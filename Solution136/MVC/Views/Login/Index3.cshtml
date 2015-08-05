@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index3";
+}
+
+<h2>Login</h2>
+<div id="divLogin">
+    <label>User Name</label>
+    <input type="text" data-bind="value: email" />
+    <br />
+    <label>Password</label>
+    <input type="password" data-bind="value: password" />
+    <br />
+    <input type="button" value="Login" data-bind="click: authorize" id="idSubmitButton" />
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var loginViewModelObj = new LoginViewModel();
+        loginViewModelObj.Initialize();
+    });
+</script>

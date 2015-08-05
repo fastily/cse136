@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "GetStudents";
+}
+
+<h3>Student List Page</h3>
+<a href="/Staff/Index"><< back</a>
+<div id="divStudentListContent">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: first"></td>
+                <td data-bind="text: last"></td>
+                <td data-bind="text: email"></td>
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                        to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a data-bind="attr: { href : '/Staff/CreateStudent', title: 'create' }">Add new student</a>
+</div>
+
+<script type="text/html" id="action-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="attr: { href : '/Student/?id=' + id, title: 'detail' }">detail</a>
+    <a data-bind="attr: { href : '/Staff/EditStudent?id=' + id, title: 'edit' }">edit</a>
+    <a data-bind="DeleteStudent: $data">delete</a>
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var studentViewModelObj = new StudentViewModel();
+        studentViewModelObj.GetAll();
+    });
+</script>
