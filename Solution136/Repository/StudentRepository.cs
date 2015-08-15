@@ -24,76 +24,89 @@
         private const string InsertStudentScheduleProcedure = "spInsertStudentSchedule";
         private const string DeleteStudentScheduleProcedure = "spDeleteStudentSchedule";
 
-        public void InsertStudent(Student student, ref List<string> errors)
+        public Student FindStudentById(int StudentId, ref List<string> errors)
         {
-            var conn = new SqlConnection(ConnectionString);
+            student dbStudent;
+            Student pocoStudent = new Student();
+
             try
             {
-                var adapter = new SqlDataAdapter(InsertStudentInfoProcedure, conn)
-                                  {
-                                      SelectCommand =
-                                          {
-                                              CommandType = CommandType.StoredProcedure
-                                          }
-                                  };
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@student_id", SqlDbType.VarChar, 20));
-                
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@first_name", SqlDbType.VarChar, 50));
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@last_name", SqlDbType.VarChar, 50));
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 64));
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 64));
-
-                adapter.SelectCommand.Parameters["@student_id"].Value = student.StudentId;
-            
-                adapter.SelectCommand.Parameters["@first_name"].Value = student.FirstName;
-                adapter.SelectCommand.Parameters["@last_name"].Value = student.LastName;
-                adapter.SelectCommand.Parameters["@email"].Value = student.Email;
-                adapter.SelectCommand.Parameters["@password"].Value = student.Password;
-
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
+                dbStudent = _context.students.Find(StudentId);
+                pocoStudent.StudentId = dbStudent.student_id;
+                pocoStudent.FirstName = dbStudent.first_name;
+                pocoStudent.LastName = dbStudent.last_name;
+                pocoStudent.Password = dbStudent.password;
+                pocoStudent.Email = dbStudent.email;
+                //foreach (enrollment enrolledCourse in dbStudent.enrollments)
+                //{
+                //    pocoStudent.Enrolled.Add(enrolledCourse);
+                //}
+                //pocoStudent.Enrolled = dbStudent.enrollments;
             }
             catch (Exception e)
             {
                 errors.Add("Error: " + e);
             }
-            finally
+
+            return pocoStudent;
+        }
+
+        public student FindEntityStudentById(int StudentId, ref List<string> errors)
+        {
+            student dbStudent = new student();
+
+            try
             {
-                conn.Dispose();
+                dbStudent = _context.students.Find(StudentId);
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
+            return dbStudent;
+        }
+
+        public void InsertStudent(Student _Student, ref List<string> errors)
+        {
+            var dbStudent = new student();
+
+            try
+            {
+                dbStudent.student_id = _Student.StudentId;
+                dbStudent.first_name = _Student.FirstName;
+                dbStudent.last_name = _Student.LastName;
+                dbStudent.password = _Student.Password;
+                dbStudent.email = _Student.Email;
+                _context.students.Add(dbStudent);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
             }
         }
 
-        public void UpdateStudent(Student student, ref List<string> errors)
+        //need to figure out how to do this method
+        public void UpdateStudent(Student _Student, ref List<string> errors)
         {
-            var conn = new SqlConnection(ConnectionString);
+            var dbStudent = new student();
+            Student pocoStudent = new Student();
+
             try
             {
-                var adapter = new SqlDataAdapter(UpdateStudentInfoProcedure, conn)
-                {
-                    SelectCommand = { CommandType = CommandType.StoredProcedure }
-                };
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@student_id", SqlDbType.VarChar, 20));
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@first_name", SqlDbType.VarChar, 50));
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@last_name", SqlDbType.VarChar, 50));
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 64));
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 64));
 
-                adapter.SelectCommand.Parameters["@student_id"].Value = student.StudentId;
-                adapter.SelectCommand.Parameters["@first_name"].Value = student.FirstName;
-                adapter.SelectCommand.Parameters["@last_name"].Value = student.LastName;
-                adapter.SelectCommand.Parameters["@email"].Value = student.Email;
-                adapter.SelectCommand.Parameters["@password"].Value = student.Password;
-
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
+                //dbStudent = FindEntityStudentById(_Student.StudentId, ref List<string> errors);
+                dbStudent.student_id = _Student.StudentId;
+                dbStudent.first_name = _Student.FirstName;
+                dbStudent.last_name = _Student.LastName;
+                dbStudent.password = _Student.Password;
+                dbStudent.email = _Student.Email;
+                _context.SaveChanges();
             }
             catch (Exception e)
             {
                 errors.Add("Error: " + e);
-            }
-            finally
-            {
-                conn.Dispose();
             }
         }
 
