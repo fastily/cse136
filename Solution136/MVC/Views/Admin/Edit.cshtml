@@ -2,14 +2,14 @@
     ViewBag.Title = "Edit";
     var id = ViewBag.id;
 }
-<h2>Edit</h2>
+<h2 class="page-header">Edit</h2>
 
 <div id="divAdminEdit">
-    First : <input type="text" data-bind="value: $data.first" /><br />
+    First : <input class="form-control" type="text" data-bind="value: $data.first" /><br />
     <br />
-    Last : <input type="text" data-bind="value: $data.last" /><br />
+    Last : <input class="form-control" type="text" data-bind="value: $data.last" /><br />
     <br />
-    <input type="button" data-bind="value: 'Update', click: $data.update" style="margin-left:80px" />
+    <input class="btn btn-primary" type="button" data-bind="value: 'Update', click: $data.update" style="margin-left:80px" />
     <br /><br />
     <div id="divMessage"></div>    
 </div>
