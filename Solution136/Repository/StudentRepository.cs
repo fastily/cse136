@@ -4,13 +4,18 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-
     using IRepository;
-
     using POCO;
+    using System.Linq;
 
     public class StudentRepository : BaseRepository, IStudentRepository
     {
+        private cse136Entities _context;
+
+        public StudentRepository(cse136Entities _cse136Entities)
+        {
+            _context = _cse136Entities;
+        }
         private const string InsertStudentInfoProcedure = "spInsertStudentInfo";
         private const string UpdateStudentInfoProcedure = "spUpdateStudentInfo";
         private const string DeleteStudentInfoProcedure = "spDeleteStudentInfo";
@@ -193,50 +198,29 @@
 
         public List<Student> GetStudentList(ref List<string> errors)
         {
-            var conn = new SqlConnection(ConnectionString);
-            var studentList = new List<Student>();
-
+            List<POCO.Student> pocoStudentList = new List<POCO.Student>();
+            List<student> dbStudentList;
             try
             {
-                var adapter = new SqlDataAdapter(GetStudentListProcedure, conn)
-                                  {
-                                      SelectCommand =
-                                          {
-                                              CommandType = CommandType.StoredProcedure
-                                          }
-                                  };
+                dbStudentList = _context.students.ToList();
 
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
-
-                if (dataSet.Tables[0].Rows.Count == 0)
+                foreach (student i_student in dbStudentList)
                 {
-                    return null;
-                }
-
-                for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-                {
-                    var student = new Student
-                                      {
-                                          StudentId = dataSet.Tables[0].Rows[i]["student_id"].ToString(),
-                                          FirstName = dataSet.Tables[0].Rows[i]["first_name"].ToString(),
-                                          LastName = dataSet.Tables[0].Rows[i]["last_name"].ToString(),
-                                          Email = dataSet.Tables[0].Rows[i]["email"].ToString(),
-                                          Password = dataSet.Tables[0].Rows[i]["password"].ToString()
-                                      };
-                    studentList.Add(student);
+                    var tempPoco = new POCO.Student();
+                    tempPoco.StudentId = i_student.student_id;
+                    tempPoco.FirstName = i_student.first_name;
+                    tempPoco.LastName = i_student.last_name;
+                    tempPoco.StudentId = i_student.student_id;
+                    tempPoco.Email = i_student.email;
+                    pocoStudentList.Add(tempPoco);
                 }
             }
             catch (Exception e)
             {
                 errors.Add("Error: " + e);
             }
-            finally
-            {
-                conn.Dispose();
-            }
 
-            return studentList;
+            return pocoStudentList;
         }
 
         public void EnrollSchedule(string studentId, int scheduleId, ref List<string> errors)

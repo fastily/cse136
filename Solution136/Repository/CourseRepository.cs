@@ -12,7 +12,7 @@
     {
         private cse136Entities _context;
 
-        private const string GetCourseListProcedure = "spGetCourseList";
+        //private const string GetCourseListProcedure = "spGetCourseList";
 
         public CourseRepository(cse136Entities _cse136Entities)
         {

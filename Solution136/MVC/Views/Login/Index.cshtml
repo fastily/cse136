@@ -2,15 +2,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Login</h2>
+<h2 class="page-header">Login</h2>
 <div id="divLogin">
     <form method="post" action="/Login">
         <label>User Name</label>
-        <input type="text" name="email" value="admin@cs.ucsd.edu" />
+        <input class="form-control" type="text" name="email" value="admin@cs.ucsd.edu" />
         <br />
         <label>Password</label>
-        <input type="password" name="password" value="password" />
+        <input class="form-control" type="password" name="password" value="password" />
         <br />
-        <input type="submit" value="Login" id="idSubmitButton" />
+        <input class="btn-default btn" type="submit" value="Login" id="idSubmitButton" />
     </form>
 </div>

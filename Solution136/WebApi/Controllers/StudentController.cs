@@ -5,14 +5,31 @@
     using POCO;
     using Repository;
     using Service;
+    using IRepository;
 
     public class StudentController : ApiController
     {
+
+        private cse136Entities _cse136Entities;
+
+        //default constructor for runtime use
+        public StudentController()
+        {
+            _cse136Entities = new cse136Entities();
+        }
+
+        //overloaded constructor for dependency injection
+        //used for testing
+        public StudentController(cse136Entities Cse136Entities)
+        {
+            _cse136Entities = Cse136Entities;
+        }
+
         [HttpGet]
         public List<Student> GetStudentList()
         {
             var errors = new List<string>();
-            var repository = new StudentRepository();
+            var repository = new StudentRepository(_cse136Entities);
             var service = new StudentService(repository);
             return service.GetStudentList(ref errors);
         }
@@ -21,7 +38,7 @@
         public Student GetStudent(string id)
         {
             var errors = new List<string>();
-            var repository = new StudentRepository();
+            var repository = new StudentRepository(_cse136Entities);
             var service = new StudentService(repository);
             return service.GetStudent(id, ref errors);
         }
@@ -30,7 +47,7 @@
         public string InsertStudent(Student student)
         {
             var errors = new List<string>();
-            var repository = new StudentRepository();
+            var repository = new StudentRepository(_cse136Entities);
             var service = new StudentService(repository);
             service.InsertStudent(student, ref errors);
             if (errors.Count == 0)
@@ -45,7 +62,7 @@
         public string UpdateStudent(Student student)
         {
             var errors = new List<string>();
-            var repository = new StudentRepository();
+            var repository = new StudentRepository(_cse136Entities);
             var service = new StudentService(repository);
             service.UpdateStudent(student, ref errors);
 
@@ -61,7 +78,7 @@
         public string DeleteStudent(string id)
         {
             var errors = new List<string>();
-            var repository = new StudentRepository();
+            var repository = new StudentRepository(_cse136Entities);
             var service = new StudentService(repository);
             service.DeleteStudent(id, ref errors);
 
