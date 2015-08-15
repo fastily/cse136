@@ -3,11 +3,11 @@
     var id = ViewBag.Id;
 }
 
-<h2>Student Detail</h2>
+<h2 class="page-header" >Student Detail</h2>
 
 <a href="/Student/Edit?id=@id">edit</a>
 <div id="divStudentContent">
-    <table>
+    <table style="width:100%;">
         <tr>
             <td>Id</td>
             <td data-bind="text: viewModel.id"></td>
