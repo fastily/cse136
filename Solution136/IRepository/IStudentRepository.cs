@@ -8,7 +8,7 @@
     {
 
         Student FindStudentById(int StudentId, ref List<string> errors);
-        student FindEntityStudentById(int StudentId, ref List<string> errors)
+        student FindEntityStudentById(int StudentId, ref List<string> errors);
 
         void InsertStudent(Student student, ref List<string> errors);
         void UpdateStudent(Student student, ref List<string> errors);
