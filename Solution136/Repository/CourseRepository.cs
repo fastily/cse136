@@ -4,64 +4,174 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-
+    using System.Linq;
     using IRepository;
-
     using POCO;
 
     public class CourseRepository : BaseRepository, ICourseRepository
     {
+        private cse136Entities _context;
+
         private const string GetCourseListProcedure = "spGetCourseList";
 
-        public List<Course> GetCourseList(ref List<string> errors)
+        public CourseRepository(cse136Entities _cse136Entities)
         {
-            var conn = new SqlConnection(ConnectionString);
-            var courseList = new List<Course>();
+            _context = _cse136Entities;
+        }
 
+        //probably not necessary
+        public Course FindCourseByName(string _courseName, ref List<string> errors)
+        {
+            POCO.Course pocoCourse = new POCO.Course();
+            course dbCourse;
             try
             {
-                var adapter = new SqlDataAdapter(GetCourseListProcedure, conn)
-                                  {
-                                      SelectCommand =
-                                          {
-                                              CommandType = CommandType.StoredProcedure
-                                          }
-                                  };
-
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
-
-                if (dataSet.Tables[0].Rows.Count == 0)
+                dbCourse = _context.courses.Where(x => x.course_title == _courseName).First();
+                if (dbCourse != null)
                 {
-                    return null;
-                }
-
-                for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-                {
-                    var course = new Course
-                                     {
-                                         CourseId = dataSet.Tables[0].Rows[i]["course_id"].ToString(),
-                                         Title = dataSet.Tables[0].Rows[i]["course_title"].ToString(),
-                                         CourseLevel =
-                                             (CourseLevel)
-                                             Enum.Parse(
-                                                 typeof(CourseLevel),
-                                                 dataSet.Tables[0].Rows[i]["course_level"].ToString()),
-                                         Description = dataSet.Tables[0].Rows[i]["course_description"].ToString()
-                                     };
-                    courseList.Add(course);
+                    pocoCourse.CourseId = dbCourse.course_id.ToString();
+                    pocoCourse.Description = dbCourse.course_description;
+                    pocoCourse.Title = dbCourse.course_title;
+                    pocoCourse.CourseLevel = 0;
                 }
             }
             catch (Exception e)
             {
                 errors.Add("Error: " + e);
             }
-            finally
+
+            return pocoCourse;
+        }
+
+        //shouldn't call this method unless we know course exists
+        public Course FindCourseById(string _courseName, ref List<string> errors)
+        {
+            POCO.Course pocoCourse = new POCO.Course();
+            course dbCourse;
+            try
             {
-                conn.Dispose();
+                //will search primary key
+                dbCourse = _context.courses.Find(_courseName);
+                if (dbCourse != null)
+                {
+                    pocoCourse.CourseId = dbCourse.course_id.ToString();
+                    pocoCourse.Description = dbCourse.course_description;
+                    pocoCourse.Title = dbCourse.course_title;
+                    pocoCourse.CourseLevel = 0;
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
             }
 
-            return courseList;
+            return pocoCourse;
         }
+
+        //good method for validation when adding new course
+        public bool IsDuplicateCourse(POCO.Course _course, ref List<string> errors)
+        {
+            var dbCourse = new course();
+
+            try
+            {
+                dbCourse = _context.courses.Find(dbCourse);
+
+                if (dbCourse == null)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
+            return true;
+
+        }
+
+        //Unsure If We need to get course before updating... TODO
+        public void UpdateCourse(POCO.Course  _course, ref List<string> errors)
+        {
+            var dbCourse = new course();
+
+            try
+            {
+                //might have to retrieve course then update, but I dont think so
+                dbCourse.course_level = _course.CourseLevel.ToString();
+                dbCourse.course_description = _course.Description;
+                dbCourse.course_title = _course.Title;
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+        }
+
+        public void AddCourse(POCO.Course _course, ref List<string> errors)
+        {
+            var dbCourse = new course();
+
+            try
+            {
+                dbCourse.course_level = _course.CourseLevel.ToString();
+                dbCourse.course_description = _course.Description;
+                dbCourse.course_title = _course.Title;
+                _context.courses.Add(dbCourse);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+        }
+
+        public void RemoveCourse(POCO.Course  _course, ref List<string> errors)
+        {
+            var dbCourse = new course();
+
+            try
+            {
+                dbCourse.course_level = _course.CourseLevel.ToString();
+                dbCourse.course_description = _course.Description;
+                dbCourse.course_title = _course.Title;
+                _context.courses.Remove(dbCourse);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+        }
+
+        public List<Course> GetCourseList(ref List<string> errors)
+        {
+            List<POCO.Course> pocoCourseList = new List<POCO.Course>();
+            List<course> dbCourseList;
+            try
+            {
+                dbCourseList = _context.courses.ToList();
+
+                foreach (course i_course in dbCourseList)
+                {
+                    var tempPoco = new POCO.Course();
+                    tempPoco.CourseId = i_course.course_id.ToString();
+                    tempPoco.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), i_course.course_level);
+                    tempPoco.Description = i_course.course_description;
+                    tempPoco.Title = i_course.course_title;
+                    pocoCourseList.Add(tempPoco);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
+            return pocoCourseList;
+        }
+
     }
+
 }
