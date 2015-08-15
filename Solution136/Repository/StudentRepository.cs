@@ -32,22 +32,18 @@
                                           }
                                   };
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@student_id", SqlDbType.VarChar, 20));
-                //adapter.SelectCommand.Parameters.Add(new SqlParameter("@ssn", SqlDbType.VarChar, 9));
+                
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@first_name", SqlDbType.VarChar, 50));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@last_name", SqlDbType.VarChar, 50));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 64));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 64));
-                //adapter.SelectCommand.Parameters.Add(new SqlParameter("@shoe_size", SqlDbType.Float));
-                //adapter.SelectCommand.Parameters.Add(new SqlParameter("@weight", SqlDbType.Int));
 
                 adapter.SelectCommand.Parameters["@student_id"].Value = student.StudentId;
-                //adapter.SelectCommand.Parameters["@ssn"].Value = student.SSN;
+            
                 adapter.SelectCommand.Parameters["@first_name"].Value = student.FirstName;
                 adapter.SelectCommand.Parameters["@last_name"].Value = student.LastName;
                 adapter.SelectCommand.Parameters["@email"].Value = student.Email;
                 adapter.SelectCommand.Parameters["@password"].Value = student.Password;
-               // adapter.SelectCommand.Parameters["@shoe_size"].Value = student.ShoeSize;
-               // adapter.SelectCommand.Parameters["@weight"].Value = student.Weight;
 
                 var dataSet = new DataSet();
                 adapter.Fill(dataSet);
@@ -72,22 +68,16 @@
                     SelectCommand = { CommandType = CommandType.StoredProcedure }
                 };
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@student_id", SqlDbType.VarChar, 20));
-                //adapter.SelectCommand.Parameters.Add(new SqlParameter("@ssn", SqlDbType.VarChar, 9));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@first_name", SqlDbType.VarChar, 50));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@last_name", SqlDbType.VarChar, 50));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 64));
                 adapter.SelectCommand.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 64));
-                //adapter.SelectCommand.Parameters.Add(new SqlParameter("@shoe_size", SqlDbType.Float));
-                //adapter.SelectCommand.Parameters.Add(new SqlParameter("@weight", SqlDbType.Int));
 
                 adapter.SelectCommand.Parameters["@student_id"].Value = student.StudentId;
-                //adapter.SelectCommand.Parameters["@ssn"].Value = student.SSN;
                 adapter.SelectCommand.Parameters["@first_name"].Value = student.FirstName;
                 adapter.SelectCommand.Parameters["@last_name"].Value = student.LastName;
                 adapter.SelectCommand.Parameters["@email"].Value = student.Email;
                 adapter.SelectCommand.Parameters["@password"].Value = student.Password;
-                //adapter.SelectCommand.Parameters["@shoe_size"].Value = student.ShoeSize;
-                //adapter.SelectCommand.Parameters["@weight"].Value = student.Weight;
 
                 var dataSet = new DataSet();
                 adapter.Fill(dataSet);
@@ -162,12 +152,8 @@
                                   StudentId = dataSet.Tables[0].Rows[0]["student_id"].ToString(),
                                   FirstName = dataSet.Tables[0].Rows[0]["first_name"].ToString(),
                                   LastName = dataSet.Tables[0].Rows[0]["last_name"].ToString(),
-                                  //SSN = dataSet.Tables[0].Rows[0]["ssn"].ToString(),
                                   Email = dataSet.Tables[0].Rows[0]["email"].ToString(),
-                                  Password = dataSet.Tables[0].Rows[0]["password"].ToString(),
-                                  //ShoeSize =
-                                     // (float)Convert.ToDouble(dataSet.Tables[0].Rows[0]["shoe_size"].ToString()),
-                                  //Weight = Convert.ToInt32(dataSet.Tables[0].Rows[0]["weight"].ToString())
+                                  Password = dataSet.Tables[0].Rows[0]["password"].ToString()
                               };
 
                 if (dataSet.Tables[1] != null)
@@ -235,13 +221,8 @@
                                           StudentId = dataSet.Tables[0].Rows[i]["student_id"].ToString(),
                                           FirstName = dataSet.Tables[0].Rows[i]["first_name"].ToString(),
                                           LastName = dataSet.Tables[0].Rows[i]["last_name"].ToString(),
-                                          //SSN = dataSet.Tables[0].Rows[i]["ssn"].ToString(),
                                           Email = dataSet.Tables[0].Rows[i]["email"].ToString(),
-                                          Password = dataSet.Tables[0].Rows[i]["password"].ToString(),
-                                          //ShoeSize =
-                                          //    (float)
-                                          //    Convert.ToDouble(dataSet.Tables[0].Rows[i]["shoe_size"].ToString()),
-                                          //Weight = Convert.ToInt32(dataSet.Tables[0].Rows[i]["weight"].ToString())
+                                          Password = dataSet.Tables[0].Rows[i]["password"].ToString()
                                       };
                     studentList.Add(student);
                 }
