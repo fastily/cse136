@@ -146,6 +146,11 @@
             }
         }
 
+        public void AssignPreReqToCourse(Course _course, Course _PreReqCourse, ref List<string> errors)
+        {
+
+        }
+
         public List<Course> GetCourseList(ref List<string> errors)
         {
             List<POCO.Course> pocoCourseList = new List<POCO.Course>();

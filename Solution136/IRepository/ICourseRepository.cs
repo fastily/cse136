@@ -12,6 +12,7 @@
         void UpdateCourse(Course _course, ref List<string> errors);
         void AddCourse(Course _course, ref List<string> errors);
         void RemoveCourse(Course _course, ref List<string> errors);
+        void AssignPreReqToCourse(Course _course, Course _PreReqCourse, ref List<string> errors);
 
         List<Course> GetCourseList(ref List<string> errors);
     }
