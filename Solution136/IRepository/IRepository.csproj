@@ -72,6 +72,7 @@
     <Compile Include="grade_change.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="IEnrollmentRepository.cs" />
     <Compile Include="ICourseRepository.cs" />
     <Compile Include="IInstructorRepository.cs" />
     <Compile Include="instructor.cs">
@@ -84,6 +85,7 @@
     <Compile Include="IScheduleRepository.cs" />
     <Compile Include="IStudentRepository.cs" />
     <Compile Include="IAuthorizeRepository.cs" />
+    <Compile Include="IGradeChangeRepository.cs" />
     <Compile Include="ITaRepository.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
