@@ -42,6 +42,9 @@
                 db.instructor_rating = cr.InstructorRating;
                 db.summary = cr.Summary;
                 db.course_rating = cr.CourseRating;
+
+                this.context.cape_reviews.Add(db);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -117,6 +120,8 @@
                 db.course_rating = cr.CourseRating;
                 db.instructor_rating = cr.InstructorRating;
                 db.summary = cr.Summary;
+
+                this.context.cape_reviews.Add(db);
                 this.context.SaveChanges();
             }
             catch (Exception e)
