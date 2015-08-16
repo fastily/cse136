@@ -17,12 +17,12 @@
             this.context = entities;
         }
 
-        public void AddEnrollment(int studentId, int ScheduleId, string year, string quarter, string session, Course Course, ref List<string> errors);
+        public void AddEnrollment(int studentId, int ScheduleId, string year, string quarter, string session, Course Course, ref List<string> errors)
         {
         }
 
 
-        public void RemoveEnrolement (int studentId, int ScheduleId, ref List<string> errors);
+        public void RemoveEnrolement (int studentId, int ScheduleId, ref List<string> errors)
         {
         }
     }

@@ -303,7 +303,11 @@
 
             try
             {
-
+                db_PreReqRequest.schedule_id = scheduleId;
+                db_PreReqRequest.student_id = Int32.Parse(studentId);
+                db_PreReqRequest.approved = false;
+                this.context.preReq_Override.Add(db_PreReqRequest);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
