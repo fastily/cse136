@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using POCO;
-
-namespace IRepository
+﻿namespace IRepository
 {
+    using System.Collections.Generic;
+    using POCO;
+
     public interface IGradeChangeRepository
     {
-        void RequestGradeChange(GradeChange _GradeChange, ref List<string> errors);
-        void ApproveGradeChange(GradeChange _GradeChange, ref List<string> errors);
+        void RequestGradeChange(GradeChange gradeChange, ref List<string> errors);
+
+        void ApproveGradeChange(GradeChange gradeChange, ref List<string> errors);
     }
 }

@@ -74,19 +74,16 @@
             return scheduleList;
         }
 
-        public void CreateSchedule(Schedule _Schedule, ref List<string> errors)
+        public void CreateSchedule(Schedule schedule, ref List<string> errors)
         {
-
         }
 
-        public void AddCourseToSchedule(Schedule _Schedule, Course _Course, ref List<string> errors)
+        public void AddCourseToSchedule(Schedule schedule, Course course, ref List<string> errors)
         {
-
         }
 
-        public void RemoveCourseFromSchedule(Schedule _Schedule, Course _Course, ref List<string> errors)
+        public void RemoveCourseFromSchedule(Schedule schedule, Course course, ref List<string> errors)
         {
-
         }
     }
 }

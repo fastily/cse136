@@ -2,32 +2,36 @@
 {
     using System.Collections.Generic;
     using System.Web.Http;
+    using IRepository;
     using POCO;
     using Repository;
     using Service;
-    using IRepository;
 
     public class CourseController : ApiController
     {
-        private cse136Entities _cse136Entities;
+        private cse136Entities entities;
 
-        //default constructor for runtime use
+        /// <summary>
+        /// default constructor for runtime use
+        /// </summary>
         public CourseController()
         {
-            _cse136Entities = new cse136Entities();
+            this.entities = new cse136Entities();
         }
 
-        //overloaded constructor for dependency injection
-        //used for testing
-        public CourseController(cse136Entities Cse136Entities)
+        /// <summary>
+        /// overloaded constructor for dependency injection. used for testing
+        /// </summary>
+        /// <param name="entities"></param>
+        public CourseController(cse136Entities entities)
         {
-            _cse136Entities = Cse136Entities;
+            this.entities = entities;
         }
 
         [HttpGet]
         public List<Course> GetCourseList()
         {
-            var service = new CourseService(new CourseRepository(_cse136Entities));
+            var service = new CourseService(new CourseRepository(this.entities));
             var errors = new List<string>();
 
             //// we could log the errors here if there are any...

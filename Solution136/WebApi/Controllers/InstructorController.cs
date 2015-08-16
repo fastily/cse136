@@ -1,28 +1,32 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-using POCO;
-using Repository;
-using Service;
-using IRepository;
-
-namespace WebApi.Controllers
+﻿namespace WebApi.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Http;
+    using IRepository;
+    using POCO;
+    using Repository;
+    using Service;
+
     public class InstructorController : ApiController
     {
-        private cse136Entities _cse136Entities;
+        private cse136Entities entities;
 
-        //default constructor for runtime use
+        /// <summary>
+        /// default constructor for runtime use
+        /// </summary>
         public InstructorController()
         {
-            _cse136Entities = new cse136Entities();
+            this.entities = new cse136Entities();
         }
 
-        //overloaded constructor for dependency injection
-        //used for testing
-        public InstructorController(cse136Entities Cse136Entities)
+        /// <summary>
+        /// overloaded constructor for dependency injection. used for testing
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        public InstructorController(cse136Entities entities)
         {
-            _cse136Entities = Cse136Entities;
+            this.entities = entities;
         }
-
     }
 }

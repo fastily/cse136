@@ -5,8 +5,8 @@
 
     public interface IEnrollmentRepository
     {
-        //void AssignGradeToStudent();
-        //void add course
-        //void drop course
+        ////void AssignGradeToStudent();
+        ////void add course
+        ////void drop course
     }
 }

@@ -4,18 +4,12 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Linq;
     using IRepository;
     using POCO;
-    using System.Linq;
 
     public class StudentRepository : BaseRepository, IStudentRepository
     {
-        private cse136Entities _context;
-
-        public StudentRepository(cse136Entities _cse136Entities)
-        {
-            _context = _cse136Entities;
-        }
         private const string InsertStudentInfoProcedure = "spInsertStudentInfo";
         private const string UpdateStudentInfoProcedure = "spUpdateStudentInfo";
         private const string DeleteStudentInfoProcedure = "spDeleteStudentInfo";
@@ -24,24 +18,31 @@
         private const string InsertStudentScheduleProcedure = "spInsertStudentSchedule";
         private const string DeleteStudentScheduleProcedure = "spDeleteStudentSchedule";
 
-        public Student FindStudentById(int StudentId, ref List<string> errors)
+        private cse136Entities context;
+
+        public StudentRepository(cse136Entities entities)
         {
-            student dbStudent;
+            this.context = entities;
+        }
+
+        public Student FindStudentById(int student_id, ref List<string> errors)
+        {
+            student db_student;
             Student pocoStudent = new Student();
 
             try
             {
-                dbStudent = _context.students.Find(StudentId);
-                pocoStudent.StudentId = dbStudent.student_id;
-                pocoStudent.FirstName = dbStudent.first_name;
-                pocoStudent.LastName = dbStudent.last_name;
-                pocoStudent.Password = dbStudent.password;
-                pocoStudent.Email = dbStudent.email;
-                //foreach (enrollment enrolledCourse in dbStudent.enrollments)
-                //{
-                //    pocoStudent.Enrolled.Add(enrolledCourse);
-                //}
-                //pocoStudent.Enrolled = dbStudent.enrollments;
+                db_student = this.context.students.Find(student_id);
+                pocoStudent.StudentId = db_student.student_id;
+                pocoStudent.FirstName = db_student.first_name;
+                pocoStudent.LastName = db_student.last_name;
+                pocoStudent.Password = db_student.password;
+                pocoStudent.Email = db_student.email;
+                ////foreach (enrollment enrolledCourse in dbStudent.enrollments)
+                ////{
+                ////    pocoStudent.Enrolled.Add(enrolledCourse);
+                ////}
+                ////pocoStudent.Enrolled = dbStudent.enrollments;
             }
             catch (Exception e)
             {
@@ -51,35 +52,35 @@
             return pocoStudent;
         }
 
-        public student FindEntityStudentById(int StudentId, ref List<string> errors)
+        public student FindEntityStudentById(int student_id, ref List<string> errors)
         {
-            student dbStudent = new student();
+            student db_student = new student();
 
             try
             {
-                dbStudent = _context.students.Find(StudentId);
+                db_student = this.context.students.Find(student_id);
             }
             catch (Exception e)
             {
                 errors.Add("Error: " + e);
             }
 
-            return dbStudent;
+            return db_student;
         }
 
-        public void InsertStudent(Student _Student, ref List<string> errors)
+        public void InsertStudent(Student s, ref List<string> errors)
         {
-            var dbStudent = new student();
+            var db_student = new student();
 
             try
             {
-                dbStudent.student_id = _Student.StudentId;
-                dbStudent.first_name = _Student.FirstName;
-                dbStudent.last_name = _Student.LastName;
-                dbStudent.password = _Student.Password;
-                dbStudent.email = _Student.Email;
-                _context.students.Add(dbStudent);
-                _context.SaveChanges();
+                db_student.student_id = s.StudentId;
+                db_student.first_name = s.FirstName;
+                db_student.last_name = s.LastName;
+                db_student.password = s.Password;
+                db_student.email = s.Email;
+                this.context.students.Add(db_student);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -87,22 +88,21 @@
             }
         }
 
-        //need to figure out how to do this method
-        public void UpdateStudent(Student _Student, ref List<string> errors)
+        ////need to figure out how to do this method
+        public void UpdateStudent(Student s, ref List<string> errors)
         {
-            var dbStudent = new student();
+            var db_student = new student();
             Student pocoStudent = new Student();
 
             try
             {
-
-                //dbStudent = FindEntityStudentById(_Student.StudentId, ref List<string> errors);
-                dbStudent.student_id = _Student.StudentId;
-                dbStudent.first_name = _Student.FirstName;
-                dbStudent.last_name = _Student.LastName;
-                dbStudent.password = _Student.Password;
-                dbStudent.email = _Student.Email;
-                _context.SaveChanges();
+                ////dbStudent = FindEntityStudentById(_Student.StudentId, ref List<string> errors);
+                db_student.student_id = s.StudentId;
+                db_student.first_name = s.FirstName;
+                db_student.last_name = s.LastName;
+                db_student.password = s.Password;
+                db_student.email = s.Email;
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -110,15 +110,15 @@
             }
         }
 
-        public void DeleteStudent(string StudentId, ref List<string> errors)
+        public void DeleteStudent(string student_id, ref List<string> errors)
         {
-            var dbStudent = new student();
+            var db_student = new student();
 
             try
             {
-                dbStudent.student_id = StudentId;
-                _context.students.Remove(dbStudent);
-                _context.SaveChanges();
+                db_student.student_id = student_id;
+                this.context.students.Remove(db_student);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -196,12 +196,12 @@
         public List<Student> GetStudentList(ref List<string> errors)
         {
             List<POCO.Student> pocoStudentList = new List<POCO.Student>();
-            List<student> dbStudentList;
+            List<student> db_studentList;
             try
             {
-                dbStudentList = _context.students.ToList();
+                db_studentList = this.context.students.ToList();
 
-                foreach (student i_student in dbStudentList)
+                foreach (student i_student in db_studentList)
                 {
                     var tempPoco = new POCO.Student();
                     tempPoco.StudentId = i_student.student_id;
