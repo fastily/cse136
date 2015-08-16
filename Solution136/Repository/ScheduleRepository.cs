@@ -59,6 +59,7 @@
                             Description = dataSet.Tables[0].Rows[i]["course_description"].ToString(), 
                         }
                     };
+
                     scheduleList.Add(schedule);
                 }
             }
@@ -88,8 +89,15 @@
 
         public void RemoveCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
         {
+            var db_Schedule = new course_schedule;
+
             try
             {
+                db_Schedule.year = year;
+                db_Schedule.course_id = courseId;
+                db_Schedule.quarter = quarter;
+                db_Schedule = this.context.course_schedule.remove(db_Schedule);
+                this.context.SaveChanges();
 
             }
             catch (Exception e)
