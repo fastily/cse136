@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AuthorizeRepository.cs" />
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="EnrollmentRepository.cs" />
     <Compile Include="GradeChangeRepository.cs" />
     <Compile Include="CapeReviewRepository.cs" />
     <Compile Include="CourseRepository.cs" />

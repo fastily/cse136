@@ -39,7 +39,7 @@
         }
 
 
-        public void RemoveEnrolement (int studentId, int ScheduleId, ref List<string> errors);
+        public void RemoveEnrolement (int studentId, int ScheduleId, ref List<string> errors)
         {
         }
     }
