@@ -128,15 +128,13 @@
             }
         }
 
-        public void RemoveCourse(POCO.Course  _course, ref List<string> errors)
+        public void RemoveCourse(int CourseId, ref List<string> errors)
         {
             var dbCourse = new course();
 
             try
             {
-                dbCourse.course_level = _course.CourseLevel.ToString();
-                dbCourse.course_description = _course.Description;
-                dbCourse.course_title = _course.Title;
+                dbCourse.course_id = CourseId;
                 _context.courses.Remove(dbCourse);
                 _context.SaveChanges();
             }
