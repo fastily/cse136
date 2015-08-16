@@ -12,10 +12,10 @@
         bool IsDuplicateTa(Ta ta, ref List<string> errors);
 
         void UpdateTa(Ta ta, ref List<string> errors);
-
+        
         void AddTa(Ta ta, ref List<string> errors);
 
-        void RemoveTa(Ta ta, ref List<string> errors);
+        void RemoveTa(int ta_id, ref List<string> errors);
 
         List<Ta> GetTaList(ref List<string> errors);
     }

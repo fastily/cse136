@@ -15,7 +15,7 @@
 
         void AddInstructor(Instructor instructor, ref List<string> errors);
 
-        void RemoveInstructor(Instructor instructor, ref List<string> errors);
+        void RemoveInstructor(int instructor_id, ref List<string> errors);
 
         List<Instructor> GetInstructorList(ref List<string> errors);
     }

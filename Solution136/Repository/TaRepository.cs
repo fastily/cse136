@@ -42,7 +42,6 @@
             return pocoTa;
         }
 
-        ////TODO :: shouldn't call this method unless we know course exists
         public Ta FindTaById(string ta_name, ref List<string> errors)
         {
             POCO.Ta pocoTa = new POCO.Ta();
@@ -92,16 +91,14 @@
             return true;
         }
 
-        ////Unsure If We need to get course before updating... TODO
-        //// Not changing id - PK
         public void UpdateTa(POCO.Ta ta, ref List<string> errors)
         {
             var db_Ta = new TeachingAssistant();
 
             try
             {
-                ////might have to retrieve course then update, but I dont think so
-                db_Ta.ta_type_id = int.Parse(ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
+                db_Ta.ta_type_id = int.Parse(ta.TaType);
+                db_Ta = this.context.TeachingAssistants.Find(db_Ta);
                 db_Ta.first = ta.FirstName;
                 db_Ta.last = ta.LastName;
                 this.context.SaveChanges();
@@ -118,7 +115,7 @@
 
             try
             {
-                db_Ta.ta_type_id = int.Parse(ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
+                db_Ta.ta_type_id = int.Parse(ta.TaType); 
                 db_Ta.first = ta.FirstName;
                 db_Ta.last = ta.LastName;
                 this.context.TeachingAssistants.Add(db_Ta);
@@ -130,17 +127,14 @@
             }
         }
 
-        // Is this how remove should be done? Using preset?
-        public void RemoveTa(POCO.Ta ta, ref List<string> errors)
+        public void RemoveTa(int ta_id, ref List<string> errors)
         {
             var db_Ta = new TeachingAssistant();
 
             try
             {
-                db_Ta.ta_type_id = int.Parse(ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
-                db_Ta.first = ta.FirstName;
-                db_Ta.last = ta.LastName;
-                this.context.TeachingAssistants.Remove(db_Ta);
+                db_Ta.ta_type_id = ta_id; 
+                db_Ta = this.context.TeachingAssistants.Remove(db_Ta);
                 this.context.SaveChanges();
             }
             catch (Exception e)
@@ -177,6 +171,29 @@
 
         public bool IsDuplicateTa(Ta ta, ref List<string> errors)
         {
+            var db_Ta = new TeachingAssistant();
+
+            try
+            {
+                db_Ta.first = ta.FirstName;
+                db_Ta.last = ta.LastName;
+                db_Ta.ta_type_id = Int32.Parse(ta.TaType);
+                db_Ta = this.context.TeachingAssistants.Find(db_Ta);
+
+                if (db_Ta == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
             return true;
         }
     }

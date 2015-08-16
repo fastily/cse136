@@ -43,13 +43,13 @@
         }
 
         ////TODO :: shouldn't call this method unless we know course exists
-        public Instructor FindInstructorById(string instName, ref List<string> errors)
+        public Instructor FindInstructorById(string instId, ref List<string> errors)
         {
             POCO.Instructor pocoInstructor = new POCO.Instructor();
             instructor db_instructor;
             try
             {
-                db_instructor = this.context.instructors.Find(instName);
+                db_instructor = this.context.instructors.Find(instId);
                 if (db_instructor != null)
                 {
                     pocoInstructor.InstructorId = db_instructor.instructor_id;
@@ -75,6 +75,11 @@
 
             try
             {
+                db_instructor.email = ins.Email;
+                db_instructor.first_name = ins.FirstName;
+                db_instructor.last_name = ins.LastName;
+                db_instructor.password = ins.Password;
+                db_instructor.title = ins.Title;
                 db_instructor = this.context.instructors.Find(db_instructor);
 
                 if (db_instructor == null)
@@ -94,16 +99,14 @@
             return true;
         }
 
-        ////Unsure If We need to get course before updating... TODO
-        //// Not changing id - PK
         public void UpdateInstructor(POCO.Instructor ins, ref List<string> errors)
         {
             var db_instructor = new instructor();
 
             try
             {
-                ////might have to retrieve course then update, but I dont think so
                 db_instructor.instructor_id = ins.InstructorId;
+                db_instructor = this.context.instructors.Find(db_instructor);
                 db_instructor.first_name = ins.FirstName;
                 db_instructor.last_name = ins.LastName;
                 db_instructor.title = ins.Title;
@@ -138,19 +141,13 @@
             }
         }
 
-        //// Is this how remove should be done? Using preset?
-        public void RemoveInstructor(POCO.Instructor ins, ref List<string> errors)
+        public void RemoveInstructor(int instructor_id, ref List<string> errors)
         {
             var db_instructor = new instructor();
 
             try
             {
-                db_instructor.instructor_id = ins.InstructorId;
-                db_instructor.first_name = ins.FirstName;
-                db_instructor.last_name = ins.LastName;
-                db_instructor.title = ins.Title;
-                db_instructor.email = ins.Email;
-                db_instructor.password = ins.Password;
+                db_instructor.instructor_id = instructor_id;
                 this.context.instructors.Remove(db_instructor);
                 this.context.SaveChanges();
             }

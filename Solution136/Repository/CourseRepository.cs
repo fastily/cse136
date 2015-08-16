@@ -75,6 +75,9 @@
 
             try
             {
+                db_course.course_title = c.Title;
+                db_course.course_description = c.Description;
+                db_course.course_level = c.CourseLevel.ToString();
                 db_course = this.context.courses.Find(db_course);
 
                 if (db_course == null)
@@ -94,14 +97,14 @@
             return true;
         }
 
-        ////Unsure If We need to get course before updating... TODO
         public void UpdateCourse(POCO.Course c, ref List<string> errors)
         {
             var db_course = new course();
 
             try
             {
-                ////might have to retrieve course then update, but I dont think so
+                db_course.course_id = Int32.Parse(c.CourseId);
+                db_course = context.courses.Find(db_course);
                 db_course.course_level = c.CourseLevel.ToString();
                 db_course.course_description = c.Description;
                 db_course.course_title = c.Title;
