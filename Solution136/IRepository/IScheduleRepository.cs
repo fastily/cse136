@@ -8,10 +8,10 @@
     {
         List<Schedule> GetScheduleList(string year, string quarter, ref List<string> errors);
 
-        void CreateSchedule(Schedule schedule, ref List<string> errors);
+        void AddCourseToSchedule(Schedule schedule, ref List<string> errors);
 
-        void AddCourseToSchedule(Schedule schedule, Course course, ref List<string> errors);
+        void RemoveCourseFromSchedule(string year, int courseId,string quarter, ref List<string> errors);
 
-        void RemoveCourseFromSchedule(Schedule schedule, Course course, ref List<string> errors);
+        void IsDuplicateCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors);
     }
 }

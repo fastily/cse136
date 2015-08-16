@@ -74,16 +74,40 @@
             return scheduleList;
         }
 
-        public void CreateSchedule(Schedule schedule, ref List<string> errors)
+        public void AddCourseToSchedule(Schedule schedule, ref List<string> errors)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
 
-        public void AddCourseToSchedule(Schedule schedule, Course course, ref List<string> errors)
+        public void RemoveCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
 
-        public void RemoveCourseFromSchedule(Schedule schedule, Course course, ref List<string> errors)
+        public void IsDuplicateCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
     }
 }

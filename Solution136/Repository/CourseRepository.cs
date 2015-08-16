@@ -196,7 +196,7 @@
             }
         }
 
-        void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors)
+        public void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors)
         {
             course db_coursePreReq = new course();
             course_preReq db_preReq = new course_preReq();
@@ -219,7 +219,7 @@
             }
         }
 
-        List<Course> GetAllPreReqs(int courseId, ref List<string> errors)
+        public List<Course> GetAllPreReqs(int courseId, ref List<string> errors)
         {
             List<POCO.Course> pocoCourseList = new List<POCO.Course>();
             course db_course = new course();

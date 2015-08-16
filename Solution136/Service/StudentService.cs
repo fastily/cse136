@@ -111,7 +111,7 @@
                 throw new ArgumentException();
             }
 
-            return this.repository.GetEnrollments(studentId);
+            return this.repository.GetEnrollments(studentId, ref errors);
         }
 
         public float CalculateGpa(string studentId, List<Enrollment> enrollments, ref List<string> errors)

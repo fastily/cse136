@@ -8,7 +8,7 @@
     using IRepository;
     using POCO;
 
-    public class GradeChangewRepository : IGradeChangeRepository
+    public class GradeChangeRepository : IGradeChangeRepository
     {
 
         private cse136Entities context;
@@ -18,7 +18,7 @@
             this.context = entities;
         }
 
-        void RequestGradeChange(GradeChange gradeChange, ref List<string> errors)
+        public void RequestGradeChange(GradeChange gradeChange, ref List<string> errors)
         {
             grade_change db_gradeChange = new grade_change();
 
@@ -36,7 +36,7 @@
             }
         }
 
-        void ApproveGradeChange(int gradeChangeId, ref List<string> errors)
+        public void ApproveGradeChange(int gradeChangeId, ref List<string> errors)
         {
             grade_change db_gradeChange = new grade_change();
 
