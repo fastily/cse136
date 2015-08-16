@@ -3,7 +3,7 @@ using POCO;
 
 namespace IRepository
 {
-    interface IInstructorRepository
+    public interface IInstructorRepository
     {
         Instructor FindInstructorByName(string _InstructorName, ref List<string> errors);
         Course FindInstructorById(string _InstructorId, ref List<string> errors);

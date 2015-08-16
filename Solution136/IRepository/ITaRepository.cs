@@ -3,7 +3,7 @@ using POCO;
 
 namespace IRepository
 {
-    interface ITaRepository
+    public interface ITaRepository
     {
         Ta FindTaByName(string _TaName, ref List<string> errors);
         Ta FindTaById(string _TaId, ref List<string> errors);
