@@ -110,35 +110,19 @@
             }
         }
 
-        public void DeleteStudent(string id, ref List<string> errors)
+        public void DeleteStudent(string StudentId, ref List<string> errors)
         {
-            var conn = new SqlConnection(ConnectionString);
+            var dbStudent = new student();
 
             try
             {
-                var adapter = new SqlDataAdapter(DeleteStudentInfoProcedure, conn)
-                                  {
-                                      SelectCommand =
-                                          {
-                                              CommandType =
-                                                  CommandType
-                                                  .StoredProcedure
-                                          }
-                                  };
-                adapter.SelectCommand.Parameters.Add(new SqlParameter("@student_id", SqlDbType.VarChar, 20));
-
-                adapter.SelectCommand.Parameters["@student_id"].Value = id;
-
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
+                dbStudent.student_id = StudentId;
+                _context.students.Remove(dbStudent);
+                _context.SaveChanges();
             }
             catch (Exception e)
             {
                 errors.Add("Error: " + e);
-            }
-            finally
-            {
-                conn.Dispose();
             }
         }
 

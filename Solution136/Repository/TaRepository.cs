@@ -1,4 +1,10 @@
-﻿namespace Repository
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Repository
 {
 
     using System;
@@ -66,7 +72,7 @@
         }
 
         //good method for validation when adding new course
-        public bool IsDuplicateTa(POCO.Ta _ta, ref List<string> errors)
+        public bool IsDuplicateCourse(POCO.Ta _ta, ref List<string> errors)
         {
             var dbTa = new TeachingAssistant();
 
@@ -169,6 +175,11 @@
             }
 
             return pocoTaList;
+        }
+
+        public bool IsDuplicateTa(Ta _Ta, ref List<string> errors)
+        {
+            return true;
         }
     }
 }
