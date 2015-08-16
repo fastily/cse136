@@ -17,7 +17,7 @@
             this.context = entities;
         }
 
-        public void AddEnrollment(int studentId, string year, string quarter, string session, Course Course, ref List<string> errors);
+        public void AddEnrollment(string studentId, string year, string quarter, string session, Course Course, ref List<string> errors)
         {
             var db_Enrollment = new enrollment();
 
@@ -26,10 +26,9 @@
                 db_Enrollment.student_id = studentId; 
 
                 db_Enrollment.schedule_id = this.context.course_schedule.Where(
-                    y => y.quarter == schedule.Quarter && y.year == Int32.Parse(schedule.Year) &&
-                    y.instructor_id == InstructorId).Select(x => x.schedule_id).First();
+                    y => y.quarter == quarter && y.year == Int32.Parse(year)).Select(x => x.schedule_id).First();
                 db_Enrollment.grade = "";
-                this.context.enrollment.Add(db_Enrollment);
+                this.context.enrollments.Add(db_Enrollment);
                 this.context.SaveChanges();
             }
             catch (Exception e)
