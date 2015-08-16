@@ -8,30 +8,30 @@
     using IRepository;
     using POCO;
 
-    class InstructorRepository : BaseRepository, IInstructorRepository
+    public class InstructorRepository : BaseRepository, IInstructorRepository
     {
-        private cse136Entities _context;
+        private cse136Entities context;
 
-        public InstructorRepository(cse136Entities _cse136Entities)
+        public InstructorRepository(cse136Entities entities)
         {
-            _context = _cse136Entities;
+            this.context = entities;
         }
 
-        public Instructor FindInstructorByName(string _InstName, ref List<string> errors)
+        public Instructor FindInstructorByName(string instName, ref List<string> errors)
         {
             POCO.Instructor pocoInstructor = new POCO.Instructor();
-            instructor dbInstructor;
+            instructor db_instructor;
             try
             {
-                dbInstructor = _context.instructors.Where(x => x.first_name == _InstName).First();
-                if (dbInstructor != null)
+                db_instructor = this.context.instructors.Where(x => x.first_name == instName).First();
+                if (db_instructor != null)
                 {
-                    pocoInstructor.InstructorId = dbInstructor.instructor_id;
-                    pocoInstructor.FirstName = dbInstructor.first_name;
-                    pocoInstructor.LastName = dbInstructor.last_name;
-                    pocoInstructor.Title = dbInstructor.title;
-                    pocoInstructor.Email = dbInstructor.email;
-                    pocoInstructor.Password = dbInstructor.password;
+                    pocoInstructor.InstructorId = db_instructor.instructor_id;
+                    pocoInstructor.FirstName = db_instructor.first_name;
+                    pocoInstructor.LastName = db_instructor.last_name;
+                    pocoInstructor.Title = db_instructor.title;
+                    pocoInstructor.Email = db_instructor.email;
+                    pocoInstructor.Password = db_instructor.password;
                 }
             }
             catch (Exception e)
@@ -42,22 +42,22 @@
             return pocoInstructor;
         }
 
-        //TODO :: shouldn't call this method unless we know course exists
-        public Instructor FindInstructorById(string _InstName, ref List<string> errors)
+        ////TODO :: shouldn't call this method unless we know course exists
+        public Instructor FindInstructorById(string instName, ref List<string> errors)
         {
             POCO.Instructor pocoInstructor = new POCO.Instructor();
-            instructor dbInstructor;
+            instructor db_instructor;
             try
             {
-                dbInstructor = _context.instructors.Find(_InstName);
-                if (dbInstructor != null)
+                db_instructor = this.context.instructors.Find(instName);
+                if (db_instructor != null)
                 {
-                    pocoInstructor.InstructorId = dbInstructor.instructor_id;
-                    pocoInstructor.FirstName = dbInstructor.first_name;
-                    pocoInstructor.LastName = dbInstructor.last_name;
-                    pocoInstructor.Title = dbInstructor.title;
-                    pocoInstructor.Email = dbInstructor.email;
-                    pocoInstructor.Password = dbInstructor.password;
+                    pocoInstructor.InstructorId = db_instructor.instructor_id;
+                    pocoInstructor.FirstName = db_instructor.first_name;
+                    pocoInstructor.LastName = db_instructor.last_name;
+                    pocoInstructor.Title = db_instructor.title;
+                    pocoInstructor.Email = db_instructor.email;
+                    pocoInstructor.Password = db_instructor.password;
                 }
             }
             catch (Exception e)
@@ -68,19 +68,23 @@
             return pocoInstructor;
         }
 
-        //good method for validation when adding new course
-        public bool IsDuplicateInstructor(POCO.Instructor _instructor, ref List<string> errors)
+        ////good method for validation when adding new course
+        public bool IsDuplicateInstructor(POCO.Instructor ins, ref List<string> errors)
         {
-            var dbInstructor = new instructor();
+            var db_instructor = new instructor();
 
             try
             {
-                dbInstructor = _context.instructors.Find(dbInstructor);
+                db_instructor = this.context.instructors.Find(db_instructor);
 
-                if (dbInstructor == null)
+                if (db_instructor == null)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }
             catch (Exception e)
             {
@@ -88,25 +92,24 @@
             }
 
             return true;
-
         }
 
-        //Unsure If We need to get course before updating... TODO
-        // Not changing id - PK
-        public void UpdateInstructor(POCO.Instructor _instructor, ref List<string> errors)
+        ////Unsure If We need to get course before updating... TODO
+        //// Not changing id - PK
+        public void UpdateInstructor(POCO.Instructor ins, ref List<string> errors)
         {
-            var dbInstructor = new instructor();
+            var db_instructor = new instructor();
 
             try
             {
-                //might have to retrieve course then update, but I dont think so
-                dbInstructor.instructor_id = _instructor.InstructorId;
-                dbInstructor.first_name = _instructor.FirstName;
-                dbInstructor.last_name = _instructor.LastName;
-                dbInstructor.title = _instructor.Title;
-                dbInstructor.email = _instructor.Email;
-                dbInstructor.password = _instructor.Password;
-                _context.SaveChanges();
+                ////might have to retrieve course then update, but I dont think so
+                db_instructor.instructor_id = ins.InstructorId;
+                db_instructor.first_name = ins.FirstName;
+                db_instructor.last_name = ins.LastName;
+                db_instructor.title = ins.Title;
+                db_instructor.email = ins.Email;
+                db_instructor.password = ins.Password;
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -114,20 +117,20 @@
             }
         }
 
-        public void AddInstructor(POCO.Instructor _instructor, ref List<string> errors)
+        public void AddInstructor(POCO.Instructor ins, ref List<string> errors)
         {
-            var dbInstructor = new instructor();
+            var db_instructor = new instructor();
 
             try
             {
-                dbInstructor.instructor_id = _instructor.InstructorId; 
-                dbInstructor.first_name = _instructor.FirstName;
-                dbInstructor.last_name = _instructor.LastName;
-                dbInstructor.title = _instructor.Title;
-                dbInstructor.email = _instructor.Email;
-                dbInstructor.password = _instructor.Password;
-                _context.instructors.Add(dbInstructor);
-                _context.SaveChanges();
+                db_instructor.instructor_id = ins.InstructorId; 
+                db_instructor.first_name = ins.FirstName;
+                db_instructor.last_name = ins.LastName;
+                db_instructor.title = ins.Title;
+                db_instructor.email = ins.Email;
+                db_instructor.password = ins.Password;
+                this.context.instructors.Add(db_instructor);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -135,21 +138,21 @@
             }
         }
 
-        // Is this how remove should be done? Using preset?
-        public void RemoveInstructor(POCO.Instructor _instructor, ref List<string> errors)
+        //// Is this how remove should be done? Using preset?
+        public void RemoveInstructor(POCO.Instructor ins, ref List<string> errors)
         {
-            var dbInstructor = new instructor();
+            var db_instructor = new instructor();
 
             try
             {
-                dbInstructor.instructor_id = _instructor.InstructorId;
-                dbInstructor.first_name = _instructor.FirstName;
-                dbInstructor.last_name = _instructor.LastName;
-                dbInstructor.title = _instructor.Title;
-                dbInstructor.email = _instructor.Email;
-                dbInstructor.password = _instructor.Password;
-                _context.instructors.Remove(dbInstructor);
-                _context.SaveChanges();
+                db_instructor.instructor_id = ins.InstructorId;
+                db_instructor.first_name = ins.FirstName;
+                db_instructor.last_name = ins.LastName;
+                db_instructor.title = ins.Title;
+                db_instructor.email = ins.Email;
+                db_instructor.password = ins.Password;
+                this.context.instructors.Remove(db_instructor);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -160,12 +163,12 @@
         public List<Instructor> GetInstructorList(ref List<string> errors)
         {
             List<POCO.Instructor> pocoInstructorList = new List<POCO.Instructor>();
-            List<instructor> dbInstructorList;
+            List<instructor> db_instructorList;
             try
             {
-                dbInstructorList = _context.instructors.ToList();
+                db_instructorList = this.context.instructors.ToList();
 
-                foreach (instructor i_instructor in dbInstructorList)
+                foreach (instructor i_instructor in db_instructorList)
                 {
                     var tempPoco = new POCO.Instructor();
                     tempPoco.InstructorId = i_instructor.instructor_id;
@@ -173,7 +176,7 @@
                     tempPoco.LastName = i_instructor.last_name;
                     tempPoco.Title = i_instructor.title;
                     tempPoco.Email = i_instructor.email;
-                    tempPoco.Password= i_instructor.password;
+                    tempPoco.Password = i_instructor.password;
                     
                     pocoInstructorList.Add(tempPoco);
                 }

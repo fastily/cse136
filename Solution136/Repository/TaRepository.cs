@@ -1,42 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository
+﻿namespace Repository
 {
-
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
     using IRepository;
     using POCO;
 
-    class TaRepository : BaseRepository, ITaRepository
+    public class TaRepository : BaseRepository, ITaRepository
     {
-        private cse136Entities _context;
+        private cse136Entities context;
 
-        public TaRepository(cse136Entities _cse136Entities)
+        public TaRepository(cse136Entities entities)
         {
-            _context = _cse136Entities;
+            this.context = entities;
         }
 
-        public Ta FindTaByName(string _TaName, ref List<string> errors)
+        public Ta FindTaByName(string ta_name, ref List<string> errors)
         {
             POCO.Ta pocoTa = new POCO.Ta();
-            TeachingAssistant dbTa;
+            TeachingAssistant db_Ta;
             try
             {
-                dbTa = _context.TeachingAssistants.Where(x => x.first == _TaName).First();
-                if (dbTa != null)
+                db_Ta = this.context.TeachingAssistants.Where(x => x.first == ta_name).First();
+                if (db_Ta != null)
                 {
-                    pocoTa.TaId = dbTa.ta_id;
-                    pocoTa.TaType = dbTa.ta_type_id.ToString();
-                    pocoTa.FirstName = dbTa.first;
-                    pocoTa.LastName = dbTa.last;
+                    pocoTa.TaId = db_Ta.ta_id;
+                    pocoTa.TaType = db_Ta.ta_type_id.ToString();
+                    pocoTa.FirstName = db_Ta.first;
+                    pocoTa.LastName = db_Ta.last;
                 }
             }
             catch (Exception e)
@@ -47,20 +42,20 @@ namespace Repository
             return pocoTa;
         }
 
-        //TODO :: shouldn't call this method unless we know course exists
-        public Ta FindTaById(string _TaName, ref List<string> errors)
+        ////TODO :: shouldn't call this method unless we know course exists
+        public Ta FindTaById(string ta_name, ref List<string> errors)
         {
             POCO.Ta pocoTa = new POCO.Ta();
-            TeachingAssistant dbTa;
+            TeachingAssistant db_Ta;
             try
             {
-                dbTa = _context.TeachingAssistants.Find(_TaName);
-                if (dbTa != null)
+                db_Ta = this.context.TeachingAssistants.Find(ta_name);
+                if (db_Ta != null)
                 {
-                    pocoTa.TaId = dbTa.ta_id;
-                    pocoTa.TaType = dbTa.ta_type_id.ToString();
-                    pocoTa.FirstName = dbTa.first;
-                    pocoTa.LastName = dbTa.last;
+                    pocoTa.TaId = db_Ta.ta_id;
+                    pocoTa.TaType = db_Ta.ta_type_id.ToString();
+                    pocoTa.FirstName = db_Ta.first;
+                    pocoTa.LastName = db_Ta.last;
                 }
             }
             catch (Exception e)
@@ -71,19 +66,23 @@ namespace Repository
             return pocoTa;
         }
 
-        //good method for validation when adding new course
-        public bool IsDuplicateCourse(POCO.Ta _ta, ref List<string> errors)
+        ////good method for validation when adding new course
+        public bool IsDuplicateCourse(POCO.Ta ta, ref List<string> errors)
         {
-            var dbTa = new TeachingAssistant();
+            var db_Ta = new TeachingAssistant();
 
             try
             {
-                dbTa = _context.TeachingAssistants.Find(dbTa);
+                db_Ta = this.context.TeachingAssistants.Find(db_Ta);
 
-                if (dbTa == null)
+                if (db_Ta == null)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }
             catch (Exception e)
             {
@@ -91,22 +90,21 @@ namespace Repository
             }
 
             return true;
-
         }
 
-        //Unsure If We need to get course before updating... TODO
-        // Not changing id - PK
-        public void UpdateTa(POCO.Ta  _ta, ref List<string> errors)
+        ////Unsure If We need to get course before updating... TODO
+        //// Not changing id - PK
+        public void UpdateTa(POCO.Ta ta, ref List<string> errors)
         {
-            var dbTa = new TeachingAssistant();
+            var db_Ta = new TeachingAssistant();
 
             try
             {
-                //might have to retrieve course then update, but I dont think so
-                dbTa.ta_type_id = Int32.Parse(_ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
-                dbTa.first = _ta.FirstName;
-                dbTa.last = _ta.LastName;
-                _context.SaveChanges();
+                ////might have to retrieve course then update, but I dont think so
+                db_Ta.ta_type_id = int.Parse(ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
+                db_Ta.first = ta.FirstName;
+                db_Ta.last = ta.LastName;
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -114,17 +112,17 @@ namespace Repository
             }
         }
 
-        public void AddTa(POCO.Ta _ta, ref List<string> errors)
+        public void AddTa(POCO.Ta ta, ref List<string> errors)
         {
-            var dbTa = new TeachingAssistant();
+            var db_Ta = new TeachingAssistant();
 
             try
             {
-                dbTa.ta_type_id = Int32.Parse(_ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
-                dbTa.first = _ta.FirstName;
-                dbTa.last = _ta.LastName;
-                _context.TeachingAssistants.Add(dbTa);
-                _context.SaveChanges();
+                db_Ta.ta_type_id = int.Parse(ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
+                db_Ta.first = ta.FirstName;
+                db_Ta.last = ta.LastName;
+                this.context.TeachingAssistants.Add(db_Ta);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -133,17 +131,17 @@ namespace Repository
         }
 
         // Is this how remove should be done? Using preset?
-        public void RemoveTa(POCO.Ta  _ta, ref List<string> errors)
+        public void RemoveTa(POCO.Ta ta, ref List<string> errors)
         {
-            var dbTa = new TeachingAssistant();
+            var db_Ta = new TeachingAssistant();
 
             try
             {
-                dbTa.ta_type_id = Int32.Parse(_ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
-                dbTa.first = _ta.FirstName;
-                dbTa.last = _ta.LastName;
-                _context.TeachingAssistants.Remove(dbTa);
-                _context.SaveChanges();
+                db_Ta.ta_type_id = int.Parse(ta.TaType); // shouldn't the taType be stored as int in POCO as well ?
+                db_Ta.first = ta.FirstName;
+                db_Ta.last = ta.LastName;
+                this.context.TeachingAssistants.Remove(db_Ta);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -154,12 +152,12 @@ namespace Repository
         public List<Ta> GetTaList(ref List<string> errors)
         {
             List<POCO.Ta> pocoTaList = new List<POCO.Ta>();
-            List<TeachingAssistant> dbTaList;
+            List<TeachingAssistant> db_TaList;
             try
             {
-                dbTaList = _context.TeachingAssistants.ToList();
+                db_TaList = this.context.TeachingAssistants.ToList();
 
-                foreach (TeachingAssistant i_ta in dbTaList)
+                foreach (TeachingAssistant i_ta in db_TaList)
                 {
                     var tempPoco = new POCO.Ta();
                     tempPoco.TaId = i_ta.ta_id;
@@ -177,7 +175,7 @@ namespace Repository
             return pocoTaList;
         }
 
-        public bool IsDuplicateTa(Ta _Ta, ref List<string> errors)
+        public bool IsDuplicateTa(Ta ta, ref List<string> errors)
         {
             return true;
         }

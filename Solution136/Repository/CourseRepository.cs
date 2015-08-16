@@ -10,28 +10,28 @@
 
     public class CourseRepository : BaseRepository, ICourseRepository
     {
-        private cse136Entities _context;
+        private cse136Entities context;
 
-        //private const string GetCourseListProcedure = "spGetCourseList";
+        ////private const string GetCourseListProcedure = "spGetCourseList";
 
-        public CourseRepository(cse136Entities _cse136Entities)
+        public CourseRepository(cse136Entities entities)
         {
-            _context = _cse136Entities;
+            this.context = entities;
         }
 
-        //probably not necessary
-        public Course FindCourseByName(string _courseName, ref List<string> errors)
+        ////probably not necessary
+        public Course FindCourseByName(string courseName, ref List<string> errors)
         {
             POCO.Course pocoCourse = new POCO.Course();
-            course dbCourse;
+            course db_course;
             try
             {
-                dbCourse = _context.courses.Where(x => x.course_title == _courseName).First();
-                if (dbCourse != null)
+                db_course = this.context.courses.Where(x => x.course_title == courseName).First();
+                if (db_course != null)
                 {
-                    pocoCourse.CourseId = dbCourse.course_id.ToString();
-                    pocoCourse.Description = dbCourse.course_description;
-                    pocoCourse.Title = dbCourse.course_title;
+                    pocoCourse.CourseId = db_course.course_id.ToString();
+                    pocoCourse.Description = db_course.course_description;
+                    pocoCourse.Title = db_course.course_title;
                     pocoCourse.CourseLevel = 0;
                 }
             }
@@ -43,20 +43,20 @@
             return pocoCourse;
         }
 
-        //shouldn't call this method unless we know course exists
-        public Course FindCourseById(string _courseName, ref List<string> errors)
+        ////shouldn't call this method unless we know course exists
+        public Course FindCourseById(string courseName, ref List<string> errors)
         {
             POCO.Course pocoCourse = new POCO.Course();
-            course dbCourse;
+            course db_course;
             try
             {
-                //will search primary key
-                dbCourse = _context.courses.Find(_courseName);
-                if (dbCourse != null)
+                ////will search primary key
+                db_course = this.context.courses.Find(courseName);
+                if (db_course != null)
                 {
-                    pocoCourse.CourseId = dbCourse.course_id.ToString();
-                    pocoCourse.Description = dbCourse.course_description;
-                    pocoCourse.Title = dbCourse.course_title;
+                    pocoCourse.CourseId = db_course.course_id.ToString();
+                    pocoCourse.Description = db_course.course_description;
+                    pocoCourse.Title = db_course.course_title;
                     pocoCourse.CourseLevel = 0;
                 }
             }
@@ -68,19 +68,23 @@
             return pocoCourse;
         }
 
-        //good method for validation when adding new course
-        public bool IsDuplicateCourse(POCO.Course _course, ref List<string> errors)
+        ////good method for validation when adding new course
+        public bool IsDuplicateCourse(POCO.Course c, ref List<string> errors)
         {
-            var dbCourse = new course();
+            var db_course = new course();
 
             try
             {
-                dbCourse = _context.courses.Find(dbCourse);
+                db_course = this.context.courses.Find(db_course);
 
-                if (dbCourse == null)
+                if (db_course == null)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }
             catch (Exception e)
             {
@@ -88,21 +92,20 @@
             }
 
             return true;
-
         }
 
-        //Unsure If We need to get course before updating... TODO
-        public void UpdateCourse(POCO.Course  _course, ref List<string> errors)
+        ////Unsure If We need to get course before updating... TODO
+        public void UpdateCourse(POCO.Course c, ref List<string> errors)
         {
-            var dbCourse = new course();
+            var db_course = new course();
 
             try
             {
-                //might have to retrieve course then update, but I dont think so
-                dbCourse.course_level = _course.CourseLevel.ToString();
-                dbCourse.course_description = _course.Description;
-                dbCourse.course_title = _course.Title;
-                _context.SaveChanges();
+                ////might have to retrieve course then update, but I dont think so
+                db_course.course_level = c.CourseLevel.ToString();
+                db_course.course_description = c.Description;
+                db_course.course_title = c.Title;
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -110,17 +113,17 @@
             }
         }
 
-        public void AddCourse(POCO.Course _course, ref List<string> errors)
+        public void AddCourse(POCO.Course c, ref List<string> errors)
         {
-            var dbCourse = new course();
+            var db_course = new course();
 
             try
             {
-                dbCourse.course_level = _course.CourseLevel.ToString();
-                dbCourse.course_description = _course.Description;
-                dbCourse.course_title = _course.Title;
-                _context.courses.Add(dbCourse);
-                _context.SaveChanges();
+                db_course.course_level = c.CourseLevel.ToString();
+                db_course.course_description = c.Description;
+                db_course.course_title = c.Title;
+                this.context.courses.Add(db_course);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -128,15 +131,15 @@
             }
         }
 
-        public void RemoveCourse(int CourseId, ref List<string> errors)
+        public void RemoveCourse(int course_id, ref List<string> errors)
         {
-            var dbCourse = new course();
+            var db_course = new course();
 
             try
             {
-                dbCourse.course_id = CourseId;
-                _context.courses.Remove(dbCourse);
-                _context.SaveChanges();
+                db_course.course_id = course_id;
+                this.context.courses.Remove(db_course);
+                this.context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -144,20 +147,19 @@
             }
         }
 
-        public void AssignPreReqToCourse(Course _course, Course _PreReqCourse, ref List<string> errors)
+        public void AssignPreReqToCourse(Course course, Course preReqCourse, ref List<string> errors)
         {
-
         }
 
         public List<Course> GetCourseList(ref List<string> errors)
         {
             List<POCO.Course> pocoCourseList = new List<POCO.Course>();
-            List<course> dbCourseList;
+            List<course> db_courseList;
             try
             {
-                dbCourseList = _context.courses.ToList();
+                db_courseList = this.context.courses.ToList();
 
-                foreach (course i_course in dbCourseList)
+                foreach (course i_course in db_courseList)
                 {
                     var tempPoco = new POCO.Course();
                     tempPoco.CourseId = i_course.course_id.ToString();
@@ -174,7 +176,5 @@
 
             return pocoCourseList;
         }
-
     }
-
 }
