@@ -10,7 +10,7 @@
 
         void AddCourseToSchedule(Schedule schedule, ref List<string> errors);
 
-        void RemoveCourseFromSchedule(string year, int courseId,string quarter, ref List<string> errors);
+        void RemoveCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors);
 
         void IsDuplicateCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors);
     }

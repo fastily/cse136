@@ -10,7 +10,6 @@
 
     public class GradeChangeRepository : IGradeChangeRepository
     {
-
         private cse136Entities context;
 
         public GradeChangeRepository(cse136Entities entities)

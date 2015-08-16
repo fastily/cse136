@@ -177,7 +177,7 @@
             {
                 db_Ta.first = ta.FirstName;
                 db_Ta.last = ta.LastName;
-                db_Ta.ta_type_id = Int32.Parse(ta.TaType);
+                db_Ta.ta_type_id = int.Parse(ta.TaType);
                 db_Ta = this.context.TeachingAssistants.Find(db_Ta);
 
                 if (db_Ta == null)
