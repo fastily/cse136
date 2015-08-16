@@ -5,7 +5,7 @@
 
     public interface IEnrollmentRepository
     {
-    	void AddEnrolement (int studentId, string year, string quarter, string session, Course Course, ref List<string> errors);
-        void RemoveEnrolement (int studentId, int ScheduleId, ref List<string> errors);
+    	void AddEnrollment (string studentId, string year, string quarter, string session, Course Course, ref List<string> errors);
+        void RemoveEnrollment (string studentId, int ScheduleId, ref List<string> errors);
     }
 }

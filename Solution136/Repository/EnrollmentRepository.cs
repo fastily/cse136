@@ -37,9 +37,21 @@
             }
         }
 
-
-        public void RemoveEnrolement (int studentId, int ScheduleId, ref List<string> errors)
+        public void RemoveEnrollment(string studentId, int ScheduleId, ref List<string> errors)
         {
+            var db_enrollment = new enrollment();
+
+            try
+            {
+                db_enrollment.student_id = studentId;
+                db_enrollment.schedule_id = ScheduleId;
+                this.context.enrollments.Remove(db_enrollment);
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
     }
 }
