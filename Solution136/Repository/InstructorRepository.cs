@@ -36,7 +36,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in InstructorRepository.FindInstructorByName: " + e);
             }
 
             return pocoInstructor;
@@ -62,7 +62,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in InstructorRepository.FindInstructorById: " + e);
             }
 
             return pocoInstructor;
@@ -93,7 +93,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in in InstructorRepository.IsDuplicateInstructor: " + e);
             }
 
             return true;
@@ -116,7 +116,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in InstructorRepository.UpdateInstructor: " + e);
             }
         }
 
@@ -137,7 +137,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in InstructorRepository.AddInstructor: " + e);
             }
         }
 
@@ -153,7 +153,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in InstructorRepository.RemoveInstructor: " + e);
             }
         }
 
@@ -180,7 +180,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in InstructorRepository.GetInstructorList: " + e);
             }
 
             return pocoInstructorList;
@@ -202,7 +202,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in InstructorRepository.AssignGradeToStudent: " + e);
             }
         }
 
@@ -220,7 +220,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in InstructorRepository.ApprovePreReqOverride: " + e);
             }
         }
     }

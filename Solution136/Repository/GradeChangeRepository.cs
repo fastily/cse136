@@ -31,7 +31,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in GradeChangeRepository.RequestGradeChange: " + e);
             }
         }
 
@@ -48,7 +48,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in GradeChangeRepository.ApproveGradeChange: " + e);
             }
         }
     }

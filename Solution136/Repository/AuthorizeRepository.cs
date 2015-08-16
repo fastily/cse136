@@ -44,7 +44,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in AuthorizeRepository.Authenticate: " + e);
             }
             finally
             {

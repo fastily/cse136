@@ -35,7 +35,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.FindCourseByName: " + e);
             }
 
             return pocoCourse;
@@ -59,7 +59,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.FindCourseById: " + e);
             }
 
             return pocoCourse;
@@ -88,7 +88,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.IsDuplicateCourse: " + e);
             }
 
             return true;
@@ -109,7 +109,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.UpdateCourse: " + e);
             }
         }
 
@@ -127,7 +127,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.AddCourse: " + e);
             }
         }
 
@@ -143,7 +143,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.RemoveCourse: " + e);
             }
         }
 
@@ -167,7 +167,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.GetCourseList: " + e);
             }
 
             return pocoCourseList;
@@ -191,7 +191,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.AssignPreReqToCourse: " + e);
             }
         }
 
@@ -213,7 +213,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in in CourseRepository.RemovePreReqFromCourse: " + e);
             }
         }
 
@@ -236,7 +236,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CourseRepository.GetAllPreReqs: " + e);
             }
 
             return pocoCourseList;

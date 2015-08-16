@@ -48,7 +48,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CapeReviewRepository.InsertCape: " + e);
             }
         }
 
@@ -69,7 +69,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CapeReviewRepository.DeleteCapeReview: " + e);
             }
         }
 
@@ -97,7 +97,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CapeReviewRepository.FindCapeReviewById: " + e);
             }
 
             return pocoCR;
@@ -126,7 +126,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in CapeReviewRepository.UpdateCapeReview: " + e);
             }
         }
     }

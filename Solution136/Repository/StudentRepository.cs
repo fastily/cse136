@@ -46,7 +46,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.FindStudentById: " + e);
             }
 
             return pocoStudent;
@@ -68,7 +68,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.InsertStudent: " + e);
             }
         }
 
@@ -89,7 +89,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.UpdateStudent: " + e);
             }
         }
 
@@ -105,7 +105,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.DeleteStudent: " + e);
             }
         }
 
@@ -166,7 +166,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.GetStudentDetail: " + e);
             }
             finally
             {
@@ -197,7 +197,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.GetStudentList: " + e);
             }
 
             return pocoStudentList;
@@ -230,7 +230,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.EnrollSchedule : " + e);
             }
             finally
             {
@@ -265,7 +265,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.DropEnrolledSchedule: " + e);
             }
             finally
             {
@@ -291,7 +291,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.GetEnrollments: " + e);
             }
 
             return poco_EnrollmentList;
@@ -311,7 +311,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in StudentRepository.RequestPreReqOverride: " + e);
             }
         }
 
