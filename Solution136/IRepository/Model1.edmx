@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="cse136Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="cse136Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -100,6 +100,15 @@
           </Key>
           <Property Name="instructor_type_id" Type="int" Nullable="false" />
           <Property Name="instructor_type_desc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="preReq_Override">
+          <Key>
+            <PropertyRef Name="preReq_Overrid_id" />
+          </Key>
+          <Property Name="preReq_Overrid_id" Type="int" Nullable="false" />
+          <Property Name="schedule_id" Type="int" Nullable="false" />
+          <Property Name="student_id" Type="int" Nullable="false" />
+          <Property Name="approved" Type="bit" />
         </EntityType>
         <EntityType Name="ratings">
           <Key>
@@ -297,6 +306,7 @@
           <EntitySet Name="grade_change" EntityType="Self.grade_change" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="instructor" EntityType="Self.instructor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="instructor_type" EntityType="Self.instructor_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="preReq_Override" EntityType="Self.preReq_Override" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ratings" EntityType="Self.ratings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="schedule_day" EntityType="Self.schedule_day" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="schedule_time" EntityType="Self.schedule_time" Schema="dbo" store:Type="Tables" />
@@ -346,8 +356,7 @@
             <End Role="TeachingAssistant" EntitySet="TeachingAssistant" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cse136Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -676,7 +685,17 @@
             <End Role="course_schedule" EntitySet="course_schedule" />
             <End Role="TeachingAssistant" EntitySet="TeachingAssistants" />
           </AssociationSet>
+          <EntitySet Name="preReq_Override" EntityType="cse136Model.preReq_Override" />
         </EntityContainer>
+        <EntityType Name="preReq_Override">
+          <Key>
+            <PropertyRef Name="preReq_Overrid_id" />
+          </Key>
+          <Property Name="preReq_Overrid_id" Type="Int32" Nullable="false" />
+          <Property Name="schedule_id" Type="Int32" Nullable="false" />
+          <Property Name="student_id" Type="Int32" Nullable="false" />
+          <Property Name="approved" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -860,6 +879,16 @@
               <ScalarProperty Name="ta_id" ColumnName="ta_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="preReq_Override">
+            <EntityTypeMapping TypeName="cse136Model.preReq_Override">
+              <MappingFragment StoreEntitySet="preReq_Override">
+                <ScalarProperty Name="approved" ColumnName="approved" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
+                <ScalarProperty Name="preReq_Overrid_id" ColumnName="preReq_Overrid_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
