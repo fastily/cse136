@@ -100,8 +100,8 @@
 
             try
             {
-                db_course.course_id = Int32.Parse(c.CourseId);
-                db_course = context.courses.Find(db_course);
+                db_course.course_id = int.Parse(c.CourseId);
+                db_course = this.context.courses.Find(db_course);
                 db_course.course_level = c.CourseLevel.ToString();
                 db_course.course_description = c.Description;
                 db_course.course_title = c.Title;
@@ -188,7 +188,6 @@
 
                 this.context.course_preReq.Add(db_preReq);
                 this.context.SaveChanges();
-
             }
             catch (Exception e)
             {
@@ -196,7 +195,7 @@
             }
         }
 
-        void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors)
+        public void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors)
         {
             course db_coursePreReq = new course();
             course_preReq db_preReq = new course_preReq();
@@ -211,7 +210,6 @@
 
                 this.context.course_preReq.Remove(db_preReq);
                 this.context.SaveChanges();
-
             }
             catch (Exception e)
             {
@@ -219,7 +217,7 @@
             }
         }
 
-        List<Course> GetAllPreReqs(int courseId, ref List<string> errors)
+        public List<Course> GetAllPreReqs(int courseId, ref List<string> errors)
         {
             List<POCO.Course> pocoCourseList = new List<POCO.Course>();
             course db_course = new course();

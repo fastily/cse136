@@ -7,8 +7,6 @@
     {
         Student FindStudentById(int studentId, ref List<string> errors);
 
-        student FindEntityStudentById(int studentId, ref List<string> errors);
-
         void InsertStudent(Student student, ref List<string> errors);
 
         void UpdateStudent(Student student, ref List<string> errors);
@@ -23,7 +21,7 @@
 
         void DropEnrolledSchedule(string studentId, int scheduleId, ref List<string> errors);
 
-        List<Enrollment> GetEnrollments(string studentId);
+        List<Enrollment> GetEnrollments(string studentId, ref List<string> errors);
 
         ////void ShowStudentHistory();
     }

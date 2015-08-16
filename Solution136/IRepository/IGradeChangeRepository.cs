@@ -7,6 +7,8 @@
     {
         void RequestGradeChange(GradeChange gradeChange, ref List<string> errors);
 
-        void ApproveGradeChange(GradeChange gradeChange, ref List<string> errors);
+        void ApproveGradeChange(int gradeChangeId, ref List<string> errors);
+
+        ////find gradeChangeBySomeSortOfId
     }
 }

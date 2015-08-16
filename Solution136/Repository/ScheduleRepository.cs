@@ -12,6 +12,12 @@
     public class ScheduleRepository : BaseRepository, IScheduleRepository
     {
         private const string GetScheduleListProcedure = "spGetScheduleList";
+        private cse136Entities context;
+
+        public ScheduleRepository(cse136Entities entities)
+        {
+            this.context = entities;
+        }
 
         public List<Schedule> GetScheduleList(string year, string quarter, ref List<string> errors)
         {
@@ -74,16 +80,48 @@
             return scheduleList;
         }
 
-        public void CreateSchedule(Schedule schedule, ref List<string> errors)
+        public void AddCourseToSchedule(Schedule schedule, int instructorId, int dayId, int timeId, ref List<string> errors)
         {
+            course_schedule db_Schedule = new course_schedule();
+
+            try
+            {
+                db_Schedule.course_id = int.Parse(schedule.Course.CourseId);
+                db_Schedule.instructor_id = instructorId;
+                db_Schedule.schedule_day_id = dayId;
+                db_Schedule.schedule_time_id = timeId;
+                db_Schedule.year = int.Parse(schedule.Year);
+                db_Schedule.quarter = schedule.Quarter;
+                db_Schedule.session = schedule.Session;
+                this.context.course_schedule.Add(db_Schedule);
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
 
-        public void AddCourseToSchedule(Schedule schedule, Course course, ref List<string> errors)
+        public void RemoveCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
         {
+            try
+            {
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
 
-        public void RemoveCourseFromSchedule(Schedule schedule, Course course, ref List<string> errors)
+        public void IsDuplicateCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
         {
+            try
+            {
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
     }
 }

@@ -103,7 +103,7 @@
 
             var mockRepository = new Mock<IStudentRepository>();
             var studentService = new StudentService(mockRepository.Object);
-            mockRepository.Setup(x => x.GetEnrollments("testId")).Returns(new List<Enrollment>());
+            mockRepository.Setup(x => x.GetEnrollments("testId", ref errors)).Returns(new List<Enrollment>());
 
             //// Act
             var enrollments = studentService.GetEnrollments("testId", ref errors);
@@ -127,7 +127,7 @@
             enrollments.Add(new Enrollment { Grade = "B", GradeValue = 3.0f, ScheduleId = 2, StudentId = "testId" });
             enrollments.Add(new Enrollment { Grade = "C+", GradeValue = 2.7f, ScheduleId = 3, StudentId = "testId" });
 
-            mockRepository.Setup(x => x.GetEnrollments("testId")).Returns(enrollments);
+            mockRepository.Setup(x => x.GetEnrollments("testId", ref errors)).Returns(enrollments);
 
             //// Act
             var gap = studentService.CalculateGpa("testId", enrollments, ref errors);

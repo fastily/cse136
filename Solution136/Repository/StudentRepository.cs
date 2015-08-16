@@ -52,22 +52,6 @@
             return pocoStudent;
         }
 
-        public student FindEntityStudentById(int student_id, ref List<string> errors)
-        {
-            student db_student = new student();
-
-            try
-            {
-                db_student = this.context.students.Find(student_id);
-            }
-            catch (Exception e)
-            {
-                errors.Add("Error: " + e);
-            }
-
-            return db_student;
-        }
-
         public void InsertStudent(Student s, ref List<string> errors)
         {
             var db_student = new student();
@@ -88,7 +72,6 @@
             }
         }
 
-        ////need to figure out how to do this method
         public void UpdateStudent(Student s, ref List<string> errors)
         {
             var db_student = new student();
@@ -96,8 +79,8 @@
 
             try
             {
-                ////dbStudent = FindEntityStudentById(_Student.StudentId, ref List<string> errors);
                 db_student.student_id = s.StudentId;
+                db_student = this.context.students.Find(db_student);
                 db_student.first_name = s.FirstName;
                 db_student.last_name = s.LastName;
                 db_student.password = s.Password;
@@ -290,10 +273,28 @@
             }
         }
 
-        public List<Enrollment> GetEnrollments(string studentId)
+        public List<Enrollment> GetEnrollments(string studentId, ref List<string> errors)
         {
-            //// Not implemented yet. 136 TODO:
-            throw new Exception();
+            IEnumerable<enrollment> db_EnrollmentList;
+            List<Enrollment> poco_EnrollmentList = new List<Enrollment>();
+            try
+            {
+                db_EnrollmentList = this.context.enrollments.Where(x => x.student_id == studentId);
+                foreach (enrollment enrolledSchedule in db_EnrollmentList) 
+                {
+                    Enrollment poco_Enrollment = new Enrollment();
+                    poco_Enrollment.Grade = enrolledSchedule.grade;
+                    poco_Enrollment.ScheduleId = enrolledSchedule.schedule_id;
+                    poco_Enrollment.StudentId = studentId;
+                    poco_EnrollmentList.Add(poco_Enrollment);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
+            return poco_EnrollmentList;
         }
     }
 }
