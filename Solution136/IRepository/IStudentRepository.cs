@@ -23,6 +23,7 @@
 
         List<Enrollment> GetEnrollments(string studentId, ref List<string> errors);
 
+        void RequestPreReqOverride();
         ////void ShowStudentHistory();
     }
 }

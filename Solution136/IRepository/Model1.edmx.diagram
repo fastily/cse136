@@ -31,6 +31,7 @@
         <AssociationConnector Association="cse136Model.FK_enrollment_student" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_TeachingAssistant_TeachingAssitantType" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.course_schedule_ta" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="cse136Model.preReq_Override" Width="1.5" PointX="10.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
