@@ -280,7 +280,8 @@
             try
             {
                 db_EnrollmentList = this.context.enrollments.Where(x => x.student_id == studentId);
-                foreach(enrollment enrolledSchedule in db_EnrollmentList){
+                foreach (enrollment enrolledSchedule in db_EnrollmentList) 
+                {
                     Enrollment poco_Enrollment = new Enrollment();
                     poco_Enrollment.Grade = enrolledSchedule.grade;
                     poco_Enrollment.ScheduleId = enrolledSchedule.schedule_id;

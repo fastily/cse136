@@ -10,14 +10,11 @@
 
     public class EnrollmentRepository : IEnrollmentRepository
     {
-
         private cse136Entities context;
 
         public EnrollmentRepository(cse136Entities entities)
         {
             this.context = entities;
         }
-
-     
     }
 }

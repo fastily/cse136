@@ -23,7 +23,7 @@
 
         void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors);
 
-        //void ApprovePreReqOvverid()
+        ////void ApprovePreReqOvverid()
 
         List<Course> GetAllPreReqs(int courseId, ref List<string> errors);
     }
