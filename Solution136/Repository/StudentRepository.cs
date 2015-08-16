@@ -297,8 +297,21 @@
             return poco_EnrollmentList;
         }
 
-        public void RequestPreReqOverride()
+        public void RequestPreReqOverride(int scheduleId, string studentId, ref List<string> errors)
         {
+            preReq_Override db_PreReqRequest = new preReq_Override();
+
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+        }
+
+        public void GetStudentHistory(){
 
         }
     }
