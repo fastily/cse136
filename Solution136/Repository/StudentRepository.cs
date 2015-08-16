@@ -304,7 +304,7 @@
             try
             {
                 db_PreReqRequest.schedule_id = scheduleId;
-                db_PreReqRequest.student_id = Int32.Parse(studentId);
+                db_PreReqRequest.student_id = int.Parse(studentId);
                 db_PreReqRequest.approved = false;
                 this.context.preReq_Override.Add(db_PreReqRequest);
                 this.context.SaveChanges();
@@ -330,7 +330,6 @@
                     tmpSchedule = this.context.course_schedule.Find(tmpSchedule);
                     db_CourseScheduleList.Add(tmpSchedule);
                 }
-
             }
             catch (Exception e)
             {

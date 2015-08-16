@@ -186,7 +186,7 @@
             return pocoInstructorList;
         }
 
-        public void AssignGradeToStudent(Schedule schedule ,string studentId, int InstructorId, string grade, ref List<string> errors)
+        public void AssignGradeToStudent(Schedule schedule, string studentId, int instructorId, string grade, ref List<string> errors)
         {
             var db_enrollment = new enrollment();
             int scheduleId;
@@ -194,8 +194,8 @@
             try
             {
                 scheduleId = this.context.course_schedule.Where(
-                    y => y.quarter == schedule.Quarter && y.year == Int32.Parse(schedule.Year) &&
-                    y.instructor_id == InstructorId).Select(x => x.schedule_id).First();
+                    y => y.quarter == schedule.Quarter && y.year == int.Parse(schedule.Year) &&
+                    y.instructor_id == instructorId).Select(x => x.schedule_id).First();
                 db_enrollment = this.context.enrollments.Where(x => x.student_id == studentId && x.schedule_id == scheduleId).First();
                 db_enrollment.grade = grade;
                 this.context.SaveChanges();
@@ -213,7 +213,7 @@
             try
             {
                 db_PreReqRequest.schedule_id = scheduleId;
-                db_PreReqRequest.student_id = Int32.Parse(studentId);
+                db_PreReqRequest.student_id = int.Parse(studentId);
                 db_PreReqRequest = this.context.preReq_Override.Find(db_PreReqRequest);
                 db_PreReqRequest.approved = true;
                 this.context.SaveChanges();

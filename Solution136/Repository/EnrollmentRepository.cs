@@ -17,7 +17,7 @@
             this.context = entities;
         }
 
-        public void AddEnrollment(string studentId, string year, string quarter, string session, Course Course, ref List<string> errors)
+        public void AddEnrollment(string studentId, string year, string quarter, string session, Course course, ref List<string> errors)
         {
             var db_Enrollment = new enrollment();
 
@@ -26,8 +26,8 @@
                 db_Enrollment.student_id = studentId; 
 
                 db_Enrollment.schedule_id = this.context.course_schedule.Where(
-                    y => y.quarter == quarter && y.year == Int32.Parse(year)).Select(x => x.schedule_id).First();
-                db_Enrollment.grade = "";
+                    y => y.quarter == quarter && y.year == int.Parse(year)).Select(x => x.schedule_id).First();
+                db_Enrollment.grade = string.Empty;
                 this.context.enrollments.Add(db_Enrollment);
                 this.context.SaveChanges();
             }
@@ -37,14 +37,14 @@
             }
         }
 
-        public void RemoveEnrollment(string studentId, int ScheduleId, ref List<string> errors)
+        public void RemoveEnrollment(string studentId, int scheduleId, ref List<string> errors)
         {
             var db_enrollment = new enrollment();
 
             try
             {
                 db_enrollment.student_id = studentId;
-                db_enrollment.schedule_id = ScheduleId;
+                db_enrollment.schedule_id = scheduleId;
                 this.context.enrollments.Remove(db_enrollment);
                 this.context.SaveChanges();
             }
