@@ -104,8 +104,16 @@
 
         public void RemoveCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
         {
+            var db_Schedule = new course_schedule();
+
             try
             {
+                db_Schedule.year = Int32.Parse(year);
+                db_Schedule.course_id = courseId;
+                db_Schedule.quarter = quarter;
+                db_Schedule = this.context.course_schedule.Remove(db_Schedule);
+                this.context.SaveChanges();
+
             }
             catch (Exception e)
             {
