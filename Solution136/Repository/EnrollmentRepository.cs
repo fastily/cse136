@@ -34,7 +34,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error at AddEnrollment: " + e);
+                errors.Add("Error occured in EnrollmentRepository.AddEnrollment: " + e);
             }
         }
 

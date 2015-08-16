@@ -71,7 +71,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in ScheduleRepository.GetScheduleList: " + e);
             }
             finally
             {
@@ -99,7 +99,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in ScheduleRepository.AddCourseToSchedule: " + e);
             }
         }
 
@@ -119,7 +119,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in ScheduleRepository.RemoveCourseFromSchedule: " + e);
             }
         }
 
@@ -130,7 +130,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in ScheduleRepository.IsDuplicateCourseFromSchedule: " + e);
             }
         }
     }

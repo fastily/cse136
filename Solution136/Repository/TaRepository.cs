@@ -36,7 +36,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in TaRepository.FindTaByName: " + e);
             }
 
             return pocoTa;
@@ -59,7 +59,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in TaRepository.FindTaById: " + e);
             }
 
             return pocoTa;
@@ -85,7 +85,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in TaRepository.IsDuplicateCourse: " + e);
             }
 
             return true;
@@ -105,7 +105,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in TaRepository.UpdateTa: " + e);
             }
         }
 
@@ -123,7 +123,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in TaRepository.AddTa: " + e);
             }
         }
 
@@ -139,7 +139,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in TaRepository.RemoveTa: " + e);
             }
         }
 
@@ -163,7 +163,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in TaRepository.GetTaList: " + e);
             }
 
             return pocoTaList;
@@ -191,7 +191,7 @@
             }
             catch (Exception e)
             {
-                errors.Add("Error: " + e);
+                errors.Add("Error occured in TaRepository.IsDuplicateTa: " + e);
             }
 
             return true;
