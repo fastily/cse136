@@ -185,5 +185,25 @@
 
             return pocoInstructorList;
         }
+
+        public void AssignGradeToStudent(Schedule schedule ,string studentId, int InstructorId, string grade, ref List<string> errors)
+        {
+            var db_enrollment = new enrollment();
+            int scheduleId;
+
+            try
+            {
+                scheduleId = this.context.course_schedule.Where(
+                    y => y.quarter == schedule.Quarter && y.year == Int32.Parse(schedule.Year) &&
+                    y.instructor_id == InstructorId).Select(x => x.schedule_id).First();
+                db_enrollment = this.context.enrollments.Where(x => x.student_id == studentId && x.schedule_id == scheduleId).First();
+                db_enrollment.grade = grade;
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+        }
     }
 }

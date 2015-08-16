@@ -18,5 +18,7 @@
         void RemoveInstructor(int instructor_id, ref List<string> errors);
 
         List<Instructor> GetInstructorList(ref List<string> errors);
+
+        void AssignGradeToStudent(Schedule schedule, string studentId, int InstructorId, string grade, ref List<string> errors);
     }
 }
