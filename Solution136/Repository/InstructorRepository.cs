@@ -206,9 +206,22 @@
             }
         }
 
-        public void ApprovePreReqOverride()
+        public void ApprovePreReqOverride(int scheduleId, string studentId, ref List<string> errors)
         {
+            preReq_Override db_PreReqRequest = new preReq_Override();
 
+            try
+            {
+                db_PreReqRequest.schedule_id = scheduleId;
+                db_PreReqRequest.student_id = Int32.Parse(studentId);
+                db_PreReqRequest = this.context.preReq_Override.Find(db_PreReqRequest);
+                db_PreReqRequest.approved = true;
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
     }
 }

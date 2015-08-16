@@ -21,6 +21,6 @@
 
         void AssignGradeToStudent(Schedule schedule, string studentId, int InstructorId, string grade, ref List<string> errors);
 
-        void ApprovePreReqOverride();
+        void ApprovePreReqOverride(int scheduleId, string studentId, ref List<string> errors);
     }
 }
