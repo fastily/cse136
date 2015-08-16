@@ -25,6 +25,6 @@
 
         void RequestPreReqOverride(int scheduleId, string studentId, ref List<string> errors);
 
-        void GetStudentHistory();
+        void GetStudentHistory(string studenId, ref List<string> errors);
     }
 }

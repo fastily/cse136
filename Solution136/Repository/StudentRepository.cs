@@ -315,8 +315,27 @@
             }
         }
 
-        public void GetStudentHistory(){
+        public void GetStudentHistory(string studentId, ref List<string> errors)
+        {
+            IEnumerable<int> db_ScheduleIdList;
+            List<course_schedule> db_CourseScheduleList = new List<course_schedule>();
 
+            try
+            {
+                db_ScheduleIdList = this.context.enrollments.Where(x => x.student_id == studentId).Select(y => y.schedule_id);
+                foreach (int scheduleId in db_ScheduleIdList)
+                {
+                    course_schedule tmpSchedule = new course_schedule();
+                    tmpSchedule.schedule_id = scheduleId;
+                    tmpSchedule = this.context.course_schedule.Find(tmpSchedule);
+                    db_CourseScheduleList.Add(tmpSchedule);
+                }
+
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
         }
     }
 }
