@@ -176,5 +176,10 @@ namespace Repository
 
             return pocoTaList;
         }
+
+        public bool IsDuplicateTa(Ta _Ta, ref List<string> errors)
+        {
+            return true;
+        }
     }
 }
