@@ -29,7 +29,7 @@
         /// </summary>
         /// <param name="cr">The poco cape review to insert</param>
         /// <param name="errors">Error list</param>
-        public void InsertCape(CapeReview cr, ref List<string> errors )
+        public void InsertCape(CapeReview cr, ref List<string> errors)
         {
             cape_reviews db = new cape_reviews();
 
@@ -43,7 +43,7 @@
                 db.summary = cr.Summary;
                 db.course_rating = cr.CourseRating;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 errors.Add("Error: " + e);
             }
@@ -77,7 +77,7 @@
         /// <param name="cape_id">id to search for</param>
         /// <param name="errors">Error list</param>
         /// <returns></returns>
-        public CapeReview FindCapeReviewById(int cape_id, ref List<String> errors)
+        public CapeReview FindCapeReviewById(int cape_id, ref List<string> errors)
         {
             CapeReview pocoCR = new CapeReview();
 
@@ -88,9 +88,9 @@
                 pocoCR.CapeId = db.cape_id;
                 ////pocoCR.CourseName = db.course_id; //TODO: NEED JOINS HERE D:
                 ////pocoCR.InstructorName = db.instructor_id;
-                pocoCR.InstructorRating = (int) db.instructor_rating;
+                pocoCR.InstructorRating = (int)db.instructor_rating;
                 pocoCR.Summary = db.summary;
-                pocoCR.CourseRating = (int) db.course_rating;
+                pocoCR.CourseRating = (int)db.course_rating;
             }
             catch (Exception e)
             {
@@ -118,13 +118,11 @@
                 db.instructor_rating = cr.InstructorRating;
                 db.summary = cr.Summary;
                 this.context.SaveChanges();
-
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 errors.Add("Error: " + e);
             }
-
         }
     }
 }
