@@ -42,5 +42,6 @@ namespace IRepository
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TeachingAssistant> TeachingAssistants { get; set; }
         public virtual DbSet<TeachingAssistantType> TeachingAssistantTypes { get; set; }
+        public virtual DbSet<preReq_Override> preReq_Override { get; set; }
     }
 }
