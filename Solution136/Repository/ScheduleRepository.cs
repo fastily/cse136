@@ -65,6 +65,7 @@
                             Description = dataSet.Tables[0].Rows[i]["course_description"].ToString(), 
                         }
                     };
+
                     scheduleList.Add(schedule);
                 }
             }
@@ -104,6 +105,7 @@
 
         public void RemoveCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
         {
+
             var db_Schedule = new course_schedule();
 
             try
