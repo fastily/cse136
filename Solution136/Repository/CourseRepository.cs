@@ -12,8 +12,6 @@
     {
         private cse136Entities context;
 
-        ////private const string GetCourseListProcedure = "spGetCourseList";
-
         public CourseRepository(cse136Entities entities)
         {
             this.context = entities;
@@ -43,15 +41,14 @@
             return pocoCourse;
         }
 
-        ////shouldn't call this method unless we know course exists
-        public Course FindCourseById(string courseName, ref List<string> errors)
+        public Course FindCourseById(string courseId, ref List<string> errors)
         {
             POCO.Course pocoCourse = new POCO.Course();
             course db_course;
             try
             {
                 ////will search primary key
-                db_course = this.context.courses.Find(courseName);
+                db_course = this.context.courses.Find(courseId);
                 if (db_course != null)
                 {
                     pocoCourse.CourseId = db_course.course_id.ToString();
@@ -150,10 +147,6 @@
             }
         }
 
-        public void AssignPreReqToCourse(Course course, Course preReqCourse, ref List<string> errors)
-        {
-        }
-
         public List<Course> GetCourseList(ref List<string> errors)
         {
             List<POCO.Course> pocoCourseList = new List<POCO.Course>();
@@ -169,6 +162,77 @@
                     tempPoco.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), i_course.course_level);
                     tempPoco.Description = i_course.course_description;
                     tempPoco.Title = i_course.course_title;
+                    pocoCourseList.Add(tempPoco);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
+            return pocoCourseList;
+        }
+
+        public void AssignPreReqToCourse(int courseId, int preReqCourseId, ref List<string> errors)
+        {
+            course db_coursePreReq = new course();
+            course_preReq db_preReq = new course_preReq();
+            try
+            {
+                db_coursePreReq.course_id = preReqCourseId;
+                db_coursePreReq = this.context.courses.Find(db_coursePreReq);
+
+                db_preReq.course_id = courseId;
+                db_preReq.preReq_id = preReqCourseId;
+                db_preReq.preReq_title = db_coursePreReq.course_title;
+
+                this.context.course_preReq.Add(db_preReq);
+                this.context.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+        }
+
+        void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors)
+        {
+            course db_coursePreReq = new course();
+            course_preReq db_preReq = new course_preReq();
+            try
+            {
+                db_coursePreReq.course_id = preReqToRemoveCourseId;
+                db_coursePreReq = this.context.courses.Find(db_coursePreReq);
+
+                db_preReq.course_id = courseId;
+                db_preReq.preReq_id = preReqToRemoveCourseId;
+                db_preReq.preReq_title = db_coursePreReq.course_title;
+
+                this.context.course_preReq.Remove(db_preReq);
+                this.context.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+        }
+
+        List<Course> GetAllPreReqs(int courseId, ref List<string> errors)
+        {
+            List<POCO.Course> pocoCourseList = new List<POCO.Course>();
+            course db_course = new course();
+            List<course_preReq> db_preReqCourseList;
+            try
+            {
+                db_preReqCourseList = this.context.course_preReq.ToList();
+
+                foreach (course_preReq preReq in db_preReqCourseList)
+                {
+                    var tempPoco = new POCO.Course();
+                    tempPoco.CourseId = preReq.preReq_id.ToString();
+                    tempPoco.Title = preReq.preReq_title;
                     pocoCourseList.Add(tempPoco);
                 }
             }

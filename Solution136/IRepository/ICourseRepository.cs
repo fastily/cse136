@@ -17,8 +17,12 @@
 
         void RemoveCourse(int courseId, ref List<string> errors);
 
-        void AssignPreReqToCourse(Course course, Course preReqCourse, ref List<string> errors);
-
         List<Course> GetCourseList(ref List<string> errors);
+
+        void AssignPreReqToCourse(int courseId, int preReqCourseId, ref List<string> errors);
+
+        void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors);
+
+        List<Course> GetAllPreReqs(int courseId, ref List<string> errors);
     }
 }
