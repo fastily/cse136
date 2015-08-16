@@ -2,26 +2,30 @@
 {
     using System.Collections.Generic;
     using System.Web.Http;
+    using IRepository;
     using POCO;
     using Repository;
     using Service;
-    using IRepository;
 
     public class AdminController : ApiController
     {
-        private cse136Entities _cse136Entities;
+        private cse136Entities entities;
 
-        //default constructor for runtime use
+        /// <summary>
+        /// default constructor for runtime use
+        /// </summary>
         public AdminController()
         {
-            _cse136Entities = new cse136Entities();
+            this.entities = new cse136Entities();
         }
 
-        //overloaded constructor for dependency injection
-        //used for testing
-        public AdminController(cse136Entities Cse136Entities)
+        /// <summary>
+        /// overloaded constructor for dependency injection.  Used for testing
+        /// </summary>
+        /// <param name="entities"></param>
+        public AdminController(cse136Entities entities)
         {
-            _cse136Entities = Cse136Entities;
+            this.entities = entities;
         }
 
         [HttpGet]
