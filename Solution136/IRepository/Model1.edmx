@@ -91,15 +91,6 @@
           <Property Name="first_name" Type="varchar" MaxLength="50" />
           <Property Name="last_name" Type="varchar" MaxLength="50" />
           <Property Name="title" Type="varchar" MaxLength="50" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
-          <Property Name="password" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="instructor_type">
-          <Key>
-            <PropertyRef Name="instructor_type_id" />
-          </Key>
-          <Property Name="instructor_type_id" Type="int" Nullable="false" />
-          <Property Name="instructor_type_desc" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="preReq_Override">
           <Key>
@@ -305,7 +296,6 @@
           <EntitySet Name="enrollment" EntityType="Self.enrollment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="grade_change" EntityType="Self.grade_change" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="instructor" EntityType="Self.instructor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="instructor_type" EntityType="Self.instructor_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="preReq_Override" EntityType="Self.preReq_Override" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ratings" EntityType="Self.ratings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="schedule_day" EntityType="Self.schedule_day" Schema="dbo" store:Type="Tables" />
@@ -413,11 +403,11 @@
           <Property Name="schedule_time_id" Type="Int32" />
           <Property Name="instructor_id" Type="Int32" />
           <NavigationProperty Name="course" Relationship="Self.FK_course_schedule_course" FromRole="course_schedule" ToRole="course" />
-          <NavigationProperty Name="instructor" Relationship="Self.FK_course_schedule_instructor" FromRole="course_schedule" ToRole="instructor" />
           <NavigationProperty Name="schedule_day" Relationship="Self.FK_course_schedule_schedule_day" FromRole="course_schedule" ToRole="schedule_day" />
           <NavigationProperty Name="schedule_time" Relationship="Self.FK_course_schedule_schedule_time" FromRole="course_schedule" ToRole="schedule_time" />
           <NavigationProperty Name="enrollments" Relationship="Self.FK_enrollment_course_schedule" FromRole="course_schedule" ToRole="enrollment" />
           <NavigationProperty Name="TeachingAssistants" Relationship="Self.course_schedule_ta" FromRole="course_schedule" ToRole="TeachingAssistant" />
+          <NavigationProperty Name="instructor" Relationship="cse136Model.FK_course_schedule_instructor" FromRole="course_schedule" ToRole="instructor" />
         </EntityType>
         <EntityType Name="enrollment">
           <Key>
@@ -429,25 +419,6 @@
           <Property Name="grade" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="course_schedule" Relationship="Self.FK_enrollment_course_schedule" FromRole="enrollment" ToRole="course_schedule" />
           <NavigationProperty Name="student" Relationship="Self.FK_enrollment_student" FromRole="enrollment" ToRole="student" />
-        </EntityType>
-        <EntityType Name="instructor">
-          <Key>
-            <PropertyRef Name="instructor_id" />
-          </Key>
-          <Property Name="instructor_id" Type="Int32" Nullable="false" />
-          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="course_schedule" Relationship="Self.FK_course_schedule_instructor" FromRole="instructor" ToRole="course_schedule" />
-        </EntityType>
-        <EntityType Name="instructor_type">
-          <Key>
-            <PropertyRef Name="instructor_type_id" />
-          </Key>
-          <Property Name="instructor_type_id" Type="Int32" Nullable="false" />
-          <Property Name="instructor_type_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="rating">
           <Key>
@@ -545,18 +516,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_course_schedule_instructor">
-          <End Role="instructor" Type="Self.instructor" Multiplicity="0..1" />
-          <End Role="course_schedule" Type="Self.course_schedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="instructor">
-              <PropertyRef Name="instructor_id" />
-            </Principal>
-            <Dependent Role="course_schedule">
-              <PropertyRef Name="instructor_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_course_schedule_schedule_day">
           <End Role="schedule_day" Type="Self.schedule_day" Multiplicity="0..1" />
           <End Role="course_schedule" Type="Self.course_schedule" Multiplicity="*" />
@@ -628,8 +587,6 @@
           <EntitySet Name="course_preReq" EntityType="Self.course_preReq" />
           <EntitySet Name="course_schedule" EntityType="Self.course_schedule" />
           <EntitySet Name="enrollments" EntityType="Self.enrollment" />
-          <EntitySet Name="instructors" EntityType="Self.instructor" />
-          <EntitySet Name="instructor_type" EntityType="Self.instructor_type" />
           <EntitySet Name="ratings" EntityType="Self.rating" />
           <EntitySet Name="schedule_day" EntityType="Self.schedule_day" />
           <EntitySet Name="schedule_time" EntityType="Self.schedule_time" />
@@ -644,10 +601,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_course_schedule_course" Association="Self.FK_course_schedule_course">
             <End Role="course" EntitySet="courses" />
-            <End Role="course_schedule" EntitySet="course_schedule" />
-          </AssociationSet>
-          <AssociationSet Name="FK_course_schedule_instructor" Association="Self.FK_course_schedule_instructor">
-            <End Role="instructor" EntitySet="instructors" />
             <End Role="course_schedule" EntitySet="course_schedule" />
           </AssociationSet>
           <AssociationSet Name="FK_course_schedule_schedule_day" Association="Self.FK_course_schedule_schedule_day">
@@ -676,6 +629,11 @@
           </AssociationSet>
           <EntitySet Name="grade_change" EntityType="cse136Model.grade_change" />
           <EntitySet Name="preReq_Override" EntityType="cse136Model.preReq_Override" />
+          <EntitySet Name="instructors" EntityType="cse136Model.instructor" />
+          <AssociationSet Name="FK_course_schedule_instructor" Association="cse136Model.FK_course_schedule_instructor">
+            <End Role="instructor" EntitySet="instructors" />
+            <End Role="course_schedule" EntitySet="course_schedule" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="grade_change">
           <Key>
@@ -696,6 +654,28 @@
           <Property Name="schedule_id" Type="Int32" Nullable="false" />
           <Property Name="approved" Type="Boolean" />
         </EntityType>
+        <EntityType Name="instructor">
+          <Key>
+            <PropertyRef Name="instructor_id" />
+          </Key>
+          <Property Name="instructor_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="course_schedule" Relationship="cse136Model.FK_course_schedule_instructor" FromRole="instructor" ToRole="course_schedule" />
+        </EntityType>
+        <Association Name="FK_course_schedule_instructor">
+          <End Type="cse136Model.instructor" Role="instructor" Multiplicity="0..1" />
+          <End Type="cse136Model.course_schedule" Role="course_schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instructor">
+              <PropertyRef Name="instructor_id" />
+            </Principal>
+            <Dependent Role="course_schedule">
+              <PropertyRef Name="instructor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -764,26 +744,6 @@
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
                 <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
                 <ScalarProperty Name="grade" ColumnName="grade" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="instructors">
-            <EntityTypeMapping TypeName="cse136Model.instructor">
-              <MappingFragment StoreEntitySet="instructor">
-                <ScalarProperty Name="instructor_id" ColumnName="instructor_id" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="instructor_type">
-            <EntityTypeMapping TypeName="cse136Model.instructor_type">
-              <MappingFragment StoreEntitySet="instructor_type">
-                <ScalarProperty Name="instructor_type_id" ColumnName="instructor_type_id" />
-                <ScalarProperty Name="instructor_type_desc" ColumnName="instructor_type_desc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -886,6 +846,16 @@
                 <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
                 <ScalarProperty Name="preReq_Overrid_id" ColumnName="preReq_Overrid_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="instructors">
+            <EntityTypeMapping TypeName="cse136Model.instructor">
+              <MappingFragment StoreEntitySet="instructor">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="instructor_id" ColumnName="instructor_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

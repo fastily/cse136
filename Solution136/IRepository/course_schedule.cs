@@ -31,12 +31,12 @@ namespace IRepository
         public Nullable<int> instructor_id { get; set; }
     
         public virtual course course { get; set; }
-        public virtual instructor instructor { get; set; }
         public virtual schedule_day schedule_day { get; set; }
         public virtual schedule_time schedule_time { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<enrollment> enrollments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeachingAssistant> TeachingAssistants { get; set; }
+        public virtual instructor instructor { get; set; }
     }
 }

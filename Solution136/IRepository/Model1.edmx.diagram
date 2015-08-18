@@ -11,8 +11,6 @@
         <EntityTypeShape EntityType="cse136Model.course_preReq" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.course_schedule" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.enrollment" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="cse136Model.instructor" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="cse136Model.instructor_type" Width="1.5" PointX="7.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.rating" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.schedule_day" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.schedule_time" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
@@ -23,7 +21,6 @@
         <EntityTypeShape EntityType="cse136Model.TeachingAssistantType" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
         <AssociationConnector Association="cse136Model.FK_cape_reviews_ratings" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_course" ManuallyRouted="false" />
-        <AssociationConnector Association="cse136Model.FK_course_schedule_instructor" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_schedule_day" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_schedule_time" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_enrollment_course_schedule" ManuallyRouted="false" />
@@ -32,6 +29,8 @@
         <AssociationConnector Association="cse136Model.course_schedule_ta" ManuallyRouted="false" />
         <EntityTypeShape EntityType="cse136Model.grade_change" Width="1.5" PointX="10.375" PointY="4.75" />
         <EntityTypeShape EntityType="cse136Model.preReq_Override" Width="1.5" PointX="10.375" PointY="7.75" />
+        <EntityTypeShape EntityType="cse136Model.instructor" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="cse136Model.FK_course_schedule_instructor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

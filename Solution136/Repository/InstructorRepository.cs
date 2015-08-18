@@ -30,8 +30,6 @@
                     pocoInstructor.FirstName = db_instructor.first_name;
                     pocoInstructor.LastName = db_instructor.last_name;
                     pocoInstructor.Title = db_instructor.title;
-                    pocoInstructor.Email = db_instructor.email;
-                    pocoInstructor.Password = db_instructor.password;
                 }
             }
             catch (Exception e)
@@ -56,8 +54,6 @@
                     pocoInstructor.FirstName = db_instructor.first_name;
                     pocoInstructor.LastName = db_instructor.last_name;
                     pocoInstructor.Title = db_instructor.title;
-                    pocoInstructor.Email = db_instructor.email;
-                    pocoInstructor.Password = db_instructor.password;
                 }
             }
             catch (Exception e)
@@ -75,10 +71,8 @@
 
             try
             {
-                db_instructor.email = ins.Email;
                 db_instructor.first_name = ins.FirstName;
                 db_instructor.last_name = ins.LastName;
-                db_instructor.password = ins.Password;
                 db_instructor.title = ins.Title;
                 db_instructor = this.context.instructors.Find(db_instructor);
 
@@ -110,8 +104,6 @@
                 db_instructor.first_name = ins.FirstName;
                 db_instructor.last_name = ins.LastName;
                 db_instructor.title = ins.Title;
-                db_instructor.email = ins.Email;
-                db_instructor.password = ins.Password;
                 this.context.SaveChanges();
             }
             catch (Exception e)
@@ -130,8 +122,6 @@
                 db_instructor.first_name = ins.FirstName;
                 db_instructor.last_name = ins.LastName;
                 db_instructor.title = ins.Title;
-                db_instructor.email = ins.Email;
-                db_instructor.password = ins.Password;
                 this.context.instructors.Add(db_instructor);
                 this.context.SaveChanges();
             }
@@ -172,8 +162,6 @@
                     tempPoco.FirstName = i_instructor.first_name;
                     tempPoco.LastName = i_instructor.last_name;
                     tempPoco.Title = i_instructor.title;
-                    tempPoco.Email = i_instructor.email;
-                    tempPoco.Password = i_instructor.password;
                     
                     pocoInstructorList.Add(tempPoco);
                 }

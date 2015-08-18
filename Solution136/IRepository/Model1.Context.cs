@@ -31,8 +31,6 @@ namespace IRepository
         public virtual DbSet<course_preReq> course_preReq { get; set; }
         public virtual DbSet<course_schedule> course_schedule { get; set; }
         public virtual DbSet<enrollment> enrollments { get; set; }
-        public virtual DbSet<instructor> instructors { get; set; }
-        public virtual DbSet<instructor_type> instructor_type { get; set; }
         public virtual DbSet<rating> ratings { get; set; }
         public virtual DbSet<schedule_day> schedule_day { get; set; }
         public virtual DbSet<schedule_time> schedule_time { get; set; }
@@ -43,5 +41,6 @@ namespace IRepository
         public virtual DbSet<TeachingAssistantType> TeachingAssistantTypes { get; set; }
         public virtual DbSet<grade_change> grade_change { get; set; }
         public virtual DbSet<preReq_Override> preReq_Override { get; set; }
+        public virtual DbSet<instructor> instructors { get; set; }
     }
 }
