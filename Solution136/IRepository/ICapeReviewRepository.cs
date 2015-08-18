@@ -15,6 +15,8 @@
 
         CapeReview FindCapeReviewById(int cape_id, ref List<string> errors);
 
+        ////find by schedule or course Id
+
         void UpdateCapeReview(CapeReview cr, ref List<string> errors);
     }
 }

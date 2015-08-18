@@ -304,7 +304,7 @@
             try
             {
                 db_PreReqRequest.schedule_id = scheduleId;
-                db_PreReqRequest.student_id = int.Parse(studentId);
+                db_PreReqRequest.student_id = studentId;
                 db_PreReqRequest.approved = false;
                 this.context.preReq_Override.Add(db_PreReqRequest);
                 this.context.SaveChanges();

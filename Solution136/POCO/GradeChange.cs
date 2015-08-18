@@ -10,7 +10,7 @@
     {
         public int GradeChangeId { get; set; }
 
-        public int Student_id { get; set; }
+        public string Student_id { get; set; }
 
         public int Schedule_id { get; set; }
 

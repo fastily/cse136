@@ -15,8 +15,8 @@ namespace IRepository
     public partial class preReq_Override
     {
         public int preReq_Overrid_id { get; set; }
+        public string student_id { get; set; }
         public int schedule_id { get; set; }
-        public int student_id { get; set; }
         public Nullable<bool> approved { get; set; }
     }
 }

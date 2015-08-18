@@ -78,7 +78,7 @@
             <PropertyRef Name="gradeChange_id" />
           </Key>
           <Property Name="gradeChange_id" Type="int" Nullable="false" />
-          <Property Name="student_id" Type="int" Nullable="false" />
+          <Property Name="student_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="schedule_id" Type="int" Nullable="false" />
           <Property Name="approved" Type="bit" />
           <Property Name="course_id" Type="int" Nullable="false" />
@@ -106,8 +106,8 @@
             <PropertyRef Name="preReq_Overrid_id" />
           </Key>
           <Property Name="preReq_Overrid_id" Type="int" Nullable="false" />
+          <Property Name="student_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="schedule_id" Type="int" Nullable="false" />
-          <Property Name="student_id" Type="int" Nullable="false" />
           <Property Name="approved" Type="bit" />
         </EntityType>
         <EntityType Name="ratings">
@@ -430,16 +430,6 @@
           <NavigationProperty Name="course_schedule" Relationship="Self.FK_enrollment_course_schedule" FromRole="enrollment" ToRole="course_schedule" />
           <NavigationProperty Name="student" Relationship="Self.FK_enrollment_student" FromRole="enrollment" ToRole="student" />
         </EntityType>
-        <EntityType Name="grade_change">
-          <Key>
-            <PropertyRef Name="gradeChange_id" />
-          </Key>
-          <Property Name="gradeChange_id" Type="Int32" Nullable="false" />
-          <Property Name="student_id" Type="Int32" Nullable="false" />
-          <Property Name="schedule_id" Type="Int32" Nullable="false" />
-          <Property Name="approved" Type="Boolean" />
-          <Property Name="course_id" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="instructor">
           <Key>
             <PropertyRef Name="instructor_id" />
@@ -638,7 +628,6 @@
           <EntitySet Name="course_preReq" EntityType="Self.course_preReq" />
           <EntitySet Name="course_schedule" EntityType="Self.course_schedule" />
           <EntitySet Name="enrollments" EntityType="Self.enrollment" />
-          <EntitySet Name="grade_change" EntityType="Self.grade_change" />
           <EntitySet Name="instructors" EntityType="Self.instructor" />
           <EntitySet Name="instructor_type" EntityType="Self.instructor_type" />
           <EntitySet Name="ratings" EntityType="Self.rating" />
@@ -685,15 +674,26 @@
             <End Role="course_schedule" EntitySet="course_schedule" />
             <End Role="TeachingAssistant" EntitySet="TeachingAssistants" />
           </AssociationSet>
+          <EntitySet Name="grade_change" EntityType="cse136Model.grade_change" />
           <EntitySet Name="preReq_Override" EntityType="cse136Model.preReq_Override" />
         </EntityContainer>
+        <EntityType Name="grade_change">
+          <Key>
+            <PropertyRef Name="gradeChange_id" />
+          </Key>
+          <Property Name="gradeChange_id" Type="Int32" Nullable="false" />
+          <Property Name="student_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="schedule_id" Type="Int32" Nullable="false" />
+          <Property Name="approved" Type="Boolean" />
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="preReq_Override">
           <Key>
             <PropertyRef Name="preReq_Overrid_id" />
           </Key>
           <Property Name="preReq_Overrid_id" Type="Int32" Nullable="false" />
+          <Property Name="student_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="schedule_id" Type="Int32" Nullable="false" />
-          <Property Name="student_id" Type="Int32" Nullable="false" />
           <Property Name="approved" Type="Boolean" />
         </EntityType>
       </Schema>
@@ -764,17 +764,6 @@
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
                 <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
                 <ScalarProperty Name="grade" ColumnName="grade" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="grade_change">
-            <EntityTypeMapping TypeName="cse136Model.grade_change">
-              <MappingFragment StoreEntitySet="grade_change">
-                <ScalarProperty Name="gradeChange_id" ColumnName="gradeChange_id" />
-                <ScalarProperty Name="student_id" ColumnName="student_id" />
-                <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
-                <ScalarProperty Name="approved" ColumnName="approved" />
-                <ScalarProperty Name="course_id" ColumnName="course_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -879,12 +868,23 @@
               <ScalarProperty Name="ta_id" ColumnName="ta_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="grade_change">
+            <EntityTypeMapping TypeName="cse136Model.grade_change">
+              <MappingFragment StoreEntitySet="grade_change">
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="approved" ColumnName="approved" />
+                <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="gradeChange_id" ColumnName="gradeChange_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="preReq_Override">
             <EntityTypeMapping TypeName="cse136Model.preReq_Override">
               <MappingFragment StoreEntitySet="preReq_Override">
                 <ScalarProperty Name="approved" ColumnName="approved" />
-                <ScalarProperty Name="student_id" ColumnName="student_id" />
                 <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
                 <ScalarProperty Name="preReq_Overrid_id" ColumnName="preReq_Overrid_id" />
               </MappingFragment>
             </EntityTypeMapping>
