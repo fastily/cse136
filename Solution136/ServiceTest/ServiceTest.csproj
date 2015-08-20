@@ -53,6 +53,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ScheduleServiceTest.cs" />
+    <Compile Include="GradeChangeServiceTest.cs" />
+    <Compile Include="CourseServiceTest.cs" />
+    <Compile Include="EnrollmentServiceTest.cs" />
+    <Compile Include="InstructorServiceTest.cs" />
+    <Compile Include="CapeReviewServiceTest.cs" />
+    <Compile Include="TaServiceTest.cs" />
     <Compile Include="StudentServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AuthorizeServiceTest.cs" />
