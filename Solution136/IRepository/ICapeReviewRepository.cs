@@ -13,7 +13,9 @@
 
         void DeleteCapeReview(int cape_id, ref List<string> errors);
 
-        CapeReview FindCapeReviewById(int cape_id, ref List<string> errors);
+        //// CapeReview FindCapeReviewById(int cape_id, ref List<string> errors);
+
+        CapeReview FindCapeReviewByCourseId(int cape_id, ref List<string> errors);
 
         ////find by schedule or course Id
 
