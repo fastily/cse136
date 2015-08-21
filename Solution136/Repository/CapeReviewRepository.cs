@@ -36,9 +36,10 @@
             try
             {
                 db.cape_id = cr.CapeId;
-                ////TODO: This is going to have to be a join
-                ////db.instructor_id = cr.InstructorName;
-                ////db.course_id = cr.CourseName;
+                ////db.instructor_id = this.context.instructors.Where(x => x.last_name == cr.InstructorName).Select(y => y.instructor_id).First();
+
+                db.instructor_id = cr.InstructorId;
+                db.course_id = cr.CourseId;
                 db.instructor_rating = cr.InstructorRating;
                 db.summary = cr.Summary;
                 db.course_rating = cr.CourseRating;
@@ -80,17 +81,17 @@
         /// <param name="cape_id">id to search for</param>
         /// <param name="errors">Error list</param>
         /// <returns></returns>
-        public CapeReview FindCapeReviewById(int cape_id, ref List<string> errors)
+        public CapeReview FindCapeReviewByCourseId(int course_id, ref List<string> errors)
         {
             CapeReview pocoCR = new CapeReview();
 
             try
             {
-                cape_reviews db = this.context.cape_reviews.Find(cape_id);
+                cape_reviews db = this.context.cape_reviews.Find(course_id);
 
                 pocoCR.CapeId = db.cape_id;
-                ////pocoCR.CourseName = db.course_id; //TODO: NEED JOINS HERE D:
-                ////pocoCR.InstructorName = db.instructor_id;
+                pocoCR.CourseId = (int)db.course_id;
+                pocoCR.InstructorId = (int)db.instructor_id;
                 pocoCR.InstructorRating = (int)db.instructor_rating;
                 pocoCR.Summary = db.summary;
                 pocoCR.CourseRating = (int)db.course_rating;
@@ -115,8 +116,8 @@
             try
             {
                 db.cape_id = cr.CapeId;
-                ////db.instructor_id = cr.InstructorName;
-                ////db.course_id = cr.CourseName;
+                db.instructor_id = cr.InstructorId;
+                db.course_id = cr.CourseId;
                 db.course_rating = cr.CourseRating;
                 db.instructor_rating = cr.InstructorRating;
                 db.summary = cr.Summary;

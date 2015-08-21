@@ -51,5 +51,25 @@
                 errors.Add("Error occured in GradeChangeRepository.ApproveGradeChange: " + e);
             }
         }
+    
+        public int GetEverything(string student_id, int course_id, ref List<string> errors)
+        {
+            grade_change db_gradeChange = new grade_change();
+
+            IEnumerable<int> scheduleIDs = this.context.enrollments.Where(x => x.student_id == student_id).Select(y => y.schedule_id);
+
+            bool temp;
+           
+            foreach (int s in scheduleIDs)
+            {
+                temp = this.context.course_schedule.Where(x => x.schedule_id == s && x.course_id == course_id).Count() > 0;
+                if (temp)
+                {
+                    return s;
+                }
+            }
+
+            return -1;
+        }
     }
 }

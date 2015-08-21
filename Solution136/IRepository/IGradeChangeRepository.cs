@@ -10,5 +10,7 @@
         void ApproveGradeChange(int gradeChangeId, ref List<string> errors);
 
         ////find gradeChangeBySomeSortOfId
+
+        int GetEverything(string student_id, int course_id, ref List<string> errors);
     }
 }

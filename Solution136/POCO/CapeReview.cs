@@ -10,9 +10,9 @@
     {
         public int CapeId { get; set; }
 
-        public string InstructorName { get; set; }
+        public int InstructorId { get; set; }
 
-        public string CourseName { get; set; }
+        public int CourseId { get; set; }
 
         public int InstructorRating { get; set; }
 

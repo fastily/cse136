@@ -13,5 +13,24 @@
         {
             this.repository = repository;
         }
+
+        public void InsertGradeChange(GradeChange gc, ref List<string> errors)
+        {
+            if (gc.Course_id == -1)
+            {
+                errors.Add("Invalid course ID");
+                throw new ArgumentException();
+            }
+
+            int scheduleid = this.repository.GetEverything(gc.Student_id, gc.Course_id, ref errors);
+            if (scheduleid == -1)
+            {
+                errors.Add("Invalid schedule ID");
+                throw new ArgumentException();
+            }
+
+            gc.Schedule_id = scheduleid;
+            this.repository.RequestGradeChange(gc, ref errors);
+        }
     }
 }
