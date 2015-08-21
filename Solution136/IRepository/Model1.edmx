@@ -12,6 +12,8 @@
           <Property Name="admin_id" Type="int" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="First" Type="varchar" MaxLength="50" />
+          <Property Name="Last" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="cape_reviews">
           <Key>
@@ -350,14 +352,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cse136Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="admin">
-          <Key>
-            <PropertyRef Name="admin_id" />
-          </Key>
-          <Property Name="admin_id" Type="Int32" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="cape_reviews">
           <Key>
             <PropertyRef Name="cape_id" />
@@ -581,7 +575,6 @@
           <End Role="TeachingAssistant" Type="Self.TeachingAssistant" Multiplicity="*" />
         </Association>
         <EntityContainer Name="cse136Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="admins" EntityType="Self.admin" />
           <EntitySet Name="cape_reviews" EntityType="Self.cape_reviews" />
           <EntitySet Name="courses" EntityType="Self.course" />
           <EntitySet Name="course_preReq" EntityType="Self.course_preReq" />
@@ -634,6 +627,7 @@
             <End Role="instructor" EntitySet="instructors" />
             <End Role="course_schedule" EntitySet="course_schedule" />
           </AssociationSet>
+          <EntitySet Name="admins" EntityType="cse136Model.admin" />
         </EntityContainer>
         <EntityType Name="grade_change">
           <Key>
@@ -676,21 +670,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="First" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="cse136ModelStoreContainer" CdmEntityContainer="cse136Entities">
-          <EntitySetMapping Name="admins">
-            <EntityTypeMapping TypeName="cse136Model.admin">
-              <MappingFragment StoreEntitySet="admin">
-                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="cape_reviews">
             <EntityTypeMapping TypeName="cse136Model.cape_reviews">
               <MappingFragment StoreEntitySet="cape_reviews">
@@ -856,6 +851,17 @@
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="instructor_id" ColumnName="instructor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="cse136Model.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="Last" ColumnName="Last" />
+                <ScalarProperty Name="First" ColumnName="First" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

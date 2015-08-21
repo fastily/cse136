@@ -39,8 +39,15 @@
         [HttpPost]
         public string UpdateAdminInfo(Admin admin)
         {
-            //// 136 TODO : update admin info here...
-            return "update not yet implemented";
+            var errors = new List<string>();
+
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
         }
     }
 }

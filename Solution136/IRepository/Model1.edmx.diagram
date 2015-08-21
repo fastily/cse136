@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e0ba313ba4c7484a9a426e09f1c2c3d2" Name="Diagram1">
-        <EntityTypeShape EntityType="cse136Model.admin" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.cape_reviews" Width="1.5" PointX="8" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.course" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.course_preReq" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
@@ -31,6 +30,7 @@
         <EntityTypeShape EntityType="cse136Model.preReq_Override" Width="1.5" PointX="10.375" PointY="7.75" />
         <EntityTypeShape EntityType="cse136Model.instructor" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_instructor" />
+        <EntityTypeShape EntityType="cse136Model.admin" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

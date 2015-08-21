@@ -83,6 +83,7 @@
     <Compile Include="IStudentRepository.cs" />
     <Compile Include="IAuthorizeRepository.cs" />
     <Compile Include="IGradeChangeRepository.cs" />
+    <Compile Include="IAdminRepository.cs" />
     <Compile Include="ITaRepository.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>

@@ -25,7 +25,6 @@ namespace IRepository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<admin> admins { get; set; }
         public virtual DbSet<cape_reviews> cape_reviews { get; set; }
         public virtual DbSet<course> courses { get; set; }
         public virtual DbSet<course_preReq> course_preReq { get; set; }
@@ -42,5 +41,6 @@ namespace IRepository
         public virtual DbSet<grade_change> grade_change { get; set; }
         public virtual DbSet<preReq_Override> preReq_Override { get; set; }
         public virtual DbSet<instructor> instructors { get; set; }
+        public virtual DbSet<admin> admins { get; set; }
     }
 }

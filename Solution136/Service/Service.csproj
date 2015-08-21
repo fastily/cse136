@@ -62,6 +62,7 @@
     <Compile Include="ScheduleService.cs" />
     <Compile Include="InstructorService.cs" />
     <Compile Include="GradeChangeService.cs" />
+    <Compile Include="AdminService.cs" />
     <Compile Include="TaService.cs" />
     <Compile Include="StudentService.cs" />
     <Compile Include="ErrorLog\AsynchLog.cs" />

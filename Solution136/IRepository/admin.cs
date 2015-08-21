@@ -17,5 +17,7 @@ namespace IRepository
         public int admin_id { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public string First { get; set; }
+        public string Last { get; set; }
     }
 }
