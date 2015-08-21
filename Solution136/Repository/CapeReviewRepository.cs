@@ -31,20 +31,20 @@
         /// <param name="errors">Error list</param>
         public void InsertCape(CapeReview cr, ref List<string> errors)
         {
-            cape_reviews db = new cape_reviews();
+            cape_reviews db_CapeReview = new cape_reviews();
 
             try
             {
-                db.cape_id = cr.CapeId;
+                db_CapeReview.cape_id = cr.CapeId;
                 ////db.instructor_id = this.context.instructors.Where(x => x.last_name == cr.InstructorName).Select(y => y.instructor_id).First();
 
-                db.instructor_id = cr.InstructorId;
-                db.course_id = cr.CourseId;
-                db.instructor_rating = cr.InstructorRating;
-                db.summary = cr.Summary;
-                db.course_rating = cr.CourseRating;
+                db_CapeReview.instructor_id = cr.InstructorId;
+                db_CapeReview.course_id = cr.CourseId;
+                db_CapeReview.instructor_rating = cr.InstructorRating;
+                db_CapeReview.summary = cr.Summary;
+                db_CapeReview.course_rating = cr.CourseRating;
 
-                this.context.cape_reviews.Add(db);
+                this.context.cape_reviews.Add(db_CapeReview);
                 this.context.SaveChanges();
             }
             catch (Exception e)
@@ -60,12 +60,12 @@
         /// <param name="errors">Errors List</param>
         public void DeleteCapeReview(int cape_id, ref List<string> errors)
         {
-            cape_reviews db = new cape_reviews();
+            cape_reviews db_CapeReview = new cape_reviews();
    
             try
             {
-                db.cape_id = cape_id;
-                this.context.cape_reviews.Remove(db);
+                db_CapeReview.cape_id = cape_id;
+                this.context.cape_reviews.Remove(db_CapeReview);
                 this.context.SaveChanges();
             }
             catch (Exception e)

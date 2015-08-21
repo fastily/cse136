@@ -19,5 +19,9 @@
         {
             return this.repository.GetScheduleList(year, quarter, ref errors);
         }
+
+        ////add course to schedule
+
+        ////remove course from schedule
     }
 }

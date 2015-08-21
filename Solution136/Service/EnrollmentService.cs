@@ -13,5 +13,9 @@
         {
             this.repository = repository;
         }
+
+        ////add enrollment to schedule
+
+        ////remove enrollment to schedule
     }
 }

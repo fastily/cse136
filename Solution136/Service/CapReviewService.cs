@@ -13,5 +13,13 @@
         {
             this.repository = repository;
         }
+
+        ////course rating
+
+        ////instructor rating
+
+        ////find cape reviews by scheduleId
+
+        ////insert cape review schedule id, student id, instructor id
     }
 }

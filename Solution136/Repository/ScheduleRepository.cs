@@ -6,6 +6,7 @@
     using System.Data.SqlClient;
 
     using IRepository;
+    using System.Linq;
 
     using POCO;
 
@@ -121,15 +122,26 @@
             }
         }
 
-        public void IsDuplicateCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
+        public bool IsNotDuplicateCourseFromSchedule(int year, int courseId, string quarter, ref List<string> errors)
         {
+            var IsDuplicate = true;
+
             try
             {
+                IsDuplicate = this.context.course_schedule.Where(x => x.course_id == courseId && x.year == year && x.quarter == quarter).Count() > 0;
+                if (IsDuplicate)
+                {
+                    return false;
+                }
+
+                return true;
             }
             catch (Exception e)
             {
-                errors.Add("Error occured in ScheduleRepository.IsDuplicateCourseFromSchedule: " + e);
+                errors.Add("Error occured in ScheduleRepository.IsDuplicateCourseToSchedule: " + e);
             }
+
+            return IsDuplicate;
         }
     }
 }
