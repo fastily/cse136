@@ -28,5 +28,71 @@
         {
             this.entities = entities;
         }
+
+        [HttpGet]
+        public List<Instructor> GetInstructorList()
+        {
+            var errors = new List<string>();
+            var repository = new InstructorRepository(this.entities);
+            var service = new InstructorService(repository);
+            return service.GetInstructorList(ref errors);
+        }
+
+        [HttpGet]
+        public Instructor GetInstructor(string id)
+        {
+            var errors = new List<string>();
+            var repository = new InstructorRepository(this.entities);
+            var service = new InstructorService(repository);
+            return service.GetInstructor(id, ref errors);
+        }
+
+        [HttpPost]
+        public string InsertInstructor(Instructor instructor)
+        {
+            var errors = new List<string>();
+            var repository = new InstructorRepository(this.entities);
+            var service = new InstructorService(repository);
+            service.InsertInstructor(instructor, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
+        [HttpPost]
+        public string UpdateInstructor(Instructor instructor)
+        {
+            var errors = new List<string>();
+            var repository = new InstructorRepository(this.entities);
+            var service = new InstructorService(repository);
+            service.UpdateInstructor(instructor, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
+        [HttpPost]
+        public string DeleteInstructor(string id)
+        {
+            var errors = new List<string>();
+            var repository = new InstructorRepository(this.entities);
+            var service = new InstructorService(repository);
+            service.DeleteInstructor(id, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
     }
 }

@@ -19,10 +19,10 @@
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
+            var teachingAssistantService = new TaService(mockRepository.Object);
 
             //// Act
-            taService.InsertTa(null, ref errors);
+            teachingAssistantService.InsertTa(null, ref errors);
 
             //// Assert cant be null instructor object
             Assert.AreEqual(1, errors.Count);
@@ -35,11 +35,11 @@
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
+            var teachingAssistantService = new TaService(mockRepository.Object);
             var ta = new Ta { FirstName = string.Empty };
             
             //// Act
-            taService.InsertTa(ta, ref errors);
+            teachingAssistantService.InsertTa(ta, ref errors);
 
             //// Assert firstname cannot be empty
             Assert.AreEqual(1, errors.Count);
@@ -52,11 +52,11 @@
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
+            var teachingAssistantService = new TaService(mockRepository.Object);
             var ta = new Ta { FirstName = "nick", LastName = string.Empty };
 
             //// Act
-            taService.InsertTa(ta, ref errors);
+            teachingAssistantService.InsertTa(ta, ref errors);
 
             //// Assert last name cannot be empty
             Assert.AreEqual(1, errors.Count);
@@ -69,10 +69,10 @@
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
+            var teachingAssistantService = new TaService(mockRepository.Object);
 
             //// Act
-            taService.UpdateTa(null, ref errors);
+            teachingAssistantService.UpdateTa(null, ref errors);
 
             //// Assert instructor object not null
             Assert.AreEqual(1, errors.Count);
@@ -85,11 +85,11 @@
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
+            var teachingAssistantService = new TaService(mockRepository.Object);
             var ta = new Ta { FirstName = string.Empty };
 
             //// Act
-            taService.UpdateTa(ta, ref errors);
+            teachingAssistantService.UpdateTa(ta, ref errors);
 
             //// Assert first name cannot be empty
             Assert.AreEqual(1, errors.Count);
@@ -102,11 +102,11 @@
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
+            var teachingAssistantService = new TaService(mockRepository.Object);
             var ta = new Ta { FirstName = "nick", LastName = string.Empty };
 
             //// Act
-            taService.UpdateTa(ta, ref errors);
+            teachingAssistantService.UpdateTa(ta, ref errors);
 
             //// Assert last name cannot be empty
             Assert.AreEqual(1, errors.Count);
@@ -120,10 +120,10 @@
             var errors = new List<string>();
 
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
+            var teachingAssistantService = new TaService(mockRepository.Object);
 
             //// Act
-            taService.DeleteTa(null, ref errors);
+            teachingAssistantService.DeleteTa(null, ref errors);
 
             //// Assert instructor id cannot be null
             Assert.AreEqual(1, errors.Count);

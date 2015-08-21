@@ -12,7 +12,6 @@
     [TestClass]
     public class GradeChangeServiceTest
     {
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void InsertGradeChageTestError1()
@@ -29,7 +28,6 @@
             //// Assert
             Assert.AreEqual(1, errors.Count);
         }
-
 
         [TestMethod]
         public void InsertGradeChageTest()
