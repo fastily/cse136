@@ -31,20 +31,30 @@
         [HttpGet]
         public Admin GetAdminInfo(int adminId)
         {
-            //// 136 TODO: get the admin info 
-            //// for now, returning the hard-coded value
-            return new Admin() { FirstName = "Isaac", LastName = "Chu", Id = adminId };
+            var errors = new List<string>();
+            var repository = new AdminRepository(this.entities);
+            var service = new AdminService(repository);
+            var adminPoco = service.GetAdminById(adminId.ToString(), ref errors);
+
+            if (errors.Count == 0 && adminPoco != null)
+            {
+                return adminPoco;
+            }
+
+            return new Admin();
         }
 
         [HttpPost]
         public string UpdateAdminInfo(Admin admin)
         {
             var errors = new List<string>();
-
+            var repository = new AdminRepository(this.entities);
+            var service = new AdminService(repository);
+            service.UpdateAdmin(admin, ref errors);
 
             if (errors.Count == 0)
             {
-                return "ok";
+                return "Update Successful";
             }
 
             return "error";

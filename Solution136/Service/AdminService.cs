@@ -34,10 +34,16 @@
                 throw new ArgumentException();
             }
 
+            if (string.IsNullOrEmpty(adminPoco.Id.ToString()))
+            {
+                errors.Add("Admin Id cannot be null");
+                throw new ArgumentException();
+            }
+
             this.repository.UpdateAdmin(adminPoco, ref errors);
         }
 
-        public Admin GetAdminBy(string adminId, ref List<string> errors)
+        public Admin GetAdminById(string adminId, ref List<string> errors)
         {
             if (string.IsNullOrEmpty(adminId))
             {

@@ -73,7 +73,7 @@
 
             try
             {
-                db_Admin = this.context.admins.Find(db_Admin);
+                db_Admin = this.context.admins.Find(adminPoco.Id);
                 db_Admin.First = adminPoco.FirstName;
                 db_Admin.Last = adminPoco.LastName;
                 this.context.SaveChanges();
