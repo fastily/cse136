@@ -131,6 +131,8 @@
           <Property Name="staff_id" Type="int" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="First" Type="varchar" MaxLength="50" />
+          <Property Name="Last" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="student">
           <Key>
@@ -438,14 +440,6 @@
           <Property Name="schedule_time1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="course_schedule" Relationship="Self.FK_course_schedule_schedule_time" FromRole="schedule_time" ToRole="course_schedule" />
         </EntityType>
-        <EntityType Name="staff">
-          <Key>
-            <PropertyRef Name="staff_id" />
-          </Key>
-          <Property Name="staff_id" Type="Int32" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="student">
           <Key>
             <PropertyRef Name="student_id" />
@@ -583,7 +577,6 @@
           <EntitySet Name="ratings" EntityType="Self.rating" />
           <EntitySet Name="schedule_day" EntityType="Self.schedule_day" />
           <EntitySet Name="schedule_time" EntityType="Self.schedule_time" />
-          <EntitySet Name="staffs" EntityType="Self.staff" />
           <EntitySet Name="students" EntityType="Self.student" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TeachingAssistants" EntityType="Self.TeachingAssistant" />
@@ -628,6 +621,7 @@
             <End Role="course_schedule" EntitySet="course_schedule" />
           </AssociationSet>
           <EntitySet Name="admins" EntityType="cse136Model.admin" />
+          <EntitySet Name="staffs" EntityType="cse136Model.staff" />
         </EntityContainer>
         <EntityType Name="grade_change">
           <Key>
@@ -675,6 +669,16 @@
             <PropertyRef Name="admin_id" />
           </Key>
           <Property Name="admin_id" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="First" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="Int32" Nullable="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="First" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -766,15 +770,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="staffs">
-            <EntityTypeMapping TypeName="cse136Model.staff">
-              <MappingFragment StoreEntitySet="staff">
-                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="students">
             <EntityTypeMapping TypeName="cse136Model.student">
               <MappingFragment StoreEntitySet="student">
@@ -862,6 +857,17 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffs">
+            <EntityTypeMapping TypeName="cse136Model.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="Last" ColumnName="Last" />
+                <ScalarProperty Name="First" ColumnName="First" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

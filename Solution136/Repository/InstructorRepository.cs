@@ -104,6 +104,7 @@
                 db_instructor.last_name = ins.LastName;
                 db_instructor.title = ins.Title;
                 this.context.SaveChanges();
+                ////update staff now
             }
             catch (Exception e)
             {
@@ -123,6 +124,7 @@
                 db_instructor.title = ins.Title;
                 this.context.instructors.Add(db_instructor);
                 this.context.SaveChanges();
+                ////add to staff
             }
             catch (Exception e)
             {
@@ -139,6 +141,7 @@
                 db_instructor.instructor_id = instructor_id;
                 this.context.instructors.Remove(db_instructor);
                 this.context.SaveChanges();
+                ////remove staff
             }
             catch (Exception e)
             {

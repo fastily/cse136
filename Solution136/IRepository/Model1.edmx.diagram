@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="cse136Model.rating" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.schedule_day" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.schedule_time" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="cse136Model.staff" Width="1.5" PointX="7.75" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.student" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.sysdiagram" Width="1.5" PointX="9.75" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.TeachingAssistant" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
@@ -31,6 +30,7 @@
         <EntityTypeShape EntityType="cse136Model.instructor" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_instructor" />
         <EntityTypeShape EntityType="cse136Model.admin" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="cse136Model.staff" Width="1.5" PointX="5.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -33,7 +33,6 @@ namespace IRepository
         public virtual DbSet<rating> ratings { get; set; }
         public virtual DbSet<schedule_day> schedule_day { get; set; }
         public virtual DbSet<schedule_time> schedule_time { get; set; }
-        public virtual DbSet<staff> staffs { get; set; }
         public virtual DbSet<student> students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TeachingAssistant> TeachingAssistants { get; set; }
@@ -42,5 +41,6 @@ namespace IRepository
         public virtual DbSet<preReq_Override> preReq_Override { get; set; }
         public virtual DbSet<instructor> instructors { get; set; }
         public virtual DbSet<admin> admins { get; set; }
+        public virtual DbSet<staff> staffs { get; set; }
     }
 }
