@@ -40,8 +40,7 @@
             return pocoInstructor;
         }
 
-        ////TODO :: shouldn't call this method unless we know course exists
-        public Instructor FindInstructorById(string instId, ref List<string> errors)
+        public Instructor FindInstructorById(int instId, ref List<string> errors)
         {
             POCO.Instructor pocoInstructor = new POCO.Instructor();
             instructor db_instructor;
@@ -65,7 +64,7 @@
         }
 
         ////good method for validation when adding new course
-        public bool IsDuplicateInstructor(POCO.Instructor ins, ref List<string> errors)
+        public bool IsNotDuplicateInstructor(POCO.Instructor ins, ref List<string> errors)
         {
             var db_instructor = new instructor();
 

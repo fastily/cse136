@@ -42,13 +42,13 @@
             return pocoTa;
         }
 
-        public Ta FindTaById(string ta_name, ref List<string> errors)
+        public Ta FindTaById(int ta_id, ref List<string> errors)
         {
             POCO.Ta pocoTa = new POCO.Ta();
             TeachingAssistant db_Ta;
             try
             {
-                db_Ta = this.context.TeachingAssistants.Find(ta_name);
+                db_Ta = this.context.TeachingAssistants.Find(ta_id);
                 if (db_Ta != null)
                 {
                     pocoTa.TaId = db_Ta.ta_id;
@@ -169,7 +169,7 @@
             return pocoTaList;
         }
 
-        public bool IsDuplicateTa(Ta ta, ref List<string> errors)
+        public bool IsNotDuplicateTa(Ta ta, ref List<string> errors)
         {
             var db_Ta = new TeachingAssistant();
 

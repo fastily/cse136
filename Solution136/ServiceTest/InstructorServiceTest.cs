@@ -12,129 +12,120 @@
     [TestClass]
     public class InstructorServiceTest
     {
-        ////[TestMethod]
-        ////[ExpectedException(typeof(ArgumentException))]
-        ////public void InsertStudentErrorTest()
-        ////{
-        ////    //// Arrange
-        ////    var errors = new List<string>();
-        ////    var mockRepository = new Mock<IStudentRepository>();
-        ////    var studentService = new StudentService(mockRepository.Object);
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InsertInstructorErrorTest1()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
 
-        ////    //// Act
-        ////    studentService.InsertStudent(null, ref errors);
+            //// Act
+            instructorService.InsertInstructor(null, ref errors);
 
-        ////    //// Assert
-        ////    Assert.AreEqual(1, errors.Count);
-        ////}
+            //// Assert cant be null instructor object
+            Assert.AreEqual(1, errors.Count);
+        }
 
-        ////[TestMethod]
-        ////[ExpectedException(typeof(ArgumentException))]
-        ////public void InsertStudentErrorTest2()
-        ////{
-        ////    //// Arranage
-        ////    var errors = new List<string>();
-        ////    var mockRepository = new Mock<IStudentRepository>();
-        ////    var studentService = new StudentService(mockRepository.Object);
-        ////    var student = new Student { StudentId = string.Empty };
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InsertInstructorErrorTest2()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+            var instructor = new Instructor { FirstName = string.Empty };
+            //// Act
+            instructorService.InsertInstructor(instructor, ref errors);
 
-        ////    //// Act
-        ////    studentService.InsertStudent(student, ref errors);
+            //// Assert firstname cannot be empty
+            Assert.AreEqual(1, errors.Count);
+        }
 
-        ////    //// Assert
-        ////    Assert.AreEqual(1, errors.Count);
-        ////}
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InsertInstructorErrorTest3()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+            var instructor = new Instructor { FirstName = "nick", LastName = string.Empty };
 
-        ////[TestMethod]
-        ////[ExpectedException(typeof(ArgumentException))]
-        ////public void StudentErrorTest()
-        ////{
-        ////    //// Arranage
-        ////    var errors = new List<string>();
-        ////    var mockRepository = new Mock<IStudentRepository>();
-        ////    var studentService = new StudentService(mockRepository.Object);
+            //// Act
+            instructorService.InsertInstructor(null, ref errors);
 
-        ////    //// Act
-        ////    studentService.GetStudent(null, ref errors);
+            //// Assert last name cannot be empty
+            Assert.AreEqual(1, errors.Count);
+        }
 
-        ////    //// Assert
-        ////    Assert.AreEqual(1, errors.Count);
-        ////}
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void UpdateInstructorErrorTest1()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
 
-        ////[TestMethod]
-        ////[ExpectedException(typeof(ArgumentException))]
-        ////public void DeleteStudentErrorTest()
-        ////{
-        ////    //// Arrange
-        ////    var errors = new List<string>();
+            //// Act
+            instructorService.UpdateInstructor(null, ref errors);
 
-        ////    var mockRepository = new Mock<IStudentRepository>();
-        ////    var studentService = new StudentService(mockRepository.Object);
+            //// Assert instructor object not null
+            Assert.AreEqual(1, errors.Count);
+        }
 
-        ////    //// Act
-        ////    studentService.DeleteStudent(null, ref errors);
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void UpdateInstructorErrorTest2()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+            var instructor = new Instructor { FirstName = string.Empty };
 
-        ////    //// Assert
-        ////    Assert.AreEqual(1, errors.Count);
-        ////}
+            //// Act
+            instructorService.UpdateInstructor(instructor, ref errors);
 
-        ////[TestMethod]
-        ////[ExpectedException(typeof(ArgumentException))]
-        ////public void CalculateGpaErrorTest()
-        ////{
-        ////    //// Arrange
-        ////    var errors = new List<string>();
+            //// Assert first name cannot be empty
+            Assert.AreEqual(1, errors.Count);
+        }
 
-        ////    var mockRepository = new Mock<IStudentRepository>();
-        ////    var studentService = new StudentService(mockRepository.Object);
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void UpdateInstructorErrorTest3()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+            var instructor = new Instructor { FirstName = "nick", LastName = string.Empty };
 
-        ////    //// Act
-        ////    studentService.CalculateGpa(string.Empty, null, ref errors);
+            //// Act
+            instructorService.UpdateInstructor(instructor, ref errors);
 
-        ////    //// Assert
-        ////    Assert.AreEqual(2, errors.Count);
-        ////}
+            //// Assert last name cannot be empty
+            Assert.AreEqual(1, errors.Count);
+        }
 
-        ////[TestMethod]
-        ////public void CalculateGpaNoEnrollmentTest()
-        ////{
-        ////    //// Arrange
-        ////    var errors = new List<string>();
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void DeleteInstructorErrorTest()
+        {
+            //// Arrange
+            var errors = new List<string>();
 
-        ////    var mockRepository = new Mock<IStudentRepository>();
-        ////    var studentService = new StudentService(mockRepository.Object);
-        ////    mockRepository.Setup(x => x.GetEnrollments("testId", ref errors)).Returns(new List<Enrollment>());
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
 
-        ////    //// Act
-        ////    var enrollments = studentService.GetEnrollments("testId", ref errors);
-        ////    var gap = studentService.CalculateGpa("testId", enrollments, ref errors);
+            //// Act
+            instructorService.DeleteInstructor(null, ref errors);
 
-        ////    //// Assert
-        ////    Assert.AreEqual(0, errors.Count);
-        ////    Assert.AreEqual(0.0f, gap);
-        ////}
-
-        ////[TestMethod]
-        ////public void CalculateGpaWithEnrollmentTest()
-        ////{
-        ////    //// Arrange
-        ////    var errors = new List<string>();
-
-        ////    var mockRepository = new Mock<IStudentRepository>();
-        ////    var studentService = new StudentService(mockRepository.Object);
-        ////    var enrollments = new List<Enrollment>();
-        ////    enrollments.Add(new Enrollment { Grade = "A", GradeValue = 4.0f, ScheduleId = 1, StudentId = "testId" });
-        ////    enrollments.Add(new Enrollment { Grade = "B", GradeValue = 3.0f, ScheduleId = 2, StudentId = "testId" });
-        ////    enrollments.Add(new Enrollment { Grade = "C+", GradeValue = 2.7f, ScheduleId = 3, StudentId = "testId" });
-
-        ////    mockRepository.Setup(x => x.GetEnrollments("testId", ref errors)).Returns(enrollments);
-
-        ////    //// Act
-        ////    var gap = studentService.CalculateGpa("testId", enrollments, ref errors);
-
-        ////    //// Assert
-        ////    Assert.AreEqual(0, errors.Count);
-        ////    Assert.AreEqual(true, gap > 3.2f && gap < 3.3f);
-        ////}
+            //// Assert instructor id cannot be null
+            Assert.AreEqual(1, errors.Count);
+        }
     }
 }

@@ -14,133 +14,86 @@
             this.repository = repository;
         }
 
-        ////public void InsertStudent(Student student, ref List<string> errors)
-        ////{
-        ////    if (student == null)
-        ////    {
-        ////        errors.Add("Student cannot be null");
-        ////        throw new ArgumentException();
-        ////    }
+        public void InsertInstructor(Instructor instructor, ref List<string> errors)
+        {
+            if (instructor == null)
+            {
+                errors.Add("Instructor cannot be null");
+                throw new ArgumentException();
+            }
 
-        ////    if (student.StudentId.Length < 5)
-        ////    {
-        ////        errors.Add("Invalid student ID");
-        ////        throw new ArgumentException();
-        ////    }
+            if (string.IsNullOrEmpty(instructor.FirstName))
+            {
+                errors.Add("Instructor first name cannot be null");
+                throw new ArgumentException();
+            }
 
-        ////    this.repository.InsertStudent(student, ref errors);
-        ////}
+            if (string.IsNullOrEmpty(instructor.LastName))
+            {
+                errors.Add("Instructor last name cannot be null");
+                throw new ArgumentException();
+            }
 
-        ////public void UpdateStudent(Student student, ref List<string> errors)
-        ////{
-        ////    if (student == null)
-        ////    {
-        ////        errors.Add("Student cannot be null");
-        ////        throw new ArgumentException();
-        ////    }
+            if (this.repository.IsNotDuplicateInstructor(instructor, ref errors))
+            {
+                this.repository.AddInstructor(instructor, ref errors);
+            }
+        }
 
-        ////    if (string.IsNullOrEmpty(student.StudentId))
-        ////    {
-        ////        errors.Add("Invalid student id");
-        ////        throw new ArgumentException();
-        ////    }
+        public void UpdateInstructor(Instructor instructor, ref List<string> errors)
+        {
+            if (instructor == null)
+            {
+                errors.Add("Instructor cannot be null");
+                throw new ArgumentException();
+            }
 
-        ////    if (student.StudentId.Length < 5)
-        ////    {
-        ////        errors.Add("Invalid student id");
-        ////        throw new ArgumentException();
-        ////    }
+            if (string.IsNullOrEmpty(instructor.FirstName))
+            {
+                errors.Add("Instructor first name cannot be null");
+                throw new ArgumentException();
+            }
 
-        ////    this.repository.UpdateStudent(student, ref errors);
-        ////}
+            if (string.IsNullOrEmpty(instructor.LastName))
+            {
+                errors.Add("Instructor last name cannot be null");
+                throw new ArgumentException();
+            }
 
-        ////public Student GetStudent(string id, ref List<string> errors)
-        ////{
-        ////    if (string.IsNullOrEmpty(id))
-        ////    {
-        ////        errors.Add("Invalid student id");
-        ////        throw new ArgumentException();
-        ////    }
+            if (string.IsNullOrEmpty(instructor.InstructorId.ToString()))
+            {
+                errors.Add("Instructor id be null");
+                throw new ArgumentException();
+            }
 
-        ////    return this.repository.GetStudentDetail(id, ref errors);
-        ////}
+            this.repository.AddInstructor(instructor, ref errors);
+        }
 
-        ////public void DeleteStudent(string id, ref List<string> errors)
-        ////{
-        ////    if (string.IsNullOrEmpty(id))
-        ////    {
-        ////        errors.Add("Invalid student id");
-        ////        throw new ArgumentException();
-        ////    }
+        public Instructor GetInstructor(string instructor_id, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(instructor_id))
+            {
+                errors.Add("Invalid instructor_id");
+                throw new ArgumentException();
+            }
 
-        ////    this.repository.DeleteStudent(id, ref errors);
-        ////}
+            return this.repository.FindInstructorById(int.Parse(instructor_id), ref errors);
+        }
 
-        ////public List<Student> GetStudentList(ref List<string> errors)
-        ////{
-        ////    return this.repository.GetStudentList(ref errors);
-        ////}
+        public void DeleteInstructor(string instructor_id, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(instructor_id))
+            {
+                errors.Add("Invalid ta_id");
+                throw new ArgumentException();
+            }
 
-        ////public void EnrollSchedule(string studentId, int scheduleId, ref List<string> errors)
-        ////{
-        ////    if (string.IsNullOrEmpty(studentId) || scheduleId < 0)
-        ////    {
-        ////        errors.Add("Invalid student id or schedule id");
-        ////        throw new ArgumentException();
-        ////    }
+            this.repository.RemoveInstructor(int.Parse(instructor_id), ref errors);
+        }
 
-        ////    this.repository.EnrollSchedule(studentId, scheduleId, ref errors);
-        ////}
-
-        ////public void DropEnrolledSchedule(string studentId, int scheduleId, ref List<string> errors)
-        ////{
-        ////    if (string.IsNullOrEmpty(studentId) || scheduleId < 0)
-        ////    {
-        ////        errors.Add("Invalid student id or schedule id");
-        ////        throw new ArgumentException();
-        ////    }
-
-        ////    this.repository.DropEnrolledSchedule(studentId, scheduleId, ref errors);
-        ////}
-
-        ////public List<Enrollment> GetEnrollments(string studentId, ref List<string> errors)
-        ////{
-        ////    if (string.IsNullOrEmpty(studentId))
-        ////    {
-        ////        errors.Add("Invalid student id");
-        ////        throw new ArgumentException();
-        ////    }
-
-        ////    return this.repository.GetEnrollments(studentId, ref errors);
-        ////}
-
-        ////public float CalculateGpa(string studentId, List<Enrollment> enrollments, ref List<string> errors)
-        ////{
-        ////    if (string.IsNullOrEmpty(studentId))
-        ////    {
-        ////        errors.Add("Invalid student id");
-        ////        throw new ArgumentException();
-        ////    }
-
-        ////    if (enrollments == null)
-        ////    {
-        ////        errors.Add("Invalid student id");
-        ////        throw new ArgumentException();                
-        ////    }
-
-        ////    if (enrollments.Count == 0)
-        ////    {
-        ////        return 0.0f;
-        ////    }
-
-        ////    var sum = 0.0f;
-
-        ////    foreach (var enrollment in enrollments)
-        ////    {
-        ////        sum += enrollment.GradeValue;
-        ////    }
-
-        ////    return sum / enrollments.Count;
-        ////}
+        public List<Instructor> GetInstructorList(ref List<string> errors)
+        {
+            return this.repository.GetInstructorList(ref errors);
+        }     
     }
 }

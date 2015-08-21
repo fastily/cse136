@@ -7,9 +7,9 @@
     {
         Instructor FindInstructorByName(string instructorName, ref List<string> errors);
 
-        Instructor FindInstructorById(string instructorId, ref List<string> errors);
+        Instructor FindInstructorById(int instructorId, ref List<string> errors);
 
-        bool IsDuplicateInstructor(Instructor instructor, ref List<string> errors);
+        bool IsNotDuplicateInstructor(Instructor instructor, ref List<string> errors);
 
         void UpdateInstructor(Instructor instructor, ref List<string> errors);
 

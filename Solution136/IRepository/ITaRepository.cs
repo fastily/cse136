@@ -7,9 +7,9 @@
     {
         Ta FindTaByName(string ta_name, ref List<string> errors);
 
-        Ta FindTaById(string ta_id, ref List<string> errors);
+        Ta FindTaById(int ta_id, ref List<string> errors);
 
-        bool IsDuplicateTa(Ta ta, ref List<string> errors);
+        bool IsNotDuplicateTa(Ta ta, ref List<string> errors);
 
         void UpdateTa(Ta ta, ref List<string> errors);
         
