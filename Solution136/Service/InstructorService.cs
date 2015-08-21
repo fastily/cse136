@@ -94,6 +94,46 @@
         public List<Instructor> GetInstructorList(ref List<string> errors)
         {
             return this.repository.GetInstructorList(ref errors);
-        }     
+        }
+
+        public void AssignGrade(Schedule schedule, string studentId, int instructorId, string grade, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(instructorId.ToString()))
+            {
+                errors.Add("Invalid instructorId");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(grade))
+            {
+                errors.Add("Must assign a grade");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(schedule.ScheduleId.ToString()))
+            {
+                errors.Add("Invalid schedule");
+                throw new ArgumentException();
+            }
+
+            this.repository.AssignGradeToStudent(schedule, studentId, instructorId, grade, ref errors);
+        }
+
+        public void RespondToPreReqOverride(int scheduleId, string studentId, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(studentId))
+            {
+                errors.Add("Invalid studentId");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(scheduleId.ToString()))
+            {
+                errors.Add("Invalid schedule");
+                throw new ArgumentException();
+            }
+
+            this.repository.ApprovePreReqOverride(scheduleId, studentId, ref errors);
+        }
     }
 }

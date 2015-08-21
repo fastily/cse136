@@ -35,7 +35,7 @@
             }
         }
 
-        public void ApproveGradeChange(int gradeChangeId, ref List<string> errors)
+        public void RespondToGradeChange(int gradeChangeId, ref List<string> errors)
         {
             grade_change db_gradeChange = new grade_change();
 
