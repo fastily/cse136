@@ -87,7 +87,7 @@
 
             try
             {
-                cape_reviews db = this.context.cape_reviews.Find(course_id);
+                cape_reviews db = this.context.cape_reviews.Where(x => x.course_id == course_id).First();
 
                 pocoCR.CapeId = db.cape_id;
                 pocoCR.CourseId = (int)db.course_id;
@@ -129,6 +129,32 @@
             {
                 errors.Add("Error occured in CapeReviewRepository.UpdateCapeReview: " + e);
             }
+        }
+
+        public CapeReview FindCapeReviewByScheduleId(int schedule_id, ref List<string> errors)
+        {
+            CapeReview pocoCR = new CapeReview();
+            course_schedule db_schedule = new course_schedule();
+            cape_reviews db_cr = new cape_reviews();
+
+            try
+            {
+                db_schedule = this.context.course_schedule.Find(schedule_id);
+                db_cr = this.context.cape_reviews.Where(x => x.course_id == db_schedule.course_id &&
+                                x.instructor_id == (int)db_schedule.instructor_id).First();
+                pocoCR.CapeId = db_cr.cape_id;
+                pocoCR.CourseId = (int)db_cr.course_id;
+                pocoCR.CourseRating = (int)db_cr.course_rating;
+                pocoCR.InstructorId = (int)db_cr.instructor_id;
+                pocoCR.InstructorRating = (int)db_cr.instructor_rating;
+                pocoCR.Summary = db_cr.summary;
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in CapeReviewRepository.FindCapeReviewById: " + e);
+            }
+
+            return pocoCR;
         }
     }
 }
