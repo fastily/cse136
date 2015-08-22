@@ -59,5 +59,14 @@
 
             return "error";
         }
+
+        [HttpGet]
+        public List<Admin> GetAdminList()
+        {
+            var service = new AdminService(new AdminRepository(this.entities));
+            var errors = new List<string>();
+
+            return service.GetAdminList(ref errors);
+        }
     }
 }
