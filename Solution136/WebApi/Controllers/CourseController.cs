@@ -39,5 +39,62 @@
         }
 
         //// you can add more [HttpGet] and [HttpPost] methods as you need
+
+        [HttpGet]
+        public Course GetCourse(string id)
+        {
+            var errors = new List<string>();
+            var repository = new CourseRepository(this.entities);
+            var service = new CourseService(repository);
+            return service.GetCourse(id, ref errors);
+        }
+
+        [HttpPost]
+        public string InsertCourse(Course course)
+        {
+            var errors = new List<string>();
+            var repository = new CourseRepository(this.entities);
+            var service = new CourseService(repository);
+            service.InsertCourse(course, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
+        [HttpPost]
+        public string UpdateCourse(Course course)
+        {
+            var errors = new List<string>();
+            var repository = new CourseRepository(this.entities);
+            var service = new CourseService(repository);
+            service.UpdateCourse(course, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
+        [HttpPost]
+        public string DeleteCourse(string id)
+        {
+            var errors = new List<string>();
+            var repository = new CourseRepository(this.entities);
+            var service = new CourseService(repository);
+            service.DeleteCourse(id, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
     }
 }
