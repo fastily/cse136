@@ -57,7 +57,7 @@
     <Compile Include="Award\Resolver.cs" />
     <Compile Include="AuthorizeService.cs" />
     <Compile Include="CourseService.cs" />
-    <Compile Include="CapReviewService.cs" />
+    <Compile Include="CapeReviewService.cs" />
     <Compile Include="EnrollmentService.cs" />
     <Compile Include="ScheduleService.cs" />
     <Compile Include="InstructorService.cs" />

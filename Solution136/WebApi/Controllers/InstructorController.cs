@@ -94,5 +94,38 @@
 
             return "error";
         }
+        
+        [HttpPost]
+        public string AssignGrade(Schedule schedule, string studentId, int instructorId, string grade)
+        {
+            var errors = new List<string>();
+            var repository = new InstructorRepository(this.entities);
+            var service = new InstructorService(repository);
+            service.AssignGrade(schedule, studentId, instructorId, grade, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
+        [HttpPost]
+        public string RespondToPreReqOverride(int scheduleId, string studentId)
+        {
+            var errors = new List<string>();
+            var repository = new InstructorRepository(this.entities);
+            var service = new InstructorService(repository);
+            service.RespondToPreReqOverride(scheduleId, studentId, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
     }
 }
