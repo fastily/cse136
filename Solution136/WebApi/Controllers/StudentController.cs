@@ -92,5 +92,44 @@
 
             return "error";
         }
+
+        [HttpPost]
+        public string EnrollSchedule(string studentId, int scheduleId)
+        {
+            var errors = new List<string>();
+            var repository = new StudentRepository(this.entities);
+            var service = new StudentService(repository);
+            service.EnrollSchedule(studentId, scheduleId, ref errors);
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+            
+            return "error";
+        }
+
+        [HttpPost]
+        public string DropEnrolledSchedule(string studentId, int scheduleId)
+        {
+            var errors = new List<string>();
+            var repository = new StudentRepository(this.entities);
+            var service = new StudentService(repository);
+            service.DropEnrolledSchedule(studentId, scheduleId, ref errors);
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
+        [HttpGet]
+        public List<Enrollment> GetEnrollments(string studentId)
+        {
+            var errors = new List<string>();
+            var repository = new StudentRepository(this.entities);
+            var service = new StudentService(repository);
+            return service.GetEnrollments(studentId, ref errors);
+        }
     }
 }
