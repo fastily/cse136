@@ -66,7 +66,7 @@
         }
 
         ////good method for validation when adding new course
-        public bool IsDuplicateCourse(POCO.Course c, ref List<string> errors)
+        public bool IsNotDuplicateCourse(POCO.Course c, ref List<string> errors)
         {
             var db_course = new course();
 
