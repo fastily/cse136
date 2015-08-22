@@ -96,5 +96,46 @@
 
             return "error";
         }
+
+        [HttpPost]
+        public string AssignPreReq(int courseId, int preReqCourseId)
+        {
+            var errors = new List<string>();
+            var repository = new CourseRepository(this.entities);
+            var service = new CourseService(repository);
+            service.AssignPreReq(courseId, preReqCourseId, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
+        [HttpPost]
+        public string RemovePreReq(int courseId, int preReqCourseId)
+        {
+            var errors = new List<string>();
+            var repository = new CourseRepository(this.entities);
+            var service = new CourseService(repository);
+            service.AssignPreReq(courseId, preReqCourseId, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
+        [HttpGet]
+        public List<Course> GetPreReqList(int courseId)
+        {
+            var errors = new List<string>();
+            var repository = new CourseRepository(this.entities);
+            var service = new CourseService(repository);
+            return service.GetPreReqList(courseId, ref errors);
+        }
     }
 }
