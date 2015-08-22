@@ -4,10 +4,8 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-
-    using IRepository;
     using System.Linq;
-
+    using IRepository;
     using POCO;
 
     public class ScheduleRepository : BaseRepository, IScheduleRepository
@@ -104,15 +102,13 @@
             }
         }
 
-        public void RemoveCourseFromSchedule(string year, int courseId, string quarter, ref List<string> errors)
+        public void RemoveCourseFromSchedule(int scheduleId, ref List<string> errors)
         {
             var db_Schedule = new course_schedule();
 
             try
             {
-                db_Schedule.year = int.Parse(year);
-                db_Schedule.course_id = courseId;
-                db_Schedule.quarter = quarter;
+                db_Schedule.schedule_id = scheduleId;
                 db_Schedule = this.context.course_schedule.Remove(db_Schedule);
                 this.context.SaveChanges();
             }
@@ -124,12 +120,12 @@
 
         public bool IsNotDuplicateCourseFromSchedule(int year, int courseId, string quarter, ref List<string> errors)
         {
-            var IsDuplicate = true;
+            var isDuplicate = true;
 
             try
             {
-                IsDuplicate = this.context.course_schedule.Where(x => x.course_id == courseId && x.year == year && x.quarter == quarter).Count() > 0;
-                if (IsDuplicate)
+                isDuplicate = this.context.course_schedule.Where(x => x.course_id == courseId && x.year == year && x.quarter == quarter).Count() > 0;
+                if (isDuplicate)
                 {
                     return false;
                 }
@@ -141,7 +137,7 @@
                 errors.Add("Error occured in ScheduleRepository.IsDuplicateCourseToSchedule: " + e);
             }
 
-            return IsDuplicate;
+            return isDuplicate;
         }
     }
 }

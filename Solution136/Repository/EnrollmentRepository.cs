@@ -17,16 +17,16 @@
             this.context = entities;
         }
 
-        public void AddEnrollment(string studentId, string year, string quarter, string session, Course course, ref List<string> errors)
+        public void AddEnrollment(string studentId, int scheduleId, ref List<string> errors)
         {
             var db_Enrollment = new enrollment();
 
             try
             {
-                db_Enrollment.student_id = studentId; 
-
-                db_Enrollment.schedule_id = this.context.course_schedule.Where(
-                    y => y.quarter == quarter && y.year == int.Parse(year)).Select(x => x.schedule_id).First();
+                db_Enrollment.student_id = studentId;
+                db_Enrollment.schedule_id = scheduleId;
+                ////db_Enrollment.schedule_id = this.context.course_schedule.Where(
+                ////    y => y.quarter == quarter && y.year == int.Parse(year)).Select(x => x.schedule_id).First();
                 db_Enrollment.grade = string.Empty;
                 this.context.enrollments.Add(db_Enrollment);
                 this.context.SaveChanges();
@@ -52,6 +52,28 @@
             {
                 errors.Add("Error: " + e);
             }
+        }
+
+        public bool IsNotDuplicateEnrollment(string studentId, int scheduleId, ref List<string> errors)
+        {
+            var isDuplicate = true;
+
+            try
+            {
+                isDuplicate = this.context.enrollments.Where(x => x.student_id == studentId && x.schedule_id == scheduleId).Count() > 0;
+                if (isDuplicate)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in ScheduleRepository.IsDuplicateCourseToSchedule: " + e);
+            }
+
+            return isDuplicate;
         }
     }
 }
