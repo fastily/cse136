@@ -12,7 +12,6 @@
     [TestClass]
     public class CourseServiceTest
     {
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void InsertCourseErrorTest1() // :  course == null
@@ -180,6 +179,7 @@
             //// Assert course object not null
             Assert.AreEqual(1, errors.Count);
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GetPreReqErrorTest()
@@ -195,6 +195,5 @@
             //// Assert
             Assert.AreEqual(1, errors.Count);
         }
-
     }
 }

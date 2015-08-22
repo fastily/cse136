@@ -12,7 +12,6 @@
     [TestClass]
     public class EnrollmentServiceTest
     {
-       
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void AddEnrollmentErrorTest1() // :  studentId  == null
@@ -23,12 +22,11 @@
             var enrollmentService = new EnrollmentService(mockRepository.Object);
 
             //// Act
-            enrollmentService.AddEnrollment(string.Empty, 0,ref errors);
+            enrollmentService.AddEnrollment(string.Empty, 0, ref errors);
 
             //// Assert cant be null course object
             Assert.AreEqual(1, errors.Count);
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -45,7 +43,6 @@
             //// Assert cant be null course object
             Assert.AreEqual(1, errors.Count);
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -81,8 +78,6 @@
         }
          */
 
-
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void RemoveEnrollmentErrorTest() // course == null
@@ -117,7 +112,5 @@
             //// Assert course id cannot be null
             Assert.AreEqual(1, errors.Count);
         }
-
-
     }
 }
