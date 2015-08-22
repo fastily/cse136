@@ -12,10 +12,9 @@
     [TestClass]
     public class CapeReviewServiceTest
     {
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void CapeReviewErrorTest() //;IsNullOrEmpty
+        public void CapeReviewErrorTest() ////;IsNullOrEmpty
         {
             //// Arranage
             var errors = new List<string>();
@@ -31,7 +30,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void CapeReviewErrorTest() //;IsNullOrEmpty
+        public void CapeReviewErrorTest() ////;IsNullOrEmpty
         {
             //// Arranage
             var errors = new List<string>();

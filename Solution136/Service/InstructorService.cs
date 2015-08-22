@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text.RegularExpressions;
     using IRepository;
     using POCO;
 
@@ -98,6 +99,8 @@
 
         public void AssignGrade(Schedule schedule, string studentId, int instructorId, string grade, ref List<string> errors)
         {
+            Regex notRealGrade = new Regex(@"[A-D][+-]?|F");
+
             if (string.IsNullOrEmpty(instructorId.ToString()))
             {
                 errors.Add("Invalid instructorId");
@@ -107,6 +110,12 @@
             if (string.IsNullOrEmpty(grade))
             {
                 errors.Add("Must assign a grade");
+                throw new ArgumentException();
+            }
+
+            if (notRealGrade.IsMatch(grade))
+            {
+                errors.Add("Invalid grade");
                 throw new ArgumentException();
             }
 

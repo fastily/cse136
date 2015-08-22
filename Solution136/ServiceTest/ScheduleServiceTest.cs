@@ -12,7 +12,6 @@
     [TestClass]
     public class ScheduleServiceTest
     {
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void AddCourseToScheduleErrorTest1() // :  schedule  == null
@@ -28,7 +27,6 @@
             //// Assert cant be null course object
             Assert.AreEqual(1, errors.Count);
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -47,7 +45,6 @@
             Assert.AreEqual(1, errors.Count);
         }
 
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void AddCourseToScheduleErrorTest3() // :  timeID  == null
@@ -64,12 +61,9 @@
             Assert.AreEqual(1, errors.Count);
         }
 
-
-
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void RemoveCourseFromScheduleErrorTest() // course == null
+        public void RemoveCourseFromScheduleErrorTest() //// course == null
         {
             //// Arrange
             var errors = new List<string>();
