@@ -81,27 +81,32 @@
         /// <param name="cape_id">id to search for</param>
         /// <param name="errors">Error list</param>
         /// <returns></returns>
-        public CapeReview FindCapeReviewByCourseId(int course_id, ref List<string> errors)
+        public List<CapeReview> FindCapeReviewsByCourseId(int course_id, ref List<string> errors)
         {
-            CapeReview pocoCR = new CapeReview();
+            List<CapeReview> pocoCrList = new List<CapeReview>();
 
             try
             {
-                cape_reviews db = this.context.cape_reviews.Where(x => x.course_id == course_id).First();
+                IEnumerable<cape_reviews> db_crList = this.context.cape_reviews.Where(x => x.course_id == course_id);
 
-                pocoCR.CapeId = db.cape_id;
-                pocoCR.CourseId = (int)db.course_id;
-                pocoCR.InstructorId = (int)db.instructor_id;
-                pocoCR.InstructorRating = (int)db.instructor_rating;
-                pocoCR.Summary = db.summary;
-                pocoCR.CourseRating = (int)db.course_rating;
+                foreach (cape_reviews db in db_crList)
+                {
+                    var pocoCr = new CapeReview();
+                    pocoCr.CapeId = db.cape_id;
+                    pocoCr.CourseId = (int)db.course_id;
+                    pocoCr.InstructorId = (int)db.instructor_id;
+                    pocoCr.InstructorRating = (int)db.instructor_rating;
+                    pocoCr.Summary = db.summary;
+                    pocoCr.CourseRating = (int)db.course_rating;
+                    pocoCrList.Add(pocoCr);
+                }
             }
             catch (Exception e)
             {
                 errors.Add("Error occured in CapeReviewRepository.FindCapeReviewById: " + e);
             }
 
-            return pocoCR;
+            return pocoCrList;
         }
 
         /// <summary>
@@ -155,6 +160,34 @@
             }
 
             return pocoCR;
+        }
+
+        public List<CapeReview> FindCapeReviewsByInstructorId(int instructor_id, ref List<string> errors)
+        {
+            List<CapeReview> pocoCrList = new List<CapeReview>();
+
+            try
+            {
+                IEnumerable<cape_reviews> db_crList = this.context.cape_reviews.Where(x => x.instructor_id == instructor_id);
+
+                foreach (cape_reviews db in db_crList)
+                {
+                    var pocoCr = new CapeReview();
+                    pocoCr.CapeId = db.cape_id;
+                    pocoCr.CourseId = (int)db.course_id;
+                    pocoCr.InstructorId = (int)db.instructor_id;
+                    pocoCr.InstructorRating = (int)db.instructor_rating;
+                    pocoCr.Summary = db.summary;
+                    pocoCr.CourseRating = (int)db.course_rating;
+                    pocoCrList.Add(pocoCr);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in CapeReviewRepository.FindCapeReviewById: " + e);
+            }
+
+            return pocoCrList;
         }
     }
 }
