@@ -12,5 +12,37 @@
     [TestClass]
     public class CapeReviewServiceTest
     {
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CapeReviewErrorTest() //;IsNullOrEmpty
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<ICapeReviewRepository>();
+            var capeService = new CapeReviewService(mockRepository.Object);
+
+            //// Act
+            capeService.GetCourseRating(0, ref errors);
+
+            //// Assert
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CapeReviewErrorTest() //;IsNullOrEmpty
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<ICapeReviewRepository>();
+            var capeService = new CapeReviewService(mockRepository.Object);
+
+            //// Act
+            capeService.GetInstructorRating(0, ref errors);
+
+            //// Assert
+            Assert.AreEqual(1, errors.Count);
+        }
     }
 }
