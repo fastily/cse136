@@ -69,7 +69,7 @@
             this.repository.AddTa(ta, ref errors);
         }
 
-        public Ta GetTaBy(string ta_id, ref List<string> errors)
+        public Ta GetTaById(string ta_id, ref List<string> errors)
         {
             if (string.IsNullOrEmpty(ta_id))
             {

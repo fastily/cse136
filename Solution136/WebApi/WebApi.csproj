@@ -126,6 +126,7 @@
     <Folder Include="Views\GradeChange\" />
     <Folder Include="Views\Instructor\" />
     <Folder Include="Views\Schedule\" />
+    <Folder Include="Views\Ta\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
