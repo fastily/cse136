@@ -149,7 +149,7 @@
         // WTF int can't be null ?
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void AssignPreReqErrorTest3() // courseid == null
+        public void RemovePreReqErrorTest1() // courseid == null
         {
             //// Arranage
             var errors = new List<string>();
@@ -166,7 +166,7 @@
         // WTF int can't be null ?
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void AssignPreReqErrorTest4() // preReqCourseId == null
+        public void RemovePreReqErrorTest2() // preReqCourseId == null
         {
             //// Arranage
             var errors = new List<string>();
@@ -277,6 +277,83 @@
 
             //// Assert
             mockRepository.Verify(x => x.UpdateCourse(s, ref errors), Times.Once());
+        }
+
+        [TestMethod]
+        public void AssignPreReqPassTest()
+        {
+            //// Arranage
+            string courseName1 = "Test5";
+            string courseName2 = "Test6";
+            string courseName3 = "Test7";
+            var errors1 = new List<string>();
+            var errors2 = new List<string>();
+            var mockRepository = new Mock<ICourseRepository>();
+            var courseService = new CourseService(mockRepository.Object);
+            var course1 = new Course { Title = courseName1 };
+            var course2 = new Course { Title = courseName2 };
+            var course3 = new Course { Title = courseName3 };
+            courseService.InsertCourse(course1, ref errors1);
+            courseService.InsertCourse(course2, ref errors1);
+            courseService.InsertCourse(course3, ref errors1);
+
+            //// Act
+            courseService.AssignPreReq(1, 2, ref errors2);
+
+            //// Assert
+            Assert.AreEqual(0, errors2.Count);
+        }
+
+        [TestMethod]
+        public void RemovePreReqPassTest()
+        {
+            //// Arranage
+            string courseName1 = "Test5";
+            string courseName2 = "Test6";
+            string courseName3 = "Test7";
+            var errors1 = new List<string>();
+            var errors2 = new List<string>();
+            var mockRepository = new Mock<ICourseRepository>();
+            var courseService = new CourseService(mockRepository.Object);
+            var course1 = new Course { Title = courseName1 };
+            var course2 = new Course { Title = courseName2 };
+            var course3 = new Course { Title = courseName3 };
+            courseService.InsertCourse(course1, ref errors1);
+            courseService.InsertCourse(course2, ref errors1);
+            courseService.InsertCourse(course3, ref errors1);
+            courseService.AssignPreReq(1, 2, ref errors1);
+
+            //// Act
+            courseService.RemovePreReq(1, 2, ref errors2);
+
+            //// Assert
+            Assert.AreEqual(0, errors2.Count);
+        }
+
+        [TestMethod]
+        public void GetPreReqPassTest()
+        {
+            //// Arranage
+            string courseName1 = "Test5";
+            string courseName2 = "Test6";
+            string courseName3 = "Test7";
+            var errors1 = new List<string>();
+            var errors2 = new List<string>();
+            var mockRepository = new Mock<ICourseRepository>();
+            var courseService = new CourseService(mockRepository.Object);
+            var course1 = new Course { Title = courseName1 };
+            var course2 = new Course { Title = courseName2 };
+            var course3 = new Course { Title = courseName3 };
+            courseService.InsertCourse(course1, ref errors1);
+            courseService.InsertCourse(course2, ref errors1);
+            courseService.InsertCourse(course3, ref errors1);
+            courseService.AssignPreReq(1, 2, ref errors1);
+
+            //// Act
+            courseService.GetPreReqList(1, ref errors2);
+
+            //// Assert
+            Assert.AreEqual(0, errors2.Count);
         }
     }
 }

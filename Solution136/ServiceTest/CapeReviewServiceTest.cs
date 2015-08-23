@@ -69,6 +69,29 @@
         }
 
         [TestMethod]
+        public void CapeReviewGetInstructorReviewTest()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            Mock<ICapeReviewRepository> mockRepository = new Mock<ICapeReviewRepository>();
+            CapeReviewService capeservice = new CapeReviewService(mockRepository.Object);
+
+            List<CapeReview> crl = new List<CapeReview>();
+            crl.Add(new CapeReview { CapeId = 1000, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 3, CourseRating = 1 });
+            crl.Add(new CapeReview { CapeId = 1001, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 2, CourseRating = 5 });
+            crl.Add(new CapeReview { CapeId = 1002, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 1, CourseRating = 3 });
+            mockRepository.Setup(x => x.FindCapeReviewsByInstructorId(500, ref errors)).Returns(crl);
+
+            //// Act
+            var rating = capeservice.GetInstructorRating(500, ref errors);
+
+            //// Assert
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(2, rating);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void InsertCapeReviewErrorTest1() // :  CapeReview == null
         {
@@ -85,7 +108,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void InsertCapeReviewErrorTest2() // : instr == null
         {
             //// Arranage
@@ -114,7 +137,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void InsertCapeReviewErrorTest3() // : course == null
         {
             //// Arranage
@@ -175,7 +198,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void DeleteCapeReviewErrorTest() // CapeReview == null
         {
             //// Arrange
@@ -226,7 +249,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void UpdateCapeReviewErrorTest2() // inst null
         {
             //// Arranage
@@ -245,7 +268,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void UpdateCapeReviewErrorTest3() // course id == null
         {
             //// Arranage
