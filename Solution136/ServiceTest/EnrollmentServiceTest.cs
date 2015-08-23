@@ -30,7 +30,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void AddEnrollmentErrorTest1() // :  scheduleId  == null
+        public void AddEnrollmentErrorTest2() // :  scheduleId  == null
         {
             //// Arranage
             var errors = new List<string>();
@@ -46,7 +46,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void AddEnrollmentErrorTest1() // :  scheduleId  == null
+        public void AddEnrollmentErrorTest3() // :  scheduleId  == null
         {
             //// Arranage
             var errors = new List<string>();
@@ -80,7 +80,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void RemoveEnrollmentErrorTest() // course == null
+        public void RemoveEnrollmentErrorTest1() // course == null
         {
             //// Arrange
             var errors = new List<string>();
@@ -97,7 +97,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void RemoveEnrollmentErrorTest() // course == null
+        public void RemoveEnrollmentErrorTest2() // course == null
         {
             //// Arrange
             var errors = new List<string>();

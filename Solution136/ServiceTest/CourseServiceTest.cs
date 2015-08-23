@@ -132,7 +132,7 @@
         // WTF int can't be null ?
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void AssignPreReqErrorTest1() // preReqCourseId == null
+        public void AssignPreReqErrorTest2() // preReqCourseId == null
         {
             //// Arranage
             var errors = new List<string>();
@@ -149,7 +149,7 @@
         // WTF int can't be null ?
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void AssignPreReqErrorTest1() // courseid == null
+        public void AssignPreReqErrorTest3() // courseid == null
         {
             //// Arranage
             var errors = new List<string>();
@@ -166,7 +166,7 @@
         // WTF int can't be null ?
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void AssignPreReqErrorTest1() // preReqCourseId == null
+        public void AssignPreReqErrorTest4() // preReqCourseId == null
         {
             //// Arranage
             var errors = new List<string>();
