@@ -182,13 +182,13 @@
 
             Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test" };
 
-            mockRepository.Setup(x => x.InsertInstructor(ins, ref errors));
+            mockRepository.Setup(x => x.AddInstructor(ins, ref errors));
 
             //// Act
             iserv.InsertInstructor(ins, ref errors);
 
             //// Assert
-            mockRepository.Verify(x => x.InsertInstructor(ins, ref errors), Times.Once());
+            mockRepository.Verify(x => x.AddInstructor(ins, ref errors), Times.Once());
         }
     }
 }
