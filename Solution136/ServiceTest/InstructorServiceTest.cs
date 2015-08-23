@@ -205,6 +205,40 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetInstructorErrorTest()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+
+            //// Act
+            instructorService.GetInstructor(null, ref errors);
+
+            //// Assert instructor id cannot be null
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetInstructorErrorTest1()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+
+            //// Act
+            instructorService.GetInstructor("", ref errors);
+
+            //// Assert instructor id cannot be null
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
         public void UpdateInstructorTest()
         {
             //// Arranage
