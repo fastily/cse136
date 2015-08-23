@@ -89,7 +89,15 @@
                 throw new ArgumentException();
             }
 
-            this.repository.EnrollSchedule(studentId, scheduleId, ref errors);
+            if (this.repository.GetEnrollments(studentId, ref errors).Count < 4)
+            {
+                this.repository.EnrollSchedule(studentId, scheduleId, ref errors);
+            }
+            else
+            {
+                errors.Add("Enrolled in to many courses!");
+                throw new ArgumentException();
+            }
         }
 
         public void DropEnrolledSchedule(string studentId, int scheduleId, ref List<string> errors)
