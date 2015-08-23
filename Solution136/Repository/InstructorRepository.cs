@@ -213,5 +213,9 @@
                 errors.Add("Error occured in InstructorRepository.ApprovePreReqOverride: " + e);
             }
         }
+
+        public void InsertInstructor(Instructor instructor, ref List<string> errors)
+        {
+        }
     }
 }

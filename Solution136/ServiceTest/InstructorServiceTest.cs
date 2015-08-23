@@ -149,5 +149,46 @@
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(99, temp.InstructorId);
         }
+
+
+        [TestMethod]
+        public void UpdateInstructorTest()
+        {
+            //// Arranage
+            var errors = new List<string>();
+
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test"};
+
+            mockRepository.Setup(x => x.UpdateInstructor(ins, ref errors));
+
+            //// Act
+            iserv.UpdateInstructor(ins, ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.UpdateInstructor(ins, ref errors), Times.Once());
+        }
+
+        [TestMethod]
+        public void InsertInstructorTest()
+        {
+            //// Arranage
+            var errors = new List<string>();
+
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test" };
+
+            mockRepository.Setup(x => x.InsertInstructor(ins, ref errors));
+
+            //// Act
+            iserv.InsertInstructor(ins, ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.InsertInstructor(ins, ref errors), Times.Once());
+        }
     }
 }
