@@ -51,7 +51,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<IInstructorRepository>();
             var instructorService = new InstructorService(mockRepository.Object);
-            var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "cc", Title = "nope"};
+            var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "cc", Title = "nope" };
 
             mockRepository.Setup(x => x.AddInstructor(instructor, ref errors));
 
@@ -136,7 +136,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<IInstructorRepository>();
             var instructorService = new InstructorService(mockRepository.Object);
-            var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "zz", Title = "NOPE"  };
+            var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "zz", Title = "NOPE" };
 
             mockRepository.Setup(x => x.UpdateInstructor(instructor, ref errors));
 
@@ -204,7 +204,6 @@
             Assert.AreEqual(99, temp.InstructorId);
         }
 
-
         [TestMethod]
         public void UpdateInstructorTest()
         {
@@ -214,7 +213,7 @@
             Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
             InstructorService iserv = new InstructorService(mockRepository.Object);
 
-            Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test"};
+            Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test" };
 
             mockRepository.Setup(x => x.UpdateInstructor(ins, ref errors));
 

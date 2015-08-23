@@ -123,9 +123,9 @@
             EnrollmentService enrollservice = new EnrollmentService(mockRepository.Object);
 
             List<Enrollment> crl = new List<Enrollment>();
-            crl.Add(new Enrollment { StudentId = "99", ScheduleId = 1000, Grade = "A+", GradeValue = 4.0f});
+            crl.Add(new Enrollment { StudentId = "99", ScheduleId = 1000, Grade = "A+", GradeValue = 4.0f });
 
-            mockRepository.Setup(x => x.RemoveEnrollment("99", 1000, ref errors)); //.Returns(crl);
+            mockRepository.Setup(x => x.RemoveEnrollment("99", 1000, ref errors)); 
 
             //// Act
             enrollservice.RemoveEnrollment("99", 1000, ref errors);
