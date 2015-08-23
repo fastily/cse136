@@ -195,5 +195,27 @@
             //// Assert
             Assert.AreEqual(1, errors.Count);
         }
+
+        [TestMethod]
+        public void GetCourseServiceTest()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            Mock<ICourseRepository> mockRepository = new Mock<ICourseRepository>();
+            CourseService courseservice = new CourseService(mockRepository.Object);
+
+            List<Course> crl = new List<Course>();
+            crl.Add(new Course { CourseId = "99", Title = "T", Description = "Test"});
+
+            mockRepository.Setup(x => x.GetCourseList(ref errors)).Returns(crl); //.Returns(crl);
+
+            //// Act
+            Course temp = courseservice.GetCourseList(ref errors)[0];
+
+            //// Assert
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual("99", temp.CourseId);
+        }
     }
 }

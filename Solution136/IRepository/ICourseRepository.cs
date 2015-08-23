@@ -24,5 +24,7 @@
         void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors);
 
         List<Course> GetAllPreReqs(int courseId, ref List<string> errors);
+
+        ////Course GetCourse(string course_id, ref List<string> errors);
     }
 }

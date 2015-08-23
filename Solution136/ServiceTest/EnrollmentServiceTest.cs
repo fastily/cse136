@@ -112,5 +112,27 @@
             //// Assert course id cannot be null
             Assert.AreEqual(1, errors.Count);
         }
+
+        [TestMethod]
+        public void RemoveEnrollmentServiceTest()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            Mock<IEnrollmentRepository> mockRepository = new Mock<IEnrollmentRepository>();
+            EnrollmentService enrollservice = new EnrollmentService(mockRepository.Object);
+
+            List<Enrollment> crl = new List<Enrollment>();
+            crl.Add(new Enrollment { StudentId = "99", ScheduleId = 1000, Grade = "A+", GradeValue = 4.0f});
+
+            mockRepository.Setup(x => x.RemoveEnrollment("99", 1000, ref errors)); //.Returns(crl);
+
+            //// Act
+            enrollservice.RemoveEnrollment("99", 1000, ref errors);
+
+            //// Assert
+            Assert.AreEqual(0, errors.Count);
+            ////Assert.AreEqual(3, rating);
+        }
     }
 }
