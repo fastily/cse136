@@ -1,9 +1,8 @@
 ﻿namespace WebApiTest
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Diagnostics;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using POCO;
-
     using WebApi.Controllers;
 
     /// <summary>

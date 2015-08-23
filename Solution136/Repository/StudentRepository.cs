@@ -42,15 +42,15 @@
                 foreach (enrollment enrolledCourse in db_student.enrollments)
                 {
                     var pocoSchedule = new Schedule();
-                    var dbSchedule = new course_schedule();
+                    var db_Schedule = new course_schedule();
 
-                    dbSchedule.schedule_id = enrolledCourse.schedule_id;
-                    dbSchedule = this.context.course_schedule.Find(dbSchedule);
+                    db_Schedule.schedule_id = enrolledCourse.schedule_id;
+                    db_Schedule = this.context.course_schedule.Find(db_Schedule);
 
-                    pocoSchedule.ScheduleId = dbSchedule.schedule_id;
-                    pocoSchedule.Quarter = dbSchedule.quarter;
-                    pocoSchedule.Year = dbSchedule.year.ToString();
-                    pocoSchedule.Session = dbSchedule.session;
+                    pocoSchedule.ScheduleId = db_Schedule.schedule_id;
+                    pocoSchedule.Quarter = db_Schedule.quarter;
+                    pocoSchedule.Year = db_Schedule.year.ToString();
+                    pocoSchedule.Session = db_Schedule.session;
 
                     pocoStudent.Enrolled.Add(pocoSchedule);
                 }

@@ -18,19 +18,24 @@
         }
 
         ////probably not necessary
-        public Course FindCourseByName(string courseName, ref List<string> errors)
+        public List<Course> FindCourseByName(string courseName, ref List<string> errors)
         {
-            POCO.Course pocoCourse = new POCO.Course();
-            course db_course;
+            List<Course> searchResults = new List<Course>();
+            IEnumerable<course> db_courses;
+
             try
             {
-                db_course = this.context.courses.Where(x => x.course_title == courseName).First();
-                if (db_course != null)
+                db_courses = this.context.courses.Where(x => x.course_title.Contains(courseName));
+
+                foreach (course db_course in db_courses)
                 {
+                    POCO.Course pocoCourse = new POCO.Course();
+
                     pocoCourse.CourseId = db_course.course_id.ToString();
                     pocoCourse.Description = db_course.course_description;
                     pocoCourse.Title = db_course.course_title;
-                    pocoCourse.CourseLevel = 0;
+                    pocoCourse.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), db_course.course_level);
+                    searchResults.Add(pocoCourse);
                 }
             }
             catch (Exception e)
@@ -38,7 +43,7 @@
                 errors.Add("Error occured in CourseRepository.FindCourseByName: " + e);
             }
 
-            return pocoCourse;
+            return searchResults;
         }
 
         public Course FindCourseById(string courseId, ref List<string> errors)
@@ -54,7 +59,7 @@
                     pocoCourse.CourseId = db_course.course_id.ToString();
                     pocoCourse.Description = db_course.course_description;
                     pocoCourse.Title = db_course.course_title;
-                    pocoCourse.CourseLevel = 0;
+                    pocoCourse.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), db_course.course_level);
                 }
             }
             catch (Exception e)

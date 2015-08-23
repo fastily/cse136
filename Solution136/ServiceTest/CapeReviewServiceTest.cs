@@ -55,7 +55,7 @@
             CapeReviewService capeservice = new CapeReviewService(mockRepository.Object);
 
             List<CapeReview> crl = new List<CapeReview>();
-            crl.Add(new CapeReview { CapeId = 1000, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 3, CourseRating = 1});
+            crl.Add(new CapeReview { CapeId = 1000, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 3, CourseRating = 1 });
             crl.Add(new CapeReview { CapeId = 1001, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 2, CourseRating = 5 });
             crl.Add(new CapeReview { CapeId = 1002, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 1, CourseRating = 3 });
             mockRepository.Setup(x => x.FindCapeReviewsByCourseId(999, ref errors)).Returns(crl);

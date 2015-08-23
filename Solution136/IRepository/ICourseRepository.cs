@@ -5,7 +5,7 @@
 
     public interface ICourseRepository
     {
-        Course FindCourseByName(string courseName, ref List<string> errors);
+        List<Course> FindCourseByName(string courseName, ref List<string> errors);
 
         Course FindCourseById(string courseId, ref List<string> errors);
 

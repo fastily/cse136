@@ -147,5 +147,16 @@
 
             return this.repository.GetAllPreReqs(courseId, ref errors);
         }
+
+        public List<Course> SearchCourses(string courseName, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(courseName))
+            {
+                errors.Add("Must Enter something to search");
+                throw new ArgumentException();
+            }
+
+            return this.repository.FindCourseByName(courseName, ref errors);
+        }
     }
 }
