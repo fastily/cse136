@@ -78,7 +78,6 @@
             Assert.AreEqual(1, errors.Count);
         }
 
-
         [TestMethod]
         public void GetScheduleListTest()
         {

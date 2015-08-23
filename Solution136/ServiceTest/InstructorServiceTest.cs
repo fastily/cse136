@@ -54,6 +54,7 @@
             var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "cc", Title = "nope" };
 
             mockRepository.Setup(x => x.AddInstructor(instructor, ref errors));
+            mockRepository.Setup(x => x.IsNotDuplicateInstructor(instructor, ref errors)).Returns(true);
 
             //// Act
             instructorService.InsertInstructor(instructor, ref errors);
@@ -232,7 +233,7 @@
             var instructorService = new InstructorService(mockRepository.Object);
 
             //// Act
-            instructorService.GetInstructor("", ref errors);
+            instructorService.GetInstructor(string.Empty, ref errors);
 
             //// Assert instructor id cannot be null
             Assert.AreEqual(1, errors.Count);
@@ -270,6 +271,7 @@
             Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test" };
 
             mockRepository.Setup(x => x.AddInstructor(ins, ref errors));
+            mockRepository.Setup(x => x.IsNotDuplicateInstructor(ins, ref errors)).Returns(true);
 
             //// Act
             iserv.InsertInstructor(ins, ref errors);
