@@ -197,7 +197,7 @@
         }
 
         [TestMethod]
-        public void InstructorServiceTest()
+        public void GetCourseListTest()
         {
             //// Arrange
             var errors = new List<string>();
@@ -216,6 +216,67 @@
             //// Assert
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual("99", temp.CourseId);
+        }
+
+        [TestMethod]
+        public void RemoveCourseTest()
+        {
+            //// Arranage
+            var errors = new List<string>();
+
+            Mock<ICourseRepository> mockRepository = new Mock<ICourseRepository>();
+            CourseService iserv = new CourseService(mockRepository.Object);
+
+            Course s = new Course { CourseId = "99", Title = "T", Description = "Test" };
+
+            mockRepository.Setup(x => x.RemoveCourse(99, ref errors));
+
+            //// Act
+            iserv.DeleteCourse("99", ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.RemoveCourse(99, ref errors), Times.Once());
+        }
+
+        [TestMethod]
+        public void AddCourseTest()
+        {
+            //// Arranage
+            var errors = new List<string>();
+
+            Mock<ICourseRepository> mockRepository = new Mock<ICourseRepository>();
+            CourseService iserv = new CourseService(mockRepository.Object);
+
+            Course s = new Course { CourseId = "99", Title = "T", Description = "Test" };
+
+            mockRepository.Setup(x => x.AddCourse(s, ref errors));
+            mockRepository.Setup(x => x.IsNotDuplicateCourse(s, ref errors)).Returns(true);
+
+            //// Act
+            iserv.InsertCourse(s, ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.AddCourse(s, ref errors), Times.Once());
+        }
+
+        [TestMethod]
+        public void UpdateCourseTest()
+        {
+            //// Arranage
+            var errors = new List<string>();
+
+            Mock<ICourseRepository> mockRepository = new Mock<ICourseRepository>();
+            CourseService iserv = new CourseService(mockRepository.Object);
+
+            Course s = new Course { CourseId = "99", Title = "T", Description = "Test" };
+
+            mockRepository.Setup(x => x.UpdateCourse(s, ref errors));
+
+            //// Act
+            iserv.UpdateCourse(s, ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.UpdateCourse(s, ref errors), Times.Once());
         }
     }
 }
