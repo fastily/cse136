@@ -66,7 +66,7 @@
                 throw new ArgumentException();
             }
 
-            this.repository.AddTa(ta, ref errors);
+            this.repository.UpdateTa(ta, ref errors);
         }
 
         public Ta GetTaById(string ta_id, ref List<string> errors)

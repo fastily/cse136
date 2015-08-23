@@ -72,6 +72,7 @@
             var ta_1 = new Ta { TaId = 2, TaType = "bb", FirstName = "cc", LastName = "dd" };
 
             mockRepository.Setup(x => x.AddTa(ta_1, ref errors));
+            mockRepository.Setup(x => x.IsNotDuplicateTa(ta_1, ref errors)).Returns(true);
 
             //// Act
             ta_Service.InsertTa(ta_1, ref errors);

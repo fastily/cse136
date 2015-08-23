@@ -73,7 +73,7 @@
                 throw new ArgumentException();
             }
 
-            this.repository.AddCourse(course, ref errors);
+            this.repository.UpdateCourse(course, ref errors);
         }
 
         public Course GetCourse(string course_id, ref List<string> errors)

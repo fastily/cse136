@@ -250,6 +250,7 @@
             Course s = new Course { CourseId = "99", Title = "T", Description = "Test" };
 
             mockRepository.Setup(x => x.AddCourse(s, ref errors));
+            mockRepository.Setup(x => x.IsNotDuplicateCourse(s, ref errors)).Returns(true);
 
             //// Act
             iserv.InsertCourse(s, ref errors);
