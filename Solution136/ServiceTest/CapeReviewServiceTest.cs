@@ -109,7 +109,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void InsertCapeReviewErrorTest2() // : instr == null
         {
             //// Arranage
@@ -139,7 +139,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void InsertCapeReviewErrorTest3() // : course == null
         {
             //// Arranage
@@ -203,7 +203,7 @@
 
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void DeleteCapeReviewErrorTest() // CapeReview == null
         {
             //// Arrange
@@ -254,7 +254,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void UpdateCapeReviewErrorTest2() // inst null
         {
             //// Arranage
@@ -273,7 +273,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void UpdateCapeReviewErrorTest3() // course id == null
         {
             //// Arranage
