@@ -70,6 +70,27 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetAdminErrorTest3()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IAdminRepository>();
+            var adminService = new AdminService(mockRepository.Object);
+            var adminPoco = new Admin()
+            {
+                FirstName = "hi",
+                LastName = string.Empty
+            };
+
+            //// Act
+            adminService.GetAdminById(string.Empty, ref errors);
+
+            //// Assert instructor object not null
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
         public void UpdateAdmin()
         {
             //// Arranage
