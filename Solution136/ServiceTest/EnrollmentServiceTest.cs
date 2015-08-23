@@ -29,7 +29,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void AddEnrollmentErrorTest2() // :  scheduleId  == null
         {
             //// Arranage
@@ -45,7 +45,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void AddEnrollmentErrorTest3() // :  scheduleId  == null
         {
             //// Arranage
@@ -96,7 +96,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void RemoveEnrollmentErrorTest2() // course == null
         {
             //// Arrange

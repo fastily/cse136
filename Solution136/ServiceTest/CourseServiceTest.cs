@@ -114,7 +114,7 @@
 
         // WTF int can't be null ?
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void AssignPreReqErrorTest1() // courseid == null
         {
             //// Arranage
@@ -131,7 +131,7 @@
 
         // WTF int can't be null ?
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void AssignPreReqErrorTest2() // preReqCourseId == null
         {
             //// Arranage
@@ -148,7 +148,7 @@
 
         // WTF int can't be null ?
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void AssignPreReqErrorTest3() // courseid == null
         {
             //// Arranage
@@ -165,7 +165,7 @@
 
         // WTF int can't be null ?
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void AssignPreReqErrorTest4() // preReqCourseId == null
         {
             //// Arranage
@@ -181,7 +181,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void GetPreReqErrorTest()
         {
             //// Arranage

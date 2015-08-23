@@ -1,7 +1,7 @@
 ﻿namespace WebApiTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+    using System.Diagnostics;
     using POCO;
 
     using WebApi.Controllers;
@@ -17,6 +17,7 @@
         {
             var authorizeController = new AuthorizeController();
             var login = authorizeController.Authenticate("admin@cs.ucsd.edu", "password");
+            ////Debug.Write("WTF IS THIS " + login.Id);
             Assert.AreEqual("1", login.Id);
         }
 

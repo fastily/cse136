@@ -13,7 +13,7 @@
     public class CapeReviewServiceTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(NullReferenceException))]
         public void CapeReviewErrorTest1() ////;IsNullOrEmpty
         {
             //// Arranage
@@ -29,7 +29,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(NullReferenceException))]
         public void CapeReviewErrorTest2() ////;IsNullOrEmpty
         {
             //// Arranage
@@ -38,10 +38,16 @@
             var capeService = new CapeReviewService(mockRepository.Object);
 
             //// Act
+
             capeService.GetInstructorRating(0, ref errors);
 
             //// Assert
             Assert.AreEqual(1, errors.Count);
+        }
+
+        public void CapeReviewGetCourseRatingTest()
+        {
+
         }
     }
 }
