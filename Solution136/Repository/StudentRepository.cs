@@ -38,11 +38,22 @@
                 pocoStudent.LastName = db_student.last_name;
                 pocoStudent.Password = db_student.password;
                 pocoStudent.Email = db_student.email;
-                ////foreach (enrollment enrolledCourse in dbStudent.enrollments)
-                ////{
-                ////    pocoStudent.Enrolled.Add(enrolledCourse);
-                ////}
-                ////pocoStudent.Enrolled = dbStudent.enrollments;
+                pocoStudent.Enrolled = new List<Schedule>();
+                foreach (enrollment enrolledCourse in db_student.enrollments)
+                {
+                    var pocoSchedule = new Schedule();
+                    var dbSchedule = new course_schedule();
+
+                    dbSchedule.schedule_id = enrolledCourse.schedule_id;
+                    dbSchedule = this.context.course_schedule.Find(dbSchedule);
+
+                    pocoSchedule.ScheduleId = dbSchedule.schedule_id;
+                    pocoSchedule.Quarter = dbSchedule.quarter;
+                    pocoSchedule.Year = dbSchedule.year.ToString();
+                    pocoSchedule.Session = dbSchedule.session;
+
+                    pocoStudent.Enrolled.Add(pocoSchedule);
+                }
             }
             catch (Exception e)
             {
