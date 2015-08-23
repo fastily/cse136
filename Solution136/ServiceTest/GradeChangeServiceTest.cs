@@ -73,7 +73,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<IGradeChangeRepository>();
             var gradeChangeService = new GradeChangeService(mockRepository.Object);
-            var gc = new GradeChange { Course_id = 5 , GradeChangeId = 1 };
+            var gc = new GradeChange { Course_id = 5, GradeChangeId = 1 };
 
             mockRepository.Setup(x => x.RespondToGradeChange(5, ref errors));
 

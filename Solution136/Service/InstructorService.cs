@@ -67,7 +67,7 @@
                 throw new ArgumentException();
             }
 
-            this.repository.AddInstructor(instructor, ref errors);
+            this.repository.UpdateInstructor(instructor, ref errors);
         }
 
         public Instructor GetInstructor(string instructor_id, ref List<string> errors)

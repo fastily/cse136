@@ -62,23 +62,22 @@
             Assert.AreEqual(1, errors.Count);
         }
 
-
         [TestMethod]
         public void InsertTa()
         {
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
-            var ta = new Ta { TaId = 2, TaType = "bb", FirstName = "cc", LastName = "dd" };
+            var ta_Service = new TaService(mockRepository.Object);
+            var ta_1 = new Ta { TaId = 2, TaType = "bb", FirstName = "cc", LastName = "dd" };
 
-            mockRepository.Setup(x => x.AddTa(ta, ref errors));
+            mockRepository.Setup(x => x.AddTa(ta_1, ref errors));
 
             //// Act
-            taService.InsertTa(ta, ref errors);
+            ta_Service.InsertTa(ta_1, ref errors);
 
             //// Assert
-            mockRepository.Verify(x => x.AddTa(ta, ref errors), Times.Once());
+            mockRepository.Verify(x => x.AddTa(ta_1, ref errors), Times.Once());
         }
 
         [TestMethod]
@@ -137,17 +136,16 @@
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
-            var ta = new Ta { TaId = 2, TaType = "bb", FirstName = "cc", LastName = "dd" };
+            var ta_Service = new TaService(mockRepository.Object);
+            var ta_1 = new Ta { TaId = 2, TaType = "bb", FirstName = "cc", LastName = "dd" };
 
-
-            mockRepository.Setup(x => x.UpdateTa(ta, ref errors));
+            mockRepository.Setup(x => x.UpdateTa(ta_1, ref errors));
 
             //// Act
-            taService.UpdateTa(ta, ref errors);
+            ta_Service.UpdateTa(ta_1, ref errors);
 
             //// Assert
-            mockRepository.Verify(x => x.UpdateTa(ta, ref errors), Times.Once());
+            mockRepository.Verify(x => x.UpdateTa(ta_1, ref errors), Times.Once());
         }
 
         [TestMethod]
@@ -167,19 +165,18 @@
             Assert.AreEqual(1, errors.Count);
         }
 
-
         [TestMethod]
         public void DeleteTa()
         {
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
-            var taService = new TaService(mockRepository.Object);
+            var ta_Service = new TaService(mockRepository.Object);
          
             mockRepository.Setup(x => x.RemoveTa(2, ref errors));
 
             //// Act
-            taService.DeleteTa("2", ref errors);
+            ta_Service.DeleteTa("2", ref errors);
 
             //// Assert
             mockRepository.Verify(x => x.RemoveTa(2, ref errors), Times.Once());
@@ -191,7 +188,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<ITaRepository>();
             var teachingAssistantService = new TaService(mockRepository.Object);
-            var ta_1 = new Ta { FirstName = "hi", LastName = "bye" , TaId = 5 };
+            var ta_1 = new Ta { FirstName = "hi", LastName = "bye", TaId = 5 };
             var returnTa = new Ta();
 
             mockRepository.Setup(x => x.FindTaById(5, ref errors)).Returns(ta_1);

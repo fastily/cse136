@@ -54,6 +54,7 @@
             var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "cc", Title = "nope" };
 
             mockRepository.Setup(x => x.AddInstructor(instructor, ref errors));
+            mockRepository.Setup(x => x.IsNotDuplicateInstructor(instructor, ref errors)).Returns(true);
 
             //// Act
             instructorService.InsertInstructor(instructor, ref errors);
@@ -183,7 +184,7 @@
         }
 
         [TestMethod]
-        public void GetInstructorTest()
+        public void GetInstructorListTest()
         {
             //// Arrange
             var errors = new List<string>();
@@ -232,7 +233,7 @@
             var instructorService = new InstructorService(mockRepository.Object);
 
             //// Act
-            instructorService.GetInstructor("", ref errors);
+            instructorService.GetInstructor(string.Empty, ref errors);
 
             //// Assert instructor id cannot be null
             Assert.AreEqual(1, errors.Count);
@@ -270,12 +271,42 @@
             Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test" };
 
             mockRepository.Setup(x => x.AddInstructor(ins, ref errors));
+            mockRepository.Setup(x => x.IsNotDuplicateInstructor(ins, ref errors)).Returns(true);
 
             //// Act
             iserv.InsertInstructor(ins, ref errors);
 
             //// Assert
             mockRepository.Verify(x => x.AddInstructor(ins, ref errors), Times.Once());
+        }
+
+        [TestMethod]
+        public void GetInstructor()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            Instructor crl = new Instructor() 
+            { 
+                InstructorId = 99, 
+                FirstName = "T", 
+                LastName = "Test", 
+                Title = "Tester" 
+            };
+
+            mockRepository.Setup(x => x.FindInstructorById(99, ref errors)).Returns(crl);
+
+            //// Act
+            Instructor temp = iserv.GetInstructor("99", ref errors);
+
+            //// Assert
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(99, temp.InstructorId);
+            Assert.AreEqual("T", temp.FirstName);
+            Assert.AreEqual("Test", temp.LastName);
         }
     }
 }
