@@ -64,7 +64,7 @@
 
 
         [TestMethod]
-        public void InsertTa()
+        public void InsertTaTest()
         {
             //// Arranage
             var errors = new List<string>();
@@ -132,7 +132,7 @@
         }
 
         [TestMethod]
-        public void UpdateTa()
+        public void UpdateTaTest()
         {
             //// Arranage
             var errors = new List<string>();
@@ -169,7 +169,7 @@
 
 
         [TestMethod]
-        public void DeleteTa()
+        public void DeleteTaTest()
         {
             //// Arranage
             var errors = new List<string>();
