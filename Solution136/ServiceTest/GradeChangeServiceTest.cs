@@ -30,7 +30,24 @@
         }
 
         [TestMethod]
-        public void InsertGradeChageTest()
+        [ExpectedException(typeof(ArgumentException))]
+        public void RespondToGradeChageTestError1()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IGradeChangeRepository>();
+            var gradeChangeService = new GradeChangeService(mockRepository.Object);
+            var gc = new GradeChange { Course_id = -1 };
+
+            //// Act
+            gradeChangeService.RespondToGradeChange(gc, ref errors);
+
+            //// Assert
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        public void InsertGradeChangeTest()
         {
             //// Arranage
             var errors = new List<string>();
@@ -47,7 +64,25 @@
             mockRepository.VerifyAll();
             //// Assert
             Assert.AreEqual(0, errors.Count);
-            ////Assert.IsTrue(mockRepository.Verify();
+        }
+
+        [TestMethod]
+        public void RespondToGradeChageTest()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IGradeChangeRepository>();
+            var gradeChangeService = new GradeChangeService(mockRepository.Object);
+            var gc = new GradeChange { Course_id = 5 };
+
+            mockRepository.Setup(x => x.RespondToGradeChange(5, ref errors));
+
+            //// Act
+            gradeChangeService.RespondToGradeChange(gc, ref errors);
+            mockRepository.Verify(mock => mock.RespondToGradeChange(5, ref errors), Times.Once());
+
+            //// Assert
+            Assert.AreEqual(0, errors.Count);
         }
     }
 }

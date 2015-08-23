@@ -45,6 +45,24 @@
         }
 
         [TestMethod]
+        public void InsertInstructor()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+            var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "cc", Title = "nope" };
+
+            mockRepository.Setup(x => x.AddInstructor(instructor, ref errors));
+
+            //// Act
+            instructorService.InsertInstructor(instructor, ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.AddInstructor(instructor, ref errors), Times.Once());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void InsertInstructorErrorTest3()
         {
@@ -112,6 +130,24 @@
         }
 
         [TestMethod]
+        public void UpdateInstructor()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+            var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "zz", Title = "NOPE" };
+
+            mockRepository.Setup(x => x.UpdateInstructor(instructor, ref errors));
+
+            //// Act
+            instructorService.UpdateInstructor(instructor, ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.UpdateInstructor(instructor, ref errors), Times.Once());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void DeleteInstructorErrorTest()
         {
@@ -126,6 +162,24 @@
 
             //// Assert instructor id cannot be null
             Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        public void DeleteInstructor()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<IInstructorRepository>();
+            var instructorService = new InstructorService(mockRepository.Object);
+            var instructor = new Instructor { InstructorId = 2, FirstName = "bb", LastName = "cc", Title = "nope" };
+
+            mockRepository.Setup(x => x.RemoveInstructor(2, ref errors));
+
+            //// Act
+            instructorService.DeleteInstructor("2", ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.RemoveInstructor(2, ref errors), Times.Once());
         }
 
         [TestMethod]
@@ -150,7 +204,6 @@
             Assert.AreEqual(99, temp.InstructorId);
         }
 
-
         [TestMethod]
         public void UpdateInstructorTest()
         {
@@ -160,7 +213,7 @@
             Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
             InstructorService iserv = new InstructorService(mockRepository.Object);
 
-            Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test"};
+            Instructor ins = new Instructor { InstructorId = 99, FirstName = "Test", LastName = "test" };
 
             mockRepository.Setup(x => x.UpdateInstructor(ins, ref errors));
 

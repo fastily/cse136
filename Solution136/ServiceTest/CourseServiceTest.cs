@@ -206,7 +206,7 @@
             CourseService courseservice = new CourseService(mockRepository.Object);
 
             List<Course> crl = new List<Course>();
-            crl.Add(new Course { CourseId = "99", Title = "T", Description = "Test"});
+            crl.Add(new Course { CourseId = "99", Title = "T", Description = "Test" });
 
             mockRepository.Setup(x => x.GetCourseList(ref errors)).Returns(crl);
 

@@ -283,7 +283,7 @@
             var studentService = new StudentService(mockRepository.Object);
             var student = new Student { StudentId = "aaaaaa", Email = "c@c.com" };
 
-            mockRepository.Setup(x => x.UpdateStudent(student,ref errors));
+            mockRepository.Setup(x => x.UpdateStudent(student, ref errors));
 
             //// Act
             studentService.UpdateStudent(student, ref errors);
@@ -317,15 +317,14 @@
             var errors = new List<string>();
             var mockRepository = new Mock<IStudentRepository>();
             var studentService = new StudentService(mockRepository.Object);
-            var student = new Student { StudentId = "aaaaaa", Email = "c@c.com" };
 
-            mockRepository.Setup(x => x.InsertStudent(student, ref errors));
+            mockRepository.Setup(x => x.DeleteStudent("aaaaaa", ref errors));
 
             //// Act
-            studentService.InsertStudent(student, ref errors);
+            studentService.DeleteStudent("aaaaaa", ref errors);
 
             //// Assert
-            mockRepository.Verify(x => x.InsertStudent(student, ref errors), Times.Once());
+            mockRepository.Verify(x => x.DeleteStudent("aaaaaa", ref errors), Times.Once());
         }
     }
 }
