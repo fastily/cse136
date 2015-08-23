@@ -91,7 +91,6 @@
             Assert.AreEqual(2, rating);
         }
 
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void InsertCapeReviewErrorTest1() // :  CapeReview == null
@@ -125,8 +124,7 @@
                 CapeId = 1,
                 CourseId = 2,
                 CourseRating = 3,
-                InstructorId = (int)nullInt
-                ,
+                InstructorId = (int)nullInt,
                 InstructorRating = 5,
                 Summary = "nope"
             };
@@ -151,8 +149,7 @@
             var capeReview = new CapeReview
             {
                 CapeId = 1,
-                CourseId = (int)nullInt
-                ,
+                CourseId = (int)nullInt,
                 CourseRating = 3,
                 InstructorId = 4,
                 InstructorRating = 5,
@@ -173,7 +170,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<ICapeReviewRepository>();
             var capeReviewService = new CapeReviewService(mockRepository.Object);
-            var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = null};
+            var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = null };
 
             //// Act
             capeReviewService.InsertCapeReview(capeReview, ref errors);
@@ -182,7 +179,6 @@
             Assert.AreEqual(1, errors.Count);
         }
 
-
         [TestMethod]
         public void InsertCapeReviewTest()
         {
@@ -190,7 +186,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<ICapeReviewRepository>();
             var capeReviewService = new CapeReviewService(mockRepository.Object);
-            var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = "hello"};
+            var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = "hello" };
 
             mockRepository.Setup(x => x.InsertCape(capeReview, ref errors));
 
@@ -200,7 +196,6 @@
             //// Assert
             mockRepository.Verify(x => x.InsertCape(capeReview, ref errors), Times.Once());
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
@@ -316,7 +311,6 @@
             var mockRepository = new Mock<ICapeReviewRepository>();
             var capeReviewService = new CapeReviewService(mockRepository.Object);
             var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = "hello" };
-
 
             mockRepository.Setup(x => x.UpdateCapeReview(capeReview, ref errors));
 
