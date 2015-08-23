@@ -399,21 +399,45 @@
             mockRepository.Verify(x => x.AssignGradeToStudent(s, "1", 1, "A+", ref errors), Times.Once());
         }
 
-        ////public void RespondToPreReqOverride(int scheduleId, string studentId, ref List<string> errors)
-        ////{
-        ////    if (string.IsNullOrEmpty(studentId))
-        ////    {
-        ////        errors.Add("Invalid studentId");
-        ////        throw new ArgumentException();
-        ////    }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PreReqOverrideErrorTest1()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
 
-        ////    if (string.IsNullOrEmpty(scheduleId.ToString()))
-        ////    {
-        ////        errors.Add("Invalid schedule");
-        ////        throw new ArgumentException();
-        ////    }
+            iserv.RespondToPreReqOverride(1, string.Empty, ref errors);
+            Assert.AreEqual(1, errors.Count);
+        }
 
-        ////    this.repository.ApprovePreReqOverride(scheduleId, studentId, ref errors);
-        ////}
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PreReqOverrideErrorTest2()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            iserv.RespondToPreReqOverride(2, string.Empty, ref errors);
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        public void PreReqOverride()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            mockRepository.Setup(x => x.ApprovePreReqOverride(1, "1", ref errors));
+
+            iserv.RespondToPreReqOverride(1, "1", ref errors);
+
+            mockRepository.Verify(x => x.ApprovePreReqOverride(1, "1", ref errors), Times.Once());
+        }
     }
 }
