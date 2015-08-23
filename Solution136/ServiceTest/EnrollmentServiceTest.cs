@@ -134,6 +134,5 @@
             Assert.AreEqual(0, errors.Count);
             ////Assert.AreEqual(3, rating);
         }
-
     }
 }
