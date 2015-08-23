@@ -277,25 +277,5 @@
             //// Assert
             mockRepository.Verify(x => x.UpdateCourse(s, ref errors), Times.Once());
         }
-
-        [TestMethod]
-        public void UpdateCourseTest()
-        {
-            //// Arranage
-            var errors = new List<string>();
-
-            Mock<ICourseRepository> mockRepository = new Mock<ICourseRepository>();
-            CourseService iserv = new CourseService(mockRepository.Object);
-
-            Course s = new Course { CourseId = "99", Title = "T", Description = "Test" };
-
-            mockRepository.Setup(x => x.UpdateCourse(s, ref errors));
-
-            //// Act
-            iserv.UpdateCourse(s, ref errors);
-
-            //// Assert
-            mockRepository.Verify(x => x.UpdateCourse(s, ref errors), Times.Once());
-        }
     }
 }
