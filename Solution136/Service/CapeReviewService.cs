@@ -64,8 +64,73 @@
             return instructorRating / reviewCount;
         }
 
-        ////find cape reviews by scheduleId
+        public void InsertCapeReview(CapeReview cr, ref List<string> errors)
+        {
+            if (cr == null)
+            {
+                errors.Add("Cape Review cannot be null");
+                throw new ArgumentException();
+            }
 
-        ////insert cape review schedule id, student id, instructor id
+            if (string.IsNullOrEmpty(cr.InstructorId.ToString()))
+            {
+                errors.Add("Instructor cannot be null");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(cr.CourseId.ToString()))
+            {
+                errors.Add("Course cannot be null");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(cr.Summary))
+            {
+                errors.Add("Summary cannot be null");
+                throw new ArgumentException();
+            }
+
+            this.repository.InsertCape(cr, ref errors);
+        }
+
+        public void DeleteCapeReview(int cape_id, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(cape_id.ToString()))
+            {
+                errors.Add("Cape Review Id cannot be null");
+                throw new ArgumentException();
+            }
+
+            this.repository.DeleteCapeReview(cape_id, ref errors);
+        }
+
+        public void UpdateCapeReview(CapeReview cr, ref List<string> errors)
+        {
+            if (cr == null)
+            {
+                errors.Add("Cape Review cannot be null");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(cr.InstructorId.ToString()))
+            {
+                errors.Add("Instructor cannot be null");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(cr.CourseId.ToString()))
+            {
+                errors.Add("Course cannot be null");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(cr.Summary))
+            {
+                errors.Add("Summary cannot be null");
+                throw new ArgumentException();
+            }
+
+            this.repository.UpdateCapeReview(cr, ref errors);
+        }
     }
 }
