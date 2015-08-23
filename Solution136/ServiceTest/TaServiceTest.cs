@@ -184,5 +184,42 @@
             //// Assert
             mockRepository.Verify(x => x.RemoveTa(2, ref errors), Times.Once());
         }
+
+        [TestMethod]
+        public void GetTa()
+        {
+            var errors = new List<string>();
+            var mockRepository = new Mock<ITaRepository>();
+            var teachingAssistantService = new TaService(mockRepository.Object);
+            var ta_1 = new Ta { FirstName = "hi", LastName = "bye" , TaId = 5 };
+            var returnTa = new Ta();
+
+            mockRepository.Setup(x => x.FindTaById(5, ref errors)).Returns(ta_1);
+            returnTa = teachingAssistantService.GetTaById("5", ref errors);
+
+            Assert.AreEqual(returnTa.TaId, 5);
+            Assert.AreEqual(returnTa.FirstName, "hi");
+            Assert.AreEqual(returnTa.LastName, "bye");
+        } 
+
+        [TestMethod]
+        public void GetTaList()
+        {
+            var errors = new List<string>();
+            var mockRepository = new Mock<ITaRepository>();
+            var teachingAssistantService = new TaService(mockRepository.Object);
+            var ta_List = new List<Ta>();
+            var ta_1 = new Ta { FirstName = "hi", LastName = "bye" };
+            var ta_2 = new Ta { FirstName = "hi", LastName = "bye" };
+            var returnTaList = new List<Ta>();
+
+            ta_List.Add(ta_1);
+            ta_List.Add(ta_2);
+
+            mockRepository.Setup(x => x.GetTaList(ref errors)).Returns(ta_List);
+            returnTaList = teachingAssistantService.GetTaList(ref errors);
+
+            Assert.AreEqual(returnTaList.Count, 2);
+        }  
     }
 }
