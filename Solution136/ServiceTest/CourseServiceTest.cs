@@ -197,7 +197,7 @@
         }
 
         [TestMethod]
-        public void GetCourseServiceTest()
+        public void InstructorServiceTest()
         {
             //// Arrange
             var errors = new List<string>();
@@ -208,7 +208,7 @@
             List<Course> crl = new List<Course>();
             crl.Add(new Course { CourseId = "99", Title = "T", Description = "Test"});
 
-            mockRepository.Setup(x => x.GetCourseList(ref errors)).Returns(crl); //.Returns(crl);
+            mockRepository.Setup(x => x.GetCourseList(ref errors)).Returns(crl);
 
             //// Act
             Course temp = courseservice.GetCourseList(ref errors)[0];

@@ -127,5 +127,27 @@
             //// Assert instructor id cannot be null
             Assert.AreEqual(1, errors.Count);
         }
+
+        [TestMethod]
+        public void GetInstructorTest()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            List<Instructor> crl = new List<Instructor>();
+            crl.Add(new Instructor { InstructorId = 99, FirstName = "T", LastName = "Test", Title = "Tester" });
+
+            mockRepository.Setup(x => x.GetInstructorList(ref errors)).Returns(crl);
+
+            //// Act
+            Instructor temp = iserv.GetInstructorList(ref errors)[0];
+
+            //// Assert
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(99, temp.InstructorId);
+        }
     }
 }
