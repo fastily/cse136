@@ -101,6 +101,12 @@
         {
             Regex notRealGrade = new Regex(@"[A-D][+-]?|F");
 
+            if (schedule == null)
+            {
+                errors.Add("Invalid instructorId");
+                throw new ArgumentException();
+            }
+
             if (string.IsNullOrEmpty(instructorId.ToString()))
             {
                 errors.Add("Invalid instructorId");
@@ -113,7 +119,7 @@
                 throw new ArgumentException();
             }
 
-            if (notRealGrade.IsMatch(grade))
+            if (!notRealGrade.IsMatch(grade))
             {
                 errors.Add("Invalid grade");
                 throw new ArgumentException();

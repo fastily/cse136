@@ -308,5 +308,112 @@
             Assert.AreEqual("T", temp.FirstName);
             Assert.AreEqual("Test", temp.LastName);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AssignGradeErrorTest1()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            iserv.AssignGrade(null, string.Empty, 1, string.Empty, ref errors);
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AssignGradeErrorTest2()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            Schedule s = new Schedule { ScheduleId = 99, Year = "1000", Quarter = "Winter", Session = "2" };
+
+            iserv.AssignGrade(s, string.Empty, 1, string.Empty, ref errors);
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AssignGradeErrorTest3()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            Schedule s = new Schedule { ScheduleId = 99, Year = "1000", Quarter = "Winter", Session = "2" };
+
+            iserv.AssignGrade(s, "1", 1, string.Empty, ref errors);
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AssignGradeErrorTest4()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            Schedule s = new Schedule { ScheduleId = 99, Year = "1000", Quarter = "Winter", Session = "2" };
+
+            iserv.AssignGrade(s, "1", 1, "G", ref errors);
+            Assert.AreEqual(1, errors.Count);
+        }
+
+        ////[TestMethod]
+        ////[ExpectedException(typeof(ArgumentException))]
+        ////public void AssignGradeErrorTest5()
+        ////{
+        ////    //// Arrange
+        ////    var errors = new List<string>();
+        ////    Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+        ////    InstructorService iserv = new InstructorService(mockRepository.Object);
+
+        ////    Schedule s = new Schedule { ScheduleId = 99, Year = "1000", Quarter = "Winter", Session = "2" };
+
+        ////    iserv.AssignGrade(s, "1", 1, "A--", ref errors);
+        ////    Assert.AreEqual(1, errors.Count);
+        ////}
+
+        [TestMethod]
+        public void AssignGrade()
+        {
+            //// Arrange
+            var errors = new List<string>();
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            Schedule s = new Schedule { ScheduleId = 99, Year = "1000", Quarter = "Winter", Session = "2" };
+
+            mockRepository.Setup(x => x.AssignGradeToStudent(s, "1", 1, "A+", ref errors));
+
+            iserv.AssignGrade(s, "1", 1, "A+", ref errors);
+
+            mockRepository.Verify(x => x.AssignGradeToStudent(s, "1", 1, "A+", ref errors), Times.Once());
+        }
+
+        ////public void RespondToPreReqOverride(int scheduleId, string studentId, ref List<string> errors)
+        ////{
+        ////    if (string.IsNullOrEmpty(studentId))
+        ////    {
+        ////        errors.Add("Invalid studentId");
+        ////        throw new ArgumentException();
+        ////    }
+
+        ////    if (string.IsNullOrEmpty(scheduleId.ToString()))
+        ////    {
+        ////        errors.Add("Invalid schedule");
+        ////        throw new ArgumentException();
+        ////    }
+
+        ////    this.repository.ApprovePreReqOverride(scheduleId, studentId, ref errors);
+        ////}
     }
 }
