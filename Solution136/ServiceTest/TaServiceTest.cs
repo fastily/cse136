@@ -62,6 +62,25 @@
             Assert.AreEqual(1, errors.Count);
         }
 
+
+        [TestMethod]
+        public void InsertTa()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<ITaRepository>();
+            var taService = new TaService(mockRepository.Object);
+            var ta = new Ta { TaId = 2, TaType = "bb", FirstName = "cc", LastName = "dd" };
+
+            mockRepository.Setup(x => x.AddTa(ta, ref errors));
+
+            //// Act
+            taService.InsertTa(ta, ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.AddTa(ta, ref errors), Times.Once());
+        }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void UpdateTaErrorTest1()
@@ -113,6 +132,25 @@
         }
 
         [TestMethod]
+        public void UpdateTa()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<ITaRepository>();
+            var taService = new TaService(mockRepository.Object);
+            var ta = new Ta { TaId = 2, TaType = "bb", FirstName = "cc", LastName = "dd" };
+
+
+            mockRepository.Setup(x => x.UpdateTa(ta, ref errors));
+
+            //// Act
+            taService.UpdateTa(ta, ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.UpdateTa(ta, ref errors), Times.Once());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void DeleteTaErrorTest()
         {
@@ -127,6 +165,24 @@
 
             //// Assert instructor id cannot be null
             Assert.AreEqual(1, errors.Count);
+        }
+
+
+        [TestMethod]
+        public void DeleteTa()
+        {
+            //// Arranage
+            var errors = new List<string>();
+            var mockRepository = new Mock<ITaRepository>();
+            var taService = new TaService(mockRepository.Object);
+         
+            mockRepository.Setup(x => x.RemoveTa(2, ref errors));
+
+            //// Act
+            taService.DeleteTa("2", ref errors);
+
+            //// Assert
+            mockRepository.Verify(x => x.RemoveTa(2, ref errors), Times.Once());
         }
 
         [TestMethod]
