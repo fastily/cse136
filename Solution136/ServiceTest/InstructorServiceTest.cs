@@ -184,7 +184,7 @@
         }
 
         [TestMethod]
-        public void GetInstructorTest()
+        public void GetInstructorListTest()
         {
             //// Arrange
             var errors = new List<string>();
@@ -278,6 +278,35 @@
 
             //// Assert
             mockRepository.Verify(x => x.AddInstructor(ins, ref errors), Times.Once());
+        }
+
+        [TestMethod]
+        public void GetInstructor()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            Mock<IInstructorRepository> mockRepository = new Mock<IInstructorRepository>();
+            InstructorService iserv = new InstructorService(mockRepository.Object);
+
+            Instructor crl = new Instructor() 
+            { 
+                InstructorId = 99, 
+                FirstName = "T", 
+                LastName = "Test", 
+                Title = "Tester" 
+            };
+
+            mockRepository.Setup(x => x.FindInstructorById(99, ref errors)).Returns(crl);
+
+            //// Act
+            Instructor temp = iserv.GetInstructor("99", ref errors);
+
+            //// Assert
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(99, temp.InstructorId);
+            Assert.AreEqual("T", temp.FirstName);
+            Assert.AreEqual("Test", temp.LastName);
         }
     }
 }

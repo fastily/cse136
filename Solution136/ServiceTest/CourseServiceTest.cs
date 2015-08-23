@@ -279,7 +279,7 @@
         }
 
         [TestMethod]
-        public void UpdateCourseTest()
+        public void UpdateCourseTest1()
         {
             //// Arranage
             var errors = new List<string>();
