@@ -30,7 +30,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
-        public void CapeReviewErrorTest2() ////;IsNullOrEmpty
+        public void CapeReviewErrorTest2() 
         {
             //// Arranage
             var errors = new List<string>();

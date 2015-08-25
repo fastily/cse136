@@ -12,6 +12,8 @@
 
         public int InstructorId { get; set; }
 
+        ////instead off id just save the whole instructor
+
         public int CourseId { get; set; }
 
         public int InstructorRating { get; set; }

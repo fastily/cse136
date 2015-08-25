@@ -67,7 +67,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(course.CourseId.ToString()))
+            if (string.IsNullOrEmpty(course.CourseId))
             {
                 errors.Add("Course id cannot be null");
                 throw new ArgumentException();
@@ -105,13 +105,13 @@
 
         public void AssignPreReq(int courseId, int preReqCourseId, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(courseId.ToString()))
+            if (courseId <= 0)
             {
                 errors.Add("Invalid courseId");
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(preReqCourseId.ToString()))
+            if (preReqCourseId <= 0)
             {
                 errors.Add("Invalid preReqCourseId");
                 throw new ArgumentException();
@@ -122,13 +122,13 @@
 
         public void RemovePreReq(int courseId, int preReqCourseId, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(courseId.ToString()))
+            if (courseId <= 0)
             {
                 errors.Add("Invalid courseId");
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(preReqCourseId.ToString()))
+            if (preReqCourseId <= 0)
             {
                 errors.Add("Invalid preReqCourseId");
                 throw new ArgumentException();
@@ -139,7 +139,7 @@
 
         public List<Course> GetPreReqList(int courseId, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(courseId.ToString()))
+            if (courseId <= 0)
             {
                 errors.Add("Invalid courseId");
                 throw new ArgumentException();

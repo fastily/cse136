@@ -61,7 +61,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(instructor.InstructorId.ToString()))
+            if (instructor.InstructorId <= 0)
             {
                 errors.Add("Instructor id be null");
                 throw new ArgumentException();
@@ -107,7 +107,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(instructorId.ToString()))
+            if (instructorId <= 0)
             {
                 errors.Add("Invalid instructorId");
                 throw new ArgumentException();
@@ -125,7 +125,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(schedule.ScheduleId.ToString()))
+            if (schedule.ScheduleId <= 0)
             {
                 errors.Add("Invalid schedule");
                 throw new ArgumentException();
@@ -142,7 +142,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(scheduleId.ToString()))
+            if (scheduleId <= 0)
             {
                 errors.Add("Invalid schedule");
                 throw new ArgumentException();

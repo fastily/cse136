@@ -14,12 +14,13 @@
             this.repository = repository;
         }
 
-        public int GetCourseRating(int course_id, ref List<string> errors)
+        public float GetCourseRating(int course_id, ref List<string> errors)
         {
             var courseRating = 0;
             List<CapeReview> capeReviewList = new List<CapeReview>();
             var reviewCount = 0;
 
+            //// can never fail default to == 0 for all service layers
             if (string.IsNullOrEmpty(course_id.ToString()))
             {
                 errors.Add("Invalid course id");
@@ -39,16 +40,16 @@
             return courseRating / reviewCount;
         }
 
-        public int GetInstructorRating(int instructor_id, ref List<string> errors)
+        public float GetInstructorRating(int instructor_id, ref List<string> errors)
         {
             var instructorRating = 0;
             List<CapeReview> capeReviewList = new List<CapeReview>();
             var reviewCount = 0;
 
-            if (string.IsNullOrEmpty(instructor_id.ToString()))
+            if (instructor_id <= 0)
             {
                 errors.Add("Invalid course id");
-                throw new ArgumentException();
+                throw new NullReferenceException();
             }
 
             capeReviewList = this.repository.FindCapeReviewsByInstructorId(instructor_id, ref errors);
@@ -72,13 +73,13 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(cr.InstructorId.ToString()))
+            if (cr.InstructorId <= 0)
             {
                 errors.Add("Instructor cannot be null");
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(cr.CourseId.ToString()))
+            if (cr.CourseId <= 0)
             {
                 errors.Add("Course cannot be null");
                 throw new ArgumentException();
@@ -95,10 +96,10 @@
 
         public void DeleteCapeReview(int cape_id, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(cape_id.ToString()))
+            if (cape_id <= 0)
             {
                 errors.Add("Cape Review Id cannot be null");
-                throw new ArgumentException();
+                throw new NullReferenceException();
             }
 
             this.repository.DeleteCapeReview(cape_id, ref errors);
@@ -112,13 +113,13 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(cr.InstructorId.ToString()))
+            if (cr.InstructorId <= 0)
             {
                 errors.Add("Instructor cannot be null");
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(cr.CourseId.ToString()))
+            if (cr.CourseId <= 0)
             {
                 errors.Add("Course cannot be null");
                 throw new ArgumentException();

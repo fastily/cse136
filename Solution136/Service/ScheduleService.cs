@@ -44,7 +44,7 @@
 
         public void RemoveCourseFromSchedule(string scheduleId, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(scheduleId.ToString()))
+            if (string.IsNullOrEmpty(scheduleId))
             {
                 errors.Add("Invalid Schedule");
                 throw new ArgumentException();

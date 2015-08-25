@@ -46,6 +46,17 @@
             return service.GetStudent(id, ref errors);
         }
 
+        [HttpGet]
+        public float GetGpa(string id)
+        {
+            var errors = new List<string>();
+
+            var repository = new StudentRepository(this.entities);
+            var service = new StudentService(repository);
+            var enrollments = service.GetEnrollments(id, ref errors);
+            return service.CalculateGpa(id, enrollments, ref errors);
+        }
+
         [HttpPost]
         public string InsertStudent(Student student)
         {

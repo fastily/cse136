@@ -60,7 +60,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(ta.TaId.ToString()))
+            if (ta.TaId <= 0)
             {
                 errors.Add("Taid be null");
                 throw new ArgumentException();
