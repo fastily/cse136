@@ -48,6 +48,12 @@
                 throw new ArgumentException();
             }
 
+            if (ta.TaId <= 0)
+            {
+                errors.Add("Invalid ta_id");
+                throw new ArgumentException();
+            }
+
             if (string.IsNullOrEmpty(ta.FirstName))
             {
                 errors.Add("Ta first name cannot be null");
@@ -69,26 +75,26 @@
             this.repository.UpdateTa(ta, ref errors);
         }
 
-        public Ta GetTaById(string ta_id, ref List<string> errors)
+        public Ta GetTaById(int ta_id, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(ta_id))
+            if (ta_id <= 0)
             {
                 errors.Add("Invalid ta_id");
                 throw new ArgumentException();
             }
 
-            return this.repository.FindTaById(int.Parse(ta_id), ref errors);
+            return this.repository.FindTaById(ta_id, ref errors);
         }
 
-        public void DeleteTa(string ta_id, ref List<string> errors)
+        public void DeleteTa(int ta_id, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(ta_id))
+            if (ta_id <= 0)
             {
                 errors.Add("Invalid ta_id");
                 throw new ArgumentException();
             }
 
-            this.repository.RemoveTa(int.Parse(ta_id), ref errors);
+            this.repository.RemoveTa(ta_id, ref errors);
         }
 
         public List<Ta> GetTaList(ref List<string> errors)

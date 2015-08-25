@@ -81,15 +81,15 @@
             return this.repository.FindInstructorById(int.Parse(instructor_id), ref errors);
         }
 
-        public void DeleteInstructor(string instructor_id, ref List<string> errors)
+        public void DeleteInstructor(int instructor_id, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(instructor_id))
+            if (instructor_id <= 0)
             {
                 errors.Add("Invalid ta_id");
                 throw new ArgumentException();
             }
 
-            this.repository.RemoveInstructor(int.Parse(instructor_id), ref errors);
+            this.repository.RemoveInstructor(instructor_id, ref errors);
         }
 
         public List<Instructor> GetInstructorList(ref List<string> errors)

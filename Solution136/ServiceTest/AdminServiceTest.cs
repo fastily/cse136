@@ -84,7 +84,7 @@
             };
 
             //// Act
-            adminService.GetAdminById(string.Empty, ref errors);
+            adminService.GetAdminById(0, ref errors);
 
             //// Assert instructor object not null
             Assert.AreEqual(1, errors.Count);

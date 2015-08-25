@@ -31,7 +31,7 @@
                 {
                     POCO.Course pocoCourse = new POCO.Course();
 
-                    pocoCourse.CourseId = db_course.course_id.ToString();
+                    pocoCourse.CourseId = db_course.course_id;
                     pocoCourse.Description = db_course.course_description;
                     pocoCourse.Title = db_course.course_title;
                     pocoCourse.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), db_course.course_level);
@@ -46,7 +46,7 @@
             return searchResults;
         }
 
-        public Course FindCourseById(string courseId, ref List<string> errors)
+        public Course FindCourseById(int courseId, ref List<string> errors)
         {
             POCO.Course pocoCourse = new POCO.Course();
             course db_course;
@@ -56,7 +56,7 @@
                 db_course = this.context.courses.Find(courseId);
                 if (db_course != null)
                 {
-                    pocoCourse.CourseId = db_course.course_id.ToString();
+                    pocoCourse.CourseId = db_course.course_id;
                     pocoCourse.Description = db_course.course_description;
                     pocoCourse.Title = db_course.course_title;
                     pocoCourse.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), db_course.course_level);
@@ -105,7 +105,7 @@
 
             try
             {
-                db_course.course_id = int.Parse(c.CourseId);
+                db_course.course_id = c.CourseId;
                 db_course = this.context.courses.Find(db_course);
                 db_course.course_level = c.CourseLevel.ToString();
                 db_course.course_description = c.Description;
@@ -163,7 +163,7 @@
                 foreach (course i_course in db_courseList)
                 {
                     var tempPoco = new POCO.Course();
-                    tempPoco.CourseId = i_course.course_id.ToString();
+                    tempPoco.CourseId = i_course.course_id;
                     tempPoco.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), i_course.course_level);
                     tempPoco.Description = i_course.course_description;
                     tempPoco.Title = i_course.course_title;
@@ -234,7 +234,7 @@
                 foreach (course_preReq preReq in db_preReqCourseList)
                 {
                     var tempPoco = new POCO.Course();
-                    tempPoco.CourseId = preReq.preReq_id.ToString();
+                    tempPoco.CourseId = (int)preReq.preReq_id;
                     tempPoco.Title = preReq.preReq_title;
                     pocoCourseList.Add(tempPoco);
                 }

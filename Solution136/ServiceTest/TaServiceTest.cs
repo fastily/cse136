@@ -160,7 +160,7 @@
             var teachingAssistantService = new TaService(mockRepository.Object);
 
             //// Act
-            teachingAssistantService.DeleteTa(null, ref errors);
+            teachingAssistantService.DeleteTa(0, ref errors);
 
             //// Assert instructor id cannot be null
             Assert.AreEqual(1, errors.Count);
@@ -177,7 +177,7 @@
             mockRepository.Setup(x => x.RemoveTa(2, ref errors));
 
             //// Act
-            ta_Service.DeleteTa("2", ref errors);
+            ta_Service.DeleteTa(2, ref errors);
 
             //// Assert
             mockRepository.Verify(x => x.RemoveTa(2, ref errors), Times.Once());
@@ -193,7 +193,7 @@
             var returnTa = new Ta();
 
             mockRepository.Setup(x => x.FindTaById(5, ref errors)).Returns(ta_1);
-            returnTa = teachingAssistantService.GetTaById("5", ref errors);
+            returnTa = teachingAssistantService.GetTaById(5, ref errors);
 
             Assert.AreEqual(returnTa.TaId, 5);
             Assert.AreEqual(returnTa.FirstName, "hi");

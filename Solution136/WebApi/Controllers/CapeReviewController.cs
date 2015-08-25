@@ -86,6 +86,5 @@
 
             return "Failed cape review insert";
         }
-
     }
 }

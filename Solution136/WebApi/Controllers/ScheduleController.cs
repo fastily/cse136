@@ -47,7 +47,7 @@
         }
 
         [HttpPost]
-        public string DeleteCourseFromSchedule(string id)
+        public string DeleteCourseFromSchedule(int id)
         {
             var errors = new List<string>();
             var repository = new ScheduleRepository(this.entities);

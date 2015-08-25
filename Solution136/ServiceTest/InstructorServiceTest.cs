@@ -159,7 +159,7 @@
             var instructorService = new InstructorService(mockRepository.Object);
 
             //// Act
-            instructorService.DeleteInstructor(null, ref errors);
+            instructorService.DeleteInstructor(0, ref errors);
 
             //// Assert instructor id cannot be null
             Assert.AreEqual(1, errors.Count);
@@ -177,7 +177,7 @@
             mockRepository.Setup(x => x.RemoveInstructor(2, ref errors));
 
             //// Act
-            instructorService.DeleteInstructor("2", ref errors);
+            instructorService.DeleteInstructor(2, ref errors);
 
             //// Assert
             mockRepository.Verify(x => x.RemoveInstructor(2, ref errors), Times.Once());

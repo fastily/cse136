@@ -80,7 +80,7 @@
         }
 
         [HttpPost]
-        public string DeleteInstructor(string id)
+        public string DeleteInstructor(int id)
         {
             var errors = new List<string>();
             var repository = new InstructorRepository(this.entities);
