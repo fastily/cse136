@@ -147,6 +147,7 @@
             Enrollment s = new Enrollment { StudentId = "99", ScheduleId = 1000, Grade = "A+", GradeValue = 3.0f };
 
             mockRepository.Setup(x => x.AddEnrollment("99", 1000, ref errors));
+            mockRepository.Setup(x => x.IsNotDuplicateEnrollment("99", 1000, ref errors)).Returns(true);
 
             //// Act
             iserv.AddEnrollment("99", 1000, ref errors);

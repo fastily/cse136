@@ -22,7 +22,7 @@
         }
 
         [HttpGet]
-        public int GetCourseRating(int courseId)
+        public float GetCourseRating(int courseId)
         {
             var errors = new List<string>();
             var repository = new CapeReviewRepository(this.entities);
@@ -31,12 +31,60 @@
         }
 
         [HttpGet]
-        public int GetInstructorRating(int instructorId)
+        public float GetInstructorRating(int instructorId)
         {
             var errors = new List<string>();
             var repository = new CapeReviewRepository(this.entities);
             var service = new CapeReviewService(repository);
             return service.GetInstructorRating(instructorId, ref errors);
+        }
+
+        [HttpPost]
+        public string DeleteCapeReview(int cape_id)
+        {
+            var errors = new List<string>();
+            var repository = new CapeReviewRepository(this.entities);
+            var service = new CapeReviewService(repository);
+            service.DeleteCapeReview(cape_id, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "successful cape review delete";
+            }
+
+            return "Failed cape review delete";
+        }
+
+        [HttpPost]
+        public string InsertCapeReview(CapeReview cr)
+        {
+            var errors = new List<string>();
+            var repository = new CapeReviewRepository(this.entities);
+            var service = new CapeReviewService(repository);
+            service.InsertCapeReview(cr, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "successful cape review insert";
+            }
+
+            return "Failed cape review insert";
+        }
+
+        [HttpPost]
+        public string UpdateCapeReview(CapeReview cr)
+        {
+            var errors = new List<string>();
+            var repository = new CapeReviewRepository(this.entities);
+            var service = new CapeReviewService(repository);
+            service.UpdateCapeReview(cr, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "successful cape review insert";
+            }
+
+            return "Failed cape review insert";
         }
     }
 }

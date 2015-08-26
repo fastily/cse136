@@ -42,15 +42,15 @@
             this.repository.AddCourseToSchedule(schedule, instructorId, int.Parse(dayId), int.Parse(timeId), ref errors);
         }
 
-        public void RemoveCourseFromSchedule(string scheduleId, ref List<string> errors)
+        public void RemoveCourseFromSchedule(int scheduleId, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(scheduleId.ToString()))
+            if (scheduleId <= 0)
             {
                 errors.Add("Invalid Schedule");
                 throw new ArgumentException();
             }
 
-            this.repository.RemoveCourseFromSchedule(int.Parse(scheduleId), ref errors);
+            this.repository.RemoveCourseFromSchedule(scheduleId, ref errors);
         }
     }
 }

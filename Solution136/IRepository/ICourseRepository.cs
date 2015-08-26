@@ -7,7 +7,7 @@
     {
         List<Course> FindCourseByName(string courseName, ref List<string> errors);
 
-        Course FindCourseById(string courseId, ref List<string> errors);
+        Course FindCourseById(int courseId, ref List<string> errors);
 
         bool IsNotDuplicateCourse(Course course, ref List<string> errors);
 

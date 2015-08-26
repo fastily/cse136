@@ -41,7 +41,7 @@
         //// you can add more [HttpGet] and [HttpPost] methods as you need
 
         [HttpGet]
-        public Course GetCourse(string id)
+        public Course GetCourse(int id)
         {
             var errors = new List<string>();
             var repository = new CourseRepository(this.entities);
@@ -82,7 +82,7 @@
         }
 
         [HttpPost]
-        public string DeleteCourse(string id)
+        public string DeleteCourse(int id)
         {
             var errors = new List<string>();
             var repository = new CourseRepository(this.entities);

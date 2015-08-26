@@ -72,7 +72,7 @@
             var scheduleService = new ScheduleService(mockRepository.Object);
 
             //// Act
-            scheduleService.RemoveCourseFromSchedule(string.Empty, ref errors);
+            scheduleService.RemoveCourseFromSchedule(0, ref errors);
 
             //// Assert course id cannot be null
             Assert.AreEqual(1, errors.Count);
@@ -134,7 +134,7 @@
             mockRepository.Setup(x => x.RemoveCourseFromSchedule(99, ref errors));
 
             //// Act
-            iserv.RemoveCourseFromSchedule("99", ref errors);
+            iserv.RemoveCourseFromSchedule(99, ref errors);
 
             //// Assert
             mockRepository.Verify(x => x.RemoveCourseFromSchedule(99, ref errors), Times.Once());

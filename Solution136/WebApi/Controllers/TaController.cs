@@ -31,7 +31,7 @@
         }
 
         [HttpGet]
-        public Ta GetTa(string id)
+        public Ta GetTa(int id)
         {
             var errors = new List<string>();
             var repository = new TaRepository(this.entities);
@@ -71,7 +71,7 @@
         }
 
         [HttpPost]
-        public string DeleteTa(string id)
+        public string DeleteTa(int id)
         {
             var errors = new List<string>();
             var repository = new TaRepository(this.entities);

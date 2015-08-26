@@ -34,7 +34,7 @@
             var errors = new List<string>();
             var repository = new AdminRepository(this.entities);
             var service = new AdminService(repository);
-            var adminPoco = service.GetAdminById(adminId.ToString(), ref errors);
+            var adminPoco = service.GetAdminById(adminId, ref errors);
 
             if (errors.Count == 0 && adminPoco != null)
             {

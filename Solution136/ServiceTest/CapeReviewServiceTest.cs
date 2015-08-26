@@ -30,7 +30,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
-        public void CapeReviewErrorTest2() ////;IsNullOrEmpty
+        public void CapeReviewErrorTest2() 
         {
             //// Arranage
             var errors = new List<string>();
@@ -68,6 +68,28 @@
             Assert.AreEqual(3, rating);
         }
 
+        [TestMethod]
+        public void CapeReviewGetInstructorReviewTest()
+        {
+            //// Arrange
+            var errors = new List<string>();
+
+            Mock<ICapeReviewRepository> mockRepository = new Mock<ICapeReviewRepository>();
+            CapeReviewService capeservice = new CapeReviewService(mockRepository.Object);
+
+            List<CapeReview> crl = new List<CapeReview>();
+            crl.Add(new CapeReview { CapeId = 1000, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 3, CourseRating = 1 });
+            crl.Add(new CapeReview { CapeId = 1001, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 2, CourseRating = 5 });
+            crl.Add(new CapeReview { CapeId = 1002, CourseId = 999, InstructorId = 500, Summary = "T", InstructorRating = 1, CourseRating = 3 });
+            mockRepository.Setup(x => x.FindCapeReviewsByInstructorId(500, ref errors)).Returns(crl);
+
+            //// Act
+            var rating = capeservice.GetInstructorRating(500, ref errors);
+
+            //// Assert
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(2, rating);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -83,16 +105,16 @@
 
             //// Assert cant be null CapeReview object
             Assert.AreEqual(1, errors.Count);
-        }/*
+        }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void InsertCapeReviewErrorTest2() // : instr == null
         {
             //// Arranage
             var errors = new List<string>();
             var mockRepository = new Mock<ICapeReviewRepository>();
-            //int? nullInt = null; // (int)nullInt
+            int? nullInt = null; // (int)nullInt
 
             var capeReviewService = new CapeReviewService(mockRepository.Object);
             //// Act
@@ -102,7 +124,7 @@
                 CapeId = 1,
                 CourseId = 2,
                 CourseRating = 3,
-                //InstructorId = (int)nullInt,
+                InstructorId = (int)nullInt,
                 InstructorRating = 5,
                 Summary = "nope"
             };
@@ -115,7 +137,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void InsertCapeReviewErrorTest3() // : course == null
         {
             //// Arranage
@@ -127,8 +149,7 @@
             var capeReview = new CapeReview
             {
                 CapeId = 1,
-                CourseId = (int)nullInt
-                ,
+                CourseId = (int)nullInt,
                 CourseRating = 3,
                 InstructorId = 4,
                 InstructorRating = 5,
@@ -139,7 +160,7 @@
 
             //// Assert last name cannot be empty
             Assert.AreEqual(1, errors.Count);
-        }*/
+        }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -149,7 +170,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<ICapeReviewRepository>();
             var capeReviewService = new CapeReviewService(mockRepository.Object);
-            var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = null};
+            var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = null };
 
             //// Act
             capeReviewService.InsertCapeReview(capeReview, ref errors);
@@ -158,7 +179,6 @@
             Assert.AreEqual(1, errors.Count);
         }
 
-
         [TestMethod]
         public void InsertCapeReviewTest()
         {
@@ -166,7 +186,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<ICapeReviewRepository>();
             var capeReviewService = new CapeReviewService(mockRepository.Object);
-            var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = "hello"};
+            var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = "hello" };
 
             mockRepository.Setup(x => x.InsertCape(capeReview, ref errors));
 
@@ -177,9 +197,8 @@
             mockRepository.Verify(x => x.InsertCape(capeReview, ref errors), Times.Once());
         }
 
-        /*
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void DeleteCapeReviewErrorTest() // CapeReview == null
         {
             //// Arrange
@@ -187,15 +206,14 @@
 
             var mockRepository = new Mock<ICapeReviewRepository>();
             var capeReviewService = new CapeReviewService(mockRepository.Object);
-            int? nullInt = null; // (int)nullInt
-            var capeReview = new CapeReview { CapeId = (int)nullInt, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = "hello" };
+             int? nullInt = null; // (int)nullInt
 
             //// Act
-             capeReviewService.DeleteCapeReview(capeReview.CapeId, ref errors);
+             capeReviewService.DeleteCapeReview((int)nullInt, ref errors);
 
             //// Assert capeReview id cannot be null
             Assert.AreEqual(1, errors.Count);
-        }*/
+        }
 
         [TestMethod]
         public void DeleteCapeReviewTest()
@@ -204,7 +222,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<ICapeReviewRepository>();
             var capeReviewService = new CapeReviewService(mockRepository.Object);
-           
+
             mockRepository.Setup(x => x.DeleteCapeReview(2, ref errors));
 
             //// Act
@@ -229,9 +247,9 @@
             //// Assert
             Assert.AreEqual(1, errors.Count);
         }
-        /*
+
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void UpdateCapeReviewErrorTest2() // inst null
         {
             //// Arranage
@@ -250,7 +268,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void UpdateCapeReviewErrorTest3() // course id == null
         {
             //// Arranage
@@ -267,7 +285,7 @@
             //// Assert 
             Assert.AreEqual(1, errors.Count);
         }
-        */
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void UpdateCapeReviewErrorTest4() // summ null
@@ -293,7 +311,6 @@
             var mockRepository = new Mock<ICapeReviewRepository>();
             var capeReviewService = new CapeReviewService(mockRepository.Object);
             var capeReview = new CapeReview { CapeId = 1, CourseId = 2, CourseRating = 3, InstructorId = 4, InstructorRating = 5, Summary = "hello" };
-
 
             mockRepository.Setup(x => x.UpdateCapeReview(capeReview, ref errors));
 

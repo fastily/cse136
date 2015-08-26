@@ -160,7 +160,7 @@
                         var schedule = new Schedule();
                         var course = new Course
                                          {
-                                             CourseId = dataSet.Tables[1].Rows[i]["course_id"].ToString(),
+                                             CourseId = int.Parse(dataSet.Tables[1].Rows[i]["course_id"].ToString()),
                                              Title = dataSet.Tables[1].Rows[i]["course_title"].ToString(),
                                              Description =
                                                  dataSet.Tables[1].Rows[i]["course_description"].ToString()

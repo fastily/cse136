@@ -22,7 +22,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(scheduleId.ToString()))
+            if (scheduleId <= 0)
             {
                 errors.Add("Invalid schedule Id");
                 throw new ArgumentException();
@@ -47,7 +47,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(scheduleId.ToString()))
+            if (scheduleId <= 0)
             {
                 errors.Add("Invalid schedule Id");
                 throw new ArgumentException();

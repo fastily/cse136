@@ -59,7 +59,7 @@
                         Session = dataSet.Tables[0].Rows[i]["session"].ToString(), 
                         Course = new Course
                         {
-                            CourseId = dataSet.Tables[0].Rows[i]["course_id"].ToString(), 
+                            CourseId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["course_id"].ToString()), 
                             Title = dataSet.Tables[0].Rows[i]["course_title"].ToString(), 
                             Description = dataSet.Tables[0].Rows[i]["course_description"].ToString(), 
                         }
@@ -86,7 +86,7 @@
 
             try
             {
-                db_Schedule.course_id = int.Parse(schedule.Course.CourseId);
+                db_Schedule.course_id = schedule.Course.CourseId;
                 db_Schedule.instructor_id = instructorId;
                 db_Schedule.schedule_day_id = dayId;
                 db_Schedule.schedule_time_id = timeId;

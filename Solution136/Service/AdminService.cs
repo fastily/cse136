@@ -34,7 +34,7 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(adminPoco.Id.ToString()))
+            if (adminPoco.Id <= 0)
             {
                 errors.Add("Admin Id cannot be null");
                 throw new ArgumentException();
@@ -43,15 +43,15 @@
             this.repository.UpdateAdmin(adminPoco, ref errors);
         }
 
-        public Admin GetAdminById(string adminId, ref List<string> errors)
+        public Admin GetAdminById(int adminId, ref List<string> errors)
         {
-            if (string.IsNullOrEmpty(adminId))
+            if (adminId <= 0)
             {
                 errors.Add("Invalid admin_id");
                 throw new ArgumentException();
             }
 
-            return this.repository.FindAdminById(int.Parse(adminId), ref errors);
+            return this.repository.FindAdminById(adminId, ref errors);
         }
 
         public List<Admin> GetAdminList(ref List<string> errors)
