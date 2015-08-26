@@ -20,7 +20,7 @@
             var errors = new List<string>();
             var mockRepository = new Mock<IScheduleRepository>();
             var scheduleService = new ScheduleService(mockRepository.Object);
-            int? nullInt = null;
+          //  int? nullInt = null;
             //// Act
             scheduleService.AddCourseToSchedule(null, 1, "2", "3", ref errors);
 
