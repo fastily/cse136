@@ -1,10 +1,9 @@
 ﻿@{
     ViewBag.Title = "List";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3 class="page-header">Instructor List Page</h3>
-<a href="/Admin?id=1"><< back</a>
+<a href="/Admin?id=@Session["adminId"]"><< back</a>
 <div id="divInstructorListContent">
     <table style="width:100%;">
         <thead>

@@ -69,7 +69,8 @@
                 id: result.StudentId,
                 first: result.FirstName,
                 last: result.LastName,
-                email: result.Email
+                email: result.Email,
+                password: result.Password
             };
 
             if (initialBind) {
