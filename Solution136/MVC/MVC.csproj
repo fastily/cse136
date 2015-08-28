@@ -144,10 +144,14 @@
     <Content Include="Scripts\136Libraries\Models\AdminModel.js" />
     <Content Include="Scripts\136Libraries\Models\CourseListModel.js" />
     <Content Include="Scripts\136Libraries\Models\LoginModel.js" />
+    <Content Include="Scripts\136Libraries\Models\InstructorModel.js" />
+    <Content Include="Scripts\136Libraries\Models\TaModel.js" />
     <Content Include="Scripts\136Libraries\Models\StudentModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\AdminViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\CourseListViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\LoginViewModel.js" />
+    <Content Include="Scripts\136Libraries\ViewModels\InstructorViewModel.js" />
+    <Content Include="Scripts\136Libraries\ViewModels\TaViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\StudentViewModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -196,7 +200,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\StudentList.cshtml" />
     <Content Include="Views\JasmineTest\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Index2.cshtml" />
@@ -204,12 +207,19 @@
     <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Shared\SharedEditStudent.cshtml" />
     <Content Include="Views\Shared\SharedStudentEnrollment.cshtml" />
-    <Content Include="Views\Staff\CreateStudent.cshtml" />
-    <Content Include="Views\Staff\EditStudent.cshtml" />
+    <Content Include="Views\Admin\EditStudent.cshtml" />
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Staff\StudentList.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Admin\TaList.cshtml" />
+    <Content Include="Views\Admin\CreateTa.cshtml" />
+    <Content Include="Views\Admin\StudentList.cshtml" />
+    <Content Include="Views\Admin\InstructorList.cshtml" />
+    <Content Include="Views\Admin\CreateStudent.cshtml" />
+    <Content Include="Views\Admin\CreateInstructor.cshtml" />
+    <Content Include="Views\Admin\EditTa.cshtml" />
+    <Content Include="Views\Admin\EditInstructor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

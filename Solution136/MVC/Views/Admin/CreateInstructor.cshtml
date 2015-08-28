@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "CreateInstructors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="page-header" >Create a new instructor</h3>
+<a href="/Admin/InstructorList"><< back</a>
+<div id="divInstructor">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td><input data-bind="value: id" /></td>
+        </tr>
+        <tr>
+            <td>First</td>
+            <td><input data-bind="value: first" /></td>
+        </tr>
+        <tr>
+            <td>Last</td>
+            <td><input data-bind="value: last" /></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input data-bind="value: title" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button data-bind="click: add">Add</button></td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var instructorViewModelObj = new InstructorViewModel();
+        instructorViewModelObj.Initialize();
+    });
+</script>

@@ -24,15 +24,7 @@
                 errors.Add("Course cannot be null");
                 throw new ArgumentException();
             }
-
-            /* I dont think we need this as CourseLevel is Not Nullable POCO - Joe
-            if (string.IsNullOrEmpty(course.CourseLevel.ToString()))
-            {
-                errors.Add("Course level cannot be null");
-                throw new ArgumentException();
-            }
-            */
-             
+           
             if (string.IsNullOrEmpty(course.Title))
             {
                 errors.Add("Course title cannot be null");

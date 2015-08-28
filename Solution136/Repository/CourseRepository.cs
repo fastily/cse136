@@ -73,16 +73,14 @@
         ////good method for validation when adding new course
         public bool IsNotDuplicateCourse(POCO.Course c, ref List<string> errors)
         {
-            var db_course = new course();
-
             try
             {
-                db_course.course_title = c.Title;
-                db_course.course_description = c.Description;
-                db_course.course_level = c.CourseLevel.ToString();
-                db_course = this.context.courses.Find(db_course);
+                var isNotDuplicate = this.context.courses.Where(
+                    x => x.course_description == c.Description && 
+                    x.course_level == c.CourseLevel.ToString() && 
+                    x.course_title == c.Title).Count() > 0;
 
-                if (db_course == null)
+                if (isNotDuplicate )
                 {
                     return true;
                 }
