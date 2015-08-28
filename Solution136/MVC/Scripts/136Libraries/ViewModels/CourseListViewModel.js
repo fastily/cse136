@@ -1,6 +1,7 @@
 ﻿function CourseListViewModel() {
     var courseModelObj = new CourseListModel();
     var courseListViewModel = ko.observableArray();
+    var coursePreReqListViewModel = ko.observableArray();
 
     this.Load = function () {
         // Because the Load() is a async call (asynchronous), we'll need to use
