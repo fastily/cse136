@@ -3,7 +3,6 @@
 }
 <h3 class ="page-header">Current Enrollment</h3>
 
-@id
 <div id="divSharedStudentEnrollmentListContent">
     <table style="width:100%;">
         <thead>
@@ -15,13 +14,13 @@
                 <th>Course</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: viewModel">
+        <tbody data-bind="foreach: viewModel.Enrollment">
             <tr>
-                <td data-bind="text: id"></td>
-                <td data-bind="text: year"></td>
-                <td data-bind="text: quarter"></td>
-                <td data-bind="text: session"></td>
-                <td data-bind="text: course"></td>
+                <td data-bind="text: viewModel.id"></td>
+                <td data-bind="text: viewModel.year"></td>
+                <td data-bind="text: viewModel.quarter"></td>
+                <td data-bind="text: viewModel.session"></td>
+                <td data-bind="text: viewModel.course"></td>
             </tr>
         </tbody>
     </table>
@@ -29,7 +28,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var taViewModelObj = new TaViewModel();
-        taViewModelObj.GetAll();
+        var enrollmentViewModelObj = new EnrollmentViewModel();
+        enrollmentViewModelObj.GetAll();
     });
 </script>
