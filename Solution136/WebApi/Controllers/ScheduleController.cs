@@ -30,6 +30,15 @@
             return service.GetScheduleList(year, quarter, ref errors);
         }
 
+        [HttpGet]
+        public List<ScheduleMin> GetScheduleListMin()
+        {
+            var service = new ScheduleService(new ScheduleRepository(this.entities));
+            var errors = new List<string>();
+
+            return service.GetScheduleMin(ref errors);
+        }
+
         [HttpPost]
         public string AddCourseToSchedule(Schedule schedule, int instructorId, string dayId, string timeId)
         {

@@ -76,7 +76,7 @@
 
     this.GetAll = function () {
 
-        CourseModelObj.GetAll(function (courseList) {
+        courseModelObj.GetAll(function (courseList) {
             courseListViewModel.removeAll();
 
             for (var i = 0; i < courseList.length; i++) {

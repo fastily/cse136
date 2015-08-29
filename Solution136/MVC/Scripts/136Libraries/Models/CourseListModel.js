@@ -1,4 +1,7 @@
-﻿function CourseListModel() {
+﻿function CourseListModel(asyncIndicator) {
+    if (asyncIndicator == undefined) {
+        asyncIndicator = true;
+    }
 
     this.Load = function (callback) {
         $.ajax({

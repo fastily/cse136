@@ -74,6 +74,11 @@
             return this.View();
         }
 
+        public ActionResult ScheduleList()
+        {
+            return this.View();
+        }
+
         public ActionResult CreateStudent()
         {
             return this.View();
