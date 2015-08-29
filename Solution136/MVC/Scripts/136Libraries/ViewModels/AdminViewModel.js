@@ -1,9 +1,8 @@
 ﻿function AdminViewModel() {
+    var adminModelObj = new AdminModel();
     var self = this;
 
     this.Load = function (id) {
-        var adminModelObj = new AdminModel();
-
         // Because the Load() is a async call (asynchronous), we'll need to use
         // the callback approach to handle the data after data is loaded.
         adminModelObj.Load(id, function (result) {
@@ -22,8 +21,6 @@
     };
 
     this.UpdateAdmin = function (viewModel) {
-        var adminModelObj = new AdminModel();
-
         // convert the viewModel to same structure as PLAdmin model (presentation layer model)
         var adminData = {
             Id: viewModel.id,

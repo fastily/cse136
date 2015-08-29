@@ -5,18 +5,24 @@
 
 <h2 class="page-header">Edit Instructor</h2>
 
-<div id="divInstructorEdit">
+<div id="divInstructorContent">
     <label>First Name</label>
     <input class="form-control" type="text" data-bind="value: $data.first" /><br />
-    <br />
+
     <label>Last Name</label>
     <input class="form-control" type="text" data-bind="value: $data.last" /><br />
-    <br />
+
     <label>Title</label>
-    <input class="form-control" type="text" data-bind="value: $data.last" /><br />
+    <input class="form-control" type="text" data-bind="value: $data.type" /><br />
+
+    <input class="btn btn-primary" value="Update" type="button" data-bind="" />
     <br />
-    <input class="btn btn-primary" value="Update" type="button" data-bind="value: 'Update', click: $data.update" />
-    <br /><br />
-    <div id="divMessage"></div>
+    <div id="divMessage" class="text-success">&nbsp;</div>  
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var viewModel = new InstructorViewModel();
+        viewModel.GetDetail(@id);
+    });
+</script>

@@ -1,5 +1,4 @@
 ﻿function TaViewModel() {
-
     var TaModelObj = new TaModel();
     var self = this;
     var initialBind = true;
@@ -74,6 +73,23 @@
                 ko.applyBindings({ viewModel: ta }, document.getElementById("divTaContent"));
             }
         });
+    };
+
+    this.UpdateTa = function (ta) {
+        var TaModelObj = new TaModel();
+
+        // convert the viewModel to same structure as PLAdmin model (presentation layer model)
+        var taData = {
+            TaId: viewModel.id,
+            FirstName: viewModel.first(),
+            LastName: viewModel.last(),
+            TaType: viewModel.type()
+        };
+
+        TaModelObj.Update(taData, function (message) {
+            $('#divMessage').html(message);
+        });
+
     };
 
     ko.bindingHandlers.DeleteTa = {

@@ -76,6 +76,23 @@
         });
     };
 
+    this.UpdateInstructor = function (instructor) {
+        var InstructorModelObj = new InstructorModel();
+
+        // convert the viewModel to same structure as PLAdmin model (presentation layer model)
+        var instructorData = {
+            InstructorId: viewModel.id,
+            FirstName: viewModel.first(),
+            LastName: viewModel.last(),
+            Title: viewModel.title()
+        };
+
+        InstructorModelObj.Update(instructorData, function (message) {
+            $('#divMessage').html(message);
+        });
+
+    };
+
     ko.bindingHandlers.DeleteInstructor = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             $(element).click(function () {

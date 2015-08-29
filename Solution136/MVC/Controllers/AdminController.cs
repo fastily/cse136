@@ -35,6 +35,12 @@
             return this.View();
         }
 
+        public ActionResult EditCourse(int id)
+        {
+            ViewBag.id = id;
+            return this.View();
+        }
+
 
         public ActionResult DetailsInstructor(int id)
         {
@@ -63,6 +69,11 @@
             return this.View();
         }
 
+        public ActionResult CourseList()
+        {
+            return this.View();
+        }
+
         public ActionResult CreateStudent()
         {
             return this.View();
@@ -74,6 +85,11 @@
         }
 
         public ActionResult CreateInstructor()
+        {
+            return this.View();
+        }
+
+        public ActionResult CreateCourse()
         {
             return this.View();
         }

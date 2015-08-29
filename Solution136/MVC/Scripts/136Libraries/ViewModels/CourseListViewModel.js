@@ -1,5 +1,7 @@
 ﻿function CourseListViewModel() {
     var courseModelObj = new CourseListModel();
+    var self = this;
+    var initialBind = true;
     var courseListViewModel = ko.observableArray();
     var coursePreReqListViewModel = ko.observableArray();
 
@@ -74,7 +76,7 @@
 
     this.GetAll = function () {
 
-        CourseModelObj.GetAll(function (studentList) {
+        CourseModelObj.GetAll(function (courseList) {
             courseListViewModel.removeAll();
 
             for (var i = 0; i < courseList.length; i++) {

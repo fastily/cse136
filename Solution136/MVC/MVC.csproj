@@ -220,6 +220,9 @@
     <Content Include="Views\Admin\CreateInstructor.cshtml" />
     <Content Include="Views\Admin\EditTa.cshtml" />
     <Content Include="Views\Admin\EditInstructor.cshtml" />
+    <Content Include="Views\Admin\CourseList.cshtml" />
+    <Content Include="Views\Admin\EditCourse.cshtml" />
+    <Content Include="Views\Admin\CreateCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

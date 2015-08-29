@@ -41,6 +41,22 @@ function InstructorModel(asyncIndicator) {
         });
     };
 
+    this.Update = function (instructor, callback) {
+        $.ajax({
+            async: asyncIndicator,
+            method: "POST",
+            url: "http://localhost:9393/Api/Instructor/UpdateInstructor",
+            data: instructor,
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while updating ta.  Is your service layer running?');
+            }
+        });
+    };
+
     this.Delete = function (id, callback) {
         $.ajax({
             async: asyncIndicator,

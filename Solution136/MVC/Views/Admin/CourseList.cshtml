@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "GetCourses";
+}
+
+<h3 class="page-header">Course List Page</h3>
+<a href="/Admin?id=@Session["adminId"]"><< back</a>
+<div id="divCourseListContent">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Course Level</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: title"></td>
+                <td data-bind="text: level"></td>
+                <td data-bind="text: description"></td>
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                        to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a data-bind="attr: { href : '/Admin/CreateCourse', title: 'create' }">Add new Course</a>
+</div>
+
+<script type="text/html" id="action-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="attr: { href : '/Admin/EditCourse?id=' + id, title: 'edit' }">edit</a>
+    <a data-bind="DeleteCourse: $data">delete</a>
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var courseViewModelObj = new CourseListViewModel();
+        courseViewModelObj.GetAll();
+    });
+</script>
