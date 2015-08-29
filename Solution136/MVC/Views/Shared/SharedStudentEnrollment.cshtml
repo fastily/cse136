@@ -3,6 +3,32 @@
 }
 <h3 class ="page-header">Current Enrollment</h3>
 
-@id
-136 TODO: for a given student, show all his course schedule enrollment. Allow add & delete of enrollments
-(The reason this is under the /Shared folder is that both staff and student should be able to update enrollments)
+<div id="divSharedStudentEnrollmentListContent">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Year</th>
+                <th>Quarter</th>
+                <th>Session</th>
+                <th>Course</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel.Enrollment">
+            <tr>
+                <td data-bind="text: viewModel.id"></td>
+                <td data-bind="text: viewModel.year"></td>
+                <td data-bind="text: viewModel.quarter"></td>
+                <td data-bind="text: viewModel.session"></td>
+                <td data-bind="text: viewModel.course"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var enrollmentViewModelObj = new EnrollmentViewModel();
+        enrollmentViewModelObj.GetAll();
+    });
+</script>

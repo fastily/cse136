@@ -62,8 +62,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CourseTest.cs" />
     <Compile Include="AuthorizeTest.cs" />
-    <Compile Include="EnrollmentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

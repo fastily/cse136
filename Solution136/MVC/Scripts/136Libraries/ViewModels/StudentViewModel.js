@@ -9,13 +9,10 @@
 
         var viewModel = {
             id: ko.observable("A0000111"),
-            //ssn: ko.observable("555-55-3333"),
             first: ko.observable("Bruce"),
             last: ko.observable("Wayne"),
             email: ko.observable("bwayne@ucsd.edu"),
             password: ko.observable("password"),
-            //shoesize: ko.observable("10"),
-            //weight: ko.observable("160"),
             add: function (data) {
                 self.CreateStudent(data);
             }
@@ -27,13 +24,10 @@
     this.CreateStudent = function(data) {
         var model = {
             StudentId: data.id(),
-            //SSN: data.ssn(),
             FirstName: data.first(),
             LastName: data.last(),
             Email: data.email(),
             Password: data.password()
-            //ShoeSize: data.shoesize(),
-            //Weight: data.weight()
         }
 
         StudentModelObj.Create(model, function(result) {
@@ -75,10 +69,8 @@
                 id: result.StudentId,
                 first: result.FirstName,
                 last: result.LastName,
-                email: result.Email
-                //shoesize: result.ShoeSize,
-                //weight: result.Weight,
-                //ssn: result.SSN
+                email: result.Email,
+                password: result.Password
             };
 
             if (initialBind) {

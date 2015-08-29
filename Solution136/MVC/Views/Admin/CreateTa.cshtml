@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "CreateTas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="page-header" >Create A New Ta</h3>
+<a href="/Admin/TaList"><< back</a>
+<div id="divTa">
+    <label>First Name</label>
+    <input class="form-control" type="text" data-bind="value: first" /><br />
+    <br />
+    <label>Last Name</label>
+    <input class="form-control" type="text" data-bind="value: last" /><br />
+    <br />
+    <label>Type</label>
+    <input class="form-control" type="text" data-bind="value: type" /><br />
+    <br />
+    <input class="btn btn-primary" value="Add" type="button" data-bind="click: add" />
+    <br /><br />
+    <div id="divMessage"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var taViewModelObj = new TaViewModel();
+        taViewModelObj.Initialize();
+    });
+</script>
