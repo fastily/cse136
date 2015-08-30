@@ -73,7 +73,7 @@
 
             if (errors.Count == 0)
             {
-                return "Successfully Updated Instructor";
+                return "ok";
             }
 
             return "error";

@@ -235,7 +235,8 @@
     <Content Include="Views\Staff\CreateStudent.cshtml" />
     <Content Include="Views\Staff\EditStudent.cshtml" />
     <Content Include="Views\Student\ScheduleList.cshtml" />
-    <Content Include="Views\Admin\EditCourseInSchedule.cshtml" />
+    <Content Include="Views\Student\AllScheduleList.cshtml" />
+    <Content Include="Views\Student\AddCourseToSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

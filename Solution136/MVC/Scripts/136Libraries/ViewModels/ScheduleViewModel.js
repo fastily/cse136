@@ -11,7 +11,7 @@
             year: ko.observable("2015"),
             quarter: ko.observable("winter"),
             session: ko.observable("B00"),
-            course: ko.observable({                
+            course: ko.observable({
                 id: ko.observable(1),
                 title: ko.observable("CSE 103"),
                 level: ko.observable(1),
@@ -51,7 +51,7 @@
 
     this.GetAll = function (year, quarter) {
 
-        scheduleModelObj.GetAll(year, quarter, function (scheduleList) {
+        scheduleModelObj.GetAll(function (year, quarter, scheduleList) {
             scheduleListViewModel.removeAll();
 
             for (var i = 0; i < scheduleList.length; i++) {
@@ -60,16 +60,6 @@
                     year: scheduleList[i].Year,
                     quarter: scheduleList[i].Quarter,
                     session: scheduleList[i].Session,
-                    day: {
-                        name: scheduleList[i].Day.Day,
-                    },
-                    time: {
-                        name: scheduleList[i].Time.Time
-                    },
-                    instructor: {
-                        id: scheduleList[i].Instructor.InstructorId,
-                        name: scheduleList[i].Instructor.FirstName + scheduleList[i].Instructor.LastName,
-                    },
                     course: {
                         id: scheduleList[i].Course.CourseId,
                         title: scheduleList[i].Course.Title,
@@ -89,6 +79,25 @@
     this.GetAllMin = function () {
 
         scheduleModelObj.GetAllMin(function (scheduleList) {
+            scheduleListViewModel.removeAll();
+
+            for (var i = 0; i < scheduleList.length; i++) {
+                scheduleListViewModel.push({
+                    year: scheduleList[i].Year,
+                    quarter: scheduleList[i].Quarter
+                });
+            }
+
+            if (initialBind) {
+                ko.applyBindings({ viewModel: scheduleListViewModel }, document.getElementById("divScheduleListContent"));
+                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
+            }
+        });
+    };
+
+    this.GetStudentScheduleMin = function (id) {
+
+        scheduleModelObj.GetStudentScheduleMin(id, function (scheduleList) {
             scheduleListViewModel.removeAll();
 
             for (var i = 0; i < scheduleList.length; i++) {
