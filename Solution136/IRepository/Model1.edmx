@@ -89,7 +89,7 @@
           <Key>
             <PropertyRef Name="instructor_id" />
           </Key>
-          <Property Name="instructor_id" Type="int" Nullable="false" />
+          <Property Name="instructor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="first_name" Type="varchar" MaxLength="50" />
           <Property Name="last_name" Type="varchar" MaxLength="50" />
           <Property Name="title" Type="varchar" MaxLength="50" />
@@ -128,7 +128,7 @@
           <Key>
             <PropertyRef Name="staff_id" />
           </Key>
-          <Property Name="staff_id" Type="int" Nullable="false" />
+          <Property Name="staff_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="First" Type="varchar" MaxLength="50" />
@@ -158,7 +158,7 @@
           <Key>
             <PropertyRef Name="ta_id" />
           </Key>
-          <Property Name="ta_id" Type="int" Nullable="false" />
+          <Property Name="ta_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ta_type_id" Type="int" Nullable="false" />
           <Property Name="first" Type="varchar" MaxLength="50" />
           <Property Name="last" Type="varchar" MaxLength="50" Nullable="false" />

@@ -51,7 +51,7 @@
 
     this.GetAll = function (year, quarter) {
 
-        scheduleModelObj.GetAll(function (year, quarter, scheduleList) {
+        scheduleModelObj.GetAll(year, quarter, function (scheduleList) {
             scheduleListViewModel.removeAll();
 
             for (var i = 0; i < scheduleList.length; i++) {
@@ -60,6 +60,16 @@
                     year: scheduleList[i].Year,
                     quarter: scheduleList[i].Quarter,
                     session: scheduleList[i].Session,
+                    day: {
+                        name: scheduleList[i].Day.Day,
+                    },
+                    time: {
+                        name: scheduleList[i].Time.Time
+                    },
+                    instructor: {
+                        id: scheduleList[i].Instructor.InstructorId,
+                        name: scheduleList[i].Instructor.FirstName + scheduleList[i].Instructor.LastName,
+                    },
                     course: {
                         id: scheduleList[i].Course.CourseId,
                         title: scheduleList[i].Course.Title,
