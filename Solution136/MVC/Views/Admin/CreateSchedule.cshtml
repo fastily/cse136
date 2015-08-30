@@ -9,28 +9,43 @@
 <a href="/Admin/ScheduleList"><< back</a>
 <div id="divCourseListContent">
     <label>Year</label>
-    <input class="form-control" type="text" data-bind="" /><br />
+    <select class="form-control" data-bind="options: availableYears"></select><br />
 
     <label>Quarter</label>
-    <input class="form-control" type="text" data-bind="" /><br />
+    <select class="form-control" data-bind=" options: availableQuarters"></select><br />
 
     <label>Session</label>
-    <input class="form-control" type="text" data-bind="" /><br />
+    <select class="form-control" data-bind=" options: availableSessions"></select><br />
 
     <label>Time</label>
-    <input class="form-control" type="text" data-bind="" /><br />
+    <select class="form-control" data-bind=" options: availableTimes"></select><br />
 
     <label>Day</label>
-    <input class="form-control" type="text" data-bind="" /><br />
+    <select class="form-control" data-bind=" options: availableDays"></select><br />
 
     <label>Instructor</label>
-    <input class="form-control" type="text" data-bind="" /><br />
+    <select class="form-control" data-bind=" options: availableInstructors"></select><br />
 
     <label>Course</label>
-    <input class="form-control" type="text" data-bind="" /><br />
+    <select class="form-control" data-bind=" options: availableCourses"></select><br />
     <input class="btn btn-primary" value="Add" type="button" />
     <br />
     <hr />
     <div id="divMessage" class="text-success">&nbsp;</div>
 </div>
+
+<script type="text/javascript">
+    var viewModel = {
+        // These are the initial options
+        availableYears: ko.observableArray(['2015', '2014', '2013']),
+        availableQuarters: ko.observableArray(['Fall', 'Winter', 'Spring', 'Summer Session 1', 'Summer Session 2', 'Special Summer Session']),
+        availableSessions: ko.observableArray(['A00', 'B00']),
+        availableTimes: ko.observableArray(['8:00 AM', '9:00AM']),
+        availableDays: ko.observableArray(['Mon/Wed/Fri', 'Tues/Thurs', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri']),
+        availableInstructors: ko.observableArray(['Isaac Chu', 'Mia Minnes']),
+        availableCourses: ko.observableArray(['CSE 105', 'CSE 134B', 'CSE 136'])
+    };
+
+    ko.applyBindings(viewModel);
+</script>
 
