@@ -1,5 +1,6 @@
 ﻿@{
     var id = ViewBag.id;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="page-header">Create Course</h2>
@@ -14,7 +15,7 @@
     <label>Level</label>
     <input class="form-control" type="text" data-bind="value: level" /><br />
 
-    <input class="btn btn-primary" value="Update" type="button" />
+    <input class="btn btn-primary" type="button" data-bind="value: 'Add', click: $data.add" />
     <br />
     <div id="divMessage" class="text-success">&nbsp;</div>   
 </div>

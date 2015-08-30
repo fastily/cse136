@@ -5,6 +5,20 @@
     var courseListViewModel = ko.observableArray();
     var coursePreReqListViewModel = ko.observableArray();
 
+    this.Initialize = function () {
+
+        var viewModel = {
+            title: ko.observable("CSE 197"),
+            level: ko.observable("Upper"),
+            description: ko.observable("best course ever"),
+            add: function (data) {
+                self.CreateCourse(data);
+            }
+        };
+
+        ko.applyBindings(viewModel, document.getElementById("divCourse"));
+    };
+
     this.Load = function () {
         // Because the Load() is a async call (asynchronous), we'll need to use
         // the callback approach to handle the data after data is loaded.
@@ -24,24 +38,8 @@
         });
     };
 
-    this.Initialize = function () {
-
-        var viewModel = {
-            id: ko.observable("1"),
-            title: ko.observable("CSE 197"),
-            level: ko.observable("Upper"),
-            description: ko.observable("best course ever"),
-            add: function (data) {
-                self.CreateCourse(data);
-            }
-        };
-
-        ko.applyBindings(viewModel, document.getElementById("divCourse"));
-    };
-
     this.CreateCourse = function (data) {
         var model = {
-            CourseId: data.id(),
             Title: data.title(),
             CourseLevel: data.level(),
             Description: data.description()
@@ -63,13 +61,16 @@
 
             var course = {
                 id: result.CourseId,
-                title: result.Title,
-                level: result.CourseLevel,
-                description: result.description
+                title: ko.observable(result.Title),
+                level: ko.observable(result.CourseLevel),
+                description: ko.observable(result.Description),
+                update: function () {
+                    self.UpdateCourse(this);
+                }
             };
 
             if (initialBind) {
-                ko.applyBindings({ viewModel: course }, document.getElementById("divCourseContent"));
+                ko.applyBindings(course , document.getElementById("divCourseContent"));
             }
         });
     };
@@ -93,6 +94,21 @@
                 initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
             }
         });
+    };
+
+    this.UpdateCourse = function (course) {
+        // convert the viewModel to same structure as PLAdmin model (presentation layer model)
+        var courseData = {
+            CourseId: course.id,
+            Title: course.title(),
+            CourseLevel: course.level(),
+            Description: course.description()
+        };
+
+        courseModelObj.Update(courseData, function (message) {
+            $('#divMessage').html(message);
+        });
+
     };
 
     ko.bindingHandlers.DeleteCourse = {

@@ -30,7 +30,7 @@
           <Key>
             <PropertyRef Name="course_id" />
           </Key>
-          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="course_id" Type="int" Nullable="false"/>
           <Property Name="course_title" Type="varchar" MaxLength="100" />
           <Property Name="course_level" Type="varchar" MaxLength="10" />
           <Property Name="course_description" Type="varchar(max)" />

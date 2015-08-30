@@ -75,18 +75,18 @@
         {
             try
             {
-                var isNotDuplicate = this.context.courses.Where(
+                var isDuplicate = this.context.courses.Where(
                     x => x.course_description == c.Description && 
                     x.course_level == c.CourseLevel.ToString() && 
                     x.course_title == c.Title).Count() > 0;
 
-                if (isNotDuplicate )
+                if (isDuplicate)
                 {
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
             catch (Exception e)
@@ -103,8 +103,7 @@
 
             try
             {
-                db_course.course_id = c.CourseId;
-                db_course = this.context.courses.Find(db_course);
+                db_course = this.context.courses.Find(c.CourseId);
                 db_course.course_level = c.CourseLevel.ToString();
                 db_course.course_description = c.Description;
                 db_course.course_title = c.Title;

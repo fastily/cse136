@@ -35,6 +35,10 @@
             {
                 this.repository.AddCourse(course, ref errors);
             }
+            else 
+            {
+                errors.Add("Duplicate Course");
+            }
         }
 
         public void UpdateCourse(Course course, ref List<string> errors)

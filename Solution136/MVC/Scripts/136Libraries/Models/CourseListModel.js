@@ -152,4 +152,19 @@
             }
         });
     };
+
+    this.Update = function (courseData, callback) {
+        $.ajax({
+            method: 'POST',
+            url: "http://localhost:9393/Api/Course/UpdateCourse",
+            data: courseData, // note, adminData must be the same as PLAdmin for this to work correctly
+            success: function (message) {
+                callback(message);
+            },
+            error: function () {
+                callback('Error while updating course info');
+            }
+        });
+
+    };
 }
