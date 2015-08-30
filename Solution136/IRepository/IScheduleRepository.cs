@@ -10,6 +10,8 @@
 
         List<ScheduleMin> GetAllSchedulesMin(ref List<string> errors);
 
+        Schedule GetScheduleById(int scheduleId, List<string> errors);
+
         void AddCourseToSchedule(Schedule schedule, int instructorId, int dayId, int timeId, ref List<string> errors);
 
         void RemoveCourseFromSchedule(int scheduleId, ref List<string> errors);
