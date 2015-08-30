@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "GetMyTAs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--TODO: Only show TAs for specific course-->
+
+<h3 class="page-header">TA List</h3>
+<a href="/Staff?id=@Session["staffId"]"><< back</a>
+<div id="divTaListContent">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Ta Type</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: first"></td>
+                <td data-bind="text: last"></td>
+                <td data-bind="text: type"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a data-bind="attr: { href : '/Staff/CreateTa', title: 'create' }">Add New Ta</a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var taViewModelObj = new TaViewModel();
+        taViewModelObj.GetAll();
+    });
+</script>

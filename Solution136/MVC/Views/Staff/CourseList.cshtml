@@ -1,28 +1,28 @@
 ﻿@{
-    ViewBag.Title = "GetMyStudents";
+    ViewBag.Title = "GetCourses";
 }
 
-<h3 class="page-header">Student List Page</h3>
+<!-- TODO: show courses for a specific instructor, right now just showing all courses.-->
+
+<h3 class="page-header">My Courses</h3>
 <a href="/Staff?id=@Session["staffId"]"><< back</a>
-<div id="divStudentListContent">
+<div id="divCourseListContent">
     <table style="width:100%;">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>First</th>
-                <th>Last</th>
-                <th>Email</th>
-                <th>Grade</th>
+                <th>Title</th>
+                <th>Course Level</th>
+                <th>Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: viewModel">
             <tr>
                 <td data-bind="text: id"></td>
-                <td data-bind="text: first"></td>
-                <td data-bind="text: last"></td>
-                <td data-bind="text: email"></td>
-                <td> A </td>
+                <td data-bind="text: title"></td>
+                <td data-bind="text: level"></td>
+                <td data-bind="text: description"></td>
                 <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
                         to for each element of the viewModel array -->
@@ -31,20 +31,17 @@
             </tr>
         </tbody>
     </table>
-    <a data-bind="attr: { href : '/Staff/CreateStudent', title: 'create' }">Add new student</a>
 </div>
 
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="attr: { href : '/Student/?id=' + id, title: 'detail' }">detail</a>
-    <a data-bind="DeleteStudent: $data">delete</a>
-    <a data-bind="attr: { href : '/Staff/EditStudent?id=' + id, title: 'manage' }">manage</a>
-
+    <a data-bind="attr: { href : '/Staff/StudentList?id=' + id, title: 'students' }">students</a>
+    <a data-bind="attr: { href : '/Staff/TaList?id=' + id, title: 'TAs' }">TAs</a>
 </script>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var studentViewModelObj = new StudentViewModel();
-        studentViewModelObj.GetAll();
+        var courseViewModelObj = new CourseListViewModel();
+        courseViewModelObj.GetAll();
     });
 </script>

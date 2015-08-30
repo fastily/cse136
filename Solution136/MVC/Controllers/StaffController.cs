@@ -19,7 +19,22 @@
             return this.View();
         }
 
-        public ActionResult EditStudent(string id)
+        public ActionResult EditStudent()
+        {
+            return this.View();
+        }
+
+        public ActionResult TaList()
+        {
+            return this.View();
+        }
+
+        public ActionResult CreateTa()
+        {
+            return this.View();
+        }
+
+        public ActionResult CourseList()
         {
             return this.View();
         }
