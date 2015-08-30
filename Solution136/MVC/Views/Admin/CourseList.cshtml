@@ -34,6 +34,7 @@
 
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="attr: { href : '/Admin/EditCoursePreReq?id=' + id, title: 'edit' }">PreReqs</a>
     <a data-bind="attr: { href : '/Admin/EditCourse?id=' + id, title: 'edit' }">edit</a>
     <a data-bind="DeleteCourse: $data">delete</a>
 </script>
