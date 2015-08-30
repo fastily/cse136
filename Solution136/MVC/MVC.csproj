@@ -238,6 +238,7 @@
     <Content Include="Views\Student\AllScheduleList.cshtml" />
     <Content Include="Views\Student\AddCourseToSchedule.cshtml" />
     <Content Include="Views\Student\GradeChange.cshtml" />
+    <Content Include="Views\Student\RequestPrereq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AddCourseToSchedule";
+    var year = ViewBag.year;
+    var quarter = ViewBag.quarter;
+}
+
+<h3 class="page-header">Request Prerequisite Clearance</h3>
+
+<a href="/Student/"><< back</a>
+
+<div id="divCourseListContent">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Course Level</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: title"></td>
+                <td data-bind="text: level"></td>
+                <td data-bind="text: description"></td>
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                        to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/html" id="action-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="AddCourse: $data">Request Clearance</a>
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var courseViewModelObj = new CourseListViewModel();
+        courseViewModelObj.GetAll();
+    });
+</script>
