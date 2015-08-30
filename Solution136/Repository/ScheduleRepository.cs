@@ -147,7 +147,6 @@
                 time = this.context.schedule_time.Find((int)dbSchedule.schedule_time_id);
                 instructor = this.context.instructors.Find((int)dbSchedule.instructor_id);
 
-
                 pocoSchedule.ScheduleId = dbSchedule.schedule_id;
                 pocoSchedule.Year = dbSchedule.year.ToString();
                 pocoSchedule.Quarter = dbSchedule.quarter;

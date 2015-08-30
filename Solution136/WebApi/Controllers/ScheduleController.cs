@@ -57,7 +57,6 @@
             return service.GetStudentScheduleMin(id, ref errors);
         }
 
-
         [HttpPost]
         public string AddCourseToSchedule(Schedule schedule, int instructorId, string dayId, string timeId)
         {

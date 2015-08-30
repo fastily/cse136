@@ -15,7 +15,7 @@
         public void CourseInsertTest()
         {
             var courseController = new CourseController();
-            var returnString = courseController.InsertCourse(new Course { Title = "Nicks Test Course", CourseLevel = CourseLevel.grad, Description = "Easy A"});
+            var returnString = courseController.InsertCourse(new Course { Title = "Nicks Test Course", CourseLevel = CourseLevel.grad, Description = "Easy A" });
             Assert.AreEqual("ok", returnString);
         }
 
