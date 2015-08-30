@@ -94,7 +94,7 @@
                 errors.Add("Error occured in CourseRepository.IsDuplicateCourse: " + e);
             }
 
-            return true;
+            return false;
         }
 
         public void UpdateCourse(POCO.Course c, ref List<string> errors)

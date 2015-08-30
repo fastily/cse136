@@ -49,14 +49,6 @@
                 throw new ArgumentException();
             }
 
-            /* see Above 
-            if (string.IsNullOrEmpty(course.CourseLevel.ToString()))
-            {
-                errors.Add("Course level cannot be null");
-                throw new ArgumentException();
-            }
-            */
-
             if (string.IsNullOrEmpty(course.Title))
             {
                 errors.Add("Course title cannot be null");

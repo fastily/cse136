@@ -64,7 +64,7 @@
 
             if (errors.Count == 0)
             {
-                return "ok";
+                return "Ta Updated Succesfully";
             }
 
             return "error";

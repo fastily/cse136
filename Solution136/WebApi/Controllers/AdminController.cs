@@ -54,7 +54,7 @@
 
             if (errors.Count == 0)
             {
-                return "Update Successful";
+                return "Updated Admin Successfully";
             }
 
             return "error";
