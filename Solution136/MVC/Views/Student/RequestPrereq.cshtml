@@ -17,7 +17,7 @@
                 <th>Title</th>
                 <th>Course Level</th>
                 <th>Description</th>
-                <th>Actions</th>
+                <th>Reason for prereq Clearance</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: viewModel">
@@ -27,18 +27,26 @@
                 <td data-bind="text: level"></td>
                 <td data-bind="text: description"></td>
                 <td>
+                    <input class="form-control" type="text" />
+                </td>
+                <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
-                        to for each element of the viewModel array -->
-                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+            to for each element of the viewModel array -->
+                
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+</br>
+<div data-bind="template: { name: 'action-template', data: $data}"></div>
+<input class="btn btn-primary" value="Update" type="button" style="float: right;" />
 
-<script type="text/html" id="action-template">
+<script type="text/html" id="action-template" >
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="AddCourse: $data">Request Clearance</a>
+
+
 </script>
 
 <script type="text/javascript">
