@@ -21,7 +21,7 @@
         }
 
         public void AddCourseToSchedule(Schedule schedule, int instructorId, string dayId, string timeId, ref List<string> errors)
-        {    
+        {
             if (schedule == null)
             {
                 errors.Add("Invalid schedule");
@@ -56,7 +56,23 @@
 
         public List<ScheduleMin> GetScheduleMin(ref List<string> errors)
         {
-            List <ScheduleMin> getMinSchedule = this.repository.GetAllSchedulesMin(ref errors);
+            List<ScheduleMin> getMinSchedule = this.repository.GetAllSchedulesMin(ref errors);
+            List<ScheduleMin> convertMinSchedule = new List<ScheduleMin>();
+
+            foreach (ScheduleMin sm in getMinSchedule)
+            {
+                if (convertMinSchedule.Where(x => x.Quarter == sm.Quarter && x.Year == sm.Year).Count() == 0)
+                {
+                    convertMinSchedule.Add(sm);
+                }
+            }
+
+            return convertMinSchedule;
+        }
+
+        public List<ScheduleMin> GetStudentScheduleMin(string id, ref List<string> errors)
+        {
+            List<ScheduleMin> getMinSchedule = this.repository.GetStudentScheduleMin(id, ref errors);
             List<ScheduleMin> convertMinSchedule = new List<ScheduleMin>();
 
             foreach (ScheduleMin sm in getMinSchedule)

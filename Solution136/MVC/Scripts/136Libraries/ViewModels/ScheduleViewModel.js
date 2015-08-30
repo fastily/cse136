@@ -11,7 +11,7 @@
             year: ko.observable("2015"),
             quarter: ko.observable("winter"),
             session: ko.observable("B00"),
-            course: ko.observable({                
+            course: ko.observable({
                 id: ko.observable(1),
                 title: ko.observable("CSE 103"),
                 level: ko.observable(1),
@@ -79,6 +79,25 @@
     this.GetAllMin = function () {
 
         scheduleModelObj.GetAllMin(function (scheduleList) {
+            scheduleListViewModel.removeAll();
+
+            for (var i = 0; i < scheduleList.length; i++) {
+                scheduleListViewModel.push({
+                    year: scheduleList[i].Year,
+                    quarter: scheduleList[i].Quarter
+                });
+            }
+
+            if (initialBind) {
+                ko.applyBindings({ viewModel: scheduleListViewModel }, document.getElementById("divScheduleListContent"));
+                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
+            }
+        });
+    };
+
+    this.GetStudentScheduleMin = function (id) {
+
+        scheduleModelObj.GetStudentScheduleMin(id, function (scheduleList) {
             scheduleListViewModel.removeAll();
 
             for (var i = 0; i < scheduleList.length; i++) {

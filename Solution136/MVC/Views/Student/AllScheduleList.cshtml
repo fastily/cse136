@@ -2,9 +2,9 @@
     ViewBag.Title = "GetSchedules";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h3 class="page-header">Currently Enrolled Schedules</h3>
-<a href="/Student?id=@Session["studentId"]"><< back</a>
 
+<h3 class="page-header">All Schedules</h3>
+<a href="/Student/ScheduleList?id=@Session["studentId"]"><< back</a>
 <div id="divScheduleListContent">
     <table style="width:100%;">
         <thead>
@@ -25,19 +25,18 @@
             </tr>
         </tbody>
     </table>
+
 </div>
 
-<a href="~/Student/AllScheduleList?id=@ViewBag.id">Enroll in New Schedule</a>
 
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="attr: { href : '/Student/AddCourseToSchedule?year=' + year +'&quarter=' + quarter, title: 'view' }">View</a>
+    <a data-bind="attr: { href : '/Student/AddCourseToSchedule?year=' + year +'&quarter=' + quarter, title: 'view' }">Add Course</a>
 </script>
 
 <script type="text/javascript">
-
     $(document).ready(function () {
         var scheduleViewModelObj = new ScheduleViewModel();
-        scheduleViewModelObj.GetStudentScheduleMin("@ViewBag.Id");
+        scheduleViewModelObj.GetAllMin();
     });
 </script>
