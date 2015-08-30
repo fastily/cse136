@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "EditMyStudents";
+}
+
+<h2 class="page-header">Manage Student</h2>
+<a href="/Staff?id=@Session["staffId"]"><< back</a>
+<p>Grade: <input data-bind="value: grade" /></p>
+<p>Prereqquiste Override Request: No</p>
+<p>Grade Change Request: No</p>
+<p></p><a data-bind="DeleteStudent: $data">Delete Student</a>
+
+<script type="text/javascript">
+    var viewModel = {
+        grade: ko.observable()
+    };
+</script>
+
+
+
