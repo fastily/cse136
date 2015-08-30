@@ -86,6 +86,41 @@
         });
     };
 
+    this.GetScheduleById = function (id) {
+
+        scheduleModelObj.GetScheduleById(id, function (result) {
+
+            var schedule = {
+                id: result.ScheduleId,
+                year: result.Year,
+                quarter: result.Quarter,
+                session: result.Session,
+                day: {
+                    name: ko.observable(result.Day.Day),
+                },
+                time: {
+                    name: ko.observable(result.Time.Time)
+                },
+                instructor: {
+                    id: result.Instructor.InstructorId,
+                    first: ko.observable(result.Instructor.FirstName),
+                    last: ko.observable(result.Instructor.LastName),
+                    name: result.Instructor.FirstName + " " + result.Instructor.LastName
+                },
+                course: {
+                    id: result.Course.CourseId,
+                    title: result.Course.Title,
+                    level: result.Course.CourseLevel,
+                    description: result.Course.Description
+                }
+            };
+            if (initialBind) {
+                ko.applyBindings(schedule, document.getElementById("divScheduleContent"));
+                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
+            }
+        });
+    };
+
     this.GetAllMin = function () {
 
         scheduleModelObj.GetAllMin(function (scheduleList) {

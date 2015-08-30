@@ -20,6 +20,17 @@
             return this.repository.GetScheduleList(year, quarter, ref errors);
         }
 
+        public Schedule GetScheduleById(int id, ref List<string> errors)
+        {
+            if (id <= 0)
+            {
+                errors.Add("Invalid schedule Id");
+                throw new ArgumentException();
+            }
+
+            return this.repository.GetScheduleById(id, ref errors);
+        }
+
         public void AddCourseToSchedule(Schedule schedule, int instructorId, string dayId, string timeId, ref List<string> errors)
         {
             if (schedule == null)
