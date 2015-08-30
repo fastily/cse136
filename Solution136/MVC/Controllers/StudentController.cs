@@ -18,7 +18,7 @@
             return this.View();
         }
 
-        public ActionResult ViewCurrentSchedule(string id)
+        public ActionResult ScheduleList(string id)
         {
             ViewBag.Id = id;
             Session["studentId"] = id;
