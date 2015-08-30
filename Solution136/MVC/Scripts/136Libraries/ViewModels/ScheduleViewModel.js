@@ -49,9 +49,9 @@
 
     };
 
-    this.GetAll = function () {
+    this.GetAll = function (year, quarter) {
 
-        scheduleModelObj.GetAll(function (scheduleList) {
+        scheduleModelObj.GetAll(function (year, quarter, scheduleList) {
             scheduleListViewModel.removeAll();
 
             for (var i = 0; i < scheduleList.length; i++) {

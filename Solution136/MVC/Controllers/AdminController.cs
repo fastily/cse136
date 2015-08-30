@@ -41,6 +41,19 @@
             return this.View();
         }
 
+        public ActionResult EditSchedule(string year, string quarter)
+        {
+            ViewBag.year = year;
+            ViewBag.quarter = quarter;
+            return this.View();
+        }
+
+        public ActionResult AddCourseToSchedule(string year, string quarter)
+        {
+            ViewBag.year = year;
+            ViewBag.quarter = quarter;
+            return this.View();
+        }
 
         public ActionResult DetailsInstructor(int id)
         {
@@ -95,6 +108,11 @@
         }
 
         public ActionResult CreateCourse()
+        {
+            return this.View();
+        }
+
+        public ActionResult CreateSchedule()
         {
             return this.View();
         }

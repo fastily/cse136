@@ -1,21 +1,28 @@
 ﻿@{
-    ViewBag.Title = "GetSchedules";
+    ViewBag.Title = "Create Schedule";
 }
 
-<h3 class="page-header">All Schedules</h3>
+<h3 class="page-header">Add Course To Schedule</h3>
 <a href="/Admin?id=@Session["adminId"]"><< back</a>
-<div id="divScheduleListContent">
+<h3 class="page-header">Current Schedule</h3>
+<h3 class="page-header">All Courses</h3>
+<div id="divCourseListContent">
     <table style="width:100%;">
         <thead>
             <tr>
-                <th>Year</th>
-                <th>Quarter</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Course Level</th>
+                <th>Description</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: viewModel">
             <tr>
-                <td data-bind="text: year"></td>
-                <td data-bind="text: quarter"></td>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: title"></td>
+                <td data-bind="text: level"></td>
+                <td data-bind="text: description"></td>
                 <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
                         to for each element of the viewModel array -->
@@ -24,18 +31,16 @@
             </tr>
         </tbody>
     </table>
-    <a data-bind="attr: { href : '/Admin/CreateSchedule', title: 'create' }">Add new Schedule</a>
 </div>
 
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="attr: { href : '/Admin/EditSchedule?year=' + year +'&quarter=' + quarter, title: 'edit' }">Edit</a>
-    <a data-bind="DeleteCourse: $data">delete</a>
+    <a data-bind="AddCourse: $data">Add Course</a>
 </script>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var scheduleViewModelObj = new ScheduleViewModel();
-        scheduleViewModelObj.GetAllMin();
+        var courseViewModelObj = new CourseListViewModel();
+        courseViewModelObj.GetAll();
     });
 </script>
