@@ -1,11 +1,7 @@
 ﻿@{
     ViewBag.Title = "GetSchedules";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h3 class="page-header">Course List Page</h3>
-
-
 <a href="/Student?id=@Session["StudentId"]"><< back</a>
 <div id="divScheduleListContent">
     <table style="width:100%;">
@@ -32,11 +28,10 @@
 
 @Html.Partial("SharedStudentEnrollment")
 
-@*
 <script src="~/Scripts/knockout-3.3.0.js" type="text/javascript">
     $(document).ready(function () {
         var studentViewModelObj = new StudentViewModel();
         studentViewModelObj.GetDetail("@id");
     });
 </script>
-*@
+
