@@ -64,14 +64,17 @@
         InstructorModelObj.GetDetail(id, function (result) {
             
             var instructor = {
-                id: result.InstructorId,
-                first: result.FirstName,
-                last: result.LastName,
-                title: result.Title
+                id: ko.observable(result.InstructorId),
+                first: ko.observable(result.FirstName),
+                last: ko.observable(result.LastName),
+                title: ko.observable(result.Title),
+                update: function () {
+                    self.UpdateInstructor(this);
+                }
             };
 
             if (initialBind) {
-                ko.applyBindings({ viewModel: instructor }, document.getElementById("divInstructorContent"));
+                ko.applyBindings(instructor , document.getElementById("divInstructorContent"));
             }
         });
     };
@@ -81,10 +84,10 @@
 
         // convert the viewModel to same structure as PLAdmin model (presentation layer model)
         var instructorData = {
-            InstructorId: viewModel.id,
-            FirstName: viewModel.first(),
-            LastName: viewModel.last(),
-            Title: viewModel.title()
+            InstructorId: instructor.id,
+            FirstName: instructor.first(),
+            LastName: instructor.last(),
+            Title: instructor.title()
         };
 
         InstructorModelObj.Update(instructorData, function (message) {

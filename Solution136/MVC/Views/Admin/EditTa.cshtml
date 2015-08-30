@@ -15,7 +15,7 @@
     <label>Type</label>
     <input class="form-control" type="text" data-bind="value: $data.type" /><br />
 
-    <input class="btn btn-primary" value="Update" type="button" />
+    <input class="btn btn-primary" type="button" data-bind="value: 'Update', click: $data.update" />
     <br />
     <div id="divMessage" class="text-success">&nbsp;</div>   
 </div>
