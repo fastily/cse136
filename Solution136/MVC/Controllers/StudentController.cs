@@ -33,6 +33,12 @@
          {
              return this.View();
          }
+
+         public ActionResult GradeChange()
+         {
+             return this.View();
+         }
+ 
  
     }
 }
