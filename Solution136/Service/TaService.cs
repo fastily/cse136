@@ -38,10 +38,6 @@
             {
                 this.repository.AddTa(ta, ref errors);
             }
-            else
-            {
-                errors.Add("Duplicate Ta");
-            }
         }
 
         public void UpdateTa(Ta ta, ref List<string> errors)

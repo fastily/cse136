@@ -12,7 +12,6 @@
             first: ko.observable("Nick"),
             last: ko.observable("Test"),
             title: ko.observable("Teacher"),
-            password: ko.observable("password"),
             add: function (data) {
                 self.CreateInstructor(data);
             }
@@ -26,13 +25,12 @@
             InstructorId: data.id(),
             FirstName: data.first(),
             LastName: data.last(),
-            Title: data.title(),
-            Password: data.password()
+            Title: data.title()
         }
 
         InstructorModelObj.Create(model, function (result) {
             if (result == "ok") {
-                alert("Created Instructor successfully. Login email is: " + model.FirstName.toLowerCase().substring(0, 1) + model.LastName.toLowerCase() + "@ucsd.edu");
+                alert("Create Instructor successful");
             } else {
                 alert("Error creating Instructor occurred");
             }

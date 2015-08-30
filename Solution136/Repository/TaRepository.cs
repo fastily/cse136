@@ -97,8 +97,8 @@
 
             try
             {
-                db_Ta = this.context.TeachingAssistants.Find(ta.TaId);
                 db_Ta.ta_type_id = int.Parse(ta.TaType);
+                db_Ta = this.context.TeachingAssistants.Find(db_Ta);
                 db_Ta.first = ta.FirstName;
                 db_Ta.last = ta.LastName;
                 this.context.SaveChanges();
@@ -133,7 +133,7 @@
 
             try
             {
-                db_Ta = this.context.TeachingAssistants.Find(ta_id); 
+                db_Ta.ta_type_id = ta_id; 
                 db_Ta = this.context.TeachingAssistants.Remove(db_Ta);
                 this.context.SaveChanges();
             }
@@ -175,19 +175,18 @@
 
             try
             {
-                var TaType = int.Parse(ta.TaType);
-                var isDuplicate = this.context.TeachingAssistants.Where(
-                    x => x.first == ta.FirstName &&
-                    x.last == ta.LastName &&
-                    x.ta_type_id == TaType).Count() > 0;
+                db_Ta.first = ta.FirstName;
+                db_Ta.last = ta.LastName;
+                db_Ta.ta_type_id = int.Parse(ta.TaType);
+                db_Ta = this.context.TeachingAssistants.Find(db_Ta);
 
-                if (isDuplicate)
+                if (db_Ta == null)
                 {
-                    return false;
+                    return true;
                 }
                 else
                 {
-                    return true;
+                    return false;
                 }
             }
             catch (Exception e)
@@ -195,7 +194,7 @@
                 errors.Add("Error occured in TaRepository.IsDuplicateTa: " + e);
             }
 
-            return false;
+            return true;
         }
     }
 }
