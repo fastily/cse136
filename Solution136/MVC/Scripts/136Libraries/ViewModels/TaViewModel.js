@@ -10,7 +10,7 @@
             id: ko.observable(1),
             first: ko.observable("Nick"),
             last: ko.observable("Test"),
-            type: ko.observable("Grader"),
+            type: ko.observable("1"),
             add: function (data) {
                 self.CreateTa(data);
             }
@@ -28,7 +28,7 @@
         }
 
         TaModelObj.Create(model, function(result) {
-            if (result == "ok") {
+            if (result === "ok") {
                 alert("Create Ta successful");
             } else {
                 alert("Error creating Ta occurred");

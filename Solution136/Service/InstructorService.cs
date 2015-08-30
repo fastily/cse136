@@ -39,6 +39,10 @@
             {
                 this.repository.AddInstructor(instructor, ref errors);
             }
+            else
+            {
+                errors.Add("Duplicate Instructor");
+            }
         }
 
         public void UpdateInstructor(Instructor instructor, ref List<string> errors)
