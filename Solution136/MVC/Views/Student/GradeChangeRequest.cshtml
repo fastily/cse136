@@ -6,4 +6,47 @@
 <h2 class="page-header">Grade Change Request</h2>
 <a href="/Student?id=@Session["studentId"]"><< back</a>
 
-<div> Class Enrollment Goes here !</div>
+<div id="divStudent">
+
+    <label>Course</label>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Select Course
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">CSE 103</a></li>
+            <li><a href="#">CSE 105</a></li>
+            <li><a href="#">CSE 131</a></li>
+            <li><a href="#">CSE 141</a></li>
+        </ul>
+    </div>
+    <br />
+
+    <label>Grade Requested</label>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Select Grade
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><a href="#">A</a></li>
+            <li><a href="#">B</a></li>
+            <li><a href="#">C</a></li>
+            <li><a href="#">D</a></li>
+            <li><a href="#">F</a></li>
+            <li><a href="#">P</a></li>
+            <li><a href="#">NP</a></li>
+        </ul>
+    </div>
+    <br />
+
+    <label>Reason</label>
+    <input class="form-control" type="text" />
+    <br />
+
+    <input class="btn btn-primary" value="Update" type="button" />
+    <br /><br />
+
+    <div id="divMessage" class="text-success">&nbsp;</div>
+</div>
