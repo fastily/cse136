@@ -7,7 +7,7 @@
         public ActionResult Index(int id)
         {
             ViewBag.id = id;
-            Session["adminId"] = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 

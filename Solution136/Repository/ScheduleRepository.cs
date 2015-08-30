@@ -21,13 +21,13 @@
         public List<ScheduleMin> GetAllSchedulesMin(ref List<string> errors)
         {
             List<ScheduleMin> pocoScheduleList = new List<ScheduleMin>();
-            IEnumerable<course_schedule> dbScheduleList;
+            IEnumerable<course_schedule> db_ScheduleList;
 
             try
             {
-                dbScheduleList = context.course_schedule.OrderBy(x => x.year);
+                db_ScheduleList = this.context.course_schedule.OrderBy(x => x.year);
 
-                foreach (course_schedule sched in dbScheduleList)
+                foreach (course_schedule sched in db_ScheduleList)
                 {
                     ScheduleMin tempPoco = new ScheduleMin();
                     tempPoco.Year = sched.year.ToString();
@@ -47,13 +47,13 @@
         public List<ScheduleMin> GetStudentScheduleMin(string id, ref List<string> errors)
         {
             List<ScheduleMin> pocoScheduleList = new List<ScheduleMin>();
-            IEnumerable<course_schedule> dbScheduleList;
+            IEnumerable<course_schedule> db_ScheduleList;
 
             try
             {
-                dbScheduleList = context.course_schedule.OrderBy(x => x.year);
+                db_ScheduleList = this.context.course_schedule.OrderBy(x => x.year);
 
-                foreach (course_schedule sched in dbScheduleList)
+                foreach (course_schedule sched in db_ScheduleList)
                 {
                     ScheduleMin tempPoco = new ScheduleMin();
                     tempPoco.Year = sched.year.ToString();
@@ -74,14 +74,14 @@
         {
             var scheduleList = new List<Schedule>();
             List<Schedule> pocoScheduleList = new List<Schedule>();
-            IEnumerable<course_schedule> dbScheduleList;
+            IEnumerable<course_schedule> db_ScheduleList;
 
             try
             {
-                var Year = int.Parse(year);
-                dbScheduleList = this.context.course_schedule.Where(x => x.quarter == quarter && x.year == Year);
+                var myYear = int.Parse(year);
+                db_ScheduleList = this.context.course_schedule.Where(x => x.quarter == quarter && x.year == myYear);
 
-                foreach (course_schedule c in dbScheduleList)
+                foreach (course_schedule c in db_ScheduleList)
                 {
                     var day = new schedule_day();
                     var time = new schedule_time();
@@ -134,23 +134,23 @@
         public Schedule GetScheduleById(int scheduleId, ref List<string> errors)
         {
             Schedule pocoSchedule = new Schedule();
-            course_schedule dbSchedule;
+            course_schedule db_Schedule;
 
             try
             {
-                dbSchedule = this.context.course_schedule.Find(scheduleId);
+                db_Schedule = this.context.course_schedule.Find(scheduleId);
 
                 var day = new schedule_day();
                 var time = new schedule_time();
                 var instructor = new instructor();
-                day = this.context.schedule_day.Find((int)dbSchedule.schedule_day_id);
-                time = this.context.schedule_time.Find((int)dbSchedule.schedule_time_id);
-                instructor = this.context.instructors.Find((int)dbSchedule.instructor_id);
+                day = this.context.schedule_day.Find((int)db_Schedule.schedule_day_id);
+                time = this.context.schedule_time.Find((int)db_Schedule.schedule_time_id);
+                instructor = this.context.instructors.Find((int)db_Schedule.instructor_id);
 
-                pocoSchedule.ScheduleId = dbSchedule.schedule_id;
-                pocoSchedule.Year = dbSchedule.year.ToString();
-                pocoSchedule.Quarter = dbSchedule.quarter;
-                pocoSchedule.Session = dbSchedule.session;
+                pocoSchedule.ScheduleId = db_Schedule.schedule_id;
+                pocoSchedule.Year = db_Schedule.year.ToString();
+                pocoSchedule.Quarter = db_Schedule.quarter;
+                pocoSchedule.Session = db_Schedule.session;
                 pocoSchedule.Instructor = new Instructor
                 {
                     InstructorId = instructor.instructor_id,
@@ -169,9 +169,9 @@
                 };
                 pocoSchedule.Course = new Course
                 {
-                    CourseId = dbSchedule.course.course_id,
-                    Title = dbSchedule.course.course_title,
-                    Description = dbSchedule.course.course_description
+                    CourseId = db_Schedule.course.course_id,
+                    Title = db_Schedule.course.course_title,
+                    Description = db_Schedule.course.course_description
                 };
             }            
             catch (Exception e)
