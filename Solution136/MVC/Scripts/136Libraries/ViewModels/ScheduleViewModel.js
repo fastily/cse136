@@ -95,6 +95,25 @@
         });
     };
 
+    this.GetStudentScheduleMin = function (id) {
+
+        scheduleModelObj.GetStudentScheduleMin(id, function (scheduleList) {
+            scheduleListViewModel.removeAll();
+
+            for (var i = 0; i < scheduleList.length; i++) {
+                scheduleListViewModel.push({
+                    year: scheduleList[i].Year,
+                    quarter: scheduleList[i].Quarter
+                });
+            }
+
+            if (initialBind) {
+                ko.applyBindings({ viewModel: scheduleListViewModel }, document.getElementById("divScheduleListContent"));
+                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
+            }
+        });
+    };
+
     ko.bindingHandlers.DeleteSchedule = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             $(element).click(function () {

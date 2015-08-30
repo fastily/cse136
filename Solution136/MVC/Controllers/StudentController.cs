@@ -18,9 +18,19 @@
             return this.View();
         }
 
-        public ActionResult ViewCurrentSchedule(string id)
+        public ActionResult ScheduleList(string id)
         {
             ViewBag.Id = id;
+            return this.View();
+        }
+        
+        public ActionResult AllScheduleList()
+        {
+            return this.View();
+        }
+
+        public ActionResult AddCourseToSchedule()
+        {
             return this.View();
         }
 
