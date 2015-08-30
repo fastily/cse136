@@ -64,13 +64,16 @@
             
             var ta = {
                 id: result.TaId,
-                first: result.FirstName,
-                last: result.LastName,
-                type: result.TaType
+                first: ko.observable(result.FirstName),
+                last: ko.observable(result.LastName),
+                type: ko.observable(result.TaType),
+                update: function () {
+                    self.UpdateTa(this);
+                }
             };
 
             if (initialBind) {
-                ko.applyBindings({ viewModel: ta }, document.getElementById("divTaContent"));
+                ko.applyBindings(ta, document.getElementById("divTaContent"));
             }
         });
     };
@@ -80,10 +83,10 @@
 
         // convert the viewModel to same structure as PLAdmin model (presentation layer model)
         var taData = {
-            TaId: viewModel.id,
-            FirstName: viewModel.first(),
-            LastName: viewModel.last(),
-            TaType: viewModel.type()
+            TaId: ta.id,
+            FirstName: ta.first(),
+            LastName: ta.last(),
+            TaType: ta.type()
         };
 
         TaModelObj.Update(taData, function (message) {

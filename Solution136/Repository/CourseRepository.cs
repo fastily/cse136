@@ -139,7 +139,7 @@
 
             try
             {
-                db_course.course_id = course_id;
+                db_course = this.context.courses.Find(course_id);
                 this.context.courses.Remove(db_course);
                 this.context.SaveChanges();
             }
