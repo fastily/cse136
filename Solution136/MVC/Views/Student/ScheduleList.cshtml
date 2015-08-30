@@ -2,9 +2,11 @@
     ViewBag.Title = "GetSchedules";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h3 class="page-header">Currently Enrolled Schedules</h3>
-<a href="/Student?id=@Session["studentId"]"><< back</a>
 
+<h3 class="page-header">Course List Page</h3>
+
+
+<a href="/Student?id=@Session["StudentId"]"><< back</a>
 <div id="divScheduleListContent">
     <table style="width:100%;">
         <thead>
@@ -25,19 +27,16 @@
             </tr>
         </tbody>
     </table>
+    <a data-bind="attr: { href : '/Admin/CreateSchedule', title: 'create' }">Add new Schedule</a>
 </div>
 
-<a href="~/Student/AllScheduleList?id=@ViewBag.id">Enroll in New Schedule</a>
+@Html.Partial("SharedStudentEnrollment")
 
-<script type="text/html" id="action-template">
-    <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="attr: { href : '/Student/AddCourseToSchedule?year=' + year +'&quarter=' + quarter, title: 'view' }">View</a>
-</script>
-
-<script type="text/javascript">
-
+@*
+<script src="~/Scripts/knockout-3.3.0.js" type="text/javascript">
     $(document).ready(function () {
-        var scheduleViewModelObj = new ScheduleViewModel();
-        scheduleViewModelObj.GetStudentScheduleMin("@ViewBag.Id");
+        var studentViewModelObj = new StudentViewModel();
+        studentViewModelObj.GetDetail("@id");
     });
 </script>
+*@

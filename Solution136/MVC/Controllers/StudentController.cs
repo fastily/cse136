@@ -21,6 +21,14 @@
         public ActionResult ScheduleList(string id)
         {
             ViewBag.Id = id;
+            Session["studentId"] = id;
+            return this.View();
+        }
+
+        public ActionResult ClassEnrollment(string id)
+        {
+            ViewBag.Id = id;
+            Session["studentId"] = id;
             return this.View();
         }
         
@@ -34,5 +42,11 @@
             return this.View();
         }
 
+        public ActionResult GradeChangeRequest(string id)
+        {
+            ViewBag.Id = id;
+            Session["studentId"] = id;
+            return this.View();
+        }
     }
 }
