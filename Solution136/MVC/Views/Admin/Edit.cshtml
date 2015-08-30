@@ -3,7 +3,7 @@
     var id = ViewBag.id;
 }
 <h2 class="page-header">Edit</h2>
-
+<a href="/Admin?id=@Session["adminId"]"><< back</a>
 <div id="divAdminEdit">
     <label>First Name</label>
     <input class="form-control" type="text" data-bind="value: $data.first" /><br />

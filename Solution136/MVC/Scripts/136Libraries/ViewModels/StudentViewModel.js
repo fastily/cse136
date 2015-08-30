@@ -21,6 +21,7 @@
         ko.applyBindings(viewModel, document.getElementById("divStudent"));
     };
 
+    /* Check login3 for this example where viewModel is outside of function */
     this.Initialize2 = function () {
         ko.applyBindings(viewModel, document.getElementById("divStudentContent"));
     };

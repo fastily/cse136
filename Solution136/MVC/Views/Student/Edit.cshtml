@@ -5,8 +5,8 @@
 }
 
 <h2 class="page-header">Student Detail</h2>
-
-<div id="divStudentContent">
+<a href="/Student?id=@Session["adminId"]"><< back</a>
+<div id="divStudent">
 
     <label>Id</label>
     <input class="form-control" type="text" data-bind="value: id" />
@@ -37,6 +37,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var studentviewModel = new StudentViewModel();
-        studentviewModel.Initialize2();
+        studentviewModel.Initialize();
     });
 </script>
