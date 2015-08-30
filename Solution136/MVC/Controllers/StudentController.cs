@@ -33,6 +33,16 @@
          {
              return this.View();
          }
+
+         public ActionResult GradeChange()
+         {
+             return this.View();
+         }
+
+         public ActionResult RequestPrereq()
+         {
+             return this.View();
+         }
  
     }
 }

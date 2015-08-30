@@ -4,10 +4,56 @@
 
 <h2 class="page-header">Manage Student</h2>
 <a href="/Staff?id=@Session["staffId"]"><< back</a>
-<p>Grade: <input data-bind="value: grade" /></p>
-<p>Prereqquiste Override Request: No</p>
-<p>Grade Change Request: No</p>
-<p></p><a data-bind="DeleteStudent: $data">Delete Student</a>
+
+<div id="divCourseListContent">
+    <table style="width:100%;">
+       
+            <tr>
+                <th>Current Grade</th>
+                <td><input data-bind="value: grade" /></td>
+              
+            </tr>
+            <tr>
+                <th>Prerequisite Clearance Request Reason</th>
+                <td><blockquote> aei;rjogf ;oakjndfhvkjlndfd</blockquote></td>
+            </tr>
+            <tr>
+                <th>Clear Prerequisite?</th>
+                <td><input type="radio" name="preq" value="yes">Allow</td>
+                <td><input type="radio" name="preq" value="no" checked>Decline</td>
+            </tr>
+            <tr>
+                <th>Desired Grade</th>
+                <td><blockquote> F</blockquote></td>
+            </tr>
+            <tr>
+                <th>Regrade Request Reason</th>
+                <td><blockquote> aei;rjogf ;oakjndfhvkjlndfd</blockquote></td>
+            </tr>
+       
+                <!--
+    <td data-bind="text: id"></td>
+    <td data-bind="text: title"></td>
+    <td data-bind="text: level"></td>
+    <td data-bind="text: description"></td>
+    <td>
+        <input class="form-control" type="text" />
+    </td>
+    <td>
+        <!-- Note, this is an example using knockout templating. $data is the keyword
+        to for each element of the viewModel array -->
+                <!--
+    </td>
+    -->
+    </table>
+</div>
+
+<input class="btn btn-primary" value="Update" type="button" />
+
+<script type="text/html" id="action-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="AddCourse: $data">update</a>
+</script>
 
 <script type="text/javascript">
     var viewModel = {

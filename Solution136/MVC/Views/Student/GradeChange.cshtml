@@ -1,0 +1,103 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "AddCourseToSchedule";
+    var year = ViewBag.year;
+    var quarter = ViewBag.quarter;
+}
+
+<h3 class="page-header">Add Course To Schedule</h3>
+
+
+<a href="/Student/"><< back</a>
+
+
+<div id="divStudent">
+
+    <label>Course</label>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Select Course
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">CSE 3</a></li>
+            <!-- hard code -->
+        </ul>
+    </div>
+    <br />
+
+    <label>Grade Requested</label>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Select Grade
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><a href="#">A</a></li>
+            <li><a href="#">B</a></li>
+            <li><a href="#">C</a></li>
+            <li><a href="#">D</a></li>
+            <li><a href="#">F</a></li>
+            <li><a href="#">P</a></li>
+            <li><a href="#">NP</a></li>
+        </ul>
+    </div>
+    <br />
+
+    <label>Reason</label>
+    <input class="form-control" type="text" />
+    <br />
+
+    <input class="btn btn-primary" value="Update" type="button" />
+    <br /><br />
+
+    <div id="divMessage" class="text-success">&nbsp;</div>
+</div>
+
+
+
+
+
+<h3 class="page-header">Current Courses</h3>
+<div id="divScheduleListContent">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Year</th>
+                <th>Quarter</th>
+                <th>Session</th>
+                <th>Instructor</th>
+                <th>Course Name</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td>1</td>
+                <td>2015</td>
+                <td>Summer</td>
+                <td>1</td>
+                <td>CHUCHUTRAIN</td>
+                <td>CSE 3</td>
+                <!-- hard coded bs
+                <td data-bind="text: year"></td>
+                <td data-bind="text: quarter"></td>
+                <td data-bind="text: session"></td>
+                <td data-bind="text: instructor"></td>
+                <td data-bind="text: coursename"></td>
+                -->
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                        to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script type="text/html" id="action-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="AddCourse: $data">Add Course</a>
+</script>
