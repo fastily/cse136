@@ -49,7 +49,7 @@
           <Key>
             <PropertyRef Name="schedule_id" />
           </Key>
-          <Property Name="schedule_id" Type="int" Nullable="false" />
+          <Property Name="schedule_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="course_id" Type="int" Nullable="false" />
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="quarter" Type="varchar" MaxLength="50" Nullable="false" />

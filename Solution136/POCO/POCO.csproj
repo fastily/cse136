@@ -47,6 +47,8 @@
     <Compile Include="CourseLevel.cs" />
     <Compile Include="Enrollment.cs" />
     <Compile Include="GradeChange.cs" />
+    <Compile Include="ScheduleTime.cs" />
+    <Compile Include="ScheduleDay.cs" />
     <Compile Include="ScheduleMin.cs" />
     <Compile Include="Ta.cs" />
     <Compile Include="Logon.cs" />

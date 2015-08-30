@@ -41,6 +41,12 @@
             return this.View();
         }
 
+        public ActionResult EditCourseInSchedule(int id)
+        {
+            ViewBag.id = id;
+            return this.View();
+        }
+
         public ActionResult EditSchedule(string year, string quarter)
         {
             ViewBag.year = year;

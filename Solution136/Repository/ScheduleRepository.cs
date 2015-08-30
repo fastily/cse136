@@ -72,48 +72,51 @@
 
         public List<Schedule> GetScheduleList(string year, string quarter, ref List<string> errors)
         {
-            var conn = new SqlConnection(ConnectionString);
             var scheduleList = new List<Schedule>();
+            List<Schedule> pocoScheduleList = new List<Schedule>();
+            IEnumerable<course_schedule> dbScheduleList;
 
             try
             {
-                var adapter = new SqlDataAdapter(GetScheduleListProcedure, conn);
+                var Year = int.Parse(year);
+                dbScheduleList = this.context.course_schedule.Where(x => x.quarter == quarter && x.year == Year);
 
-                if (year.Length > 0)
+                foreach (course_schedule c in dbScheduleList)
                 {
-                    adapter.SelectCommand.Parameters.Add(new SqlParameter("@year", SqlDbType.Int));
-                    adapter.SelectCommand.Parameters["@year"].Value = year;
-                }
+                    var day = new schedule_day();
+                    var time = new schedule_time();
+                    var instructor = new instructor();
+                    day = this.context.schedule_day.Find((int)c.schedule_day_id);
+                    time = this.context.schedule_time.Find((int)c.schedule_time_id);
+                    instructor = this.context.instructors.Find((int)c.instructor_id);
 
-                if (quarter.Length > 0)
-                {
-                    adapter.SelectCommand.Parameters.Add(new SqlParameter("@quarter", SqlDbType.VarChar, 25));
-                    adapter.SelectCommand.Parameters["@quarter"].Value = quarter;
-                }
-
-                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
-
-                if (dataSet.Tables[0].Rows.Count == 0)
-                {
-                    return null;
-                }
-
-                for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-                {
                     var schedule = new Schedule
                     {
-                        ScheduleId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["schedule_id"].ToString()), 
-                        Year = dataSet.Tables[0].Rows[i]["year"].ToString(), 
-                        Quarter = dataSet.Tables[0].Rows[i]["quarter"].ToString(), 
-                        Session = dataSet.Tables[0].Rows[i]["session"].ToString(), 
+                        ScheduleId = c.schedule_id,
+                        Year = c.year.ToString(),
+                        Quarter = c.quarter,
+                        Session = c.session,
+                        Instructor = new Instructor
+                        {
+                            InstructorId = instructor.instructor_id,
+                            FirstName = instructor.first_name,
+                            LastName = instructor.last_name,
+                        },
+                        Day = new ScheduleDay
+                        {
+                            DayId = day.schedule_day_id,
+                            Day = day.schedule_day1
+                        },
+                        Time = new ScheduleTime 
+                        {
+                            TimeId = time.schedule_time_id,
+                            Time = time.schedule_time1
+                        },
                         Course = new Course
                         {
-                            CourseId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["course_id"].ToString()), 
-                            Title = dataSet.Tables[0].Rows[i]["course_title"].ToString(), 
-                            Description = dataSet.Tables[0].Rows[i]["course_description"].ToString(), 
+                            CourseId = c.course.course_id,
+                            Title = c.course.course_title,
+                            Description = c.course.course_description
                         }
                     };
 
@@ -124,12 +127,60 @@
             {
                 errors.Add("Error occured in ScheduleRepository.GetScheduleList: " + e);
             }
-            finally
-            {
-                conn.Dispose();
-            }
 
             return scheduleList;
+        }
+
+        public Schedule GetScheduleById(int scheduleId, List<string> errors)
+        {
+            Schedule pocoSchedule = new Schedule();
+            course_schedule dbSchedule;
+
+            try
+            {
+                dbSchedule = this.context.course_schedule.Find(scheduleId);
+
+                var day = new schedule_day();
+                var time = new schedule_time();
+                var instructor = new instructor();
+                day = this.context.schedule_day.Find((int)dbSchedule.schedule_day_id);
+                time = this.context.schedule_time.Find((int)dbSchedule.schedule_time_id);
+                instructor = this.context.instructors.Find((int)dbSchedule.instructor_id);
+
+
+                pocoSchedule.ScheduleId = dbSchedule.schedule_id;
+                pocoSchedule.Year = dbSchedule.year.ToString();
+                pocoSchedule.Quarter = dbSchedule.quarter;
+                pocoSchedule.Session = dbSchedule.session;
+                pocoSchedule.Instructor = new Instructor
+                {
+                    InstructorId = instructor.instructor_id,
+                    FirstName = instructor.first_name,
+                    LastName = instructor.last_name,
+                };
+                pocoSchedule.Day = new ScheduleDay
+                {
+                    DayId = day.schedule_day_id,
+                    Day = day.schedule_day1
+                };
+                pocoSchedule.Time = new ScheduleTime
+                {
+                    TimeId = time.schedule_time_id,
+                    Time = time.schedule_time1
+                };
+                pocoSchedule.Course = new Course
+                {
+                    CourseId = dbSchedule.course.course_id,
+                    Title = dbSchedule.course.course_title,
+                    Description = dbSchedule.course.course_description
+                };
+            }            
+            catch (Exception e)
+            {
+                errors.Add("Error occured in ScheduleRepository.GetScheduleList: " + e);
+            }
+
+            return pocoSchedule;
         }
 
         public void AddCourseToSchedule(Schedule schedule, int instructorId, int dayId, int timeId, ref List<string> errors)
@@ -172,7 +223,7 @@
 
         public bool IsNotDuplicateCourseFromSchedule(int year, int courseId, string quarter, ref List<string> errors)
         {
-            var isDuplicate = true;
+            var isDuplicate = false;
 
             try
             {

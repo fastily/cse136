@@ -10,6 +10,12 @@
 
         public string Session { get; set; }
 
+        public ScheduleDay Day { get; set; }
+
+        public ScheduleTime Time { get; set; }
+
+        public Instructor Instructor { get; set; }
+
         public Course Course { get; set; }
 
         public override string ToString()
