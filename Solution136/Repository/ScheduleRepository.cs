@@ -44,6 +44,33 @@
             return pocoScheduleList;
         }
 
+
+        public List<ScheduleMin> GetStudentScheduleMin(string id, ref List<string> errors)
+        {
+            List<ScheduleMin> pocoScheduleList = new List<ScheduleMin>();
+            IEnumerable<course_schedule> dbScheduleList;
+
+            try
+            {
+                dbScheduleList = context.course_schedule.OrderBy(x => x.year);
+
+                foreach (course_schedule sched in dbScheduleList)
+                {
+                    ScheduleMin tempPoco = new ScheduleMin();
+                    tempPoco.Year = sched.year.ToString();
+                    tempPoco.Quarter = sched.quarter;
+
+                    pocoScheduleList.Add(tempPoco);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in ScheduleRepository.GetAllSchedules: " + e);
+            }
+
+            return pocoScheduleList;
+        }
+
         public List<Schedule> GetScheduleList(string year, string quarter, ref List<string> errors)
         {
             var conn = new SqlConnection(ConnectionString);
