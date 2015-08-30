@@ -1,0 +1,47 @@
+﻿@{
+    var id = ViewBag.Id;
+}
+<h3 class="page-header">Students Current Enrollments</h3>
+<a href="/Admin/StudentList"><< back</a>
+<div id="divScheduleListContent">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Year</th>
+                <th>Quarter</th>
+                <th>Session</th>
+                <th>Course</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <!--<tbody data-bind="foreach: viewModel.Enrollment">-->
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: year"></td>
+                <td data-bind="text: quarter"></td>
+                <td data-bind="text: session"></td>
+                <td data-bind="text: course.title"></td>
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                    to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/html" id="action-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="DeleteStudent: $data">Drop</a>
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var scheduleViewModelObj = new ScheduleViewModel();
+        scheduleViewModelObj.GetAll("2011","Fall");
+    });
+</script>

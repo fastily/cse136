@@ -133,5 +133,11 @@
         {
             return this.View();
         }
+
+        public ActionResult SharedStudentEnrollment(string id)
+        {
+            ViewBag.Id = id;
+            return this.View();
+        }
     }
 }
