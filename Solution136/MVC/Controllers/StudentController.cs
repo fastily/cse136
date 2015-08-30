@@ -18,7 +18,7 @@
             return this.View();
         }
 
-        public ActionResult ScheduleList(string id)
+        public ActionResult ViewCurrentSchedule(string id)
         {
             ViewBag.Id = id;
             Session["studentId"] = id;
@@ -29,16 +29,6 @@
         {
             ViewBag.Id = id;
             Session["studentId"] = id;
-            return this.View();
-        }
-        
-        public ActionResult AllScheduleList()
-        {
-            return this.View();
-        }
-
-        public ActionResult AddCourseToSchedule()
-        {
             return this.View();
         }
 

@@ -68,21 +68,4 @@
             }
         });
     };
-
-    this.GetStudentScheduleMin = function (id, callback) {
-        var url = "http://localhost:9393/Api/Schedule/GetStudentScheduleListMin?id=" + id;
-        $.ajax({
-            async: asyncIndicator,
-            method: "GET",
-            url: url,
-            data: "",
-            dataType: "json",
-            success: function (result) {
-                callback(result);
-            },
-            error: function () {
-                alert('Error while loading schedule list min.  Is your service layer running?');
-            }
-        });
-    };
 }

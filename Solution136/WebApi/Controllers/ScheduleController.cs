@@ -39,16 +39,6 @@
             return service.GetScheduleMin(ref errors);
         }
 
-        [HttpGet]
-        public List<ScheduleMin> GetStudentScheduleListMin(string id)
-        {
-            var service = new ScheduleService(new ScheduleRepository(this.entities));
-            var errors = new List<string>();
-
-            return service.GetStudentScheduleMin(id, ref errors);
-        }
-
-
         [HttpPost]
         public string AddCourseToSchedule(Schedule schedule, int instructorId, string dayId, string timeId)
         {
