@@ -43,7 +43,7 @@
 
         public ActionResult EditCourseInSchedule(int id)
         {
-            ViewBag.id = id;
+            ViewBag.Id = id;
             return this.View();
         }
 
@@ -58,6 +58,11 @@
         {
             ViewBag.year = year;
             ViewBag.quarter = quarter;
+            return this.View();
+        }
+
+        public ActionResult AddSchedule()
+        {
             return this.View();
         }
 

@@ -31,6 +31,15 @@
         }
 
         [HttpGet]
+        public Schedule GetScheduleById(int id)
+        {
+            var service = new ScheduleService(new ScheduleRepository(this.entities));
+            var errors = new List<string>();
+
+            return service.GetScheduleById(id, ref errors);
+        }
+
+        [HttpGet]
         public List<ScheduleMin> GetScheduleListMin()
         {
             var service = new ScheduleService(new ScheduleRepository(this.entities));

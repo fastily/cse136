@@ -131,7 +131,7 @@
             return scheduleList;
         }
 
-        public Schedule GetScheduleById(int scheduleId, List<string> errors)
+        public Schedule GetScheduleById(int scheduleId, ref List<string> errors)
         {
             Schedule pocoSchedule = new Schedule();
             course_schedule dbSchedule;
