@@ -3,10 +3,11 @@
     var id = ViewBag.Id;
 }
 
-<h2 class="page-header">Welcome Student</h2>
-<p>What feature should admin able to do?</p>
+<h2 class="page-header">Welcome Student! [@ViewBag.id]</h2>
+<p>Available Student Actions:</p>
 <ul>
     <li><a href="~/Student/Edit?id=@ViewBag.id">Edit my info</a></li>
     <li><a href="~/Student/ScheduleList?id=@ViewBag.id">Show Current Schedule</a></li>
     <li><a href="~/Student/ClassEnrollment?id=@ViewBag.id">Enroll in a Class</a></li>
+    <li><a href="~/Student/GradeChangeRequest?id=@ViewBag.id">Request a Grade Change</a></li>
 </ul>

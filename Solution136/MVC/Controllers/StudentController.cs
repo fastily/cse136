@@ -32,5 +32,11 @@
             return this.View();
         }
 
+        public ActionResult GradeChangeRequest(string id)
+        {
+            ViewBag.Id = id;
+            Session["studentId"] = id;
+            return this.View();
+        }
     }
 }
