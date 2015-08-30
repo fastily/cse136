@@ -23,7 +23,9 @@
                 <td data-bind="text: first"></td>
                 <td data-bind="text: last"></td>
                 <td data-bind="text: type"></td>
+                <td> <a data-bind="DeleteStudent: $data">delete</a></td>
             </tr>
+
         </tbody>
     </table>
     <a data-bind="attr: { href : '/Staff/CreateTa', title: 'create' }">Add New Ta</a>

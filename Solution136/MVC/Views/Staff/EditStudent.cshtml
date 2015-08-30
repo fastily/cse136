@@ -4,7 +4,34 @@
 
 <h2 class="page-header">Manage Student</h2>
 <a href="/Staff?id=@Session["staffId"]"><< back</a>
-
+</br>
+<div>
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <td>A901234</td>
+                <td>John</td>
+                <td>Cena</td>
+                <td>dondudndond@rko.dead</td>
+                <!--
+                <td data-bind="text: id"></td>
+                <td data-bind="text: first"></td>
+                <td data-bind="text: last"></td>
+                <td data-bind="text: email"></td>
+                -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+</br>
 <div id="divCourseListContent">
     <table style="width:100%;">
        
