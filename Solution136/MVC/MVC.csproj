@@ -234,6 +234,7 @@
     <Content Include="Views\Staff\CreateTA.cshtml" />
     <Content Include="Views\Staff\CreateStudent.cshtml" />
     <Content Include="Views\Staff\EditStudent.cshtml" />
+    <Content Include="Views\Student\ScheduleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

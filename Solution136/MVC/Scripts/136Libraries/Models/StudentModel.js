@@ -60,7 +60,7 @@ function StudentModel(asyncIndicator) {
 
     this.GetDetail = function (id, callback) {
         var url = "http://localhost:9393/Api/Student/GetStudent?id=" + id + "&bust=" + new Date();
-            
+
         $.ajax({
             async: asyncIndicator,
             method: "GET",
