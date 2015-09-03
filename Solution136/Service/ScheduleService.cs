@@ -96,5 +96,15 @@
 
             return convertMinSchedule;
         }
+
+        public List<ScheduleDay> GetDays(ref List<string> errors)
+        {
+            return this.repository.GetDays(ref errors);
+        }
+
+        public List<ScheduleTime> GetTimes(ref List<string> errors)
+        {
+            return this.repository.GetTimes(ref errors);
+        }
     }
 }

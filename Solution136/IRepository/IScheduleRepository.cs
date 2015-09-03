@@ -19,5 +19,9 @@
         void RemoveCourseFromSchedule(int scheduleId, ref List<string> errors);
 
         bool IsNotDuplicateCourseFromSchedule(int year, int courseId, string quarter, ref List<string> errors);
+
+        List<ScheduleDay> GetDays(ref List<string> errors);
+
+        List<ScheduleTime> GetTimes(ref List<string> errors);
     }
 }

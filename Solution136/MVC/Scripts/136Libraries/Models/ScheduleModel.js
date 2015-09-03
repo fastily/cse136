@@ -102,4 +102,38 @@
             }
         });
     };
+
+    this.GetDays = function (callback) {
+        var url = "http://localhost:9393/Api/Schedule/GetDays";
+        $.ajax({
+            async: asyncIndicator,
+            method: "GET",
+            url: url,
+            data: "",
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while loading day list.  Is your service layer running?');
+            }
+        });
+    };
+
+    this.GetTimes = function (callback) {
+        var url = "http://localhost:9393/Api/Schedule/GetTimes";
+        $.ajax({
+            async: asyncIndicator,
+            method: "GET",
+            url: url,
+            data: "",
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while loading time list.  Is your service layer running?');
+            }
+        });
+    };
 }

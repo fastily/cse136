@@ -33,11 +33,11 @@
         </thead>
         <tbody>
             <tr>
-                <td data-bind="text: id">0</td>
-                <td data-bind="text: year">1989</td>
-                <td data-bind="text: quarter">Fall</td>
-                <td data-bind="text: session">B00</td>
-                <td data-bind="text: course.title">CSE 197</td>
+                <td >0</td>
+                <td >1989</td>
+                <td >Fall</td>
+                <td >B00</td>
+                <td >CSE 197</td>
             </tr>
         </tbody>
     </table>
@@ -51,5 +51,5 @@
         availableInstructors: ko.observableArray(['Isaac Chu', 'Mia Minnes'])
     };
 
-    ko.applyBindings(viewModel);
+    ko.applyBindings((viewModel),document.getElementById("divCourseListContent"));
 </script>

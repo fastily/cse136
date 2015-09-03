@@ -9,7 +9,7 @@
 
 
 <a href="/Student/ScheduleList"><< back</a>
-<div id="divScheduleListContent">
+<div id="fakeContent">
     <table style="width:100%;">
         <thead>
             <tr>
@@ -47,26 +47,34 @@
 </div>
 
 <h3 class="page-header">Available Courses</h3>
-<div id="divCourseListContent">
+<div id="divScheduleListContent">
     <table style="width:100%;">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Course Level</th>
-                <th>Description</th>
+                <th>Year</th>
+                <th>Quarter</th>
+                <th>Session</th>
+                <th>Course Title</th>
+                <th>Time</th>
+                <th>Day</th>
+                <th>Instructor Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: viewModel">
             <tr>
                 <td data-bind="text: id"></td>
-                <td data-bind="text: title"></td>
-                <td data-bind="text: level"></td>
-                <td data-bind="text: description"></td>
+                <td data-bind="text: year"></td>
+                <td data-bind="text: quarter"></td>
+                <td data-bind="text: session"></td>
+                <td data-bind="text: course.title"></td>
+                <td data-bind="text: time.name"></td>
+                <td data-bind="text: day.name"></td>
+                <td data-bind="text: instructor.name"></td>
                 <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
-                        to for each element of the viewModel array -->
+                    to for each element of the viewModel array -->
                     <div data-bind="template: { name: 'action-template', data: $data}"></div>
                 </td>
             </tr>
@@ -81,7 +89,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var courseViewModelObj = new CourseListViewModel();
-        courseViewModelObj.GetAll();
+        var scheduleViewModelObj = new ScheduleViewModel();
+        scheduleViewModelObj.GetAll("@ViewBag.Year","@ViewBag.Quarter");
     });
 </script>

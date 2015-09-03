@@ -3,6 +3,8 @@
     var self = this;
     var initialBind = true;
     var scheduleListViewModel = ko.observableArray();
+    var DayListViewModel = ko.observableArray();
+    var TimeListViewModel = ko.observableArray();
 
     this.Initialize = function () {
 
@@ -154,6 +156,44 @@
 
             if (initialBind) {
                 ko.applyBindings({ viewModel: scheduleListViewModel }, document.getElementById("divScheduleListContent"));
+                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
+            }
+        });
+    };
+
+    this.GetDays = function () {
+
+        scheduleModelObj.GetDays(function (dayList) {
+            DayListViewModel.removeAll();
+
+            for (var i = 0; i < dayList.length; i++) {
+                DayListViewModel.push({
+                    id: dayList[i].DayId,
+                    day: dayList[i].Day
+                });
+            }
+
+            if (initialBind) {
+                ko.applyBindings({ viewModel: dayList }, document.getElementById("dayDropdown"));
+                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
+            }
+        });
+    };
+
+    this.GetTimes = function () {
+
+        scheduleModelObj.GetTimes(function (timeList) {
+            TimeListViewModel.removeAll();
+
+            for (var i = 0; i < timeList.length; i++) {
+                TimeListViewModel.push({
+                    id: timeList[i].TimeId,
+                    time: timeList[i].Time
+                });
+            }
+
+            if (initialBind) {
+                ko.applyBindings({ viewModel: timeList }, document.getElementById("timeDropdown"));
                 initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
             }
         });

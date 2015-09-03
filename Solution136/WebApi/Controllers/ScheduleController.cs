@@ -22,6 +22,22 @@
         }
 
         [HttpGet]
+        public List<ScheduleDay> GetDays()
+        {
+            var service = new ScheduleService(new ScheduleRepository(this.entities));
+            var errors = new List<string>();
+            return service.GetDays(ref errors);
+        }
+
+        [HttpGet]
+        public List<ScheduleTime> GetTimes()
+        {
+            var service = new ScheduleService(new ScheduleRepository(this.entities));
+            var errors = new List<string>();
+            return service.GetTimes(ref errors);
+        }
+
+        [HttpGet]
         public List<Schedule> GetScheduleList(string year, string quarter)
         {
             var service = new ScheduleService(new ScheduleRepository(this.entities));
