@@ -90,7 +90,7 @@
                 //viewModel.newCourse.ScheduleDayId("");
                 //viewModel.newCourse.ScheduleTimeId("");
                 //viewModel.newCourse.InstructorId("");
-                alert(succes);
+                alert("succes");
             }
             else {
                 alert('Error occurs during Insert new Course Schedule!!');
