@@ -30,17 +30,29 @@
     </div>
 
     <label>Time</label>
-    <select class="form-control" data-bind=" options: viewModel.availableTimes"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleTimeList,
+                            value: viewModel.newSchedule.ScheduleTime.TimeId,
+                            optionsText: 'Time',
+                            optionsValue: 'TimeId',
+                            optionsCaption: 'Choose a Time...'"></select>
+    </div>
 
     <label>Day</label>
-    <select class="form-control" data-bind=" options: viewModel.availableDays"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleDayList,
+                            value: viewModel.newSchedule.ScheduleDay.DayId,
+                            optionsText: 'Day',
+                            optionsValue: 'DayId',
+                            optionsCaption: 'Choose Day...'"></select>
+    </div>
 
     <label>Instructor</label>
     <select class="form-control" data-bind=" options: viewModel.availableInstructors"></select><br />
 
     <label>Course</label>
     <select class="form-control" data-bind=" options: viewModel.availableCourses"></select><br />
-    <input class="btn btn-primary" value="Add" type="button" />
+    <input class="btn btn-primary" value="Add" type="button" data-bind="click: viewModel.AddNewCourseSchedule" />
     <br />
     <hr />
     <div id="divMessage" class="text-success">&nbsp;</div>

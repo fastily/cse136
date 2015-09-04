@@ -9,5 +9,7 @@
         public string Grade { get; set; }
 
         public float GradeValue { get; set; }
+
+        public Schedule schedule { get; set; }
     }
 }
