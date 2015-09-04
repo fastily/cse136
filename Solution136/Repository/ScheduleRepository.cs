@@ -179,16 +179,16 @@
             return pocoSchedule;
         }
 
-        public void AddCourseToSchedule(Schedule schedule, int instructorId, int dayId, int timeId, ref List<string> errors)
+        public void AddCourseToSchedule(Schedule schedule, ref List<string> errors)
         {
             course_schedule db_Schedule = new course_schedule();
 
             try
             {
                 db_Schedule.course_id = schedule.Course.CourseId;
-                db_Schedule.instructor_id = instructorId;
-                db_Schedule.schedule_day_id = dayId;
-                db_Schedule.schedule_time_id = timeId;
+                db_Schedule.instructor_id = schedule.Instructor.InstructorId;
+                db_Schedule.schedule_day_id = schedule.Day.DayId;
+                db_Schedule.schedule_time_id = schedule.Time.TimeId;
                 db_Schedule.year = int.Parse(schedule.Year);
                 db_Schedule.quarter = schedule.Quarter;
                 db_Schedule.session = schedule.Session;

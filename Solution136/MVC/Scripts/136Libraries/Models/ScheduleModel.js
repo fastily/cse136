@@ -3,12 +3,12 @@
         asyncIndicator = true;
     }
 
-    this.Create = function (schedule, instructorId, dayId, timeId, callback) {
+    this.Create = function (schedule, callback) {
         $.ajax({
             async: asyncIndicator,
             method: "POST",
             url: "http://localhost:9393/Api/Schedule/AddCourseToSchedule",
-            data: {schedule: schedule, instructorId: instructorId, dayId: dayId, timeId: timeId},
+            data: schedule,
             dataType: "json",
             success: function (result) {
                 callback(result);

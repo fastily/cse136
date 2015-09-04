@@ -1,20 +1,21 @@
 ﻿function ScheduleViewModel() {
     var viewModel = null;
     var scheduleModelObj = new ScheduleModel();
+    var courseModelObj = new CourseListModel();
+    var InstructorModelObj = new InstructorModel();
     var self = this;
     var initialBind = true;
     var scheduleListViewModel = ko.observableArray();
     var DayListViewModel = ko.observableArray();
     var TimeListViewModel = ko.observableArray();
-
+    var courseListViewModel = ko.observableArray();
+    var instructorListViewModel = ko.observableArray();
 
     var CreateViewModel = function () {
             // These are the initial options
         this.availableYears = ko.observableArray(['2015', '2016', '2017']);
         this.availableQuarters = ko.observableArray(['Fall', 'Winter', 'Spring', 'Summer Session 1', 'Summer Session 2', 'Special Summer Session']);
         this.availableSessions = ko.observableArray(['A00', 'B00']);
-        this.availableTimes = ko.observableArray(['8:00 AM', '9:00AM']);
-        //this.availableDays = ko.observableArray(['Mon/Wed/Fri', 'Tues/Thurs', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri']);
         this.availableInstructors = ko.observableArray(['Isaac Chu', 'Mia Minnes']);
         this.availableCourses = ko.observableArray(['CSE 105', 'CSE 134B', 'CSE 136']);
 
@@ -27,7 +28,8 @@
         this.sessionList = ko.observableArray(allSessions);
         this.scheduleTimeList = ko.observableArray([]);
         this.scheduleDayList = ko.observableArray([]);
-        this.instructorList = ko.observableArray([]);
+        this.scheduleInstructorList = ko.observableArray([]);
+        this.scheduleCourseList = ko.observableArray([]);
 
         this.newSchedule = {
             ScheduleId: ko.observable(),
@@ -53,41 +55,42 @@
                 Title: ko.observable(""),
                 CourseLevel: ko.observable(""),
                 Description: ko.observable("")
-            },
+            }
         };
 
         this.AddNewCourseSchedule = AddNewCourseSchedule;
     };
 
-    var AddNewCourseSchedule = function (data) {
+    AddNewCourseSchedule = function (data) {
         var courseScheduleData = {
-            Year: viewModel.newCourse.Year(),
-            Quarter: viewModel.newCourse.Quarter(),
-            Session: viewModel.newCourse.Session(),
+            Year: viewModel.newSchedule.Year(),
+            Quarter: viewModel.newSchedule.Quarter(),
+            Session: viewModel.newSchedule.Session(),
             Day: {
-                ScheduleDayId: viewModel.newCourse.ScheduleDayId()
+                DayId: viewModel.newSchedule.ScheduleDay.DayId()
             },
             Time: {
-                ScheduleTimeId: viewModel.newCourse.ScheduleTimeId()
+                TimeId: viewModel.newSchedule.ScheduleTime.TimeId()
             },
-            Professor: {
-                InstructorId: viewModel.newCourse.InstructorId()
+            Instructor: {
+                InstructorId: viewModel.newSchedule.Instructor.InstructorId()
             },
             Course: {
-                CourseId: viewModel.newCourse.CourseId
+                CourseId: viewModel.newSchedule.Course.CourseId
             }
         };
 
-        courseScheduleModelObj.InsertCourseSchedule(courseScheduleData, function (result) {
+        scheduleModelObj.Create(courseScheduleData, function (result) {
             if (result = 'ok') {
-                LoadCourseSchedule("");
-                viewModel.newCourse.CourseId("");
-                viewModel.newCourse.Year("");
-                viewModel.newCourse.Quarter("");
-                viewModel.newCourse.Session("");
-                viewModel.newCourse.ScheduleDayId("");
-                viewModel.newCourse.ScheduleTimeId("");
-                viewModel.newCourse.InstructorId("");
+                //LoadCourseSchedule("");
+                //viewModel.newCourse.CourseId("");
+                //viewModel.newCourse.Year("");
+                //viewModel.newCourse.Quarter("");
+                //viewModel.newCourse.Session("");
+                //viewModel.newCourse.ScheduleDayId("");
+                //viewModel.newCourse.ScheduleTimeId("");
+                //viewModel.newCourse.InstructorId("");
+                alert(succes);
             }
             else {
                 alert('Error occurs during Insert new Course Schedule!!');
@@ -280,6 +283,40 @@
         });
     };
 
+    this.GetCourses = function () {
+
+        courseModelObj.GetAll(function (courseList) {
+            courseListViewModel.removeAll();
+
+            for (var i = 0; i < courseList.length; i++) {
+                courseListViewModel.push({
+                    id: courseList[i].CourseId,
+                    title: courseList[i].Title,
+                    level: courseList[i].CourseLevel,
+                    description: courseList[i].Description
+                });
+            }
+            viewModel.scheduleCourseList(courseList);
+        });
+    };
+
+    this.GetInstructors = function () {
+
+        InstructorModelObj.GetAll(function (instructorList) {
+            instructorListViewModel.removeAll();
+
+            for (var i = 0; i < instructorList.length; i++) {
+                instructorListViewModel.push({
+                    id: instructorList[i].InstructorId,
+                    first: instructorList[i].FirstName,
+                    last: instructorList[i].LastName,
+                    title: instructorList[i].Title
+                });
+            }
+            viewModel.scheduleInstructorList(instructorList);
+        });
+    };
+
     ko.bindingHandlers.DeleteSchedule = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             $(element).click(function () {
@@ -303,6 +340,8 @@
 
         this.GetDays();
         this.GetTimes();
+        this.GetCourses();
+        this.GetInstructors();
 
         ko.applyBindings({ viewModel: viewModel }, document.getElementById("divScheduleAdd"));
        

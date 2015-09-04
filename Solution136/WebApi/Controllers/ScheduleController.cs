@@ -74,12 +74,12 @@
         }
 
         [HttpPost]
-        public string AddCourseToSchedule(Schedule schedule, int instructorId, string dayId, string timeId)
+        public string AddCourseToSchedule(Schedule schedule)
         {
             var errors = new List<string>();
             var repository = new ScheduleRepository(this.entities);
             var service = new ScheduleService(repository);
-            service.AddCourseToSchedule(schedule, instructorId, dayId, timeId, ref errors);
+            service.AddCourseToSchedule(schedule, ref errors);
 
             if (errors.Count == 0)
             {

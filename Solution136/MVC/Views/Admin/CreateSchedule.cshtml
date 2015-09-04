@@ -11,21 +11,21 @@
     <label>Year</label>
     <div class="form-group">
         <select class="form-control" data-bind="options: viewModel.yearList,
-                            value: 0,
+                            value: viewModel.newSchedule.Year,
                             optionsCaption: 'Choose a Year...'"></select>
     </div>
 
     <label>Quarter</label>
     <div class="form-group">
         <select class="form-control" data-bind="options: viewModel.quarterList,
-                            value: 0,
+                            value: viewModel.newSchedule.Quarter,
                             optionsCaption: 'Choose a Quarter...'"></select>
     </div>
 
     <label>Session</label>
     <div class="form-group">
         <select class="form-control" data-bind="options: viewModel.sessionList,
-                            value: 0,
+                            value: viewModel.newSchedule.Session,
                             optionsCaption: 'Choose a Session...'"></select>
     </div>
 
@@ -48,10 +48,27 @@
     </div>
 
     <label>Instructor</label>
-    <select class="form-control" data-bind=" options: viewModel.availableInstructors"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleInstructorList,
+                            value: viewModel.newSchedule.Instructor.InstructorId,
+                            optionsText: function(instructor){
+                                return instructor.FirstName + ' ' + instructor.LastName;
+                            },
+                            optionsValue: 'InstructorId',
+                            optionsCaption: 'Choose an Instructor...'"></select>
+    </div>
 
     <label>Course</label>
-    <select class="form-control" data-bind=" options: viewModel.availableCourses"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleCourseList,
+                           optionsText: function(course) {
+                                return course.Title + ' ' + course.Description;
+                           },
+                           optionsValue: 'CourseId',
+                           value: viewModel.newSchedule.Course.CourseId,
+                           optionsCaption: 'Choose a Course...'"></select>
+    </div>
+
     <input class="btn btn-primary" value="Add" type="button" data-bind="click: viewModel.AddNewCourseSchedule" />
     <br />
     <hr />

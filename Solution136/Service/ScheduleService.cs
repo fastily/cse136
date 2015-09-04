@@ -31,7 +31,7 @@
             return this.repository.GetScheduleById(id, ref errors);
         }
 
-        public void AddCourseToSchedule(Schedule schedule, int instructorId, string dayId, string timeId, ref List<string> errors)
+        public void AddCourseToSchedule(Schedule schedule, ref List<string> errors)
         {
             if (schedule == null)
             {
@@ -39,19 +39,19 @@
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(dayId))
+            if (schedule.Day.DayId <= 0)
             {
                 errors.Add("Invalid Day");
                 throw new ArgumentException();
             }
 
-            if (string.IsNullOrEmpty(timeId))
+            if (schedule.Time.TimeId <= 0 )
             {
                 errors.Add("Invalid Time");
                 throw new ArgumentException();
             }
 
-            this.repository.AddCourseToSchedule(schedule, instructorId, int.Parse(dayId), int.Parse(timeId), ref errors);
+            this.repository.AddCourseToSchedule(schedule, ref errors);
         }
 
         public void RemoveCourseFromSchedule(int scheduleId, ref List<string> errors)
