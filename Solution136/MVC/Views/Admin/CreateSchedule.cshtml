@@ -7,27 +7,39 @@
 
 <h3 class="page-header">Add New Schedule</h3>
 <a href="/Admin/ScheduleList"><< back</a>
-<div id="divCourseListContent">
+<div id="divScheduleAdd">
     <label>Year</label>
-    <select class="form-control" data-bind="options: availableYears"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.yearList,
+                            value: 0,
+                            optionsCaption: 'Choose a Year...'"></select>
+    </div>
 
     <label>Quarter</label>
-    <select class="form-control" data-bind=" options: availableQuarters"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.quarterList,
+                            value: 0,
+                            optionsCaption: 'Choose a Quarter...'"></select>
+    </div>
 
     <label>Session</label>
-    <select class="form-control" data-bind=" options: availableSessions"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.sessionList,
+                            value: 0,
+                            optionsCaption: 'Choose a Session...'"></select>
+    </div>
 
     <label>Time</label>
-    <select class="form-control" data-bind=" options: availableTimes"></select><br />
+    <select class="form-control" data-bind=" options: viewModel.availableTimes"></select><br />
 
     <label>Day</label>
-    <select class="form-control" data-bind=" options: availableDays"></select><br />
+    <select class="form-control" data-bind=" options: viewModel.availableDays"></select><br />
 
     <label>Instructor</label>
-    <select class="form-control" data-bind=" options: availableInstructors"></select><br />
+    <select class="form-control" data-bind=" options: viewModel.availableInstructors"></select><br />
 
     <label>Course</label>
-    <select class="form-control" data-bind=" options: availableCourses"></select><br />
+    <select class="form-control" data-bind=" options: viewModel.availableCourses"></select><br />
     <input class="btn btn-primary" value="Add" type="button" />
     <br />
     <hr />
@@ -35,17 +47,10 @@
 </div>
 
 <script type="text/javascript">
-    var viewModel = {
-        // These are the initial options
-        availableYears: ko.observableArray(['2015', '2014', '2013']),
-        availableQuarters: ko.observableArray(['Fall', 'Winter', 'Spring', 'Summer Session 1', 'Summer Session 2', 'Special Summer Session']),
-        availableSessions: ko.observableArray(['A00', 'B00']),
-        availableTimes: ko.observableArray(['8:00 AM', '9:00AM']),
-        availableDays: ko.observableArray(['Mon/Wed/Fri', 'Tues/Thurs', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri']),
-        availableInstructors: ko.observableArray(['Isaac Chu', 'Mia Minnes']),
-        availableCourses: ko.observableArray(['CSE 105', 'CSE 134B', 'CSE 136'])
-    };
+    $(document).ready(function () {
+        var scheduleViewModelObj = new ScheduleViewModel();
+        scheduleViewModelObj.LoadCreateCourse();
+    });
 
-    ko.applyBindings(viewModel);
 </script>
 

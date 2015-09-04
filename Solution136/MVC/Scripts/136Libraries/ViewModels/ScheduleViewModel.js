@@ -1,4 +1,5 @@
 ﻿function ScheduleViewModel() {
+    var viewModel = null;
     var scheduleModelObj = new ScheduleModel();
     var self = this;
     var initialBind = true;
@@ -6,9 +7,32 @@
     var DayListViewModel = ko.observableArray();
     var TimeListViewModel = ko.observableArray();
 
+
+    var CreateViewModel = function () {
+            // These are the initial options
+        this.availableYears = ko.observableArray(['2015', '2016', '2017']);
+        this.availableQuarters = ko.observableArray(['Fall', 'Winter', 'Spring', 'Summer Session 1', 'Summer Session 2', 'Special Summer Session']);
+        this.availableSessions = ko.observableArray(['A00', 'B00']);
+        this.availableTimes = ko.observableArray(['8:00 AM', '9:00AM']);
+        this.availableDays = ko.observableArray(['Mon/Wed/Fri', 'Tues/Thurs', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri']);
+        this.availableInstructors = ko.observableArray(['Isaac Chu', 'Mia Minnes']);
+        this.availableCourses = ko.observableArray(['CSE 105', 'CSE 134B', 'CSE 136']);
+
+        var allQuarters = ["Winter", "Spring", "Summer 1", "Summer 2", "Fall"];
+        var allYears = ["2015", "2016", "2017"];
+        var allSessions = ["A00", "B00"];
+
+        this.yearList = ko.observableArray(allYears);
+        this.quarterList = ko.observableArray(allQuarters);
+        this.sessionList = ko.observableArray(allSessions);
+        this.scheduleTimeList = ko.observableArray([]);
+        this.scheduleDayList = ko.observableArray([]);
+        this.instructorList = ko.observableArray([]);
+    };
+
     this.Initialize = function () {
 
-        var viewModel = {
+        var tviewModel = {
             id: ko.observable(1),
             year: ko.observable("2015"),
             quarter: ko.observable("winter"),
@@ -24,7 +48,7 @@
             }
         };
 
-        ko.applyBindings(viewModel, document.getElementById("divSchedule"));
+        ko.applyBindings(tviewModel, document.getElementById("divSchedule"));
     };
 
     this.CreateSchedule = function (data) {
@@ -174,7 +198,7 @@
             }
 
             if (initialBind) {
-                ko.applyBindings({ viewModel: dayList }, document.getElementById("dayDropdown"));
+                //ko.applyBindings({ viewModel: dayList }, document.getElementById("dayDropdown"));
                 initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
             }
         });
@@ -191,11 +215,7 @@
                     time: timeList[i].Time
                 });
             }
-
-            if (initialBind) {
-                ko.applyBindings({ viewModel: timeList }, document.getElementById("timeDropdown"));
-                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
-            }
+            viewModel.scheduleTimeList(timeList);
         });
     };
 
@@ -213,5 +233,17 @@
                 });
             });
         }
+    };
+
+    this.LoadCreateCourse = function () {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        //this.GetDays();
+        //this.GetTimes();
+
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("divScheduleAdd"));
+       
     };
 }
