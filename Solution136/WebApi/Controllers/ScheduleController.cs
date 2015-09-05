@@ -89,7 +89,7 @@
             return "error";
         }
 
-        [HttpPost]
+        [HttpGet]
         public string DeleteCourseFromSchedule(int id)
         {
             var errors = new List<string>();

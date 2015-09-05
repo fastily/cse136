@@ -42,8 +42,8 @@
     this.Delete = function (id, callback) {
         $.ajax({
             async: asyncIndicator,
-            method: "POST",
-            url: "http://localhost:9393/Api/Schedule/DeleteCourseFromSchedule",
+            method: "GET",
+            url: "http://localhost:9393/Api/Schedule/DeleteCourseFromSchedule?id=" + id,
             data: "",
             dataType: "json",
             success: function (result) {

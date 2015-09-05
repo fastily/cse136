@@ -208,7 +208,7 @@
 
             try
             {
-                db_Schedule.schedule_id = scheduleId;
+                db_Schedule = this.context.course_schedule.Find(scheduleId);
                 db_Schedule = this.context.course_schedule.Remove(db_Schedule);
                 deleteEnrollments = this.context.enrollments.Where(x => x.schedule_id == scheduleId);
                 foreach (enrollment deleteMe in deleteEnrollments)
