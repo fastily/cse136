@@ -55,11 +55,11 @@
             var gradeChangeService = new GradeChangeService(mockRepository.Object);
             var gc = new GradeChange { Course_id = 5 };
 
-            mockRepository.Setup(x => x.RequestGradeChange(gc, ref errors));
+            mockRepository.Setup(x => x.AddGradeChange(gc, ref errors));
 
             //// Act
             gradeChangeService.InsertGradeChange(gc, ref errors);
-            mockRepository.Verify(mock => mock.RequestGradeChange(gc, ref errors), Times.Once());
+            mockRepository.Verify(mock => mock.AddGradeChange(gc, ref errors), Times.Once());
 
             mockRepository.VerifyAll();
             //// Assert
@@ -75,11 +75,11 @@
             var gradeChangeService = new GradeChangeService(mockRepository.Object);
             var gc = new GradeChange { Course_id = 5, GradeChangeId = 1 };
 
-            mockRepository.Setup(x => x.RespondToGradeChange(5, ref errors));
+            mockRepository.Setup(x => x.ApproveGradeChange(5, ref errors));
 
             //// Act
             gradeChangeService.RespondToGradeChange(gc, ref errors);
-            mockRepository.Verify(mock => mock.RespondToGradeChange(1, ref errors), Times.Once());
+            mockRepository.Verify(mock => mock.ApproveGradeChange(1, ref errors), Times.Once());
 
             //// Assert
             Assert.AreEqual(0, errors.Count);

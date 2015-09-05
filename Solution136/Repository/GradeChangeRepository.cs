@@ -17,15 +17,68 @@
             this.context = entities;
         }
 
-        public void RequestGradeChange(GradeChange gradeChange, ref List<string> errors)
+        public GradeChange FindGradeChangeByStudentId(string student_id, ref List<string> errors)
+        {
+            POCO.GradeChange pocoGradeChange = new POCO.GradeChange();
+            grade_change db_GradeChange;
+            try
+            {
+                db_GradeChange = this.context.grade_change.Find(student_id);
+                if (db_GradeChange != null)
+                {
+                    pocoGradeChange.GradeChangeId = db_GradeChange.gradeChange_id;
+                    pocoGradeChange.Student_id = db_GradeChange.student_id;
+                    pocoGradeChange.Schedule_id = db_GradeChange.schedule_id;
+                    pocoGradeChange.Approved = db_GradeChange.approved;
+                    pocoGradeChange.Course_id = db_GradeChange.course_id;
+                    pocoGradeChange.Description = db_GradeChange.description;
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in GradeChangeRepository.FindGradeChangeById: " + e);
+            }
+
+            return pocoGradeChange;
+        }
+
+        public GradeChange FindGradeChangeByCourseId(int course_id, ref List<string> errors)
+        {
+            POCO.GradeChange pocoGradeChange = new POCO.GradeChange();
+            grade_change db_GradeChange;
+            try
+            {
+                db_GradeChange = this.context.grade_change.Find(course_id);
+                if (db_GradeChange != null)
+                {
+                    pocoGradeChange.GradeChangeId = db_GradeChange.gradeChange_id;
+                    pocoGradeChange.Student_id = db_GradeChange.student_id;
+                    pocoGradeChange.Schedule_id = db_GradeChange.schedule_id;
+                    pocoGradeChange.Approved = db_GradeChange.approved;
+                    pocoGradeChange.Course_id = db_GradeChange.course_id;
+                    pocoGradeChange.Description = db_GradeChange.description;
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in GradeChangeRepository.FindGradeChangeById: " + e);
+            }
+
+            return pocoGradeChange;
+        }
+
+        public void AddGradeChange(GradeChange gradeChange, ref List<string> errors)
         {
             grade_change db_gradeChange = new grade_change();
 
             try
             {
-                db_gradeChange.course_id = gradeChange.Course_id;
-                db_gradeChange.schedule_id = gradeChange.Schedule_id;
                 db_gradeChange.student_id = gradeChange.Student_id;
+                db_gradeChange.schedule_id = gradeChange.Schedule_id;
+                db_gradeChange.course_id = gradeChange.Course_id;
+                db_gradeChange.approved = gradeChange.Approved;
+                db_gradeChange.description = gradeChange.Description;
+
                 this.context.grade_change.Add(db_gradeChange);
                 this.context.SaveChanges();
             }
@@ -35,7 +88,7 @@
             }
         }
 
-        public void RespondToGradeChange(int gradeChangeId, ref List<string> errors)
+        public void ApproveGradeChange(int gradeChangeId, ref List<string> errors)
         {
             grade_change db_gradeChange = new grade_change();
 
@@ -52,7 +105,7 @@
             }
         }
     
-        public int GetEverything(string student_id, int course_id, ref List<string> errors)
+        public int GetGradeChangeScheduleId(string student_id, int course_id, ref List<string> errors)
         {
             grade_change db_gradeChange = new grade_change();
 

@@ -22,12 +22,12 @@
         }
 
         [HttpPost]
-        public string InsertGradeChange(GradeChange gc)
+        public string AddGradeChange(GradeChange gc)
         {
             var errors = new List<string>();
             var repository = new GradeChangeRepository(this.entities);
             var service = new GradeChangeService(repository);
-            service.InsertGradeChange(gc, ref errors);
+            service.AddGradeChange(gc, ref errors);
 
             if (errors.Count == 0)
             {
@@ -37,13 +37,14 @@
             return "error";
         }
 
+
         [HttpPost]
-        public string RespondToGradeChange(GradeChange gc)
+        public string ApproveGradeChange(GradeChange gc)
         {
             var errors = new List<string>();
             var repository = new GradeChangeRepository(this.entities);
             var service = new GradeChangeService(repository);
-            service.RespondToGradeChange(gc, ref errors);
+            service.ApproveGradeChange(gc, ref errors);
 
             if (errors.Count == 0)
             {
@@ -51,6 +52,33 @@
             }
 
             return "error";
+        }
+
+        [HttpGet]
+        public GradeChange FindGradeChangeByStudentId(string student_id)
+        {
+            var errors = new List<string>();
+            var repository = new GradeChangeRepository(this.entities);
+            var service = new GradeChangeService(repository);
+            return service.FindGradeChangeByStudentId(student_id, ref errors);
+        }
+
+        [HttpGet]
+        public GradeChange FindGradeChangeByCourseId(int course_id)
+        {
+            var errors = new List<string>();
+            var repository = new GradeChangeRepository(this.entities);
+            var service = new GradeChangeService(repository);
+            return service.FindGradeChangeByCourseId(course_id, ref errors);
+        }
+
+        [HttpGet]
+        public int GetGradeChangeScheduleId(string student_id, int course_id)
+        {
+            var errors = new List<string>();
+            var repository = new GradeChangeRepository(this.entities);
+            var service = new GradeChangeService(repository);
+            return service.GetGradeChangeScheduleId(student_id, course_id, ref errors);
         }
     }
 }

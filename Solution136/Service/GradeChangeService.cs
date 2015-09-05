@@ -14,7 +14,7 @@
             this.repository = repository;
         }
 
-        public void InsertGradeChange(GradeChange gc, ref List<string> errors)
+        public void AddGradeChange(GradeChange gc, ref List<string> errors)
         {
             if (gc.Course_id == -1)
             {
@@ -22,7 +22,7 @@
                 throw new ArgumentException();
             }
 
-            int scheduleid = this.repository.GetEverything(gc.Student_id, gc.Course_id, ref errors);
+            int scheduleid = this.repository.GetGradeChangeScheduleId(gc.Student_id, gc.Course_id, ref errors);
             if (scheduleid == -1)
             {
                 errors.Add("Invalid schedule ID");
@@ -30,10 +30,10 @@
             }
 
             gc.Schedule_id = scheduleid;
-            this.repository.RequestGradeChange(gc, ref errors);
+            this.repository.AddGradeChange(gc, ref errors);
         }
 
-        public void RespondToGradeChange(GradeChange gc, ref List<string> errors)
+        public void ApproveGradeChange(GradeChange gc, ref List<string> errors)
         {
             if (gc.Course_id == -1)
             {
@@ -41,7 +41,7 @@
                 throw new ArgumentException();
             }
 
-            this.repository.RespondToGradeChange(gc.GradeChangeId, ref errors);
+            this.repository.ApproveGradeChange(gc.GradeChangeId, ref errors);
 
             if (errors.Count != 0)
             {
@@ -49,5 +49,39 @@
                 throw new ArgumentException();
             }
         }
+
+        public GradeChange FindGradeChangeByStudentId (string student_id, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(student_id))
+            {
+                errors.Add("Invalid student_id");
+                throw new ArgumentException();
+            }
+
+            return this.repository.FindGradeChangeByStudentId(student_id, ref errors);
+        }
+
+        public GradeChange FindGradeChangeByCourseId(int course_id, ref List<string> errors)
+        {
+            if (course_id <= 0)
+            {
+                errors.Add("Invalid course_id");
+                throw new ArgumentException();
+            }
+
+            return this.repository.FindGradeChangeByCourseId(course_id, ref errors);
+        }
+
+        public int GetGradeChangeScheduleId(string student_id, int course_id, ref List<string> errors)
+        {
+            if (course_id <= 0 || string.IsNullOrEmpty(student_id))
+            {
+                errors.Add("Invalid id");
+                throw new ArgumentException();
+            }
+
+            return this.repository.GetGradeChangeScheduleId(student_id, course_id, ref errors);
+        }
+
     }
 }

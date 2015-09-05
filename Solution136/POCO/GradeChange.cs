@@ -17,5 +17,8 @@
         public bool? Approved { get; set; }
 
         public int Course_id { get; set; }
+
+        public string Description { get; set; }
+
     }
 }

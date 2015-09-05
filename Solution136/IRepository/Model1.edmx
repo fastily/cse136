@@ -49,7 +49,7 @@
           <Key>
             <PropertyRef Name="schedule_id" />
           </Key>
-          <Property Name="schedule_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="schedule_id" Type="int" Nullable="false" />
           <Property Name="course_id" Type="int" Nullable="false" />
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="quarter" Type="varchar" MaxLength="50" Nullable="false" />
@@ -84,12 +84,13 @@
           <Property Name="schedule_id" Type="int" Nullable="false" />
           <Property Name="approved" Type="bit" />
           <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="instructor">
           <Key>
             <PropertyRef Name="instructor_id" />
           </Key>
-          <Property Name="instructor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="instructor_id" Type="int" Nullable="false" />
           <Property Name="first_name" Type="varchar" MaxLength="50" />
           <Property Name="last_name" Type="varchar" MaxLength="50" />
           <Property Name="title" Type="varchar" MaxLength="50" />
@@ -128,7 +129,7 @@
           <Key>
             <PropertyRef Name="staff_id" />
           </Key>
-          <Property Name="staff_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staff_id" Type="int" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="First" Type="varchar" MaxLength="50" />
@@ -158,7 +159,7 @@
           <Key>
             <PropertyRef Name="ta_id" />
           </Key>
-          <Property Name="ta_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ta_id" Type="int" Nullable="false" />
           <Property Name="ta_type_id" Type="int" Nullable="false" />
           <Property Name="first" Type="varchar" MaxLength="50" />
           <Property Name="last" Type="varchar" MaxLength="50" Nullable="false" />
@@ -632,6 +633,7 @@
           <Property Name="schedule_id" Type="Int32" Nullable="false" />
           <Property Name="approved" Type="Boolean" />
           <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="preReq_Override">
           <Key>
@@ -821,6 +823,7 @@
           <EntitySetMapping Name="grade_change">
             <EntityTypeMapping TypeName="cse136Model.grade_change">
               <MappingFragment StoreEntitySet="grade_change">
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="course_id" ColumnName="course_id" />
                 <ScalarProperty Name="approved" ColumnName="approved" />
                 <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />

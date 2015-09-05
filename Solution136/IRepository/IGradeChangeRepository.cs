@@ -5,12 +5,14 @@
 
     public interface IGradeChangeRepository
     {
-        void RequestGradeChange(GradeChange gradeChange, ref List<string> errors);
+        GradeChange FindGradeChangeByStudentId(string student_id, ref List<string> errors);
 
-        void RespondToGradeChange(int gradeChangeId, ref List<string> errors);
+        GradeChange FindGradeChangeByCourseId(int course_id, ref List<string> errors);
+       
+        void AddGradeChange(GradeChange gradeChange, ref List<string> errors);
 
-        ////find gradeChangeBySomeSortOfId
+        void ApproveGradeChange(int gradeChangeId, ref List<string> errors);
 
-        int GetEverything(string student_id, int course_id, ref List<string> errors);
+        int GetGradeChangeScheduleId(string student_id, int course_id, ref List<string> errors);
     }
 }

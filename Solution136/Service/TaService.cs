@@ -90,6 +90,17 @@
             return this.repository.FindTaById(ta_id, ref errors);
         }
 
+        public Ta GetTaByName(string ta_name, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(ta_name))
+            {
+                errors.Add("Invalid ta_id");
+                throw new ArgumentException();
+            }
+
+            return this.repository.FindTaByName(ta_name, ref errors);
+        }
+
         public void DeleteTa(int ta_id, ref List<string> errors)
         {
             if (ta_id <= 0)
