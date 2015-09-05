@@ -33,27 +33,25 @@
     AddNewPreReq = function (data) {
         courseModelObj.AssignPreReq(viewModel.viewCourse.id, data.CourseId, function (result) {
             if (result = 'ok') {
+                viewModel.currentPreReqList.push(data)
                 alert("succes");
             }
             else {
-                alert('Error occurs during Insert new Course Schedule!!');
+                alert('Error occurs during add preReq');
             }
         });
-
-        viewModel.currentPreReqList.push(data)
     };
 
     RemovePreReq = function (data) {
         courseModelObj.RemovePreReq(viewModel.viewCourse.id, data.CourseId, function (result) {
             if (result = 'ok') {
                 alert("succes");
+                viewModel.currentPreReqList.remove(data)
             }
             else {
-                alert('Error occurs during Insert new Course Schedule!!');
+                alert('Error occurs during delete preReq');
             }
         });
-
-        viewModel.currentPreReqList.remove(data)
     };
 
     this.Initialize = function () {
@@ -129,10 +127,10 @@
     this.GetDetailForPreReq = function (id) {
 
         courseModelObj.GetDetail(id, function (result) {
-            viewModel.viewCourse.id = result.CourseId;
-            viewModel.viewCourse.title = result.Title;
-            viewModel.viewCourse.level = result.Level;
-            viewModel.viewCourse.description = result.Description;
+            viewModel.viewCourse.id(result.CourseId);
+            viewModel.viewCourse.title(result.Title);
+            viewModel.viewCourse.level(result.Level);
+            viewModel.viewCourse.description(result.Description);
         });
     };
 

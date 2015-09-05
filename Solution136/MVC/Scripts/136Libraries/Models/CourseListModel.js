@@ -101,7 +101,7 @@
     };
 
     this.AssignPreReq = function (cid, cpid, callback) {
-        var url = "http://localhost:9393/Api/Course/AssignPreReq?cid=" + cid + '&prid=' + cpid;
+        var url = "http://localhost:9393/Api/Course/AssignPreReq?cid=" + cid() + '&prid=' + cpid;
 
         $.ajax({
             async: asyncIndicator,
@@ -119,7 +119,7 @@
     };
 
     this.RemovePreReq = function (cid, cpid, callback) {
-        var url = "http://localhost:9393/Api/Course/RemovePreReq?cid=" + cid + '&prid=' +cpid;
+        var url = "http://localhost:9393/Api/Course/RemovePreReq?cid=" + cid() + '&prid=' +cpid;
 
         $.ajax({
             async: asyncIndicator,
