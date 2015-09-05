@@ -5,9 +5,8 @@
     var quarter = ViewBag.quarter;
 }
 
-<h3 class="page-header">Add Course To Schedule</h3>
 
-
+<h3 class="page-header">Current Schedule</h3>
 <a href="/Student/ScheduleList"><< back</a>
 <div id="fakeContent">
     <table style="width:100%;">
@@ -19,34 +18,36 @@
                 <th>Session</th>
                 <th>Instructor</th>
                 <th>Course Name</th>
+                <th>Cape Review</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: viewModel">
             <tr>
-                <td>1</td>
-                <td>2015</td>
-                <td>Summer</td>
-                <td>1</td>
-                <td>CHUCHUTRAIN</td>
-                <td>CSE 3</td>
-                <!-- hard coded bs
-                <td data-bind="text: year"></td>
-                <td data-bind="text: quarter"></td>
-                <td data-bind="text: session"></td>
-                <td data-bind="text: instructor"></td>
+                <!-- Enrollment hardcoded-->
+                <td data-bind = "text: Id"</td>
+                <td data-bind = "text: year"</td>
+                <td data-bind = "text: quarter"</td>
+                <td data-bind = "text: instructor"</td>
                 <td data-bind="text: coursename"></td>
-                -->
+      
                 <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
                         to for each element of the viewModel array -->
-                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                    <div data-bind="template: { name: 'cape-template', data: $cape}"></div>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<h3 class="page-header">Available Courses</h3>
+
+<script type="text/html" id="cape-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="UpdateCapeReview: cape">Write</a>
+</script>
+
+
+<h3 class="page-header">Add Course To Schedule</h3>
 <div id="divScheduleListContent">
     <table style="width:100%;">
         <thead>
@@ -83,6 +84,7 @@
 </div>
 
 <script type="text/html" id="action-template">
+
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="AddCourse: $data">Add Course</a>
 </script>

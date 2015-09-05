@@ -142,6 +142,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\136Libraries\Models\AdminModel.js" />
+    <Content Include="Scripts\136Libraries\Models\CapeReviewModel.js" />
     <Content Include="Scripts\136Libraries\Models\ScheduleModel.js" />
     <Content Include="Scripts\136Libraries\Models\CourseListModel.js" />
     <Content Include="Scripts\136Libraries\Models\LoginModel.js" />
@@ -150,6 +151,7 @@
     <Content Include="Scripts\136Libraries\Models\TaModel.js" />
     <Content Include="Scripts\136Libraries\Models\StudentModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\AdminViewModel.js" />
+    <Content Include="Scripts\136Libraries\ViewModels\CapeReviewViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\ScheduleViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\CourseListViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\LoginViewModel.js" />
@@ -243,6 +245,8 @@
     <Content Include="Views\Student\RequestPrereq.cshtml" />
     <Content Include="Views\Admin\EditCoursePreReq.cshtml" />
     <Content Include="Views\Admin\SharedStudentEnrollment.cshtml" />
+    <Content Include="Views\Student\AddCapeReview.cshtml" />
+    <Content Include="Views\Student\ReviewCapeReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
