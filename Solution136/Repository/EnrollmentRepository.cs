@@ -62,14 +62,25 @@
                 foreach (enrollment enrolled in studentEnrollments)
                 {
                     var poco = new POCO.Enrollment();
+                    poco.EnrolledSchedule = new Schedule();
+                    poco.EnrolledSchedule.Course = new Course();
+                    poco.EnrolledSchedule.Instructor = new Instructor();
 
                     poco.ScheduleId = enrolled.schedule_id;
                     poco.StudentId = enrolled.student_id;
                     poco.Grade = enrolled.grade;
+
                     poco.EnrolledSchedule.ScheduleId = enrolled.course_schedule.schedule_id;
                     poco.EnrolledSchedule.Year = enrolled.course_schedule.year.ToString();
                     poco.EnrolledSchedule.Quarter = enrolled.course_schedule.quarter;
                     poco.EnrolledSchedule.Session = enrolled.course_schedule.session;
+
+                    poco.EnrolledSchedule.Course.CourseId = enrolled.course_schedule.course.course_id;
+                    poco.EnrolledSchedule.Course.Title = enrolled.course_schedule.course.course_title;
+
+                    poco.EnrolledSchedule.Instructor.InstructorId = enrolled.course_schedule.instructor.instructor_id;
+                    poco.EnrolledSchedule.Instructor.FirstName = enrolled.course_schedule.instructor.first_name;
+                    poco.EnrolledSchedule.Instructor.LastName = enrolled.course_schedule.instructor.last_name;
 
                     pocoEnrollmentList.Add(poco);
                 }
@@ -93,14 +104,26 @@
                 foreach (enrollment enrolled in studentEnrollments)
                 {
                     var poco = new POCO.Enrollment();
+                    poco.EnrolledSchedule = new Schedule();
+                    poco.EnrolledSchedule.Course = new Course();
+                    poco.EnrolledSchedule.Instructor = new Instructor();
 
                     poco.ScheduleId = enrolled.schedule_id;
                     poco.StudentId = enrolled.student_id;
                     poco.Grade = enrolled.grade;
+
                     poco.EnrolledSchedule.ScheduleId = enrolled.course_schedule.schedule_id;
                     poco.EnrolledSchedule.Year = enrolled.course_schedule.year.ToString();
                     poco.EnrolledSchedule.Quarter = enrolled.course_schedule.quarter;
                     poco.EnrolledSchedule.Session = enrolled.course_schedule.session;
+
+                    poco.EnrolledSchedule.Course.CourseId = enrolled.course_schedule.course.course_id;
+                    poco.EnrolledSchedule.Course.Title = enrolled.course_schedule.course.course_title;
+
+                    poco.EnrolledSchedule.Instructor.InstructorId = enrolled.course_schedule.instructor.instructor_id;
+                    poco.EnrolledSchedule.Instructor.FirstName = enrolled.course_schedule.instructor.first_name;
+                    poco.EnrolledSchedule.Instructor.LastName = enrolled.course_schedule.instructor.last_name;
+
 
                     if (enrolled.course_schedule.year.ToString() == year && enrolled.course_schedule.quarter == quarter)
                         pocoEnrollmentList.Add(poco);
