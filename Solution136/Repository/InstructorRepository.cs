@@ -70,18 +70,18 @@
 
             try
             {
-                db_instructor.first_name = ins.FirstName;
-                db_instructor.last_name = ins.LastName;
-                db_instructor.title = ins.Title;
-                db_instructor = this.context.instructors.Find(db_instructor);
+                var isDuplicate = this.context.instructors.Where(
+                    x => x.first_name == ins.FirstName &&
+                    x.last_name == ins.LastName &&
+                    x.title == ins.Title).Count() > 0;
 
-                if (db_instructor == null)
+                if (isDuplicate)
                 {
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
             catch (Exception e)
@@ -89,22 +89,25 @@
                 errors.Add("Error occured in in InstructorRepository.IsDuplicateInstructor: " + e);
             }
 
-            return true;
+            return false;
         }
 
         public void UpdateInstructor(POCO.Instructor ins, ref List<string> errors)
         {
             var db_instructor = new instructor();
+            var db_staff = new staff();
 
             try
             {
-                db_instructor.instructor_id = ins.InstructorId;
-                db_instructor = this.context.instructors.Find(db_instructor);
+                db_instructor = this.context.instructors.Find(ins.InstructorId);
+                db_staff = this.context.staffs.Find(ins.InstructorId);
                 db_instructor.first_name = ins.FirstName;
                 db_instructor.last_name = ins.LastName;
                 db_instructor.title = ins.Title;
+                db_staff.First = ins.FirstName;
+                db_staff.Last = ins.LastName;
+                db_staff.email = ins.FirstName.ToLower().Substring(0, 1) + ins.LastName.ToLower() + "@ucsd.edu";
                 this.context.SaveChanges();
-                ////update staff now
             }
             catch (Exception e)
             {
@@ -115,16 +118,20 @@
         public void AddInstructor(POCO.Instructor ins, ref List<string> errors)
         {
             var db_instructor = new instructor();
+            var db_staff = new staff();
 
             try
             {
-                db_instructor.instructor_id = ins.InstructorId; 
                 db_instructor.first_name = ins.FirstName;
                 db_instructor.last_name = ins.LastName;
                 db_instructor.title = ins.Title;
+                db_staff.First = ins.FirstName;
+                db_staff.Last = ins.LastName;
+                db_staff.email = ins.FirstName.ToLower().Substring(0, 1) + ins.LastName.ToLower() + "@ucsd.edu";
+                db_staff.password = ins.Password;
                 this.context.instructors.Add(db_instructor);
+                this.context.staffs.Add(db_staff);
                 this.context.SaveChanges();
-                ////add to staff
             }
             catch (Exception e)
             {
@@ -135,13 +142,15 @@
         public void RemoveInstructor(int instructor_id, ref List<string> errors)
         {
             var db_instructor = new instructor();
+            var db_staff = new staff();
 
             try
             {
-                db_instructor.instructor_id = instructor_id;
+                db_instructor = this.context.instructors.Find(instructor_id);
+                db_staff = this.context.staffs.Find(instructor_id);
+                this.context.staffs.Remove(db_staff);
                 this.context.instructors.Remove(db_instructor);
                 this.context.SaveChanges();
-                ////remove staff
             }
             catch (Exception e)
             {

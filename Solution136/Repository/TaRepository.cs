@@ -97,8 +97,8 @@
 
             try
             {
+                db_Ta = this.context.TeachingAssistants.Find(ta.TaId);
                 db_Ta.ta_type_id = int.Parse(ta.TaType);
-                db_Ta = this.context.TeachingAssistants.Find(db_Ta);
                 db_Ta.first = ta.FirstName;
                 db_Ta.last = ta.LastName;
                 this.context.SaveChanges();
@@ -115,7 +115,7 @@
 
             try
             {
-                db_Ta.ta_type_id = int.Parse(ta.TaType); 
+                db_Ta.ta_type_id = int.Parse(ta.TaType);
                 db_Ta.first = ta.FirstName;
                 db_Ta.last = ta.LastName;
                 this.context.TeachingAssistants.Add(db_Ta);
@@ -133,7 +133,7 @@
 
             try
             {
-                db_Ta.ta_type_id = ta_id; 
+                db_Ta = this.context.TeachingAssistants.Find(ta_id);
                 db_Ta = this.context.TeachingAssistants.Remove(db_Ta);
                 this.context.SaveChanges();
             }
@@ -175,18 +175,19 @@
 
             try
             {
-                db_Ta.first = ta.FirstName;
-                db_Ta.last = ta.LastName;
-                db_Ta.ta_type_id = int.Parse(ta.TaType);
-                db_Ta = this.context.TeachingAssistants.Find(db_Ta);
+                var TaType = int.Parse(ta.TaType);
+                var isDuplicate = this.context.TeachingAssistants.Where(
+                    x => x.first == ta.FirstName &&
+                    x.last == ta.LastName &&
+                    x.ta_type_id == TaType).Count() > 0;
 
-                if (db_Ta == null)
+                if (isDuplicate)
                 {
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
             catch (Exception e)
@@ -194,7 +195,7 @@
                 errors.Add("Error occured in TaRepository.IsDuplicateTa: " + e);
             }
 
-            return true;
+            return false;
         }
     }
 }

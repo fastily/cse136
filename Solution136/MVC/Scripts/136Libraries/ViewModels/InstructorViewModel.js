@@ -8,10 +8,11 @@
     this.Initialize = function() {
 
         var viewModel = {
-            id: ko.observable(1),
+            id: ko.observable(),
             first: ko.observable("Nick"),
             last: ko.observable("Test"),
             title: ko.observable("Teacher"),
+            password: ko.observable("password"),
             add: function (data) {
                 self.CreateInstructor(data);
             }
@@ -25,12 +26,13 @@
             InstructorId: data.id(),
             FirstName: data.first(),
             LastName: data.last(),
-            Title: data.title()
+            Title: data.title(),
+            Password: data.password()
         }
 
         InstructorModelObj.Create(model, function (result) {
             if (result == "ok") {
-                alert("Create Instructor successful");
+                alert("Created Instructor successfully. Login email is: " + model.FirstName.toLowerCase().substring(0, 1) + model.LastName.toLowerCase() + "@ucsd.edu");
             } else {
                 alert("Error creating Instructor occurred");
             }
@@ -48,7 +50,8 @@
                     id: instructorList[i].InstructorId,
                     first: instructorList[i].FirstName,
                     last: instructorList[i].LastName,
-                    title: instructorList[i].Title
+                    title: instructorList[i].Title,
+                    password: instructorList[i].Password
                 });
             }
 
@@ -68,6 +71,7 @@
                 first: ko.observable(result.FirstName),
                 last: ko.observable(result.LastName),
                 title: ko.observable(result.Title),
+                password: ko.observable(result.Password),
                 update: function () {
                     self.UpdateInstructor(this);
                 }
@@ -87,7 +91,8 @@
             InstructorId: instructor.id,
             FirstName: instructor.first(),
             LastName: instructor.last(),
-            Title: instructor.title()
+            Title: instructor.title(),
+            Password: instructor.password()
         };
 
         InstructorModelObj.Update(instructorData, function (message) {

@@ -35,9 +35,19 @@
                 throw new ArgumentException();
             }
 
+            if (string.IsNullOrEmpty(instructor.Password))
+            {
+                errors.Add("Password cannot be null");
+                throw new ArgumentException();
+            }
+
             if (this.repository.IsNotDuplicateInstructor(instructor, ref errors))
             {
                 this.repository.AddInstructor(instructor, ref errors);
+            }
+            else 
+            {
+                errors.Add("Instructor already exists");
             }
         }
 

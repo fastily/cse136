@@ -60,8 +60,8 @@ function InstructorModel(asyncIndicator) {
     this.Delete = function (id, callback) {
         $.ajax({
             async: asyncIndicator,
-            method: "POST",
             url: "http://localhost:9393/Api/Instructor/DeleteInstructor?id=" + id,
+            method: "GET",
             data: '',
             dataType: "json",
             success: function (result) {

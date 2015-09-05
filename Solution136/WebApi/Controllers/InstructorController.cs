@@ -79,7 +79,7 @@
             return "error";
         }
 
-        [HttpPost]
+        [HttpGet]
         public string DeleteInstructor(int id)
         {
             var errors = new List<string>();

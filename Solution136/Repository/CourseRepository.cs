@@ -76,8 +76,8 @@
             try
             {
                 var isDuplicate = this.context.courses.Where(
-                    x => x.course_description == c.Description && 
-                    x.course_level == c.CourseLevel.ToString() && 
+                    x => x.course_description == c.Description &&
+                    x.course_level == c.CourseLevel.ToString() &&
                     x.course_title == c.Title).Count() > 0;
 
                 if (isDuplicate)
@@ -94,7 +94,7 @@
                 errors.Add("Error occured in CourseRepository.IsDuplicateCourse: " + e);
             }
 
-            return true;
+            return false;
         }
 
         public void UpdateCourse(POCO.Course c, ref List<string> errors)
