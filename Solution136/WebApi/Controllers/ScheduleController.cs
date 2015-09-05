@@ -104,5 +104,21 @@
 
             return "error";
         }
+
+        [HttpPost]
+        public string DeleteAllFromSchedule(ScheduleMin schedule)
+        {
+            var errors = new List<string>();
+            var repository = new ScheduleRepository(this.entities);
+            var service = new ScheduleService(repository);
+            service.RemoveWholeSchedule(schedule.Year, schedule.Quarter, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
     }
 }

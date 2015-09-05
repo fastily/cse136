@@ -12,13 +12,6 @@
     var instructorListViewModel = ko.observableArray();
 
     var CreateViewModel = function () {
-            // These are the initial options
-        this.availableYears = ko.observableArray(['2015', '2016', '2017']);
-        this.availableQuarters = ko.observableArray(['Fall', 'Winter', 'Spring', 'Summer Session 1', 'Summer Session 2', 'Special Summer Session']);
-        this.availableSessions = ko.observableArray(['A00', 'B00']);
-        this.availableInstructors = ko.observableArray(['Isaac Chu', 'Mia Minnes']);
-        this.availableCourses = ko.observableArray(['CSE 105', 'CSE 134B', 'CSE 136']);
-
         var allQuarters = ["Winter", "Spring", "Summer 1", "Summer 2", "Fall"];
         var allYears = ["2015", "2016", "2017"];
         var allSessions = ["A00", "B00"];
@@ -317,22 +310,6 @@
         });
     };
 
-    ko.bindingHandlers.DeleteSchedule = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-            $(element).click(function () {
-                var id = viewModel.id;
-
-                courseModelObj.Delete(id, function (result) {
-                    if (result != "ok") {
-                        alert("Error Delting schedule occurred");
-                    } else {
-                        scheduleListViewModel.remove(viewModel);
-                    }
-                });
-            });
-        }
-    };
-
     this.LoadCreateCourse = function () {
         if (viewModel == null) {
             viewModel = new CreateViewModel();
@@ -345,5 +322,53 @@
 
         ko.applyBindings({ viewModel: viewModel }, document.getElementById("divScheduleAdd"));
        
+    };
+
+    this.LoadAddCourse = function (year, quarter, courseId) {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        viewModel.newSchedule.Year = year;
+        viewModel.newSchedule.Quarter = quarter;
+        viewModel.newSchedule.Course.id = courseId;
+        this.GetDays();
+        this.GetTimes();
+        this.GetInstructors();
+
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("divScheduleAddCourse"));
+    };
+
+    ko.bindingHandlers.DeleteSchedule = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+            $(element).click(function () {
+                var id = viewModel.id;
+
+                scheduleModelObj.Delete(id, function (result) {
+                    if (result != "ok") {
+                        alert("Error Delting schedule occurred");
+                    } else {
+                        scheduleListViewModel.remove(viewModel);
+                    }
+                });
+            });
+        }
+    };
+
+    ko.bindingHandlers.DeleteWholeSchedule = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+            $(element).click(function () {
+                var year = viewModel.year;
+                var quarter = viewModel.quarter;
+
+                scheduleModelObj.DeleteAllFromSchedule(year, quarter, function (result) {
+                    if (result != "ok") {
+                        alert("Error Deleting schedule occurred");
+                    } else {
+                        scheduleListViewModel.remove(viewModel);
+                    }
+                });
+            });
+        }
     };
 }

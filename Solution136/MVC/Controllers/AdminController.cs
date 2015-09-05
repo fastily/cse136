@@ -60,10 +60,11 @@
             return this.View();
         }
 
-        public ActionResult AddCourseToSchedule(string year, string quarter)
+        public ActionResult AddCourseToSchedule(string year, string quarter, int courseId)
         {
             ViewBag.year = year;
             ViewBag.quarter = quarter;
+            ViewBag.CourseId = courseId;
             return this.View();
         }
 

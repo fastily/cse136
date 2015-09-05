@@ -51,6 +51,30 @@
                 throw new ArgumentException();
             }
 
+            if (schedule.Course.CourseId <= 0)
+            {
+                errors.Add("Invalid Course");
+                throw new ArgumentException();
+            }
+
+            if (schedule.Instructor.InstructorId <= 0)
+            {
+                errors.Add("Invalid Instructor");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(schedule.Year))
+            {
+                errors.Add("Invalid year");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(schedule.Quarter))
+            {
+                errors.Add("Invalid quarter");
+                throw new ArgumentException();
+            }
+
             this.repository.AddCourseToSchedule(schedule, ref errors);
         }
 
@@ -63,6 +87,23 @@
             }
 
             this.repository.RemoveCourseFromSchedule(scheduleId, ref errors);
+        }
+
+        public void RemoveWholeSchedule(string year, string quarter, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(year))
+            {
+                errors.Add("Invalid year");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(quarter))
+            {
+                errors.Add("Invalid quarter");
+                throw new ArgumentException();
+            }
+
+            this.repository.RemoveWholeSchedule(year, quarter, ref errors);
         }
 
         public List<ScheduleMin> GetScheduleMin(ref List<string> errors)

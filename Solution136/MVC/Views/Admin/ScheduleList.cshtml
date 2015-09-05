@@ -31,7 +31,7 @@
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="attr: { href : '/Admin/EditSchedule?year=' + year +'&quarter=' + quarter, title: 'edit' }">Edit</a>
-    <a data-bind="DeleteCourse: $data">delete</a>
+    <a data-bind="DeleteWholeSchedule: $data">delete</a>
 </script>
 
 <script type="text/javascript">

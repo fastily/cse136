@@ -77,7 +77,7 @@
 </div>
 <script type="text/html" id="action-template1">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="attr: { href : '/Admin/AddCourseToSchedule?year=' + ' @ViewBag.year' +'&quarter=' + '@ViewBag.quarter', title: 'add' }">Add Course To Schedule</a>
+    <a data-bind="attr: { href : '/Admin/AddCourseToSchedule?year=' + ' @ViewBag.year' +'&quarter=' + '@ViewBag.quarter' + '&courseId=' + id, title: 'add' }">Add Course To Schedule</a>
 </script>
 
 <script type="text/javascript">

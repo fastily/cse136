@@ -204,11 +204,46 @@
         public void RemoveCourseFromSchedule(int scheduleId, ref List<string> errors)
         {
             var db_Schedule = new course_schedule();
+            IEnumerable<enrollment> deleteEnrollments;
 
             try
             {
                 db_Schedule.schedule_id = scheduleId;
                 db_Schedule = this.context.course_schedule.Remove(db_Schedule);
+                deleteEnrollments = this.context.enrollments.Where(x => x.schedule_id == scheduleId);
+                foreach (enrollment deleteMe in deleteEnrollments)
+                {
+                    this.context.enrollments.Remove(deleteMe);
+                }
+
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in ScheduleRepository.RemoveCourseFromSchedule: " + e);
+            }
+        }
+
+        public void RemoveWholeSchedule(string year, string quarter, ref List<string> errors)
+        {
+            IEnumerable<course_schedule> db_ScheduleList;
+            IEnumerable<enrollment> deleteEnrollments;
+
+            try
+            {
+                var Year = int.Parse(year);
+                db_ScheduleList = this.context.course_schedule.Where(x => x.quarter == quarter && x.year == Year);
+                foreach (course_schedule deleteMe in db_ScheduleList)
+                {
+                    var deleteMeId = deleteMe.schedule_id;
+
+                    this.context.course_schedule.Remove(deleteMe);
+                    deleteEnrollments = this.context.enrollments.Where(x => x.schedule_id == deleteMeId);
+                    foreach (enrollment deleteEnrollment in deleteEnrollments)
+                    {
+                        this.context.enrollments.Remove(deleteEnrollment);
+                    }
+                }
                 this.context.SaveChanges();
             }
             catch (Exception e)

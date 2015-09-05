@@ -19,12 +19,32 @@
         });
     };
 
+    this.DeleteAllFromSchedule = function (year, quarter, callback) {
+        var schedule = {
+            quarter: quarter,
+            year: year
+        };
+        $.ajax({
+            async: asyncIndicator,
+            method: "POST",
+            url: "http://localhost:9393/Api/Schedule/DeleteAllFromSchedule",
+            data: schedule,
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while deleteing course from schedule.  Is your service layer running?');
+            }
+        });
+    };
+
     this.Delete = function (id, callback) {
         $.ajax({
             async: asyncIndicator,
             method: "POST",
             url: "http://localhost:9393/Api/Schedule/DeleteCourseFromSchedule",
-            data: id,
+            data: "",
             dataType: "json",
             success: function (result) {
                 callback(result);

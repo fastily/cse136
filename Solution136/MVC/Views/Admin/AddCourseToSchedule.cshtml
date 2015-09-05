@@ -6,19 +6,39 @@
 }
 
 <h3 class="page-header">Add Course To Schedule</h3>
-<a href="/Admin/ScheduleList"><< back</a>
-<div id="divCourseListContent">
+<a href="/Admin/EditSchedule?year=@ViewBag.Year&quarter=@ViewBag.Quarter"><< back</a>
+<div id="divScheduleAddCourse">
 
     <label>Time</label>
-    <select class="form-control" data-bind=" options: availableTimes"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleTimeList,
+                            value: viewModel.newSchedule.ScheduleTime.TimeId,
+                            optionsText: 'Time',
+                            optionsValue: 'TimeId',
+                            optionsCaption: 'Choose a Time...'"></select>
+    </div>
 
     <label>Day</label>
-    <select class="form-control" data-bind=" options: availableDays"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleDayList,
+                            value: viewModel.newSchedule.ScheduleDay.DayId,
+                            optionsText: 'Day',
+                            optionsValue: 'DayId',
+                            optionsCaption: 'Choose Day...'"></select>
+    </div>
 
     <label>Instructor</label>
-    <select class="form-control" data-bind=" options: availableInstructors"></select><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleInstructorList,
+                            value: viewModel.newSchedule.Instructor.InstructorId,
+                            optionsText: function(instructor){
+                                return instructor.FirstName + ' ' + instructor.LastName;
+                            },
+                            optionsValue: 'InstructorId',
+                            optionsCaption: 'Choose an Instructor...'"></select>
+    </div>
 
-    <input class="btn btn-primary" value="Add" type="button" />
+    <input class="btn btn-primary" value="Add" type="button" data-bind="click: viewModel.AddNewCourseSchedule" />
     <div id="divMessage" class="text-success">&nbsp;</div>
 
     <table style="width:100%;">
@@ -27,17 +47,13 @@
                 <th>Id</th>
                 <th>Year</th>
                 <th>Quarter</th>
-                <th>Session</th>
-                <th>Course Title</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td >0</td>
-                <td >1989</td>
-                <td >Fall</td>
-                <td >B00</td>
-                <td >CSE 197</td>
+                <td data-bind="text: viewModel.newSchedule.id">0</td>
+                <td data-bind="text: viewModel.newSchedule.Year">1989</td>
+                <td data-bind="text: viewModel.newSchedule.Quarter">Fall</td>
             </tr>
         </tbody>
     </table>
@@ -45,11 +61,8 @@
 </div>
 
 <script type="text/javascript">
-    var viewModel = {
-        availableTimes: ko.observableArray(['8:00 AM', '9:00AM']),
-        availableDays: ko.observableArray(['Mon/Wed/Fri', 'Tues/Thurs', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri']),
-        availableInstructors: ko.observableArray(['Isaac Chu', 'Mia Minnes'])
-    };
-
-    ko.applyBindings((viewModel),document.getElementById("divCourseListContent"));
+    $(document).ready(function () {
+        var scheduleViewModelObj = new ScheduleViewModel();
+        scheduleViewModelObj.LoadAddCourse("@ViewBag.year", "@ViewBag.quarter", @ViewBag.CourseId);
+    });
 </script>
