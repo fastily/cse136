@@ -76,7 +76,7 @@
                     <td>
                         <!-- Note, this is an example using knockout templating. $data is the keyword
                             to for each element of the viewModel array -->
-                        <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                        <div data-bind="click: $parent.viewModel.AddNewPreReq">Assign PR</div>
                     </td>
                 </tr>
             </tbody>

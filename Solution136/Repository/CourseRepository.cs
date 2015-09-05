@@ -184,9 +184,7 @@
             course_preReq db_preReq = new course_preReq();
             try
             {
-                db_coursePreReq.course_id = preReqCourseId;
-                db_coursePreReq = this.context.courses.Find(db_coursePreReq);
-
+                db_coursePreReq = this.context.courses.Find(preReqCourseId);
                 db_preReq.course_id = courseId;
                 db_preReq.preReq_id = preReqCourseId;
                 db_preReq.preReq_title = db_coursePreReq.course_title;
