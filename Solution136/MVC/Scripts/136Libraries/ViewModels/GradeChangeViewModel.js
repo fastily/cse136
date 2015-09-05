@@ -12,7 +12,7 @@
             id: ko.observable(1),
             reason: ko.observable("Reason for your request"),
             add: function (data) { 
-                self.addGradeChange(data, student_id);
+                self.AddGradeChange(data, student_id);
             }
         };
 
@@ -21,12 +21,20 @@
 
     this.AddGradeChange = function(data, student_id) {
         var model = {
+            GradeChangeId: 1,
+            Student_id: "1",
+            Schedule_id: 1,
+            Approved: false,
+            Course_id: 1,
+            Description: "fffffffffffffffffuuuuuu"
+            /*
             GradeChangeId: data.id(),
             Student_id: student_id,
             Schedule_id: data.Schedule_id,
             Approved: false,
             Course_id: data.Course_id,
             Description: data.reason()
+            */
         }
 
         GradeChangeModelObj.Create(model, function(result) {

@@ -48,7 +48,7 @@
     <input class="form-control" type="text" data-bind="value: reason"/>
     <br />
 
-    <input class="btn btn-primary" value="Update" type="button" />
+    <input class="btn btn-primary" value="Request" type="button" data-bind="click: add" />
     <br /><br />
 
     <div id="divMessage" class="text-success">&nbsp;</div>
@@ -100,4 +100,11 @@
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="AddCourse: $data">Add Course</a>
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var gradechangeViewModelObj = new GradeChangeViewModel();
+        gradechangeViewModelObj.Initialize();
+    });
 </script>
