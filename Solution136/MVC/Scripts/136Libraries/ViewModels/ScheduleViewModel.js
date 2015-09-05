@@ -52,6 +52,37 @@
         };
 
         this.AddNewCourseSchedule = AddNewCourseSchedule;
+        this.UpdateCourseFromSchedule = UpdateCourseFromSchedule;
+    };
+
+    UpdateCourseFromSchedule = function (data) {
+        var courseScheduleData = {
+            ScheduleId: viewModel.newSchedule.ScheduleId(),
+            Year: viewModel.newSchedule.Year(),
+            Quarter: viewModel.newSchedule.Quarter(),
+            Session: viewModel.newSchedule.Session(),
+            Day: {
+                DayId: viewModel.newSchedule.ScheduleDay.DayId()
+            },
+            Time: {
+                TimeId: viewModel.newSchedule.ScheduleTime.TimeId()
+            },
+            Instructor: {
+                InstructorId: viewModel.newSchedule.Instructor.InstructorId()
+            },
+            Course: {
+                CourseId: viewModel.newSchedule.Course.CourseId
+            }
+        };
+
+        scheduleModelObj.Update(courseScheduleData, function (result) {
+            if (result = 'ok') {
+                alert("success updating schedule");
+            }
+            else {
+                alert('Error occurs during Insert new Course Schedule!!');
+            }
+        });       
     };
 
     AddNewCourseSchedule = function (data) {
@@ -75,20 +106,12 @@
 
         scheduleModelObj.Create(courseScheduleData, function (result) {
             if (result = 'ok') {
-                //LoadCourseSchedule("");
-                //viewModel.newCourse.CourseId("");
-                //viewModel.newCourse.Year("");
-                //viewModel.newCourse.Quarter("");
-                //viewModel.newCourse.Session("");
-                //viewModel.newCourse.ScheduleDayId("");
-                //viewModel.newCourse.ScheduleTimeId("");
-                //viewModel.newCourse.InstructorId("");
-                alert("succes");
+                alert("success updating schedule");
             }
             else {
                 alert('Error occurs during Insert new Course Schedule!!');
             }
-        });       
+        });
     };
 
     this.Initialize = function () {
@@ -174,37 +197,21 @@
     };
 
     this.GetScheduleById = function (id) {
-
         scheduleModelObj.GetScheduleById(id, function (result) {
+            viewModel.newSchedule.ScheduleId(result.ScheduleId);
+            viewModel.newSchedule.Session(result.Session);
+            viewModel.newSchedule.ScheduleDay.Day(result.Day.Day);
+            viewModel.newSchedule.ScheduleDay.DayId(result.Day.DayId);
+            viewModel.newSchedule.ScheduleTime.Time(result.Time.Time);
+            viewModel.newSchedule.ScheduleTime.TimeId(result.Time.TimeId);
+            viewModel.newSchedule.Instructor.InstructorId(result.Instructor.InstructorId);
+            viewModel.newSchedule.Instructor.FirstName(result.Instructor.FirstName);
+            viewModel.newSchedule.Instructor.LastName(result.Instructor.LastName);      
 
-            var schedule = {
-                id: result.ScheduleId,
-                year: result.Year,
-                quarter: result.Quarter,
-                session: result.Session,
-                day: {
-                    name: ko.observable(result.Day.Day),
-                },
-                time: {
-                    name: ko.observable(result.Time.Time)
-                },
-                instructor: {
-                    id: result.Instructor.InstructorId,
-                    first: ko.observable(result.Instructor.FirstName),
-                    last: ko.observable(result.Instructor.LastName),
-                    name: result.Instructor.FirstName + " " + result.Instructor.LastName
-                },
-                course: {
-                    id: result.Course.CourseId,
-                    title: result.Course.Title,
-                    level: result.Course.CourseLevel,
-                    description: result.Course.Description
-                }
-            };
-            if (initialBind) {
-                ko.applyBindings(schedule, document.getElementById("divScheduleContent"));
-                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
-            }
+            viewModel.newSchedule.Course.CourseId(result.Course.CourseId);
+            viewModel.newSchedule.Course.Title(result.Course.Title);
+            viewModel.newSchedule.Course.CourseLevel(result.Course.Level);
+            viewModel.newSchedule.Course.Description(result.Course.Description);
         });
     };
 
@@ -337,6 +344,22 @@
         this.GetInstructors();
 
         ko.applyBindings({ viewModel: viewModel }, document.getElementById("divScheduleAddCourse"));
+    };
+
+    this.LoadEditCourse = function (year, quarter, courseId) {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        viewModel.newSchedule.Year = ko.observable(year);
+        viewModel.newSchedule.Quarter = ko.observable(quarter);
+        viewModel.newSchedule.Course.CourseId = ko.observable(courseId);
+        this.GetDays();
+        this.GetTimes();
+        this.GetInstructors();
+        this.GetScheduleById(courseId);
+
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("divScheduleEditCourse"));
     };
 
     ko.bindingHandlers.DeleteSchedule = {

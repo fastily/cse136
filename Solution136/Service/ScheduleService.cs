@@ -39,6 +39,12 @@
                 throw new ArgumentException();
             }
 
+            if (schedule.ScheduleId <= 0)
+            {
+                errors.Add("Invalid schedule");
+                throw new ArgumentException();
+            }
+
             if (schedule.Day.DayId <= 0)
             {
                 errors.Add("Invalid Day");
@@ -76,6 +82,59 @@
             }
 
             this.repository.AddCourseToSchedule(schedule, ref errors);
+        }
+
+        public void UpdateCourseFromSchedule(Schedule schedule, ref List<string> errors)
+        {
+            if (schedule == null)
+            {
+                errors.Add("Invalid schedule");
+                throw new ArgumentException();
+            }
+
+            if (schedule.ScheduleId <= 0)
+            {
+                errors.Add("Invalid schedule");
+                throw new ArgumentException();
+            }
+
+            if (schedule.Day.DayId <= 0)
+            {
+                errors.Add("Invalid Day");
+                throw new ArgumentException();
+            }
+
+            if (schedule.Time.TimeId <= 0)
+            {
+                errors.Add("Invalid Time");
+                throw new ArgumentException();
+            }
+
+            if (schedule.Course.CourseId <= 0)
+            {
+                errors.Add("Invalid Course");
+                throw new ArgumentException();
+            }
+
+            if (schedule.Instructor.InstructorId <= 0)
+            {
+                errors.Add("Invalid Instructor");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(schedule.Year))
+            {
+                errors.Add("Invalid year");
+                throw new ArgumentException();
+            }
+
+            if (string.IsNullOrEmpty(schedule.Quarter))
+            {
+                errors.Add("Invalid quarter");
+                throw new ArgumentException();
+            }
+
+            this.repository.UpdateCourseFromSchedule(schedule, ref errors);
         }
 
         public void RemoveCourseFromSchedule(int scheduleId, ref List<string> errors)

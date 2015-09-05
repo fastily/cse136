@@ -22,7 +22,7 @@
             var scheduleService = new ScheduleService(mockRepository.Object);
             ///  int? nullInt = null;
             //// Act
-            scheduleService.AddCourseToSchedule(null, 1, "2", "3", ref errors);
+            scheduleService.AddCourseToSchedule(null, ref errors);
 
             //// Assert cant be null course object
             Assert.AreEqual(1, errors.Count);
@@ -39,7 +39,7 @@
             var schedule = new Schedule { };
 
             //// Act
-            scheduleService.AddCourseToSchedule(schedule, 1, string.Empty, "3", ref errors);
+            scheduleService.AddCourseToSchedule(schedule, ref errors);
 
             //// Assert cant be null course object
             Assert.AreEqual(1, errors.Count);
@@ -55,7 +55,7 @@
             var scheduleService = new ScheduleService(mockRepository.Object);
             var schedule = new Schedule { };
             //// Act
-            scheduleService.AddCourseToSchedule(schedule, 1, "2", string.Empty, ref errors);
+            scheduleService.AddCourseToSchedule(schedule, ref errors);
 
             //// Assert cant be null course object
             Assert.AreEqual(1, errors.Count);
@@ -111,13 +111,13 @@
 
             Schedule s = new Schedule { ScheduleId = 99, Year = "1000", Quarter = "Winter", Session = "2" };
 
-            mockRepository.Setup(x => x.AddCourseToSchedule(s, 99, 1, 1, ref errors));
+            mockRepository.Setup(x => x.AddCourseToSchedule(s, ref errors));
 
             //// Act
-            iserv.AddCourseToSchedule(s, 99, "1", "1", ref errors);
+            iserv.AddCourseToSchedule(s, ref errors);
 
             //// Assert
-            mockRepository.Verify(x => x.AddCourseToSchedule(s, 99, 1, 1, ref errors), Times.Once());
+            mockRepository.Verify(x => x.AddCourseToSchedule(s, ref errors), Times.Once());
         }
 
         [TestMethod]

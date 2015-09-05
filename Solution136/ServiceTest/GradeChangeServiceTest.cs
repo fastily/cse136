@@ -23,7 +23,7 @@
             var gc = new GradeChange { Course_id = -1 };
 
             //// Act
-            gradeChangeService.InsertGradeChange(gc, ref errors);
+            gradeChangeService.AddGradeChange(gc, ref errors);
 
             //// Assert
             Assert.AreEqual(1, errors.Count);
@@ -40,7 +40,7 @@
             var gc = new GradeChange { Course_id = -1 };
 
             //// Act
-            gradeChangeService.RespondToGradeChange(gc, ref errors);
+            gradeChangeService.ApproveGradeChange(gc, ref errors);
 
             //// Assert
             Assert.AreEqual(1, errors.Count);
@@ -58,7 +58,7 @@
             mockRepository.Setup(x => x.AddGradeChange(gc, ref errors));
 
             //// Act
-            gradeChangeService.InsertGradeChange(gc, ref errors);
+            gradeChangeService.AddGradeChange(gc, ref errors);
             mockRepository.Verify(mock => mock.AddGradeChange(gc, ref errors), Times.Once());
 
             mockRepository.VerifyAll();
@@ -78,7 +78,7 @@
             mockRepository.Setup(x => x.ApproveGradeChange(5, ref errors));
 
             //// Act
-            gradeChangeService.RespondToGradeChange(gc, ref errors);
+            gradeChangeService.ApproveGradeChange(gc, ref errors);
             mockRepository.Verify(mock => mock.ApproveGradeChange(1, ref errors), Times.Once());
 
             //// Assert

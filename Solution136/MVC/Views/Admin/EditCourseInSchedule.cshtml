@@ -4,8 +4,8 @@
 }
 
 <h2 class="page-header">Edit Course In Schedule</h2>
-<a href="/Admin/ScheduleList"><< back</a>
-<div id="divScheduleContent">
+<a href="/Admin/EditSchedule?year=@ViewBag.Year&quarter=@ViewBag.Quarter"><< back</a>
+<div id="divScheduleEditCourse">
     <table style="width:100%;">
         <thead>
             <tr>
@@ -21,28 +21,55 @@
         </thead>
         <tbody>
             <tr>
-                <td data-bind="text: id"></td>
-                <td data-bind="text: year"></td>
-                <td data-bind="text: quarter"></td>
-                <td data-bind="text: session"></td>
-                <td data-bind="text: course.title"></td>
-                <td data-bind="text: $data.time.name"></td>
-                <td data-bind="text: $data.day.name"></td>
-                <td data-bind="text: $data.instructor.name"></td>
+                <td data-bind="text: viewModel.newSchedule.ScheduleId"></td>
+                <td data-bind="text: viewModel.newSchedule.Year"></td>
+                <td data-bind="text: viewModel.newSchedule.Quarter"></td>
+                <td data-bind="text: viewModel.newSchedule.Session"></td>
+                <td data-bind="text: viewModel.newSchedule.Course.Title"></td>
+                <td data-bind="text: viewModel.newSchedule.ScheduleTime.Time"></td>
+                <td data-bind="text: viewModel.newSchedule.ScheduleDay.Day"></td>
+                <td data-bind="text: viewModel.newSchedule.Instructor.FirstName"></td>
             </tr>
         </tbody>
     </table>
     <hr />
+    <label>Session</label>
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.sessionList,
+                            value: viewModel.newSchedule.Session,
+                            optionsCaption: 'Choose a Session...'"></select>
+    </div>
+
     <label>Time</label>
-    <input class="form-control" type="text" data-bind="value: $data.day.name" /><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleTimeList,
+                            value: viewModel.newSchedule.ScheduleTime.TimeId,
+                            optionsText: 'Time',
+                            optionsValue: 'TimeId',
+                            optionsCaption: 'Choose a Time...'"></select>
+    </div>
 
     <label>Day</label>
-    <input class="form-control" type="text" data-bind="value: $data.time.name" /><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleDayList,
+                            value: viewModel.newSchedule.ScheduleDay.DayId,
+                            optionsText: 'Day',
+                            optionsValue: 'DayId',
+                            optionsCaption: 'Choose Day...'"></select>
+    </div>
 
     <label>Instructor</label>
-    <input class="form-control" type="text" data-bind="value: $data.instructor.first" /><br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.scheduleInstructorList,
+                            value: viewModel.newSchedule.Instructor.InstructorId,
+                            optionsText: function(instructor){
+                                return instructor.FirstName + ' ' + instructor.LastName;
+                            },
+                            optionsValue: 'InstructorId',
+                            optionsCaption: 'Choose an Instructor...'"></select>
+    </div>
 
-    <input class="btn btn-primary" value="Update" type="button"/>
+    <input class="btn btn-primary" value="Update" type="button" data-bind="click: viewModel.UpdateCourseFromSchedule" />
     <br />
     <div id="divMessage" class="text-success">&nbsp;</div>
 </div>
@@ -50,6 +77,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var scheduleViewModelObj = new ScheduleViewModel();
-        scheduleViewModelObj.GetScheduleById("@ViewBag.Id");
+        scheduleViewModelObj.LoadEditCourse("@ViewBag.year", "@ViewBag.quarter", @ViewBag.Id);
     });
 </script>

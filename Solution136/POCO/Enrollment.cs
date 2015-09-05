@@ -1,4 +1,5 @@
-﻿namespace POCO
+﻿using System.Collections.Generic;
+namespace POCO
 {
     public class Enrollment
     {
@@ -10,6 +11,6 @@
 
         public float GradeValue { get; set; }
 
-        public Schedule schedule { get; set; }
+        public Schedule EnrolledSchedule { get; set; }
     }
 }

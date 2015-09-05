@@ -168,7 +168,8 @@
                 {
                     CourseId = db_Schedule.course.course_id,
                     Title = db_Schedule.course.course_title,
-                    Description = db_Schedule.course.course_description
+                    Description = db_Schedule.course.course_description,
+                    Level = db_Schedule.course.course_level,
                 };
             }
             catch (Exception e)
@@ -177,6 +178,25 @@
             }
 
             return pocoSchedule;
+        }
+
+        public void UpdateCourseFromSchedule(Schedule schedule, ref List<string> errors)
+        {
+            course_schedule db_Schedule = new course_schedule();
+
+            try
+            {
+                db_Schedule = this.context.course_schedule.Find(schedule.ScheduleId);
+                db_Schedule.instructor_id = schedule.Instructor.InstructorId;
+                db_Schedule.schedule_day_id = schedule.Day.DayId;
+                db_Schedule.schedule_time_id = schedule.Time.TimeId;
+                db_Schedule.session = schedule.Session;
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in ScheduleRepository.AddCourseToSchedule: " + e);
+            }
         }
 
         public void AddCourseToSchedule(Schedule schedule, ref List<string> errors)

@@ -25,8 +25,6 @@
             {
                 db_Enrollment.student_id = studentId;
                 db_Enrollment.schedule_id = scheduleId;
-                ////db_Enrollment.schedule_id = this.context.course_schedule.Where(
-                ////    y => y.quarter == quarter && y.year == int.Parse(year)).Select(x => x.schedule_id).First();
                 db_Enrollment.grade = string.Empty;
                 this.context.enrollments.Add(db_Enrollment);
                 this.context.SaveChanges();
@@ -43,8 +41,7 @@
 
             try
             {
-                db_enrollment.student_id = studentId;
-                db_enrollment.schedule_id = scheduleId;
+                db_enrollment = this.context.enrollments.Find(studentId, scheduleId);
                 this.context.enrollments.Remove(db_enrollment);
                 this.context.SaveChanges();
             }
@@ -52,6 +49,69 @@
             {
                 errors.Add("Error: " + e);
             }
+        }
+
+        public List<POCO.Enrollment> GetAllStudentEnrolledSchedules(string studentId, ref List<string> errors)
+        {
+            IEnumerable<enrollment> studentEnrollments;
+            List<POCO.Enrollment> pocoEnrollmentList = new List<POCO.Enrollment>();
+
+            try
+            {
+                studentEnrollments = this.context.enrollments.Include("course_schedule").Where(x => x.student_id == studentId);
+                foreach (enrollment enrolled in studentEnrollments)
+                {
+                    var poco = new POCO.Enrollment();
+
+                    poco.ScheduleId = enrolled.schedule_id;
+                    poco.StudentId = enrolled.student_id;
+                    poco.Grade = enrolled.grade;
+                    poco.EnrolledSchedule.ScheduleId = enrolled.course_schedule.schedule_id;
+                    poco.EnrolledSchedule.Year = enrolled.course_schedule.year.ToString();
+                    poco.EnrolledSchedule.Quarter = enrolled.course_schedule.quarter;
+                    poco.EnrolledSchedule.Session = enrolled.course_schedule.session;
+
+                    pocoEnrollmentList.Add(poco);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
+            return pocoEnrollmentList;
+        }
+
+        public List<POCO.Enrollment> GetStudentEnrolledSchedulesByQuarter(string studentId, string year, string quarter, ref List<string> errors)
+        {
+            IEnumerable<enrollment> studentEnrollments;
+            List<POCO.Enrollment> pocoEnrollmentList = new List<POCO.Enrollment>();
+
+            try
+            {
+                studentEnrollments = this.context.enrollments.Include("course_schedule").Where(x => x.student_id == studentId);
+                foreach (enrollment enrolled in studentEnrollments)
+                {
+                    var poco = new POCO.Enrollment();
+
+                    poco.ScheduleId = enrolled.schedule_id;
+                    poco.StudentId = enrolled.student_id;
+                    poco.Grade = enrolled.grade;
+                    poco.EnrolledSchedule.ScheduleId = enrolled.course_schedule.schedule_id;
+                    poco.EnrolledSchedule.Year = enrolled.course_schedule.year.ToString();
+                    poco.EnrolledSchedule.Quarter = enrolled.course_schedule.quarter;
+                    poco.EnrolledSchedule.Session = enrolled.course_schedule.session;
+
+                    if (enrolled.course_schedule.year.ToString() == year && enrolled.course_schedule.quarter == quarter)
+                        pocoEnrollmentList.Add(poco);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
+            return pocoEnrollmentList;
         }
 
         public bool IsNotDuplicateEnrollment(string studentId, int scheduleId, ref List<string> errors)
