@@ -16,6 +16,8 @@
 
         void AddCourseToSchedule(Schedule schedule, ref List<string> errors);
 
+        void UpdateCourseFromSchedule(Schedule schedule, ref List<string> errors);
+
         void RemoveCourseFromSchedule(int scheduleId, ref List<string> errors);
 
         void RemoveWholeSchedule(string year, string quarter, ref List<string> errors);

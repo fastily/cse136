@@ -19,6 +19,23 @@
         });
     };
 
+    this.Update = function (schedule, callback) {
+        $.ajax({
+            async: asyncIndicator,
+            method: "POST",
+            url: "http://localhost:9393/Api/Schedule/UpdateCourseFromSchedule",
+            data: schedule,
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while adding Course to schedule.  Is your service layer running?');
+            }
+        });
+    };
+
+
     this.DeleteAllFromSchedule = function (year, quarter, callback) {
         var schedule = {
             quarter: quarter,

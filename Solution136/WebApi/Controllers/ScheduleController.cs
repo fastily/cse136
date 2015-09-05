@@ -89,6 +89,22 @@
             return "error";
         }
 
+        [HttpPost]
+        public string UpdateCourseFromSchedule(Schedule schedule)
+        {
+            var errors = new List<string>();
+            var repository = new ScheduleRepository(this.entities);
+            var service = new ScheduleService(repository);
+            service.UpdateCourseFromSchedule(schedule, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
+
         [HttpGet]
         public string DeleteCourseFromSchedule(int id)
         {
