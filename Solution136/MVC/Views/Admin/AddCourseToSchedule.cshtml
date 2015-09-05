@@ -9,6 +9,13 @@
 <a href="/Admin/EditSchedule?year=@ViewBag.Year&quarter=@ViewBag.Quarter"><< back</a>
 <div id="divScheduleAddCourse">
 
+    <label>Session</label>
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.sessionList,
+                            value: viewModel.newSchedule.Session,
+                            optionsCaption: 'Choose a Session...'"></select>
+    </div>
+
     <label>Time</label>
     <div class="form-group">
         <select class="form-control" data-bind="options: viewModel.scheduleTimeList,
@@ -44,14 +51,15 @@
     <table style="width:100%;">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>CourseId</th>
                 <th>Year</th>
                 <th>Quarter</th>
+                <th>Session</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td data-bind="text: viewModel.newSchedule.id">0</td>
+                <td data-bind="text: viewModel.newSchedule.Course.CourseId">0</td>
                 <td data-bind="text: viewModel.newSchedule.Year">1989</td>
                 <td data-bind="text: viewModel.newSchedule.Quarter">Fall</td>
             </tr>

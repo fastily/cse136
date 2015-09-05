@@ -329,9 +329,9 @@
             viewModel = new CreateViewModel();
         }
 
-        viewModel.newSchedule.Year = year;
-        viewModel.newSchedule.Quarter = quarter;
-        viewModel.newSchedule.Course.id = courseId;
+        viewModel.newSchedule.Year = ko.observable(year);
+        viewModel.newSchedule.Quarter = ko.observable(quarter);
+        viewModel.newSchedule.Course.CourseId = ko.observable(courseId);
         this.GetDays();
         this.GetTimes();
         this.GetInstructors();
