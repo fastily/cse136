@@ -130,7 +130,7 @@
                 throw new ArgumentException();
             }
 
-            this.repository.AssignPreReqToCourse(courseId, preReqCourseId, ref errors);
+            this.repository.RemovePreReqFromCourse(courseId, preReqCourseId, ref errors);
         }
 
         public List<Course> GetPreReqList(int courseId, ref List<string> errors)

@@ -119,13 +119,13 @@
     };
 
     this.RemovePreReq = function (cid, cpid, callback) {
-        var url = "http://localhost:9393/Api/Course/RemovePreReq";
+        var url = "http://localhost:9393/Api/Course/RemovePreReq?cid=" + cid + '&prid=' +cpid;
 
         $.ajax({
             async: asyncIndicator,
-            method: "POST",
+            method: "GET",
             url: url,
-            data: { courseId: cid, preReqCourseId: cpid },
+            data: '',
             dataType: "json",
             success: function (result) {
                 callback(result);

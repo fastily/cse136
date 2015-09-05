@@ -200,17 +200,10 @@
 
         public void RemovePreReqFromCourse(int courseId, int preReqToRemoveCourseId, ref List<string> errors)
         {
-            course db_coursePreReq = new course();
             course_preReq db_preReq = new course_preReq();
             try
             {
-                db_coursePreReq.course_id = preReqToRemoveCourseId;
-                db_coursePreReq = this.context.courses.Find(db_coursePreReq);
-
-                db_preReq.course_id = courseId;
-                db_preReq.preReq_id = preReqToRemoveCourseId;
-                db_preReq.preReq_title = db_coursePreReq.course_title;
-
+                db_preReq= this.context.course_preReq.Where(x => x.course_id == courseId && x.preReq_id == preReqToRemoveCourseId).First();
                 this.context.course_preReq.Remove(db_preReq);
                 this.context.SaveChanges();
             }

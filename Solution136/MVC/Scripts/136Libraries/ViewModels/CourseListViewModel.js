@@ -39,10 +39,21 @@
                 alert('Error occurs during Insert new Course Schedule!!');
             }
         });
+
+        //currentPreReqList.add()
     };
 
     RemovePreReq = function (data) {
-   
+        courseModelObj.RemovePreReq(viewModel.viewCourse.id, data.CourseId, function (result) {
+            if (result = 'ok') {
+                alert("succes");
+            }
+            else {
+                alert('Error occurs during Insert new Course Schedule!!');
+            }
+        });
+
+        //currentPreReqList.remove()
     };
 
     this.Initialize = function () {

@@ -113,13 +113,13 @@
             return "error";
         }
 
-        [HttpPost]
-        public string RemovePreReq(int courseId, int preReqCourseId)
+        [HttpGet]
+        public string RemovePreReq(int cid, int prid)
         {
             var errors = new List<string>();
             var repository = new CourseRepository(this.entities);
             var service = new CourseService(repository);
-            service.AssignPreReq(courseId, preReqCourseId, ref errors);
+            service.RemovePreReq(cid, prid, ref errors);
 
             if (errors.Count == 0)
             {
