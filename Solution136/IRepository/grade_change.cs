@@ -19,5 +19,6 @@ namespace IRepository
         public int schedule_id { get; set; }
         public Nullable<bool> approved { get; set; }
         public int course_id { get; set; }
+        public string description { get; set; }
     }
 }

@@ -13,19 +13,12 @@
     <textarea class="form-control" type="text" data-bind="value: $data.description"></textarea><br />
 
     <label>Level</label>
-    <!--<input class="form-control" type="text" data-bind="value: $data.level" /><br />-->
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Select Level
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li><a value="0" href="#">lower</a></li>
-            <li><a value="1" href="#">upper</a></li>
-            <li><a value="2" href="#">grad</a></li>
-        </ul>
-    </div>
-    <br><br>
+    <label>Level</label>
+    <select class="form-control" data-bind="value: $data.level">
+        <option value="lower">Lower</option>
+        <option value="upper">Upper</option>
+        <option value="grad">Grad</option>
+    </select> <br />
 
     <input class="btn btn-primary" type="button" data-bind="value: 'Update', click: $data.update" />
     <br />

@@ -41,7 +41,7 @@
     this.CreateCourse = function (data) {
         var model = {
             Title: data.title(),
-            CourseLevel: data.level(),
+            Level: data.level(),
             Description: data.description()
         }
 
@@ -62,7 +62,7 @@
             var course = {
                 id: result.CourseId,
                 title: ko.observable(result.Title),
-                level: ko.observable(result.CourseLevel),
+                level: ko.observable(result.Level),
                 description: ko.observable(result.Description),
                 update: function () {
                     self.UpdateCourse(this);
@@ -84,8 +84,8 @@
                 courseListViewModel.push({
                     id: courseList[i].CourseId,
                     title: courseList[i].Title,
-                    level: courseList[i].CourseLevel,
-                    description: courseList[i].Description
+                    level: courseList[i].Level,
+                    description: courseList[i].Description,
                 });
             }
 
@@ -101,7 +101,7 @@
         var courseData = {
             CourseId: course.id,
             Title: course.title(),
-            CourseLevel: course.level(),
+            Level: course.level(),
             Description: course.description()
         };
 

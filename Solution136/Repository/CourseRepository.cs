@@ -35,6 +35,7 @@
                     pocoCourse.Description = db_course.course_description;
                     pocoCourse.Title = db_course.course_title;
                     pocoCourse.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), db_course.course_level);
+                    pocoCourse.Level = db_course.course_level;
                     searchResults.Add(pocoCourse);
                 }
             }
@@ -60,6 +61,7 @@
                     pocoCourse.Description = db_course.course_description;
                     pocoCourse.Title = db_course.course_title;
                     pocoCourse.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), db_course.course_level);
+                    pocoCourse.Level = db_course.course_level;
                 }
             }
             catch (Exception e)
@@ -104,7 +106,7 @@
             try
             {
                 db_course = this.context.courses.Find(c.CourseId);
-                db_course.course_level = c.CourseLevel.ToString();
+                db_course.course_level = c.Level;
                 db_course.course_description = c.Description;
                 db_course.course_title = c.Title;
                 this.context.SaveChanges();
@@ -121,7 +123,7 @@
 
             try
             {
-                db_course.course_level = c.CourseLevel.ToString();
+                db_course.course_level = c.Level;
                 db_course.course_description = c.Description;
                 db_course.course_title = c.Title;
                 this.context.courses.Add(db_course);
@@ -162,6 +164,7 @@
                     var tempPoco = new POCO.Course();
                     tempPoco.CourseId = i_course.course_id;
                     tempPoco.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), i_course.course_level);
+                    tempPoco.Level = i_course.course_level;
                     tempPoco.Description = i_course.course_description;
                     tempPoco.Title = i_course.course_title;
                     pocoCourseList.Add(tempPoco);
