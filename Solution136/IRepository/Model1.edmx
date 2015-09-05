@@ -84,6 +84,7 @@
           <Property Name="schedule_id" Type="int" Nullable="false" />
           <Property Name="approved" Type="bit" />
           <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="instructor">
           <Key>
@@ -632,6 +633,7 @@
           <Property Name="schedule_id" Type="Int32" Nullable="false" />
           <Property Name="approved" Type="Boolean" />
           <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="preReq_Override">
           <Key>
@@ -821,6 +823,7 @@
           <EntitySetMapping Name="grade_change">
             <EntityTypeMapping TypeName="cse136Model.grade_change">
               <MappingFragment StoreEntitySet="grade_change">
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="course_id" ColumnName="course_id" />
                 <ScalarProperty Name="approved" ColumnName="approved" />
                 <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />

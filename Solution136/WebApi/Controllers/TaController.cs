@@ -70,7 +70,7 @@
             return "error";
         }
 
-        [HttpPost]
+        [HttpGet]
         public string DeleteTa(int id)
         {
             var errors = new List<string>();

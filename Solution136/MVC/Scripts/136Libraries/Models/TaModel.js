@@ -44,7 +44,7 @@ function TaModel(asyncIndicator) {
     this.Delete = function (id, callback) {
         $.ajax({
             async: asyncIndicator,
-            method: "POST",
+            method: "GET",
             url: "http://localhost:9393/Api/Ta/DeleteTa?id=" + id,
             data: '',
             dataType: "json",

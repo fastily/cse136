@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="cse136Model.schedule_time" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.student" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.sysdiagram" Width="1.5" PointX="9.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="cse136Model.TeachingAssistant" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.TeachingAssistant" Width="2.625" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.TeachingAssistantType" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
         <AssociationConnector Association="cse136Model.FK_cape_reviews_ratings" ManuallyRouted="false" />
         <AssociationConnector Association="cse136Model.FK_course_schedule_course" ManuallyRouted="false" />

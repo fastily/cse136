@@ -149,13 +149,13 @@
             List<TeachingAssistant> db_TaList;
             try
             {
-                db_TaList = this.context.TeachingAssistants.ToList();
+                db_TaList = this.context.TeachingAssistants.Include("TeachingAssistantType").ToList();
 
                 foreach (TeachingAssistant i_ta in db_TaList)
                 {
                     var tempPoco = new POCO.Ta();
                     tempPoco.TaId = i_ta.ta_id;
-                    tempPoco.TaType = i_ta.ta_type_id.ToString();
+                    tempPoco.TaType = i_ta.TeachingAssistantType.ta_type_desc;
                     tempPoco.FirstName = i_ta.first;
                     tempPoco.LastName = i_ta.last;
                     pocoTaList.Add(tempPoco);
