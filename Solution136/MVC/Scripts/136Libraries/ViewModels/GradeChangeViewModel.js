@@ -10,6 +10,8 @@
         var viewModel = {
             Studnet_id: student_id,
             id: ko.observable(1),
+            course: ko.observable("CSE 3"),
+            desired: ko.observable("A+"),
             reason: ko.observable("Reason for your request"),
             add: function (data) { 
                 self.AddGradeChange(data, student_id);
@@ -19,22 +21,26 @@
         ko.applyBindings(viewModel, document.getElementById("divStudent"));
     };
 
-    this.AddGradeChange = function(data, student_id) {
+    this.AddGradeChange = function (data, student_id) {
+
         var model = {
+            /*
             GradeChangeId: 1,
             Student_id: "1",
             Schedule_id: 1,
             Approved: false,
             Course_id: 1,
+            Desired: "A-",
             Description: "fffffffffffffffffuuuuuu"
-            /*
+           */
+     
             GradeChangeId: data.id(),
             Student_id: student_id,
-            Schedule_id: data.Schedule_id,
+            Schedule_id: 1, //data.Schedule_id,
             Approved: false,
-            Course_id: data.Course_id,
+            Course_id: "1", //data.Course_id,
+            desired: data.desired(),
             Description: data.reason()
-            */
         }
 
         GradeChangeModelObj.Create(model, function(result) {
