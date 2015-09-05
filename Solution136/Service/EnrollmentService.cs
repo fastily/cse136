@@ -55,5 +55,27 @@
 
             this.repository.RemoveEnrollment(studentId, scheduleId, ref errors);
         }
+
+        public List<Enrollment> GetAllStudentEnrolledSchedules(string studentId, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(studentId))
+            {
+                errors.Add("Invalid studentId");
+                throw new ArgumentException();
+            }
+
+            return this.repository.GetAllStudentEnrolledSchedules(studentId, ref errors);
+        }
+
+        public List<Enrollment> GetStudentEnrolledSchedulesByQuarter(string studentId, string year, string quarter, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(studentId))
+            {
+                errors.Add("Invalid studentId");
+                throw new ArgumentException();
+            }
+
+            return this.repository.GetStudentEnrolledSchedulesByQuarter(studentId, year, quarter, ref errors);
+        }
     }
 }

@@ -22,12 +22,12 @@
         }
 
         [HttpPost]
-        public string AddEnrollment(string studentId, int scheduleId)
+        public string AddEnrollment(Enrollment enrollment)
         {
             var errors = new List<string>();
             var repository = new EnrollmentRepository(this.entities);
             var service = new EnrollmentService(repository);
-            service.AddEnrollment(studentId, scheduleId, ref errors);
+            service.AddEnrollment(enrollment.StudentId, enrollment.ScheduleId, ref errors);
 
             if (errors.Count == 0)
             {
@@ -37,12 +37,13 @@
             return "error";
         }
 
-        public string RemoveEnrollment(string studentId, int scheduleId)
+        [HttpPost]
+        public string RemoveEnrollment(Enrollment enrollment)
         {
             var errors = new List<string>();
             var repository = new EnrollmentRepository(this.entities);
             var service = new EnrollmentService(repository);
-            service.RemoveEnrollment(studentId, scheduleId, ref errors);
+            service.AddEnrollment(enrollment.StudentId, enrollment.ScheduleId, ref errors);
 
             if (errors.Count == 0)
             {
@@ -51,5 +52,26 @@
 
             return "error";
         }
+
+        [HttpGet]
+        public List<Enrollment> GetAllStudentEnrolledSchedules(string studentId)
+        {
+            var errors = new List<string>();
+            var repository = new EnrollmentRepository(this.entities);
+            var service = new EnrollmentService(repository);
+
+            return service.GetAllStudentEnrolledSchedules(studentId, ref errors);
+        }
+
+        [HttpGet]
+        public List<Enrollment> GetStudentEnrolledSchedulesByQuarter(string studentId, string year, string quarter)
+        {
+            var errors = new List<string>();
+            var repository = new EnrollmentRepository(this.entities);
+            var service = new EnrollmentService(repository);
+
+            return service.GetStudentEnrolledSchedulesByQuarter(studentId, year, quarter, ref errors);
+        }
+
     }
 }
