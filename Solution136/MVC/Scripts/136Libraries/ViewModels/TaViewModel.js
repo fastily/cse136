@@ -10,7 +10,7 @@
             id: ko.observable(1),
             first: ko.observable("Nick"),
             last: ko.observable("Test"),
-            type: ko.observable("Grader"),
+            type: ko.observable("2"),
             add: function (data) {
                 self.CreateTa(data);
             }

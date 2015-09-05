@@ -10,6 +10,8 @@
 
         public string Description { get; set; }
 
+        public string Level { get; set; }
+
         public override string ToString()
         {
             return this.CourseId + "-" + this.Title + "-" + this.CourseLevel + "-" + this.Description;

@@ -13,10 +13,10 @@
     <input class="form-control" type="text" data-bind="value: last" /><br />
 
     <label>Type</label>
-    <select class="form-control">
-        <option value="grad">Grad 1</option>
-        <option value="saab">Tutor 2</option>
-        <option value="mercedes">Grader 3</option>
+    <select class="form-control" data-bind="value: type">
+        <option value="1">Grad</option>
+        <option value="2">Tutor</option>
+        <option value="3">Grader</option>
     </select> <br />
 
     <input class="btn btn-primary" value="Add" type="button" data-bind="click: add" />

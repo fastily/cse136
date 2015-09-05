@@ -44,15 +44,23 @@
         {
             POCO.Instructor pocoInstructor = new POCO.Instructor();
             instructor db_instructor;
+            var db_staff = new staff();
+
             try
             {
                 db_instructor = this.context.instructors.Find(instId);
                 if (db_instructor != null)
                 {
-                    pocoInstructor.InstructorId = db_instructor.instructor_id;
-                    pocoInstructor.FirstName = db_instructor.first_name;
-                    pocoInstructor.LastName = db_instructor.last_name;
-                    pocoInstructor.Title = db_instructor.title;
+                    db_staff = this.context.staffs.Find(instId);
+
+                    if (db_instructor != null)
+                    {
+                        pocoInstructor.InstructorId = db_instructor.instructor_id;
+                        pocoInstructor.FirstName = db_instructor.first_name;
+                        pocoInstructor.LastName = db_instructor.last_name;
+                        pocoInstructor.Title = db_instructor.title;
+                        pocoInstructor.Password = db_staff.password;
+                    }
                 }
             }
             catch (Exception e)
@@ -106,6 +114,7 @@
                 db_instructor.title = ins.Title;
                 db_staff.First = ins.FirstName;
                 db_staff.Last = ins.LastName;
+                db_staff.password = ins.Password;
                 db_staff.email = ins.FirstName.ToLower().Substring(0, 1) + ins.LastName.ToLower() + "@ucsd.edu";
                 this.context.SaveChanges();
             }
