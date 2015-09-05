@@ -40,7 +40,7 @@
             }
         });
 
-        //currentPreReqList.add()
+        viewModel.currentPreReqList.push(data)
     };
 
     RemovePreReq = function (data) {
@@ -53,7 +53,7 @@
             }
         });
 
-        //currentPreReqList.remove()
+        viewModel.currentPreReqList.remove(data)
     };
 
     this.Initialize = function () {
