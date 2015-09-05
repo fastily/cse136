@@ -97,13 +97,13 @@
             return "error";
         }
 
-        [HttpPost]
-        public string AssignPreReq(int courseId, int preReqCourseId)
+        [HttpGet]
+        public string AssignPreReq(int cId, int prId)
         {
             var errors = new List<string>();
             var repository = new CourseRepository(this.entities);
             var service = new CourseService(repository);
-            service.AssignPreReq(courseId, preReqCourseId, ref errors);
+            service.AssignPreReq(cId, prId, ref errors);
 
             if (errors.Count == 0)
             {

@@ -154,10 +154,10 @@
         public List<Course> GetCourseList(ref List<string> errors)
         {
             List<POCO.Course> pocoCourseList = new List<POCO.Course>();
-            List<course> db_courseList;
+            IEnumerable<course> db_courseList;
             try
             {
-                db_courseList = this.context.courses.ToList();
+                db_courseList = this.context.courses;
 
                 foreach (course i_course in db_courseList)
                 {
@@ -226,16 +226,20 @@
         {
             List<POCO.Course> pocoCourseList = new List<POCO.Course>();
             course db_course = new course();
-            List<course_preReq> db_preReqCourseList;
+            IEnumerable<course_preReq> db_preReqCourseList;
             try
             {
-                db_preReqCourseList = this.context.course_preReq.ToList();
+                db_preReqCourseList = this.context.course_preReq.Where(x => x.course_id == courseId);
 
                 foreach (course_preReq preReq in db_preReqCourseList)
                 {
                     var tempPoco = new POCO.Course();
-                    tempPoco.CourseId = (int)preReq.preReq_id;
-                    tempPoco.Title = preReq.preReq_title;
+                    var dbPoco = new course();
+                    dbPoco = this.context.courses.Find(preReq.preReq_id);
+                    tempPoco.CourseId = dbPoco.course_id;
+                    tempPoco.Title = dbPoco.course_title;
+                    tempPoco.Description = dbPoco.course_description;
+                    tempPoco.Level = dbPoco.course_level;
                     pocoCourseList.Add(tempPoco);
                 }
             }

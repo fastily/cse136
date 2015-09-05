@@ -101,13 +101,13 @@
     };
 
     this.AssignPreReq = function (cid, cpid, callback) {
-        var url = "http://localhost:9393/Api/Course/AssignPreReq";
+        var url = "http://localhost:9393/Api/Course/AssignPreReq?cid=" + cid + '&prid=' + cpid;
 
         $.ajax({
             async: asyncIndicator,
-            method: "POST",
+            method: "GET",
             url: url,
-            data: { courseId: cid, preReqCourseId: cpid },
+            data:'',
             dataType: "json",
             success: function (result) {
                 callback(result);
@@ -138,7 +138,6 @@
 
     this.GetPreReqList = function (id, callback) {
         var url = "http://localhost:9393/Api/Course/GetPreReqList?courseId=" + id;
-
         $.ajax({
             method: "GET",
             url: url,

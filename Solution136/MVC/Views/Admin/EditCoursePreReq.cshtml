@@ -5,82 +5,84 @@
 
 <h2 class="page-header">Edit Course Pre Req</h2>
 <a href="/Admin/CourseList"><< back</a>
-<div id="divCourseContent">
-    <table style="width:100%;">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Course Level</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody >
-            <tr>
-                <td data-bind="text: $data.id"></td>
-                <td data-bind="text: $data.title"></td>
-                <td data-bind="text: $data.level"></td>
-                <td data-bind="text: $data.description"></td>
-            </tr>
-        </tbody>
-    </table>
+<div id="divPreReqManagement">
+    <div>
+        <table style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Course Level</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-bind="text: viewModel.viewCourse.id">0</td>
+                    <td data-bind="text: viewModel.viewCourse.title">1</td>
+                    <td data-bind="text: viewModel.viewCourse.level">2</td>
+                    <td data-bind="text: viewModel.viewCourse.description">3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <h2 class="page-header">Current Pre Reqs</h2>
+    <div>
+        <table style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Course Level</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: viewModel.currentPreReqList">
+                <tr>
+                    <td data-bind="text: CourseId"></td>
+                    <td data-bind="text: Title"></td>
+                    <td data-bind="text: Level"></td>
+                    <td data-bind="text: Description"></td>
+                    <td>
+                        <!-- Note, this is an example using knockout templating. $data is the keyword
+                to for each element of the viewModel array -->
+                        <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <h2 class="page-header">Courses</h2>
+    <div>
+        <table style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Course Level</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: viewModel.coursesList">
+                <tr>
+                    <td data-bind="text: CourseId"></td>
+                    <td data-bind="text: Title"></td>
+                    <td data-bind="text: Level"></td>
+                    <td data-bind="text: Description"></td>
+                    <td>
+                        <!-- Note, this is an example using knockout templating. $data is the keyword
+                            to for each element of the viewModel array -->
+                        <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<br />
-<h2 class="page-header">Current Pre Reqs</h2>
-<div id="divCoursePreReq">
-    <table style="width:100%;">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Course Level</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td data-bind="">2</td>
-                <td data-bind="">CSE 1</td>
-                <td data-bind="">2</td>
-                <td data-bind="">Very Fun Course</td>
-                <td>
-                    <!-- Note, this is an example using knockout templating. $data is the keyword
-                        to for each element of the viewModel array -->
-                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<br />
-<h2 class="page-header">Courses</h2>
-<div id="divCourseListContent">
-    <table style="width:100%;">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Course Level</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: viewModel">
-            <tr>
-                <td data-bind="text: id"></td>
-                <td data-bind="text: title"></td>
-                <td data-bind="text: level"></td>
-                <td data-bind="text: description"></td>
-                <td>
-                    <!-- Note, this is an example using knockout templating. $data is the keyword
-                        to for each element of the viewModel array -->
-                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <a data-bind="attr: { href : '/Admin/CreateCourse', title: 'create' }">Add new Course</a></div>
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a>Assign Course As PreReqs</a>
@@ -88,7 +90,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var courseViewModelObj = new CourseListViewModel();
-        courseViewModelObj.GetDetail(@id);
-        courseViewModelObj.GetAll();
+        courseViewModelObj.LoadPreReq(@ViewBag.id);
     });
 </script>
