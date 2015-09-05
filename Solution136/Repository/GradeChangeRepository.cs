@@ -31,6 +31,7 @@
                     pocoGradeChange.Schedule_id = db_GradeChange.schedule_id;
                     pocoGradeChange.Approved = db_GradeChange.approved;
                     pocoGradeChange.Course_id = db_GradeChange.course_id;
+                    pocoGradeChange.Desired = db_GradeChange.desired;
                     pocoGradeChange.Description = db_GradeChange.description;
                 }
             }
@@ -56,6 +57,7 @@
                     pocoGradeChange.Schedule_id = db_GradeChange.schedule_id;
                     pocoGradeChange.Approved = db_GradeChange.approved;
                     pocoGradeChange.Course_id = db_GradeChange.course_id;
+                    pocoGradeChange.Desired = db_GradeChange.desired;
                     pocoGradeChange.Description = db_GradeChange.description;
                 }
             }
@@ -77,6 +79,7 @@
                 db_gradeChange.schedule_id = gradeChange.Schedule_id;
                 db_gradeChange.course_id = gradeChange.Course_id;
                 db_gradeChange.approved = gradeChange.Approved;
+                db_gradeChange.desired = gradeChange.Desired;
                 db_gradeChange.description = gradeChange.Description;
 
                 this.context.grade_change.Add(db_gradeChange);

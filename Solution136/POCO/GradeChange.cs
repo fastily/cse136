@@ -18,6 +18,8 @@
 
         public int Course_id { get; set; }
 
+        public string Desired { get; set; }
+
         public string Description { get; set; }
 
     }

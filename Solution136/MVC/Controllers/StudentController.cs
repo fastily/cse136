@@ -36,8 +36,9 @@
              return this.View();
          }
 
-         public ActionResult GradeChange()
+         public ActionResult GradeChange(string id)
          {
+             ViewBag.Id = id;
              return this.View();
          }
 
