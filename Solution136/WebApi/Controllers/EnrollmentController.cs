@@ -72,6 +72,5 @@
 
             return service.GetStudentEnrolledSchedulesByQuarter(studentId, year, quarter, ref errors);
         }
-
     }
 }

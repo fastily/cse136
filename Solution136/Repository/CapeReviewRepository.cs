@@ -17,7 +17,6 @@
             this.context = entities;
         }
 
-        
         public void InsertCape(CapeReview cr, ref List<string> errors)
         {
             cape_reviews db_CapeReview = new cape_reviews();
@@ -86,7 +85,6 @@
             return pocoCrList;
         }
 
-
         public List<CapeReview> FindCapeReviewsByInstructorId(int instructor_id, ref List<string> errors)
         {
             List<CapeReview> pocoCrList = new List<CapeReview>();
@@ -115,7 +113,6 @@
             return pocoCrList;
         }
 
-
         public CapeReview FindCapeReviewByScheduleId(int schedule_id, ref List<string> errors)
         {
             CapeReview pocoCR = new CapeReview();
@@ -141,7 +138,6 @@
 
             return pocoCR;
         }
-
 
         public void UpdateCapeReview(CapeReview cr, ref List<string> errors)
         {

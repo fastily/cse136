@@ -234,7 +234,7 @@
             course_preReq db_preReq = new course_preReq();
             try
             {
-                db_preReq= this.context.course_preReq.Where(x => x.course_id == courseId && x.preReq_id == preReqToRemoveCourseId).First();
+                db_preReq = this.context.course_preReq.Where(x => x.course_id == courseId && x.preReq_id == preReqToRemoveCourseId).First();
                 this.context.course_preReq.Remove(db_preReq);
                 this.context.SaveChanges();
             }
@@ -256,12 +256,12 @@
                 foreach (course_preReq preReq in db_preReqCourseList)
                 {
                     var tempPoco = new POCO.Course();
-                    var dbPoco = new course();
-                    dbPoco = this.context.courses.Find(preReq.preReq_id);
-                    tempPoco.CourseId = dbPoco.course_id;
-                    tempPoco.Title = dbPoco.course_title;
-                    tempPoco.Description = dbPoco.course_description;
-                    tempPoco.Level = dbPoco.course_level;
+                    var db_Poco = new course();
+                    db_Poco = this.context.courses.Find(preReq.preReq_id);
+                    tempPoco.CourseId = db_Poco.course_id;
+                    tempPoco.Title = db_Poco.course_title;
+                    tempPoco.Description = db_Poco.course_description;
+                    tempPoco.Level = db_Poco.course_level;
                     pocoCourseList.Add(tempPoco);
                 }
             }
