@@ -354,14 +354,14 @@
 
         public List<Schedule> GetInstructorSchedule(int instructorId, ref List<string> errors)
         {
-            IEnumerable<course_schedule> dbList;
+            IEnumerable<course_schedule> db_List;
             List<Schedule> pocoList = new List<Schedule>();
 
             try
             {
-                dbList = this.context.course_schedule.Include("schedule_day").Include("schedule_time").Include("instructor").Where(x => x.instructor_id == instructorId);
+                db_List = this.context.course_schedule.Include("schedule_day").Include("schedule_time").Include("instructor").Where(x => x.instructor_id == instructorId);
                  
-                foreach (course_schedule c in dbList)
+                foreach (course_schedule c in db_List)
                 {
                     var day = new schedule_day();
                     var time = new schedule_time();
@@ -411,18 +411,18 @@
 
         public List<Ta> GetTaBySchedule(int scheduleId, ref List<string> errors)
         {
-            IEnumerable<course_schedule> dbList;
-            IEnumerable<TeachingAssistant> taList;
+            IEnumerable<course_schedule> db_List;
+            IEnumerable<TeachingAssistant> ta_List;
             List<Ta> pocoList = new List<Ta>();
 
             try
             {
-                dbList = this.context.course_schedule.Include("TeachingAssistants").Where(x => x.schedule_id == scheduleId);
+                db_List = this.context.course_schedule.Include("TeachingAssistants").Where(x => x.schedule_id == scheduleId);
 
-                foreach (course_schedule c in dbList)
+                foreach (course_schedule c in db_List)
                 {
-                    taList = c.TeachingAssistants;
-                    foreach (TeachingAssistant t in taList)
+                    ta_List = c.TeachingAssistants;
+                    foreach (TeachingAssistant t in ta_List)
                     {
                         var poco = new Ta();
                         poco.TaId = t.ta_id;
@@ -431,8 +431,7 @@
                         poco.TaType = t.ta_type_id.ToString();
 
                         pocoList.Add(poco);
-                    }
-                    
+                    }                    
                 }
             }
             catch (Exception e)

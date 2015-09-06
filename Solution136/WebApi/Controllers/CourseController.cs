@@ -41,7 +41,6 @@
             return service.GetCourseList(ref errors);
         }
 
-
         [HttpGet]
         public Course GetCourse(int id)
         {

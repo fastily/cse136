@@ -39,7 +39,6 @@
             return service.GetInstructorRating(instructorId, ref errors);
         }
 
-
         [HttpGet]
         public List<CapeReview> FindCapeReviewByCourseId(int cid)
         {

@@ -161,15 +161,15 @@
             try
             {
                 enrollmentList = this.context.enrollments.Include("student").Where(x => x.schedule_id == scheduleId);
-                foreach (enrollment dbStudent in enrollmentList)
+                foreach (enrollment db_Student in enrollmentList)
                 {
                     var poco = new Student();
-                    poco.StudentId = dbStudent.student.student_id;
-                    poco.FirstName = dbStudent.student.first_name;
-                    poco.FirstName = dbStudent.student.first_name;
-                    poco.Email = dbStudent.student.email;
-                    poco.Password = dbStudent.student.password;
-                    poco.Grade = dbStudent.grade;
+                    poco.StudentId = db_Student.student.student_id;
+                    poco.FirstName = db_Student.student.first_name;
+                    poco.FirstName = db_Student.student.first_name;
+                    poco.Email = db_Student.student.email;
+                    poco.Password = db_Student.student.password;
+                    poco.Grade = db_Student.grade;
 
                     studentList.Add(poco);
                 }
