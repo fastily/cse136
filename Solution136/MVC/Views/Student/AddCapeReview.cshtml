@@ -7,18 +7,39 @@
     var cid = ViewBag.Course_id;
 }
 
-<h3 class="page-header">Add Cape Review</h3>
+<h3 class="page-header">Add Cape Review For</h3>
 
 <a href="/Student/"><< back</a>
 
-<div id="divCapeReview">
+<h3 class="page-header">Current Schedule</h3>
+<a href="/Student/ScheduleList"><< back</a>
+<div id="fakeContent">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Year</th>
+                <th>Quarter</th>
+                <th>Session</th>
+                <th>Instructor</th>
+                <th>Course Name</th>
+                <th>Cape Review</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel">
+            <tr>
+                <!-- Enrollment hardcoded-->
+                <td data-bind="text: Id"</td>
+                <td data-bind="text: year"</td>
+                <td data-bind="text: quarter"</td>
+                <td data-bind="text: instructor"</td>
+                <td data-bind="text: coursename"></td
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-    <label>Course</label>
-    <select class="form-control" data-bind="value: course">
-        <option value="1">CSE 3</option>
-        <option value="upper">Upper</option>
-        <option value="grad">Grad</option>
-    </select> <br />
+<div id="divCapeReview">
 
     <label>Course Rating</label>
     <select class="form-control" data-bind="value: desired">
@@ -27,11 +48,10 @@
         <option value="cr3">3</option>
         <option value="cr4">4</option>
         <option value="cr5">5</option>
-
     </select> <br />
     <br />
 
-    <label>Reason</label>
+    <label>Description</label>
     <input class="form-control" type="text" data-bind="value: reason"/>
     <br />
 
@@ -40,10 +60,6 @@
 
     <div id="divMessage" class="text-success">&nbsp;</div>
 </div>
-
-
-
-
 
 
 <script type="text/html" id="action-template">
