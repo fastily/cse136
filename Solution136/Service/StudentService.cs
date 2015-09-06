@@ -163,5 +163,16 @@
 
             return sum / enrollments.Count;
         }
+
+        public void RequestPreReqOverride(int scheduleId, string studentId, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(studentId) || scheduleId < 0)
+            {
+                errors.Add("Invalid student id or schedule id");
+                throw new ArgumentException();
+            }
+
+            this.repository.RequestPreReqOverride(scheduleId, studentId, ref errors);
+        }
     }
 }

@@ -65,6 +65,8 @@
                     poco.EnrolledSchedule = new Schedule();
                     poco.EnrolledSchedule.Course = new Course();
                     poco.EnrolledSchedule.Instructor = new Instructor();
+                    poco.EnrolledSchedule.Day = new ScheduleDay();
+                    poco.EnrolledSchedule.Time = new ScheduleTime();
 
                     poco.ScheduleId = enrolled.schedule_id;
                     poco.StudentId = enrolled.student_id;
@@ -81,6 +83,12 @@
                     poco.EnrolledSchedule.Instructor.InstructorId = enrolled.course_schedule.instructor.instructor_id;
                     poco.EnrolledSchedule.Instructor.FirstName = enrolled.course_schedule.instructor.first_name;
                     poco.EnrolledSchedule.Instructor.LastName = enrolled.course_schedule.instructor.last_name;
+
+                    poco.EnrolledSchedule.Day.DayId = enrolled.course_schedule.schedule_day.schedule_day_id;
+                    poco.EnrolledSchedule.Day.Day = enrolled.course_schedule.schedule_day.schedule_day1;
+
+                    poco.EnrolledSchedule.Time.TimeId = enrolled.course_schedule.schedule_time.schedule_time_id;
+                    poco.EnrolledSchedule.Time.Time = enrolled.course_schedule.schedule_time.schedule_time1;
 
                     pocoEnrollmentList.Add(poco);
                 }
@@ -107,26 +115,35 @@
                     poco.EnrolledSchedule = new Schedule();
                     poco.EnrolledSchedule.Course = new Course();
                     poco.EnrolledSchedule.Instructor = new Instructor();
-
-                    poco.ScheduleId = enrolled.schedule_id;
-                    poco.StudentId = enrolled.student_id;
-                    poco.Grade = enrolled.grade;
-
-                    poco.EnrolledSchedule.ScheduleId = enrolled.course_schedule.schedule_id;
-                    poco.EnrolledSchedule.Year = enrolled.course_schedule.year.ToString();
-                    poco.EnrolledSchedule.Quarter = enrolled.course_schedule.quarter;
-                    poco.EnrolledSchedule.Session = enrolled.course_schedule.session;
-
-                    poco.EnrolledSchedule.Course.CourseId = enrolled.course_schedule.course.course_id;
-                    poco.EnrolledSchedule.Course.Title = enrolled.course_schedule.course.course_title;
-
-                    poco.EnrolledSchedule.Instructor.InstructorId = enrolled.course_schedule.instructor.instructor_id;
-                    poco.EnrolledSchedule.Instructor.FirstName = enrolled.course_schedule.instructor.first_name;
-                    poco.EnrolledSchedule.Instructor.LastName = enrolled.course_schedule.instructor.last_name;
-
+                    poco.EnrolledSchedule.Day = new ScheduleDay();
+                    poco.EnrolledSchedule.Time = new ScheduleTime();
 
                     if (enrolled.course_schedule.year.ToString() == year && enrolled.course_schedule.quarter == quarter)
+                    {
+                        poco.ScheduleId = enrolled.schedule_id;
+                        poco.StudentId = enrolled.student_id;
+                        poco.Grade = enrolled.grade;
+
+                        poco.EnrolledSchedule.ScheduleId = enrolled.course_schedule.schedule_id;
+                        poco.EnrolledSchedule.Year = enrolled.course_schedule.year.ToString();
+                        poco.EnrolledSchedule.Quarter = enrolled.course_schedule.quarter;
+                        poco.EnrolledSchedule.Session = enrolled.course_schedule.session;
+
+                        poco.EnrolledSchedule.Course.CourseId = enrolled.course_schedule.course.course_id;
+                        poco.EnrolledSchedule.Course.Title = enrolled.course_schedule.course.course_title;
+
+                        poco.EnrolledSchedule.Instructor.InstructorId = enrolled.course_schedule.instructor.instructor_id;
+                        poco.EnrolledSchedule.Instructor.FirstName = enrolled.course_schedule.instructor.first_name;
+                        poco.EnrolledSchedule.Instructor.LastName = enrolled.course_schedule.instructor.last_name;
+
+                        poco.EnrolledSchedule.Day.DayId = enrolled.course_schedule.schedule_day.schedule_day_id;
+                        poco.EnrolledSchedule.Day.Day = enrolled.course_schedule.schedule_day.schedule_day1;
+
+                        poco.EnrolledSchedule.Time.TimeId = enrolled.course_schedule.schedule_time.schedule_time_id;
+                        poco.EnrolledSchedule.Time.Time = enrolled.course_schedule.schedule_time.schedule_time1;
+
                         pocoEnrollmentList.Add(poco);
+                    }
                 }
             }
             catch (Exception e)

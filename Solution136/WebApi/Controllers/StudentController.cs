@@ -142,5 +142,20 @@
             var service = new StudentService(repository);
             return service.GetEnrollments(studentId, ref errors);
         }
+
+        [HttpPost]
+        public string RequestPreReqOverride(int scheduleId, string studentId)
+        {
+            var errors = new List<string>();
+            var repository = new StudentRepository(this.entities);
+            var service = new StudentService(repository);
+            service.RequestPreReqOverride(scheduleId, studentId, ref errors);
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
     }
 }

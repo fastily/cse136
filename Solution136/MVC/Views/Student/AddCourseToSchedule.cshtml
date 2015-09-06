@@ -7,8 +7,9 @@
 
 
 <h3 class="page-header">Current Schedule</h3>
-<a href="/Student/ScheduleList"><< back</a>
-<div id="divStudentEnrollments">
+<a href="/Student/ScheduleList?id=@Session["studentid"]"><< back</a>
+<div id="StudentAddCourseToSchedule">
+    <div>
     <table style="width:100%;">
         <thead>
             <tr>
@@ -16,22 +17,26 @@
                 <th>Year</th>
                 <th>Quarter</th>
                 <th>Session</th>
-                <th>Instructor</th>
-                <th>Course</th>
-                <th>Actions</th>
+                    <th>Course Title</th>
+                    <th>Time</th>
+                    <th>Day</th>
+                    <th>Instructor Name</th>
+                    <th>Actions</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: viewModel.studentEnrollmentList">
+            <tbody data-bind="foreach: viewModel.studentScheduleList">
             <tr>
-                <td data-bind="text: EnrolledSchedule.ScheduleId"></td>
-                <td data-bind="text: EnrolledSchedule.Year"></td>
-                <td data-bind="text: EnrolledSchedule.Quarter"></td>
-                <td data-bind="text: EnrolledSchedule.Session"></td>
-                <td data-bind="text: EnrolledSchedule.Instructor.FirstName"></td>
-                <td data-bind="text: EnrolledSchedule.Course.Title"></td>
+                    <td data-bind="text: ScheduleId"></td>
+                    <td data-bind="text: EnrolledSchedule.Year"></td>
+                    <td data-bind="text: EnrolledSchedule.Quarter"></td>
+                    <td data-bind="text: EnrolledSchedule.Session"></td>
+                    <td data-bind="text: EnrolledSchedule.Course.Title"></td>
+                    <td data-bind="text: EnrolledSchedule.Time.Time"></td>
+                    <td data-bind="text: EnrolledSchedule.Day.Day"></td>
+                    <td data-bind="text: EnrolledSchedule.Instructor.FirstName"></td>
                 <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
-                    to for each element of the viewModel array -->
+                        to for each element of the viewModel array -->
                     <div data-bind="template: { name: 'cape-template', data: $data}"></div>
                 </td>
             </tr>
@@ -39,12 +44,6 @@
     </table>
 </div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var enrollmentViewModelObj = new EnrollmentViewModel();
-        enrollmentViewModelObj.LoadStudentEnrollments("@Session["studentId"]");
-    });
-</script>
 
 <script type="text/html" id="cape-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
@@ -53,7 +52,7 @@
 </script>
 
 <h3 class="page-header">Add Course To Schedule</h3>
-<div id="divScheduleListContent">
+    <div>
     <table style="width:100%;">
         <thead>
             <tr>
@@ -68,16 +67,16 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: viewModel">
+            <tbody data-bind="foreach: viewModel.scheduleList">
             <tr>
-                <td data-bind="text: id"></td>
-                <td data-bind="text: year"></td>
-                <td data-bind="text: quarter"></td>
-                <td data-bind="text: session"></td>
-                <td data-bind="text: course.title"></td>
-                <td data-bind="text: time.name"></td>
-                <td data-bind="text: day.name"></td>
-                <td data-bind="text: instructor.name"></td>
+                    <td data-bind="text: ScheduleId"></td>
+                    <td data-bind="text: Year"></td>
+                    <td data-bind="text: Quarter"></td>
+                    <td data-bind="text: Session"></td>
+                    <td data-bind="text: Course.Title"></td>
+                    <td data-bind="text: Time.Time"></td>
+                    <td data-bind="text: Day.Day"></td>
+                    <td data-bind="text: Instructor.FirstName"></td>
                 <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
                     to for each element of the viewModel array -->
@@ -87,15 +86,15 @@
         </tbody>
     </table>
 </div>
-
+</div>
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="AddCourse: $data">Add Course</a>
+    <a data-bind="AddCourseToStudent: $data">Add Course</a>
 </script>
 
 <script type="text/javascript">
     $(document).ready(function () {
         var scheduleViewModelObj = new ScheduleViewModel();
-        scheduleViewModelObj.GetAll("@ViewBag.Year","@ViewBag.Quarter");
+        scheduleViewModelObj.LoadStudentEnrollments("@ViewBag.Year", "@ViewBag.Quarter", "@Session["studentid"]");
     });
 </script>
