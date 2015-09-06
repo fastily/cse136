@@ -39,12 +39,6 @@
                 throw new ArgumentException();
             }
 
-            if (schedule.ScheduleId <= 0)
-            {
-                errors.Add("Invalid schedule");
-                throw new ArgumentException();
-            }
-
             if (schedule.Day.DayId <= 0)
             {
                 errors.Add("Invalid Day");

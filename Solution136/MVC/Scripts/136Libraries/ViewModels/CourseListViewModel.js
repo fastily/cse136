@@ -35,10 +35,10 @@
     };
 
     AddNewPreReq = function (data) {
-        courseModelObj.AssignPreReq(viewModel.viewCourse.id, data.CourseId, function (result) {
+        courseModelObj.AssignPreReq(viewModel.viewCourse.id(), data.CourseId, function (result) {
             if (result = 'ok') {
                 viewModel.currentPreReqList.push(data)
-                alert("succes");
+                alert("success adding pre req");
             }
             else {
                 alert('Error occurs during add preReq');

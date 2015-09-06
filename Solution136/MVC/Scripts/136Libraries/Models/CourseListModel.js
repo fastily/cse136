@@ -118,7 +118,7 @@
     };
 
     this.AssignPreReq = function (cid, cpid, callback) {
-        var url = "http://localhost:9393/Api/Course/AssignPreReq?cid=" + cid() + '&prid=' + cpid;
+        var url = "http://localhost:9393/Api/Course/AssignPreReq?cId=" + cid + '&pr_Id=' + cpid;
 
         $.ajax({
             async: asyncIndicator,
