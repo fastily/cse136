@@ -37,7 +37,7 @@
 
         StudentModelObj.Create(model, function(result) {
             if (result == "ok") {
-                alert("Create student successful");
+                alert("Created student successfully");
             } else {
                 alert("Error occurred");
             }
@@ -66,20 +66,38 @@
         });
     };
 
+    this.UpdateStudent = function (student) {
+        var studentData = {
+            StudentId: student.id(),
+            FirstName: student.first(),
+            LastName: student.last(),
+            Email: student.email(),
+            Password: student.password()
+        };
+
+        StudentModelObj.Update(studentData, function (message) {
+            $('#divMessage').html(message);
+        });
+
+    };
+
     this.GetDetail = function (id) {
 
         StudentModelObj.GetDetail(id, function (result) {
             
             var student = {
-                id: result.StudentId,
-                first: result.FirstName,
-                last: result.LastName,
-                email: result.Email,
-                password: result.Password
+                id: ko.observable(result.StudentId),
+                first: ko.observable(result.FirstName),
+                last: ko.observable(result.LastName),
+                email: ko.observable(result.Email),
+                password: ko.observable(result.Password),
+                update: function () {
+                    self.UpdateStudent(this);
+                }
             };
 
             if (initialBind) {
-                ko.applyBindings({ viewModel: student }, document.getElementById("divStudentContent"));
+                ko.applyBindings(student, document.getElementById("divStudentContent"));
             }
         });
     };

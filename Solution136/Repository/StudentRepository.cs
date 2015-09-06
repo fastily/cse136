@@ -86,12 +86,10 @@
         public void UpdateStudent(Student s, ref List<string> errors)
         {
             var db_student = new student();
-            Student pocoStudent = new Student();
 
             try
             {
-                db_student.student_id = s.StudentId;
-                db_student = this.context.students.Find(db_student);
+                db_student = this.context.students.Find(s.StudentId); 
                 db_student.first_name = s.FirstName;
                 db_student.last_name = s.LastName;
                 db_student.password = s.Password;
@@ -110,7 +108,7 @@
 
             try
             {
-                db_student.student_id = student_id;
+                db_student = this.context.students.Find(student_id);
                 this.context.students.Remove(db_student);
                 this.context.SaveChanges();
             }
