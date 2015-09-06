@@ -47,34 +47,6 @@
             }          
         };
 
-        //this.gradeChange = {
-        //    StudentId: student_id,
-        //    id: ko.observable(1),
-        //    course: ko.observable("CSE 3"),
-        //    desired: ko.observable("A+"),
-        //    reason: ko.observable("Reason for your request"),
-        //    add: function (data) {
-        //        self.AddGradeChange(data, student_id);
-        //    }
-        //};
-
-    //    GradeChangeId: data.id(),
-    //    Student_id: student_id,
-    //    Schedule_id:LoadStudentsByScheduleId 1, //data.Schedule_id,
-    //    Approved: false,
-    //    Course_id: "1", //data.Course_id,
-    //    Desired: data.desired(),
-    //    Description: data.reason()
-    //}
-
-    //GradeChangeModelObj.Create(model, function(result) {
-    //    if (result == "ok") {
-    //        alert("Create GradeChange successful");
-    //    } else {
-    //        alert("Error creating GradeChange occurred");
-    //    }
-    //});
-
         this.EnrollStudent = EnrollStudent;
     };
 
