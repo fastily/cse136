@@ -166,7 +166,7 @@
                     var poco = new Student();
                     poco.StudentId = db_Student.student.student_id;
                     poco.FirstName = db_Student.student.first_name;
-                    poco.FirstName = db_Student.student.first_name;
+                    poco.LastName = db_Student.student.last_name;
                     poco.Email = db_Student.student.email;
                     poco.Password = db_Student.student.password;
                     poco.Grade = db_Student.grade;
