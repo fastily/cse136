@@ -46,7 +46,7 @@
              return this.View();
          }
 
-         public ActionResult AddCapeReview(string id, string inst, string coursename) {
+         public ActionResult AddCapeReview(string id, string inst, string iname, string coursename) {
              ViewBag.ScheduleId = id;
              ViewBag.inst = inst;
              ViewBag.coursename = coursename;
