@@ -48,7 +48,7 @@
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="DeleteStudentEnrollment: $data">Delete</a>
-    <a data-bind="attr: { href : '/Staff/EditStudent?id=' + StudentId, title: 'manage' }">manage</a>
+    <a data-bind="attr: { href : '/Staff/EditStudent?studentId=' + StudentId + '&scheduleId=' + @ViewBag.scheduleId, title: 'manage' }">manage</a>
 </script>
 
 <script type="text/javascript">

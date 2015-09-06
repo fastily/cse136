@@ -79,7 +79,7 @@
           <Key>
             <PropertyRef Name="gradeChange_id" />
           </Key>
-          <Property Name="gradeChange_id" Type="int" Nullable="false" />
+          <Property Name="gradeChange_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="student_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="schedule_id" Type="int" Nullable="false" />
           <Property Name="approved" Type="bit" />

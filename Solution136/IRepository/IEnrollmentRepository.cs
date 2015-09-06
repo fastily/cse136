@@ -9,6 +9,10 @@
 
         void RemoveEnrollment(string studentId, int scheduleId, ref List<string> errors);
 
+        Enrollment GetEnrollmentDetail(string studentId, int scheduleId, ref List<string> errors);
+
+        void UpdateEnrollment(Enrollment er, ref List<string> errors);
+
         List<POCO.Enrollment> GetAllStudentEnrolledSchedules(string studentId, ref List<string> errors);
 
         List<Student> GetStudentsByScheduleId(int scheduleId, ref List<string> errors);

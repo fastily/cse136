@@ -82,5 +82,32 @@
 
             return service.GetStudentsByScheduleId(scheduleId, ref errors);
         }
+
+        [HttpGet]
+        public Enrollment GetEnrollmentDetail(string studentId, int scheduleId)
+        {
+            var errors = new List<string>();
+            var repository = new EnrollmentRepository(this.entities);
+            var service = new EnrollmentService(repository);
+
+            return service.GetEnrollmentDetail(studentId, scheduleId, ref errors);
+        }
+
+        [HttpPost]
+        public string UpdateEnrollment(Enrollment er)
+        {
+            var errors = new List<string>();
+            var repository = new EnrollmentRepository(this.entities);
+            var service = new EnrollmentService(repository);
+
+            service.UpdateEnrollment(er, ref errors);
+
+            if (errors.Count == 0)
+            {
+                return "ok";
+            }
+
+            return "error";
+        }
     }
 }

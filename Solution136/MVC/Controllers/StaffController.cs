@@ -21,8 +21,10 @@
             return this.View();
         }
 
-        public ActionResult EditStudent()
+        public ActionResult EditStudent(string studentId, int scheduleId)
         {
+            ViewBag.studentId = studentId;
+            ViewBag.scheduleId = scheduleId;
             return this.View();
         }
 

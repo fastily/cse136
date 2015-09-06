@@ -88,5 +88,27 @@
 
             return this.repository.GetStudentsByScheduleId(scheduleId, ref errors);
         }
+
+        public Enrollment GetEnrollmentDetail(string studentId, int scheduleId, ref List<string> errors)
+        {
+            if (string.IsNullOrEmpty(studentId))
+            {
+                errors.Add("Invalid studentId");
+                throw new ArgumentException();
+            }
+
+            if (scheduleId <= 0)
+            {
+                errors.Add("Invalid scheduleId");
+                throw new ArgumentException();
+            }
+
+            return this.repository.GetEnrollmentDetail(studentId, scheduleId, ref errors);
+        }
+
+        public void UpdateEnrollment(Enrollment er, ref List<string> errors)
+        {
+            this.repository.UpdateEnrollment(er, ref errors);
+        }
     }
 }

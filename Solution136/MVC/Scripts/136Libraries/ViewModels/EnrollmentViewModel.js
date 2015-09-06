@@ -15,6 +15,12 @@
         this.ScheduleId = ko.observable();
         this.StudentId = ko.observable("");
 
+        this.enrollmentUpdate = {
+            ScheduleId: ko.observable(),
+            StudentId: ko.observable(""),
+            Grade: ko.observable(""),
+        }
+
         this.newEnrollment = {
             ScheduleId: ko.observable(),
             StudentId: ko.observable(""),
@@ -48,6 +54,8 @@
         };
 
         this.EnrollStudent = EnrollStudent;
+
+        this.UpdateEnrollment = UpdateEnrollment;
     };
 
     EnrollStudent = function (data) {
@@ -145,6 +153,41 @@
         this.GetAll(studentId);
 
         ko.applyBindings({ viewModel: viewModel }, document.getElementById("divStudentEnrollments"));
+    };
+
+    this.LoadUpdateGrade = function (studentId, scheduleId) {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        viewModel.newEnrollment.StudentId = ko.observable(studentId);
+        viewModel.enrollmentUpdate.StudentId = ko.observable(studentId);
+        viewModel.enrollmentUpdate.ScheduleId = ko.observable(scheduleId);
+        this.GetDetail(studentId, scheduleId);
+
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("UpdateEnrollment"));
+    };
+
+    this.GetDetail = function (studentId, scheduleId) {
+        enrollmentModelObj.GetEnrollmentDetail(studentId, scheduleId, function (result) {
+            viewModel.enrollmentUpdate.Grade = ko.observable(result.Grade);
+        });
+    };
+
+    UpdateEnrollment = function () {
+        var enrollment = {
+            ScheduleId: viewModel.enrollmentUpdate.ScheduleId,
+            StudentId: viewModel.enrollmentUpdate.StudentId,
+            Grade: viewModel.enrollmentUpdate.Grade
+        }
+        enrollmentModelObj.UpdateEnrollment(enrollment, function (result) {
+            if (result == 'ok') {
+                alert("updated enrollment successfully");
+            }
+            else {
+                alert('Error occurs during update grade');
+            }
+        });
     };
 
     ko.bindingHandlers.DeleteEnrollment = {

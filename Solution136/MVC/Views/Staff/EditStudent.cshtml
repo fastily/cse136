@@ -4,87 +4,23 @@
 
 <h2 class="page-header">Manage Student</h2>
 <a href="/Staff?id=@Session["staffId"]"><< back</a>
-<div>
-    <table style="width:100%;">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>First</th>
-                <th>Last</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: viewModel">
-            <tr>
-                <td>A901234</td>
-                <td>John</td>
-                <td>Cena</td>
-                <td>dondudndond@rko.dead</td>
-                <!--
-                <td data-bind="text: id"></td>
-                <td data-bind="text: first"></td>
-                <td data-bind="text: last"></td>
-                <td data-bind="text: email"></td>
-                -->
-            </tr>
-        </tbody>
-    </table>
+<div id="UpdateEnrollment">
+    <label>StudentId</label>
+    <input class="form-control" type="text" data-bind="value: viewModel.enrollmentUpdate.StudentId" /><br />
+
+    <label>Grade</label>
+    <input class="form-control" type="text" data-bind="value: viewModel.enrollmentUpdate.Grade" /><br />
+
+    <input class="btn btn-primary" type="button" data-bind="value: 'UpdateEnrollment', click: viewModel.UpdateEnrollment" />
+    <br />
+    <div id="divMessage" class="text-success">&nbsp;</div> 
 </div>
-
-<div id="divCourseListContent">
-    <table style="width:100%;">
-       
-            <tr>
-                <th>Current Grade</th>
-                <td><input data-bind="value: grade" /></td>
-              
-            </tr>
-            <tr>
-                <th>Prerequisite Clearance Request Reason</th>
-                <td><blockquote> aei;rjogf ;oakjndfhvkjlndfd</blockquote></td>
-            </tr>
-            <tr>
-                <th>Clear Prerequisite?</th>
-                <td><input type="radio" name="preq" value="yes">Allow</td>
-                <td><input type="radio" name="preq" value="no" checked>Decline</td>
-            </tr>
-            <tr>
-                <th>Desired Grade</th>
-                <td><blockquote> F</blockquote></td>
-            </tr>
-            <tr>
-                <th>Regrade Request Reason</th>
-                <td><blockquote> aei;rjogf ;oakjndfhvkjlndfd</blockquote></td>
-            </tr>
-       
-                <!--
-    <td data-bind="text: id"></td>
-    <td data-bind="text: title"></td>
-    <td data-bind="text: level"></td>
-    <td data-bind="text: description"></td>
-    <td>
-        <input class="form-control" type="text" />
-    </td>
-    <td>
-        <!-- Note, this is an example using knockout templating. $data is the keyword
-        to for each element of the viewModel array -->
-                <!--
-    </td>
-    -->
-    </table>
-</div>
-
-<input class="btn btn-primary" value="Update" type="button" />
-
-<script type="text/html" id="action-template">
-    <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="AddCourse: $data">update</a>
-</script>
 
 <script type="text/javascript">
-    var viewModel = {
-        grade: ko.observable()
-    };
+    $(document).ready(function () {
+        var enrollmentViewModelObj = new EnrollmentViewModel();
+        enrollmentViewModelObj.LoadUpdateGrade("@ViewBag.studentId",@ViewBag.scheduleId);
+    });
 </script>
 
 

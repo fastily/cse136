@@ -203,5 +203,41 @@
 
             return isDuplicate;
         }
+
+        public Enrollment GetEnrollmentDetail(string studentId, int scheduleId, ref List<string> errors)
+        {
+            var db_Enrollment = new enrollment();
+            var poco = new Enrollment();
+
+            try
+            {
+                db_Enrollment = this.context.enrollments.Where(x => x.schedule_id == scheduleId && x.student_id == studentId).First();
+                poco.StudentId = db_Enrollment.student_id;
+                poco.ScheduleId = db_Enrollment.schedule_id;
+                poco.Grade = db_Enrollment.grade;
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in EnrollmentRepository.AddEnrollment: " + e);
+            }
+
+            return poco;
+        }
+
+        public void UpdateEnrollment(Enrollment er, ref List<string> errors)
+        {
+            var db_Enrollment = new enrollment();
+
+            try
+            {
+                db_Enrollment = this.context.enrollments.Where(x => x.schedule_id == er.ScheduleId && x.student_id == er.StudentId).First();
+                db_Enrollment.grade = er.Grade;
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in EnrollmentRepository.AddEnrollment: " + e);
+            }
+        }
     }
 }

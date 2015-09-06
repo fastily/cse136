@@ -85,4 +85,37 @@
             }
         });
     };
+
+    this.UpdateEnrollment = function (er, callback) {
+        $.ajax({
+            async: asyncIndicator,
+            method: "POST",
+            url: "http://localhost:9393/Api/Enrollment/UpdateEnrollment",
+            data: er,
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while adding Course to schedule.  Is your service layer running?');
+            }
+        });
+    };
+   
+    this.GetEnrollmentDetail = function (studentId, scheduleId, callback) {
+        var url = "http://localhost:9393/Api/Enrollment/GetEnrollmentDetail?studentId=" + studentId +'&scheduleId=' + scheduleId;
+        $.ajax({
+            async: asyncIndicator,
+            method: "GET",
+            url: url,
+            data: "",
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while loading schedule list.  Is your service layer running?');
+            }
+        });
+    };
 }
