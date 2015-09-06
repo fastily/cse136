@@ -178,6 +178,37 @@
             return pocoCourseList;
         }
 
+        public List<Course> GetAllScheduleCourseList(ref List<string> errors)
+        {
+            List<POCO.Course> pocoCourseList = new List<POCO.Course>();
+            IEnumerable<course> db_courseList;
+            try
+            {
+                db_courseList = this.context.courses.Include("course_schedule");
+
+                foreach (course i_course in db_courseList)
+                {
+                    var tempPoco = new POCO.Course();
+                    if (i_course.course_schedule.Count() > 0)
+                    {
+                        tempPoco.CourseId = i_course.course_id;
+                        tempPoco.ScheduleId = i_course.course_schedule.First().schedule_id;
+                        tempPoco.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), i_course.course_level);
+                        tempPoco.Level = i_course.course_level;
+                        tempPoco.Description = i_course.course_description;
+                        tempPoco.Title = i_course.course_title;
+                        pocoCourseList.Add(tempPoco);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in CourseRepository.GetCourseList: " + e);
+            }
+
+            return pocoCourseList;
+        }
+
         public void AssignPreReqToCourse(int courseId, int preReqCourseId, ref List<string> errors)
         {
             course db_coursePreReq = new course();
@@ -203,7 +234,7 @@
             course_preReq db_preReq = new course_preReq();
             try
             {
-                db_preReq= this.context.course_preReq.Where(x => x.course_id == courseId && x.preReq_id == preReqToRemoveCourseId).First();
+                db_preReq = this.context.course_preReq.Where(x => x.course_id == courseId && x.preReq_id == preReqToRemoveCourseId).First();
                 this.context.course_preReq.Remove(db_preReq);
                 this.context.SaveChanges();
             }
@@ -225,12 +256,12 @@
                 foreach (course_preReq preReq in db_preReqCourseList)
                 {
                     var tempPoco = new POCO.Course();
-                    var dbPoco = new course();
-                    dbPoco = this.context.courses.Find(preReq.preReq_id);
-                    tempPoco.CourseId = dbPoco.course_id;
-                    tempPoco.Title = dbPoco.course_title;
-                    tempPoco.Description = dbPoco.course_description;
-                    tempPoco.Level = dbPoco.course_level;
+                    var db_Poco = new course();
+                    db_Poco = this.context.courses.Find(preReq.preReq_id);
+                    tempPoco.CourseId = db_Poco.course_id;
+                    tempPoco.Title = db_Poco.course_title;
+                    tempPoco.Description = db_Poco.course_description;
+                    tempPoco.Level = db_Poco.course_level;
                     pocoCourseList.Add(tempPoco);
                 }
             }

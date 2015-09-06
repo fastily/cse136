@@ -60,7 +60,9 @@
                     tempPoco.Quarter = sched.quarter;
 
                     if (sched.enrollments.Where(x => x.student_id == id).Count() > 0)
+                    {
                         pocoScheduleList.Add(tempPoco);
+                    }
                 }
             }
             catch (Exception e)
@@ -252,8 +254,8 @@
 
             try
             {
-                var Year = int.Parse(year);
-                db_ScheduleList = this.context.course_schedule.Where(x => x.quarter == quarter && x.year == Year);
+                var yr = int.Parse(year);
+                db_ScheduleList = this.context.course_schedule.Where(x => x.quarter == quarter && x.year == yr);
                 foreach (course_schedule deleteMe in db_ScheduleList)
                 {
                     var deleteMeId = deleteMe.schedule_id;
@@ -265,6 +267,7 @@
                         this.context.enrollments.Remove(deleteEnrollment);
                     }
                 }
+
                 this.context.SaveChanges();
             }
             catch (Exception e)
@@ -298,13 +301,13 @@
         public List<ScheduleDay> GetDays(ref List<string> errors)
         {
             List<ScheduleDay> pocoList = new List<ScheduleDay>();
-            IEnumerable<schedule_day> dbList;
+            IEnumerable<schedule_day> db_List;
 
             try
             {
-                dbList = this.context.schedule_day;
+                db_List = this.context.schedule_day;
                 
-                foreach (schedule_day sd in dbList)
+                foreach (schedule_day sd in db_List)
                 {
                     var poco = new ScheduleDay();
 
@@ -325,13 +328,13 @@
         public List<ScheduleTime> GetTimes(ref List<string> errors)
         {
             List<ScheduleTime> pocoList = new List<ScheduleTime>();
-            IEnumerable<schedule_time> dbList;
+            IEnumerable<schedule_time> db_List;
 
             try
             {
-                dbList = this.context.schedule_time;
+                db_List = this.context.schedule_time;
 
-                foreach (schedule_time sd in dbList)
+                foreach (schedule_time sd in db_List)
                 {
                     var poco = new ScheduleTime();
 

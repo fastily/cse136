@@ -7,6 +7,10 @@
     var currentPreReqListViewModel = ko.observableArray();
     var coursePreReqListViewModel = ko.observableArray();
 
+    var PreReqModelObj = new CourseListModel();
+    var studentModelObj = new StudentModel();
+
+
     var CreateViewModel = function () {
         this.currentPreReqList = ko.observableArray([]);
         this.coursePreReqList = ko.observableArray([]);
@@ -230,5 +234,48 @@
                 });
             });
         }
+    };
+
+
+
+
+    var MakeViewModel = function () {
+        this.capeList = ko.observableArray([]);
+        this.prereqListResult = ko.observableArray([]);
+        this.UpdatePreReqFromSchedule = UpdatePreReqFromSchedule;
+        this.StudentId = ko.observable("");
+    };
+
+    this.LoadPreReqScheduleList = function (studentId) {
+        if (viewModel == null) {
+            viewModel = new MakeViewModel();
+        }
+
+        viewModel.StudentId(studentId);
+        this.GetPreReqScheduleList();
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("divPreReqListContent"));
+    }
+
+
+    this.GetPreReqScheduleList = function () {
+        PreReqModelObj.GetSome(function (prereqResult) {
+            viewModel.prereqListResult(prereqResult);
+        });
+    };
+
+    UpdatePreReqFromSchedule = function (data) {
+        var pr = {
+            StudentId: viewModel.StudentId(),
+            ScheduleId: data.ScheduleId
+        };
+        
+        studentModelObj.RequestPreReqOverrride(pr, function (result) {
+            if (result == 'ok') {
+                alert("success requesting PreREq");
+            }
+            else {
+                alert('Error occurs during requesting PreREq');
+            }
+        });       
     };
 }

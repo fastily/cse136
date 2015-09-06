@@ -82,6 +82,23 @@
         });
     };
 
+    this.GetSome = function (callback) {
+        var url = "http://localhost:9393/Api/Course/GetPreReqScheduleList";
+        $.ajax({
+            async: asyncIndicator,
+            method: "GET",
+            url: url,
+            data: "",
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while loading course list.  Is your service layer running?');
+            }
+        });
+    };
+
     this.GetDetail = function (id, callback) {
         var url = "http://localhost:9393/Api/Course/GetCourse?id=" + id + "&bust=" + new Date();
 

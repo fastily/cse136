@@ -11,21 +11,24 @@
     {
         private cse136Entities entities;
 
-        /// <summary>
-        /// default constructor for runtime use
-        /// </summary>
         public CourseController()
         {
             this.entities = new cse136Entities();
         }
 
-        /// <summary>
-        /// overloaded constructor for dependency injection. used for testing
-        /// </summary>
-        /// <param name="entities"></param>
         public CourseController(cse136Entities entities)
         {
             this.entities = entities;
+        }
+
+        [HttpGet]
+        public List<Course> GetPreReqScheduleList()
+        {
+            var service = new CourseService(new CourseRepository(this.entities));
+            var errors = new List<string>();
+
+            //// we could log the errors here if there are any...
+            return service.GetPreReqScheduleList(ref errors);
         }
 
         [HttpGet]
@@ -38,7 +41,6 @@
             return service.GetCourseList(ref errors);
         }
 
-        //// you can add more [HttpGet] and [HttpPost] methods as you need
 
         [HttpGet]
         public Course GetCourse(int id)
@@ -98,12 +100,12 @@
         }
 
         [HttpGet]
-        public string AssignPreReq(int cId, int prId)
+        public string AssignPreReq(int cId, int pr_Id)
         {
             var errors = new List<string>();
             var repository = new CourseRepository(this.entities);
             var service = new CourseService(repository);
-            service.AssignPreReq(cId, prId, ref errors);
+            service.AssignPreReq(cId, pr_Id, ref errors);
 
             if (errors.Count == 0)
             {

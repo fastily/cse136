@@ -2,11 +2,11 @@
     ViewBag.Title = "GetSchedules";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var adminId = ViewBag.adminId;
+    //var adminId = ViewBag.adminId;
 }
 
 <h3 class="page-header">All Schedules</h3>
-<a href="/Admin?id=@adminId"><< back</a>
+<a href="/Admin?id=@Session["adminId"]"><< back</a>
 <div id="divScheduleListContent">
     <table style="width:100%;">
         <thead>

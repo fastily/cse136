@@ -39,7 +39,7 @@
             Schedule_id: 1, //data.Schedule_id,
             Approved: false,
             Course_id: "1", //data.Course_id,
-            desired: data.desired(),
+            Desired: data.desired(),
             Description: data.reason()
         }
 

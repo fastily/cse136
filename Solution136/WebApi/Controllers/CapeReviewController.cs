@@ -39,6 +39,16 @@
             return service.GetInstructorRating(instructorId, ref errors);
         }
 
+
+        [HttpGet]
+        public List<CapeReview> FindCapeReviewByCourseId(int cid)
+        {
+            var errors = new List<string>();
+            var repository = new CapeReviewRepository(this.entities);
+            var service = new CapeReviewService(repository);
+            return service.GetCapeReview(cid, ref errors);
+        }
+
         [HttpPost]
         public string DeleteCapeReview(int cape_id)
         {
@@ -65,7 +75,7 @@
 
             if (errors.Count == 0)
             {
-                return "successful cape review insert";
+                return "ok";
             }
 
             return "Failed cape review insert";

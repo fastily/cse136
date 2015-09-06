@@ -175,11 +175,11 @@
 
             try
             {
-                var TaType = int.Parse(ta.TaType);
+                var ta_Type = int.Parse(ta.TaType);
                 var isDuplicate = this.context.TeachingAssistants.Where(
                     x => x.first == ta.FirstName &&
                     x.last == ta.LastName &&
-                    x.ta_type_id == TaType).Count() > 0;
+                    x.ta_type_id == ta_Type).Count() > 0;
 
                 if (isDuplicate)
                 {

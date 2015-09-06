@@ -144,12 +144,12 @@
         }
 
         [HttpPost]
-        public string RequestPreReqOverride(int scheduleId, string studentId)
+        public string RequestPreReqOverride(PreReqOverride pr)
         {
             var errors = new List<string>();
             var repository = new StudentRepository(this.entities);
             var service = new StudentService(repository);
-            service.RequestPreReqOverride(scheduleId, studentId, ref errors);
+            service.RequestPreReqOverride(pr.ScheduleId, pr.StudentId, ref errors);
             if (errors.Count == 0)
             {
                 return "ok";

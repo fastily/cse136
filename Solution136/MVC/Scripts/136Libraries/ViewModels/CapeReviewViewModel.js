@@ -5,30 +5,35 @@
     var capereviewListViewModel = ko.observableArray();
   
 
+ 
+    var viewModel = null;
+    var CapeReviewModelObj = new CapeReviewModel();
+ 
+
     this.Initialize = function(sid, inst, cname, cid) {
 
         var viewModel = {
             cname: ko.observable(cname),
-            irating: ko.observable(), 
-            crating: ko.observable(),
+            irating: ko.observable("5"), 
+            crating: ko.observable("5"),
             reason: ko.observable("Reason for your request"),
             add: function (data) {
-                self.AddCapeReview(data, sid, inst, cname, cid);
+                self.AddCapeReview(data, sid, inst, cid);
             }
         };
 
         ko.applyBindings(viewModel, document.getElementById("divStudentEnrollments"));
     };
 
-    this.AddCapeReview = function (data, sid, inst, cname, cid) {
+    this.AddCapeReview = function (data, sid, inst, cid) {
 
         var model = {
-            cape_id: "1",
-            instructor: inst,
-            cid: cid,
-            irating: data.irating(),
-            reason: data.reason(),
-            crating: data.crating()
+            CapeId: "1",
+            InstructorId: inst,
+            CourseId: cid,
+            InstructorRating: data.irating(),
+            Summary: data.reason(),
+            CourseRating: data.crating()
          
         };
 
@@ -41,5 +46,30 @@
         });
 
     };
+
+
+
+    
+    var CreateViewModel = function () {
+        this.capeList = ko.observableArray([]);
+        this.capereviewListResult = ko.observableArray([]);
+    };
+
+    this.LoadCapeReview = function(cid) {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        this.GetStudentSchedule(cid);
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("divCapeReviews"));    
+    }
+
+
+    this.GetStudentSchedule = function (cid) {
+        CapeReviewModelObj.GetAllByCourseId(cid, function (capereviewResult) {
+            viewModel.capereviewListResult(capereviewResult);
+        });
+    };
+    
 
 }

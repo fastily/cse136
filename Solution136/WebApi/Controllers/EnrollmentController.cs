@@ -72,15 +72,5 @@
 
             return service.GetStudentEnrolledSchedulesByQuarter(studentId, year, quarter, ref errors);
         }
-
-        [HttpGet]
-        public List<Student> GetStudentsByScheduleId(int scheduleId)
-        {
-            var errors = new List<string>();
-            var repository = new EnrollmentRepository(this.entities);
-            var service = new EnrollmentService(repository);
-
-            return service.GetStudentsByScheduleId(scheduleId, ref errors);
-        }
     }
 }

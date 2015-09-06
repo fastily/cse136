@@ -51,7 +51,7 @@
                 throw new ArgumentException();
             }
 
-            if (schedule.Time.TimeId <= 0 )
+            if (schedule.Time.TimeId <= 0)
             {
                 errors.Add("Invalid Time");
                 throw new ArgumentException();

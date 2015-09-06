@@ -37,7 +37,6 @@
             return "error";
         }
 
-
         [HttpPost]
         public string ApproveGradeChange(GradeChange gc)
         {

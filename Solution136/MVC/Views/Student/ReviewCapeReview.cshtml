@@ -1,106 +1,41 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "AddCourseToSchedule";
-    var year = ViewBag.year;
-    var quarter = ViewBag.quarter;
-    var id = ViewBag.id;
+    ViewBag.Title = "ReviewCapeReview";
+    var ScheduleId = ViewBag.ScheduleId;
+
 }
 
-<h3 class="page-header">Request a Grade Change</h3>
-
-
-<a href="/Student/"><< back</a>
-
-
-<div id="divStudent">
-
-    <label>Course</label>
-    <select class="form-control" data-bind="value: course">
-        <option value="1">CSE 3</option>
-        <option value="upper">Upper</option>
-        <option value="grad">Grad</option>
-    </select> <br />
-
-    <label>Grade Requested</label>
-    <select class="form-control" data-bind="value: desired">
-        <option value="ap">A+</option>
-        <option value="a">A</option>
-        <option value="am">A-</option>
-        <option value="bp">B+</option>
-        <option value="b">B</option>
-        <option value="bm">B-</option>
-        <option value="cp">C+</option>
-        <option value="c">C</option>
-        <option value="cm">C-</option>
-        <option value="dp">D+</option>
-        <option value="d">D</option>
-        <option value="dm">D-</option>
-        <option value="p">P</option>
-        <option value="np">NP</option>
-    </select> <br />
-    <br />
-
-    <label>Reason</label>
-    <input class="form-control" type="text" data-bind="value: reason"/>
-    <br />
-
-    <input class="btn btn-primary" value="Request" type="button" data-bind="value: 'Add', click: $data.add" />
-    <br /><br />
-
-    <div id="divMessage" class="text-success">&nbsp;</div>
-</div>
-
-
-
-
-
-<h3 class="page-header">Current Courses</h3>
-<div id="divScheduleListContent">
+<h3 class="page-header">View Cape Review For</h3>
+<a href="/Student/ScheduleList"><< back</a>
+<div id="divCapeReviews">
     <table style="width:100%;">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Year</th>
-                <th>Quarter</th>
-                <th>Session</th>
+                <th>Course</th>
+                <th>Course Rating</th>
                 <th>Instructor</th>
-                <th>Course Name</th>
+                <th>Instructor Rating</th>
+                <th>Summary</th>
+            
             </tr>
         </thead>
-        <tbody data-bind="foreach: viewModel">
+        <tbody data-bind="foreach: viewModel.capereviewListResult">
             <tr>
-                <td>1</td>
-                <td>2015</td>
-                <td>Summer</td>
-                <td>1</td>
-                <td>CHUCHUTRAIN</td>
-                <td>CSE 3</td>
-                <!-- hard coded bs
-                <td data-bind="text: year"></td>
-                <td data-bind="text: quarter"></td>
-                <td data-bind="text: session"></td>
-                <td data-bind="text: instructor"></td>
-                <td data-bind="text: coursename"></td>
-                -->
-                <td>
-                    <!-- Note, this is an example using knockout templating. $data is the keyword
-                        to for each element of the viewModel array -->
-                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
-                </td>
+                <td data-bind="text: CourseId"></td>
+                <td data-bind="text: CourseRating"></td>
+                <td data-bind="text: InstructorId"></td>
+                <td data-bind="text: InstructorRating"></td>
+                <td data-bind="text: Summary"></td>
+
             </tr>
         </tbody>
     </table>
 </div>
 
-
-<script type="text/html" id="action-template">
-    <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="AddCourse: $data">Add Course</a>
-</script>
-
 <script type="text/javascript">
     $(document).ready(function () {
-        var gradechangeViewModelObj = new GradeChangeViewModel();
-        gradechangeViewModelObj.Initialize("@ViewBag.id");
+        var capereviewViewModelObj = new CapeReviewViewModel();
+        capereviewViewModelObj.LoadCapeReview("@ViewBag.cid");
     });
 </script>
+

@@ -50,6 +50,7 @@
     <Compile Include="ScheduleTime.cs" />
     <Compile Include="ScheduleDay.cs" />
     <Compile Include="ScheduleMin.cs" />
+    <Compile Include="PreReqOverride.cs" />
     <Compile Include="Ta.cs" />
     <Compile Include="Logon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
