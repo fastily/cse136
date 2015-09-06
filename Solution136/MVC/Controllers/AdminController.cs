@@ -14,36 +14,42 @@
         public ActionResult Edit(int id)
         {
             ViewBag.id = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
         public ActionResult EditStudent(string id)
         {
             ViewBag.id = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
         public ActionResult EditTa(int id)
         {
             ViewBag.id = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
         public ActionResult EditInstructor(int id)
         {
             ViewBag.id = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
         public ActionResult EditCourse(int id)
         {
             ViewBag.id = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
         public ActionResult EditCoursePreReq(int id)
         {
             ViewBag.id = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
@@ -78,17 +84,20 @@
         public ActionResult DetailsInstructor(int id)
         {
             ViewBag.id = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
         public ActionResult DetailsTa(int id)
         {
             ViewBag.id = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
         public ActionResult StudentList()
         {
+            ///this.Session["adminId"] = id;
             return this.View();
         }
 
