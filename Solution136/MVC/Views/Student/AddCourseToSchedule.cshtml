@@ -10,22 +10,22 @@
 <a href="/Student/ScheduleList?id=@Session["studentid"]"><< back</a>
 <div id="StudentAddCourseToSchedule">
     <div>
-        <table style="width:100%;">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Year</th>
-                    <th>Quarter</th>
-                    <th>Session</th>
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Year</th>
+                <th>Quarter</th>
+                <th>Session</th>
                     <th>Course Title</th>
                     <th>Time</th>
                     <th>Day</th>
                     <th>Instructor Name</th>
                     <th>Actions</th>
-                </tr>
-            </thead>
+            </tr>
+        </thead>
             <tbody data-bind="foreach: viewModel.studentScheduleList">
-                <tr>
+            <tr>
                     <td data-bind="text: ScheduleId"></td>
                     <td data-bind="text: EnrolledSchedule.Year"></td>
                     <td data-bind="text: EnrolledSchedule.Quarter"></td>
@@ -34,41 +34,41 @@
                     <td data-bind="text: EnrolledSchedule.Time.Time"></td>
                     <td data-bind="text: EnrolledSchedule.Day.Day"></td>
                     <td data-bind="text: EnrolledSchedule.Instructor.FirstName"></td>
-                    <td>
-                        <!-- Note, this is an example using knockout templating. $data is the keyword
-                    to for each element of the viewModel array -->
-                        <div data-bind="template: { name: 'cape-template', data: $data }"></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                        to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'cape-template', data: $data}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
-    <script type="text/html" id="cape-template">
-        <!-- in the template, $data is each element of the viewModel which contains "id" -->
-        <a data-bind="UpdateCapeReview: $data">Delete</a>
-    </script>
+<script type="text/html" id="cape-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="attr: { href : '/Student/AddCapeReview?id=' + ScheduleId + '&inst=' + EnrolledSchedule.Instructor.FirstName + '&coursename=' + EnrolledSchedule.Course.Title, title: 'write' }">Write Cape Review</a>
 
+</script>
 
-    <h3 class="page-header">Add Course To Schedule</h3>
+<h3 class="page-header">Add Course To Schedule</h3>
     <div>
-        <table style="width:100%;">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Year</th>
-                    <th>Quarter</th>
-                    <th>Session</th>
-                    <th>Course Title</th>
-                    <th>Time</th>
-                    <th>Day</th>
-                    <th>Instructor Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Year</th>
+                <th>Quarter</th>
+                <th>Session</th>
+                <th>Course Title</th>
+                <th>Time</th>
+                <th>Day</th>
+                <th>Instructor Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
             <tbody data-bind="foreach: viewModel.scheduleList">
-                <tr>
+            <tr>
                     <td data-bind="text: ScheduleId"></td>
                     <td data-bind="text: Year"></td>
                     <td data-bind="text: Quarter"></td>
@@ -77,18 +77,17 @@
                     <td data-bind="text: Time.Time"></td>
                     <td data-bind="text: Day.Day"></td>
                     <td data-bind="text: Instructor.FirstName"></td>
-                    <td>
-                        <!-- Note, this is an example using knockout templating. $data is the keyword
-                to for each element of the viewModel array -->
-                        <div data-bind="template: { name: 'action-template', data: $data}"></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                    to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 <script type="text/html" id="action-template">
-
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="AddCourseToStudent: $data">Add Course</a>
 </script>
