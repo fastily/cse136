@@ -27,8 +27,9 @@
 
         this.studentScheduleList = ko.observableArray([]);
         this.scheduleList = ko.observableArray([]);
-
         this.studentId = ko.observable("");
+
+        this.instructorScheduleList = ko.observableArray([]);
 
         this.newSchedule = {
             ScheduleId: ko.observable(),
@@ -335,6 +336,12 @@
         });
     };
 
+    this.GetInstructorSchedule = function (instructorId) {
+        scheduleModelObj.GetInstructorSchedule(instructorId, function (instructorList) {
+            viewModel.instructorScheduleList(instructorList);
+        });
+    };
+
     this.LoadCreateCourse = function () {
         if (viewModel == null) {
             viewModel = new CreateViewModel();
@@ -393,6 +400,15 @@
         this.GetStudentSchedule(studentId, year, quarter);
 
         ko.applyBindings({ viewModel: viewModel }, document.getElementById("StudentAddCourseToSchedule"));
+    };
+
+    this.LoadInstructorCourses = function (instructorId) {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        this.GetInstructorSchedule(instructorId);
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("divStaffCourses"));
     };
 
     ko.bindingHandlers.DeleteSchedule = {

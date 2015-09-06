@@ -4,13 +4,15 @@
 
     public class StaffController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
+            Session["staffId"] = id;
             return this.View();
         }
 
-        public ActionResult StudentList()
+        public ActionResult StudentList(int scheduleId)
         {
+            ViewBag.scheduleId = scheduleId;
             return this.View();
         }
 

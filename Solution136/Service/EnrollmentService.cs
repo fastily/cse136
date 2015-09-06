@@ -77,5 +77,16 @@
 
             return this.repository.GetStudentEnrolledSchedulesByQuarter(studentId, year, quarter, ref errors);
         }
+
+        public List<Student> GetStudentsByScheduleId(int scheduleId, ref List<string> errors)
+        {
+            if (scheduleId <= 0)
+            {
+                errors.Add("Invalid scheduleId");
+                throw new ArgumentException();
+            }
+
+            return this.repository.GetStudentsByScheduleId(scheduleId, ref errors);
+        }
     }
 }

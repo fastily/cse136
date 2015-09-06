@@ -173,4 +173,38 @@
             }
         });
     };
+
+    this.GetInstructorSchedule = function (instructorId, callback) {
+        var url = "http://localhost:9393/Api/Schedule/GetInstructorSchedule?instructorId=" + instructorId;
+        $.ajax({
+            async: asyncIndicator,
+            method: "GET",
+            url: url,
+            data: "",
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while loading schedule list min.  Is your service layer running?');
+            }
+        });
+    };
+
+    this.GetTaBySchedule = function (scheduleId, callback) {
+        var url = "http://localhost:9393/Api/Schedule/GetTaBySchedule?instructorId=" + scheduleId;
+        $.ajax({
+            async: asyncIndicator,
+            method: "GET",
+            url: url,
+            data: "",
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while loading schedule list min.  Is your service layer running?');
+            }
+        });
+    };
 }

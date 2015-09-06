@@ -154,6 +154,34 @@
             return pocoEnrollmentList;
         }
 
+        public List<Student> GetStudentsByScheduleId(int scheduleId, ref List<string> errors)
+        {
+            IEnumerable<enrollment> enrollmentList;
+            List<Student> studentList = new List<Student>();
+            try
+            {
+                enrollmentList = this.context.enrollments.Include("student").Where(x => x.schedule_id == scheduleId);
+                foreach (enrollment dbStudent in enrollmentList)
+                {
+                    var poco = new Student();
+                    poco.StudentId = dbStudent.student.student_id;
+                    poco.FirstName = dbStudent.student.first_name;
+                    poco.FirstName = dbStudent.student.first_name;
+                    poco.Email = dbStudent.student.email;
+                    poco.Password = dbStudent.student.password;
+                    poco.Grade = dbStudent.grade;
+
+                    studentList.Add(poco);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error: " + e);
+            }
+
+            return studentList;
+        }
+
         public bool IsNotDuplicateEnrollment(string studentId, int scheduleId, ref List<string> errors)
         {
             var isDuplicate = true;

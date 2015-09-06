@@ -8,6 +8,10 @@
     {
         List<Schedule> GetScheduleList(string year, string quarter, ref List<string> errors);
 
+        List<Schedule> GetInstructorSchedule(int instructorId, ref List<string> errors);
+
+        List<Ta> GetTaBySchedule(int scheduleId, ref List<string> errors);
+
         List<ScheduleMin> GetAllSchedulesMin(ref List<string> errors);
 
         List<ScheduleMin> GetStudentScheduleMin(string id, ref List<string> errors);

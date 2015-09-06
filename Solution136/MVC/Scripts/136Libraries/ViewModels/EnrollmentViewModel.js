@@ -8,6 +8,8 @@
         this.studentEnrollmentList = ko.observableArray([]);
         this.currentStudentEnrollmentList = ko.observableArray([]);
 
+        this.ScheduleId = ko.observable();
+
         this.newEnrollment = {
             ScheduleId: ko.observable(),
             StudentId: ko.observable(""),
@@ -149,32 +151,13 @@
     //};
 
     this.GetAll = function (studentId) {
-
         enrollmentModelObj.GetAllEnrollmentsByStudentId(studentId, function (enrollmentList) {
-            //studentEnrollmentListViewModel.removeAll();
+            viewModel.studentEnrollmentList(enrollmentList);
+        });
+    };
 
-            //for (var i = 0; i < enrollmentList.length; i++) {
-            //    studentEnrollmentListViewModel.push({
-            //        ScheduleId: enrollmentList[i].ScheduleId,
-            //        StudentId: enrollmentList[i].StudentId,
-            //        Grade: enrollmentList[i].Grade,
-            //        EnrolledSchedule: {
-            //            ScheduleId: enrollmentList[i].EnrolledSchedule.ScheduleId,
-            //            Year: enrollmentList[i].EnrolledSchedule.Year,
-            //            Quarter: enrollmentList[i].EnrolledSchedule.Quarter,
-            //            Session: enrollmentList[i].EnrolledSchedule.Session,
-            //            Instructor: {
-            //                InstructorId: enrollmentList[i].EnrolledSchedule.Instructor.InstructorId,
-            //                FirstName: enrollmentList[i].EnrolledSchedule.Instructor.FirstName,
-            //                LastName: enrollmentList[i].EnrolledSchedule.Instructor.LastName,
-            //            },
-            //            Course: {
-            //                CourseId: enrollmentList[i].EnrolledSchedule.Course.CourseId,
-            //                Title: enrollmentList[i].EnrolledSchedule.Course.Title,
-            //            }
-            //        }
-            //    });
-            //}
+    this.GetStudentByScheduleId = function (scheduleId) {
+        enrollmentModelObj.GetStudentsByScheduleId(scheduleId, function (enrollmentList) {
             viewModel.studentEnrollmentList(enrollmentList);
         });
     };
@@ -209,10 +192,40 @@
         ko.applyBindings({ viewModel: viewModel }, document.getElementById("divStudentEnrollments"));
     };
 
+    this.LoadStudentsByScheduleId = function (scheduleId) {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        viewModel.ScheduleId(scheduleId);
+        this.GetStudentByScheduleId(scheduleId);
+
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("divStudentEnrollments"));
+    };
+
     ko.bindingHandlers.DeleteEnrollment = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             $(element).click(function () {
                 var enrollment = viewModel;
+
+                enrollmentModelObj.RemoveEnrollment(enrollment, function (result) {
+                    if (result != "ok") {
+                        alert("Error Delting schedule occurred");
+                    } else {
+                        bindingContext.$parents[1].viewModel.studentEnrollmentList.remove(viewModel);
+                    }
+                });
+            });
+        }
+    };
+
+    ko.bindingHandlers.DeleteStudentEnrollment = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+            $(element).click(function () {
+                var enrollment = {
+                    StudentId: viewModel.StudentId,
+                    ScheduleId: bindingContext.$parents[1].viewModel.ScheduleId
+                };
 
                 enrollmentModelObj.RemoveEnrollment(enrollment, function (result) {
                     if (result != "ok") {

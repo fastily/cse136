@@ -348,5 +348,96 @@
 
             return pocoList;
         }
+
+        public List<Schedule> GetInstructorSchedule(int instructorId, ref List<string> errors)
+        {
+            IEnumerable<course_schedule> dbList;
+            List<Schedule> pocoList = new List<Schedule>();
+
+            try
+            {
+                dbList = this.context.course_schedule.Include("schedule_day").Include("schedule_time").Include("instructor").Where(x => x.instructor_id == instructorId);
+                 
+                foreach (course_schedule c in dbList)
+                {
+                    var day = new schedule_day();
+                    var time = new schedule_time();
+                    var instructor = new instructor();
+
+                    var schedule = new Schedule
+                    {
+                        ScheduleId = c.schedule_id,
+                        Year = c.year.ToString(),
+                        Quarter = c.quarter,
+                        Session = c.session,
+                        Instructor = new Instructor
+                        {
+                            InstructorId = c.instructor.instructor_id,
+                            FirstName = c.instructor.first_name,
+                            LastName = c.instructor.last_name,
+                        },
+                        Day = new ScheduleDay
+                        {
+                            DayId = c.schedule_day.schedule_day_id,
+                            Day = c.schedule_day.schedule_day1
+                        },
+                        Time = new ScheduleTime
+                        {
+                            TimeId = c.schedule_time.schedule_time_id,
+                            Time = c.schedule_time.schedule_time1
+                        },
+                        Course = new Course
+                        {
+                            CourseId = c.course.course_id,
+                            Title = c.course.course_title,
+                            Description = c.course.course_description,
+                            Level = c.course.course_level,
+                        }
+                    };
+
+                    pocoList.Add(schedule);
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in ScheduleRepository.GetDays: " + e);
+            }
+
+            return pocoList;
+        }
+
+        public List<Ta> GetTaBySchedule(int scheduleId, ref List<string> errors)
+        {
+            IEnumerable<course_schedule> dbList;
+            IEnumerable<TeachingAssistant> taList;
+            List<Ta> pocoList = new List<Ta>();
+
+            try
+            {
+                dbList = this.context.course_schedule.Include("TeachingAssistants").Where(x => x.schedule_id == scheduleId);
+
+                foreach (course_schedule c in dbList)
+                {
+                    taList = c.TeachingAssistants;
+                    foreach (TeachingAssistant t in taList)
+                    {
+                        var poco = new Ta();
+                        poco.TaId = t.ta_id;
+                        poco.FirstName = t.first;
+                        poco.LastName = t.last;
+                        poco.TaType = t.ta_type_id.ToString();
+
+                        pocoList.Add(poco);
+                    }
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in ScheduleRepository.GetDays: " + e);
+            }
+
+            return pocoList;
+        }
     }
 }
