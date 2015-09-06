@@ -1,6 +1,8 @@
 ﻿function EnrollmentViewModel() {
     var enrollmentModelObj = new EnrollmentModel();
     var GradeChangeModelObj = new GradeChangeModel();
+    var StudentModelObj = new StudentModel();
+
     var self = this;
     var viewModel = null;
     var initialBind = true;
@@ -8,8 +10,10 @@
     var CreateViewModel = function () {
         this.studentEnrollmentList = ko.observableArray([]);
         this.currentStudentEnrollmentList = ko.observableArray([]);
+        this.studentList = ko.observableArray([]);
 
         this.ScheduleId = ko.observable();
+        this.StudentId = ko.observable("");
 
         this.newEnrollment = {
             ScheduleId: ko.observable(),
@@ -56,7 +60,7 @@
 
     //    GradeChangeId: data.id(),
     //    Student_id: student_id,
-    //    Schedule_id: 1, //data.Schedule_id,
+    //    Schedule_id:LoadStudentsByScheduleId 1, //data.Schedule_id,
     //    Approved: false,
     //    Course_id: "1", //data.Course_id,
     //    Desired: data.desired(),
@@ -71,37 +75,40 @@
     //    }
     //});
 
+        this.EnrollStudent = EnrollStudent;
     };
 
-    //UpdateCourseFromSchedule = function (data) {
-    //    var courseScheduleData = {
-    //        ScheduleId: viewModel.newSchedule.ScheduleId(),
-    //        Year: viewModel.newSchedule.Year(),
-    //        Quarter: viewModel.newSchedule.Quarter(),
-    //        Session: viewModel.newSchedule.Session(),
-    //        Day: {
-    //            DayId: viewModel.newSchedule.ScheduleDay.DayId()
-    //        },
-    //        Time: {
-    //            TimeId: viewModel.newSchedule.ScheduleTime.TimeId()
-    //        },
-    //        Instructor: {
-    //            InstructorId: viewModel.newSchedule.Instructor.InstructorId()
-    //        },
-    //        Course: {
-    //            CourseId: viewModel.newSchedule.Course.CourseId
-    //        }
-    //    };
+    EnrollStudent = function (data) {
+        var enrollment = {
+            StudentId: viewModel.StudentId,
+            ScheduleId: viewModel.ScheduleId
+        };
 
-    //    scheduleModelObj.Update(courseScheduleData, function (result) {
-    //        if (result = 'ok') {
-    //            alert("success updating schedule");
-    //        }
-    //        else {
-    //            alert('Error occurs during Insert new Course Schedule!!');
-    //        }
-    //    });       
-    //};
+        var student = {};
+
+        StudentModelObj.GetDetail(viewModel.StudentId(), function (result) {
+            student.StudentId = result.StudentId;
+            student.FirstName = result.FirstName;
+            student.LastName = result.LastName;
+            student.Email = result.Email;
+            student.Grade = "";
+        });
+
+        enrollmentModelObj.CreateEnrollment(enrollment, function (result) {
+            if (result == 'ok') {
+                viewModel.studentEnrollmentList.push(student);
+            }
+            else {
+                alert('Error occurs during Insert new Course Schedule!!');
+            }
+        });
+    };
+
+    this.GetAllStudents = function () {
+        StudentModelObj.GetAll(function (studentList) {
+            viewModel.studentList(studentList);
+        });
+    };
 
     this.GetAll = function (studentId) {
         enrollmentModelObj.GetAllEnrollmentsByStudentId(studentId, function (enrollmentList) {
@@ -151,6 +158,7 @@
         }
 
         viewModel.ScheduleId(scheduleId);
+        this.GetAllStudents();
         this.GetStudentByScheduleId(scheduleId);
 
         ko.applyBindings({ viewModel: viewModel }, document.getElementById("divStudentEnrollments"));

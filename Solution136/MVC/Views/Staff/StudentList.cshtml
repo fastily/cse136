@@ -31,7 +31,18 @@
             </tr>
         </tbody>
     </table>
-    <a data-bind="attr: { href : '/Staff/CreateStudentEnrollment', title: 'create' }">Add new student</a>
+    <br />
+    <h3 class="page-header">Add Student To Enrollment</h3>
+    <label>Student List</label>
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.studentList,
+                            value: viewModel.StudentId,
+                            optionsText: 'Email',
+                            optionsValue: 'StudentId',
+                            optionsCaption: 'Choose a Student...'"></select>
+    </div>
+    <br />
+    <input class="btn btn-primary" value="Enroll Student" type="button" data-bind="click: viewModel.EnrollStudent" />
 </div>
 
 <script type="text/html" id="action-template">

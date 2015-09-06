@@ -7,7 +7,8 @@
     <table style="width:100%;">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Year</th>
+                <th>Quarter</th>
                 <th>Title</th>
                 <th>Level</th>
                 <th>Description</th>
@@ -16,7 +17,8 @@
         </thead>
         <tbody data-bind="foreach: viewModel.instructorScheduleList">
             <tr>
-                <td data-bind="text: Course.CourseId"></td>
+                <td data-bind="text: Year"></td>
+                <td data-bind="text: Quarter"></td>
                 <td data-bind="text: Course.Title"></td>
                 <td data-bind="text: Course.Level"></td>
                 <td data-bind="text: Course.Description"></td>
