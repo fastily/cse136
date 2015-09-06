@@ -2,7 +2,7 @@
     var id = ViewBag.Id;
 }
 <h3 class="page-header">Students Current Enrollments</h3>
-<a href="/Admin/StudentList"><< back</a>
+<a href="/Admin/StudentList?id=@Session["adminId"]"><< back</a>
 <div id="divStudentEnrollments">
     <table style="width:100%;">
         <thead>
