@@ -433,18 +433,18 @@
             $(element).click(function () {
                 var enrollment = {
                     ScheduleId: viewModel.ScheduleId,
-                    StudentId: bindingContext.$parents[1].viewModel.StudentId(),
+                    StudentId: bindingContext.$parents[1].viewModel.studentId(),
                     Grade: ko.observable(""),
                     EnrolledSchedule: {
                         ScheduleId: viewModel.ScheduleId,
                         Year: viewModel.Year,
                         Quarter: viewModel.Quarter,
                         Session: viewModel.Session,
-                        ScheduleDay: {
+                        Day: {
                             DayId: viewModel.Day.DayId,
                             Day: viewModel.Day.Day
                         },
-                        ScheduleTime: {
+                        Time: {
                             TimeId: viewModel.Time.TimeId,
                             Time: viewModel.Time.Time
                         },
@@ -464,7 +464,7 @@
                 EnrollmentModelObj.CreateEnrollment(enrollment, function (result) {
                     if (result = 'ok') {
                         alert("success adding enrollment");
-                        bindingContext.$parents[1].viewModel.studentScheduleList.add(enrollment);
+                        bindingContext.$parents[1].viewModel.studentScheduleList.push(enrollment);
                     }
                     else {
                         alert('Error occurs during add enrollment');
