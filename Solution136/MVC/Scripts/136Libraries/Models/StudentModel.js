@@ -91,4 +91,20 @@ function StudentModel(asyncIndicator) {
             }
         });
     };
+
+    this.GetGPA = function (id, callback) {
+        $.ajax({
+            async: asyncIndicator,
+            method: "GET",
+            url: "http://localhost:9393/Api/Student/GetGPA?id=" + id,
+            data: "",
+            dataType: "json",
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+                alert('Error while loading student detail.  Is your service layer running?');
+            }
+        });
+    };
 }

@@ -135,8 +135,10 @@
             return this.repository.GetEnrollments(studentId, ref errors);
         }
 
-        public float CalculateGpa(string studentId, List<Enrollment> enrollments, ref List<string> errors)
+        public float CalculateGpa(string studentId, ref List<string> errors)
         {
+            List<Enrollment> enrollments = GetEnrollments(studentId, ref errors);
+
             if (string.IsNullOrEmpty(studentId))
             {
                 errors.Add("Invalid student id");
@@ -155,13 +157,61 @@
             }
 
             var sum = 0.0f;
+            var pnp = 0;
 
             foreach (var enrollment in enrollments)
             {
-                sum += enrollment.GradeValue;
+                switch (enrollment.Grade) 
+                { 
+                    case "ap":
+                        sum += 4.0f;
+                        break;
+                    case "a":
+                        sum += 4.0f;
+                        break;
+                    case "am":
+                        sum += 3.7f;
+                        break;
+                    case "bp":
+                        sum += 3.3f;
+                        break;
+                    case "b":
+                        sum += 3.0f;
+                        break;
+                    case "bm":
+                        sum += 2.7f;
+                        break;
+                    case "cp":
+                        sum += 2.3f;
+                        break;
+                    case "c":
+                        sum += 2.0f;
+                        break;
+                    case "cm":
+                        sum += 1.7f;
+                        break;
+                    case "dp":
+                        sum += 1.3f;
+                        break;
+                    case "d":
+                        sum += 1.0f;
+                        break;
+                    case "dm":
+                        sum += 0.7f;
+                        break;
+                    case "f":
+                        sum += 0f;
+                        break;
+                    case "p":
+                        pnp += 1;
+                        break;
+                    case "np":
+                        pnp += 1;
+                        break;
+                }
             }
 
-            return sum / enrollments.Count;
+            return (sum / (enrollments.Count - pnp));
         }
 
         public void RequestPreReqOverride(int scheduleId, string studentId, ref List<string> errors)

@@ -190,7 +190,7 @@
             var studentService = new StudentService(mockRepository.Object);
 
             //// Act
-            studentService.CalculateGpa(string.Empty, null, ref errors);
+            studentService.CalculateGpa(string.Empty, ref errors);
 
             //// Assert
             Assert.AreEqual(2, errors.Count);
@@ -208,7 +208,7 @@
 
             //// Act
             var enrollments = studentService.GetEnrollments("testId", ref errors);
-            var gap = studentService.CalculateGpa("testId", enrollments, ref errors);
+            var gap = studentService.CalculateGpa("testId", ref errors);
 
             //// Assert
             Assert.AreEqual(0, errors.Count);
@@ -231,7 +231,7 @@
             mockRepository.Setup(x => x.GetEnrollments("testId", ref errors)).Returns(enrollments);
 
             //// Act
-            var gap = studentService.CalculateGpa("testId", enrollments, ref errors);
+            var gap = studentService.CalculateGpa("testId", ref errors);
 
             //// Assert
             Assert.AreEqual(0, errors.Count);
