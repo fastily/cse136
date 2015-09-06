@@ -51,7 +51,7 @@
 
             try
             {
-                db_ScheduleList = this.context.course_schedule.OrderBy(x => x.year);
+                db_ScheduleList = this.context.course_schedule.Include("enrollments").OrderBy(x => x.year);
 
                 foreach (course_schedule sched in db_ScheduleList)
                 {
@@ -59,7 +59,8 @@
                     tempPoco.Year = sched.year.ToString();
                     tempPoco.Quarter = sched.quarter;
 
-                    pocoScheduleList.Add(tempPoco);
+                    if (sched.enrollments.Where(x => x.student_id == id).Count() > 0)
+                        pocoScheduleList.Add(tempPoco);
                 }
             }
             catch (Exception e)

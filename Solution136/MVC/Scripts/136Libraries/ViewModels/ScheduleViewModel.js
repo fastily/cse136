@@ -3,6 +3,7 @@
     var scheduleModelObj = new ScheduleModel();
     var courseModelObj = new CourseListModel();
     var InstructorModelObj = new InstructorModel();
+    var EnrollmentModelObj = new EnrollmentModel();
     var self = this;
     var initialBind = true;
     var scheduleListViewModel = ko.observableArray();
@@ -23,6 +24,9 @@
         this.scheduleDayList = ko.observableArray([]);
         this.scheduleInstructorList = ko.observableArray([]);
         this.scheduleCourseList = ko.observableArray([]);
+
+        this.studentScheduleList = ko.observableArray([]);
+        this.scheduleList = ko.observableArray([]);
 
         this.newSchedule = {
             ScheduleId: ko.observable(),
@@ -196,6 +200,12 @@
         });
     };
 
+    this.GetAllForStudent = function (year, quarter) {
+        scheduleModelObj.GetAll(year, quarter, function (scheduleList) {
+            viewModel.scheduleList(scheduleList);
+        });
+    };
+
     this.GetScheduleById = function (id) {
         scheduleModelObj.GetScheduleById(id, function (result) {
             viewModel.newSchedule.ScheduleId(result.ScheduleId);
@@ -317,6 +327,12 @@
         });
     };
 
+    this.GetStudentSchedule = function (sid, year, quarter) {
+        EnrollmentModelObj.GetAllEnrollments(sid, year, quarter, function (enrolledList) {      
+            viewModel.studentScheduleList(enrolledList);
+        });
+    };
+
     this.LoadCreateCourse = function () {
         if (viewModel == null) {
             viewModel = new CreateViewModel();
@@ -360,6 +376,19 @@
         this.GetScheduleById(courseId);
 
         ko.applyBindings({ viewModel: viewModel }, document.getElementById("divScheduleEditCourse"));
+    };
+
+    this.LoadStudentEnrollments = function (year, quarter, studentId) {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        viewModel.newSchedule.Year = ko.observable(year);
+        viewModel.newSchedule.Quarter = ko.observable(quarter);
+        this.GetAllForStudent(year, quarter);
+        this.GetStudentSchedule(studentId, year, quarter);
+
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("StudentAddCourseToSchedule"));
     };
 
     ko.bindingHandlers.DeleteSchedule = {
