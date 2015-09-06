@@ -423,4 +423,37 @@
             });
         }
     };
+
+    ko.bindingHandlers.AddCourseToStudent = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+            $(element).click(function () {
+                var year = viewModel.year;
+                var quarter = viewModel.quarter;
+
+                scheduleModelObj.DeleteAllFromSchedule(year, quarter, function (result) {
+                    if (result != "ok") {
+                        alert("Error Deleting schedule occurred");
+                    } else {
+                        scheduleListViewModel.remove(viewModel);
+                    }
+                });
+            });
+        }
+    };
+
+    ko.bindingHandlers.RemoveCourseFromSchedule = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+            $(element).click(function () {
+                EnrollmentModelObj.RemoveEnrollment(viewModel, function (result) {
+                    if (result = 'ok') {
+                        alert("success deleting enrollment");
+                        bindingContext.$parents[1].viewModel.studentScheduleList.remove(viewModel);
+                    }
+                    else {
+                        alert('Error occurs during delete enrollment');
+                    }
+                });
+            });
+        }
+    }; 
 }

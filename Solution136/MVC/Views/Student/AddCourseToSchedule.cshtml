@@ -48,7 +48,7 @@
 <script type="text/html" id="cape-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="attr: { href : '/Student/AddCapeReview?id=' + ScheduleId + '&inst=' + EnrolledSchedule.Instructor.FirstName + '&coursename=' + EnrolledSchedule.Course.Title, title: 'write' }">Write Cape Review</a>
-
+    <a data-bind="RemoveCourseFromSchedule: $data">Delete</a>
 </script>
 
 <h3 class="page-header">Add Course To Schedule</h3>
@@ -90,6 +90,7 @@
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="AddCourseToStudent: $data">Add Course</a>
+    <a>View Capes</a>
 </script>
 
 <script type="text/javascript">
