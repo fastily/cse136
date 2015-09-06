@@ -45,7 +45,7 @@
             var service = new StudentService(repository);
             return service.GetStudent(id, ref errors);
         }
-
+        
         [HttpGet]
         public float GetGpa(string id)
         {
@@ -53,8 +53,7 @@
 
             var repository = new StudentRepository(this.entities);
             var service = new StudentService(repository);
-            var enrollments = service.GetEnrollments(id, ref errors);
-            return service.CalculateGpa(id, enrollments, ref errors);
+            return service.CalculateGpa(id, ref errors);
         }
 
         [HttpPost]

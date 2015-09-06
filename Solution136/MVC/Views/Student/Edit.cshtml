@@ -24,6 +24,16 @@
     <div id="divMessage" class="text-success">&nbsp;</div>
 </div>
 
+<h2 class="page-header">GPA</h2>
+
+<div id="gpa">
+    <h2 data-bind="text: gpa"></h2>
+</div>
+<script type="text/javascript">
+    var studentGPAObj = new StudentViewModel();
+    studentGPAObj.GetGPA("@ViewBag.id");
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         var studentViewModelObj = new StudentViewModelAdmin();

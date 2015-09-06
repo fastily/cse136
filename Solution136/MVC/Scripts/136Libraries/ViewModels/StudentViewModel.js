@@ -45,9 +45,9 @@
 
     };
 
-    this.GetAll = function() {
+    this.GetAll = function () {
 
-        StudentModelObj.GetAll(function(studentList) {
+        StudentModelObj.GetAll(function (studentList) {
             studentListViewModel.removeAll();
 
             for (var i = 0; i < studentList.length; i++) {
@@ -63,6 +63,14 @@
                 ko.applyBindings({ viewModel: studentListViewModel }, document.getElementById("divStudentListContent"));
                 initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
             }
+        });
+    };
+
+    this.GetGPA = function(id) {
+
+        StudentModelObj.GetGPA(id, function (result) {
+            var x = { gpa: ko.observable(result)}
+            ko.applyBindings(x , document.getElementById("gpa"));
         });
     };
 
