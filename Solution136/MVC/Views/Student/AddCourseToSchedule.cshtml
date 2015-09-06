@@ -90,7 +90,7 @@
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="AddCourseToStudent: $data">Enroll</a>
-    <a>View Capes</a>
+    <a data-bind="attr: { href : '/Student/ReviewCapeReview?cid=' + Course.CourseId, title: 'write' }">View Cape Review</a>
 </script>
 
 <script type="text/javascript">

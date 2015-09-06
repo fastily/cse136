@@ -59,7 +59,7 @@ function CapeReviewModel(asyncIndicator) {
     };
 
     this.GetAllByCourseId = function (id, callback) {
-        var url = "http://localhost:9393/Api/CapeReview/FindCapeReviewByCourseId?idt=" + id;
+        var url = "http://localhost:9393/Api/CapeReview/FindCapeReviewByCourseId?cid=" + id;
         $.ajax({
             async: asyncIndicator,
             method: "GET",

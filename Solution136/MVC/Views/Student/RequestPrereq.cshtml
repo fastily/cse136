@@ -9,7 +9,7 @@
 
 <a href="/Student/"><< back</a>
 
-<div id="divCourseListContent">
+<div id="divPreReqListContent">
     <table style="width:100%;">
         <thead>
             <tr>
@@ -20,38 +20,36 @@
                 <th>Reason for Request</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: viewModel">
+        <tbody data-bind="foreach: viewModel.prereqListResult">
             <tr>
-                <td data-bind="text: id"></td>
-                <td data-bind="text: title"></td>
-                <td data-bind="text: level"></td>
-                <td data-bind="text: description"></td>
+                <td data-bind="text: CourseId"></td>
+                <td data-bind="text: Title"></td>
+                <td data-bind="text: Level"></td>
+                <td data-bind="text: Description"></td>
                 <td>
                     <input class="form-control" type="text" />
                 </td>
                 <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
-            to for each element of the viewModel array -->
-                
+                to for each element of the viewModel array -->
+                    <input class="btn btn-primary" value="Submit" type="button" data-bind="value: 'Update', click: $parent.viewModel.UpdatePreReqFromSchedule" />
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 </br>
-<div data-bind="template: { name: 'action-template', data: $data}"></div>
-<input class="btn btn-primary" value="Update" type="button" style="float: right;" />
 
 <script type="text/html" id="action-template" >
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="AddCourse: $data">Request Clearance</a>
+    <input class="btn btn-primary" value="Submit" type="button" data-bind="value: 'Update', click: $parent.viewModel.UpdatePreReqFromSchedule" />
 
 
 </script>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var courseViewModelObj = new CourseListViewModel();
-        courseViewModelObj.GetAll();
+        var prereqViewModelObj = new CourseListViewModel();
+        prereqViewModelObj.LoadPreReqScheduleList("@Session["studentId"]");
     });
 </script>

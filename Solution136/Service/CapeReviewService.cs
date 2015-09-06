@@ -133,5 +133,10 @@
 
             this.repository.UpdateCapeReview(cr, ref errors);
         }
+
+        public List<CapeReview> GetCapeReview(int cid, ref List<string> errors)
+        {
+            return this.repository.FindCapeReviewsByCourseId(cid, ref errors);
+        }
     }
 }

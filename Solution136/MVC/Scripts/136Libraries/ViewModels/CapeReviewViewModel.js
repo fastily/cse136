@@ -5,6 +5,11 @@
     var capereviewListViewModel = ko.observableArray();
   
 
+ 
+    var viewModel = null;
+    var CapeReviewModelObj = new CapeReviewModel();
+ 
+
     this.Initialize = function(sid, inst, cname, cid) {
 
         var viewModel = {
@@ -41,5 +46,30 @@
         });
 
     };
+
+
+
+    
+    var CreateViewModel = function () {
+        this.capeList = ko.observableArray([]);
+        this.capereviewListResult = ko.observableArray([]);
+    };
+
+    this.LoadCapeReview = function(cid) {
+        if (viewModel == null) {
+            viewModel = new CreateViewModel();
+        }
+
+        this.GetStudentSchedule(cid);
+        ko.applyBindings({ viewModel: viewModel }, document.getElementById("divCapeReviews"));    
+    }
+
+
+    this.GetStudentSchedule = function (cid) {
+        CapeReviewModelObj.GetAllByCourseId(cid, function (capereviewResult) {
+            viewModel.capereviewListResult(capereviewResult);
+        });
+    };
+    
 
 }

@@ -154,5 +154,10 @@
 
             return this.repository.FindCourseByName(courseName, ref errors);
         }
+
+        public List<Course> GetPreReqScheduleList(ref List<string> errors)
+        {
+            return this.repository.GetAllScheduleCourseList(ref errors);
+        }
     }
 }

@@ -178,6 +178,37 @@
             return pocoCourseList;
         }
 
+        public List<Course> GetAllScheduleCourseList(ref List<string> errors)
+        {
+            List<POCO.Course> pocoCourseList = new List<POCO.Course>();
+            IEnumerable<course> db_courseList;
+            try
+            {
+                db_courseList = this.context.courses.Include("course_schedule");
+
+                foreach (course i_course in db_courseList)
+                {
+                    var tempPoco = new POCO.Course();
+                    if (i_course.course_schedule.Count() > 0)
+                    {
+                        tempPoco.CourseId = i_course.course_id;
+                        tempPoco.ScheduleId = i_course.course_schedule.First().schedule_id;
+                        tempPoco.CourseLevel = (CourseLevel)Enum.Parse(typeof(CourseLevel), i_course.course_level);
+                        tempPoco.Level = i_course.course_level;
+                        tempPoco.Description = i_course.course_description;
+                        tempPoco.Title = i_course.course_title;
+                        pocoCourseList.Add(tempPoco);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errors.Add("Error occured in CourseRepository.GetCourseList: " + e);
+            }
+
+            return pocoCourseList;
+        }
+
         public void AssignPreReqToCourse(int courseId, int preReqCourseId, ref List<string> errors)
         {
             course db_coursePreReq = new course();
