@@ -46,11 +46,11 @@
              return this.View();
          }
 
-         public ActionResult AddCapeReview(string id, string inst, string iname, string coursename) {
+         public ActionResult AddCapeReview(string id, int inst, string coursename, int courseid) {
              ViewBag.ScheduleId = id;
              ViewBag.inst = inst;
              ViewBag.coursename = coursename;
-            // ViewBag.Course_id = course_id;
+             ViewBag.courseid = courseid;
              return this.View();
          }
     }
