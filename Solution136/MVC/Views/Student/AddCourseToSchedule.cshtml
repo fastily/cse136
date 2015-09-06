@@ -8,7 +8,7 @@
 
 <h3 class="page-header">Current Schedule</h3>
 <a href="/Student/ScheduleList"><< back</a>
-<div id="fakeContent">
+<div id="divStudentEnrollments">
     <table style="width:100%;">
         <thead>
             <tr>
@@ -17,35 +17,40 @@
                 <th>Quarter</th>
                 <th>Session</th>
                 <th>Instructor</th>
-                <th>Course Name</th>
-                <th>Cape Review</th>
+                <th>Course</th>
+                <th>Actions</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: viewModel">
+        <tbody data-bind="foreach: viewModel.studentEnrollmentList">
             <tr>
-                <!-- Enrollment hardcoded-->
-                <td data-bind = "text: Id"</td>
-                <td data-bind = "text: year"</td>
-                <td data-bind = "text: quarter"</td>
-                <td data-bind = "text: instructor"</td>
-                <td data-bind="text: coursename"></td>
-      
+                <td data-bind="text: EnrolledSchedule.ScheduleId"></td>
+                <td data-bind="text: EnrolledSchedule.Year"></td>
+                <td data-bind="text: EnrolledSchedule.Quarter"></td>
+                <td data-bind="text: EnrolledSchedule.Session"></td>
+                <td data-bind="text: EnrolledSchedule.Instructor.FirstName"></td>
+                <td data-bind="text: EnrolledSchedule.Course.Title"></td>
                 <td>
                     <!-- Note, this is an example using knockout templating. $data is the keyword
-                        to for each element of the viewModel array -->
-                    <div data-bind="template: { name: 'cape-template', data: $cape}"></div>
+                    to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'cape-template', data: $data}"></div>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var enrollmentViewModelObj = new EnrollmentViewModel();
+        enrollmentViewModelObj.LoadStudentEnrollments("@Session["studentId"]");
+    });
+</script>
 
 <script type="text/html" id="cape-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="UpdateCapeReview: cape">Write</a>
-</script>
+    <a data-bind="attr: { href : '/Student/AddCapeReview?id=' + ScheduleId + '&inst=' + EnrolledSchedule.Instructor.FirstName + '&coursename=' + EnrolledSchedule.Course.Title, title: 'write' }">Write Cape Review</a>
 
+</script>
 
 <h3 class="page-header">Add Course To Schedule</h3>
 <div id="divScheduleListContent">
@@ -84,7 +89,6 @@
 </div>
 
 <script type="text/html" id="action-template">
-
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="AddCourse: $data">Add Course</a>
 </script>

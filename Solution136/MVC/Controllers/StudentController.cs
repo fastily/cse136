@@ -47,10 +47,10 @@
              return this.View();
          }
 
-         public ActionResult AddCapeReview(string id, string year, string quarter) {
-             ViewBag.Id = id;
-             ViewBag.year = year;
-             ViewBag.Quarter = quarter;
+         public ActionResult AddCapeReview(string id, string inst, string coursename) {
+             ViewBag.ScheduleId = id;
+             ViewBag.inst = inst;
+             ViewBag.coursename = coursename;
             // ViewBag.Course_id = course_id;
              return this.View();
          }

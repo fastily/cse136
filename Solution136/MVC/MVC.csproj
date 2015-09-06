@@ -143,6 +143,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\136Libraries\Models\AdminModel.js" />
     <Content Include="Scripts\136Libraries\Models\CapeReviewModel.js" />
+    <Content Include="Scripts\136Libraries\Models\EnrollmentModel.js" />
     <Content Include="Scripts\136Libraries\Models\ScheduleModel.js" />
     <Content Include="Scripts\136Libraries\Models\CourseListModel.js" />
     <Content Include="Scripts\136Libraries\Models\LoginModel.js" />
@@ -153,6 +154,7 @@
     <Content Include="Scripts\136Libraries\Models\StudentModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\AdminViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\CapeReviewViewModel.js" />
+    <Content Include="Scripts\136Libraries\ViewModels\EnrollmentViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\ScheduleViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\CourseListViewModel.js" />
     <Content Include="Scripts\136Libraries\ViewModels\LoginViewModel.js" />

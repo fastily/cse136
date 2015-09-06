@@ -1,68 +1,69 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "AddCapeReview";
-    var year = ViewBag.year;
-    var quarter = ViewBag.quarter;
-    var id = ViewBag.id;
-    var cid = ViewBag.Course_id;
+    var ScheduleId = ViewBag.ScheduleId;
+
 }
 
 <h3 class="page-header">Add Cape Review For</h3>
-
-<a href="/Student/"><< back</a>
-
-<h3 class="page-header">Current Schedule</h3>
 <a href="/Student/ScheduleList"><< back</a>
-<div id="fakeContent">
+<div id="divStudentEnrollments">
     <table style="width:100%;">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Year</th>
-                <th>Quarter</th>
-                <th>Session</th>
                 <th>Instructor</th>
-                <th>Course Name</th>
-                <th>Cape Review</th>
+                <th>Instructor Rating</th>
+                <th>Course</th>
+                <th>Course Rating</th>
+                <th>Summary</th>
+                <th>Actions</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: viewModel">
             <tr>
-                <!-- Enrollment hardcoded-->
-                <td data-bind="text: Id"</td>
-                <td data-bind="text: year"</td>
-                <td data-bind="text: quarter"</td>
-                <td data-bind="text: instructor"</td>
-                <td data-bind="text: coursename"></td
+                <td data-bind="text: id"></td>
+                <td data-bind="text: instructor"></td>
+                <td> 
+                    <select class="form-control" data-bind="value: irating">
+                        <option value="cr1">1</option>
+                        <option value="cr2">2</option>
+                        <option value="cr3">3</option>
+                        <option value="cr4">4</option>
+                        <option value="cr5">5</option>
+                    </select>
+                </td>
+                <td data-bind="text: cname"></td>
+                <td>
+                    <select class="form-control" data-bind="value: crating">
+                        <option value="cr1">1</option>
+                        <option value="cr2">2</option>
+                        <option value="cr3">3</option>
+                        <option value="cr4">4</option>
+                        <option value="cr5">5</option>
+                    </select>
+                </td>
+                <td> <input class="form-control" type="text" data-bind="value: reason" /> </td>
+             
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                    to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'cape-template', data: $data}"></div>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<div id="divCapeReview">
-
-    <label>Course Rating</label>
-    <select class="form-control" data-bind="value: desired">
-        <option value="cr1">1</option>
-        <option value="cr2">2</option>
-        <option value="cr3">3</option>
-        <option value="cr4">4</option>
-        <option value="cr5">5</option>
-    </select> <br />
-    <br />
-
-    <label>Description</label>
-    <input class="form-control" type="text" data-bind="value: reason"/>
-    <br />
-
-    <input class="btn btn-primary" value="Request" type="button" data-bind="value: 'Add', click: $data.add" />
-    <br /><br />
-
-    <div id="divMessage" class="text-success">&nbsp;</div>
-</div>
-
-
-<script type="text/html" id="action-template">
+<script type="text/html" id="cape-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
     <a data-bind="AddCourse: $data">Add Review</a>
 </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var capereviewViewModelObj = new CapeReviewViewModel();
+        capereviewViewModelObj.Initialize("@ViewBag.ScheduleId", "@ViewBag.inst", "@ViewBag.coursename");
+    });
+</script>
+
