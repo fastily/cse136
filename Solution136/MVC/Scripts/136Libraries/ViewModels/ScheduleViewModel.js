@@ -28,6 +28,8 @@
         this.studentScheduleList = ko.observableArray([]);
         this.scheduleList = ko.observableArray([]);
 
+        this.studentId = ko.observable("");
+
         this.newSchedule = {
             ScheduleId: ko.observable(),
             Year: ko.observable(""),
@@ -385,6 +387,8 @@
 
         viewModel.newSchedule.Year = ko.observable(year);
         viewModel.newSchedule.Quarter = ko.observable(quarter);
+        viewModel.studentId(studentId);
+
         this.GetAllForStudent(year, quarter);
         this.GetStudentSchedule(studentId, year, quarter);
 
@@ -427,14 +431,43 @@
     ko.bindingHandlers.AddCourseToStudent = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             $(element).click(function () {
-                var year = viewModel.year;
-                var quarter = viewModel.quarter;
+                var enrollment = {
+                    ScheduleId: viewModel.ScheduleId,
+                    StudentId: bindingContext.$parents[1].viewModel.StudentId(),
+                    Grade: ko.observable(""),
+                    EnrolledSchedule: {
+                        ScheduleId: viewModel.ScheduleId,
+                        Year: viewModel.Year,
+                        Quarter: viewModel.Quarter,
+                        Session: viewModel.Session,
+                        ScheduleDay: {
+                            DayId: viewModel.Day.DayId,
+                            Day: viewModel.Day.Day
+                        },
+                        ScheduleTime: {
+                            TimeId: viewModel.Time.TimeId,
+                            Time: viewModel.Time.Time
+                        },
+                        Instructor: {
+                            InstructorId: viewModel.Instructor.InstructorId,
+                            FirstName: viewModel.Instructor.FirstName,
+                            LastName: viewModel.Instructor.LastName
+                        },
+                        Course: {
+                            CourseId: viewModel.Course.CourseId,
+                            Title: viewModel.Course.Title,
+                            Description: viewModel.Course.Description
+                        }
+                    }
+                };         
 
-                scheduleModelObj.DeleteAllFromSchedule(year, quarter, function (result) {
-                    if (result != "ok") {
-                        alert("Error Deleting schedule occurred");
-                    } else {
-                        scheduleListViewModel.remove(viewModel);
+                EnrollmentModelObj.CreateEnrollment(enrollment, function (result) {
+                    if (result = 'ok') {
+                        alert("success adding enrollment");
+                        bindingContext.$parents[1].viewModel.studentScheduleList.add(enrollment);
+                    }
+                    else {
+                        alert('Error occurs during add enrollment');
                     }
                 });
             });
