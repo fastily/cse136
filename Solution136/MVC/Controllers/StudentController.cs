@@ -53,5 +53,12 @@
              ViewBag.courseid = courseid;
              return this.View();
          }
+
+
+         public ActionResult ReviewCapeReview(int cid)
+         {
+             ViewBag.cid = cid;
+             return this.View();
+         }
     }
 }
