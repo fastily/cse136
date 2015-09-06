@@ -1,11 +1,8 @@
 ﻿function EnrollmentViewModel() {
-    var viewModel = null;
     var enrollmentModelObj = new EnrollmentModel();
     var self = this;
+    var viewModel = null;
     var initialBind = true;
-
-    var studentEnrollmentListViewModel = ko.observableArray();
-    var currentStudentEnrollmentListViewModel = ko.observableArray();
 
     var CreateViewModel = function () {
         this.studentEnrollmentList = ko.observableArray([]);
@@ -44,7 +41,7 @@
         };
 
         //this.AddNewCourseSchedule = AddNewCourseSchedule;
-        //this.UpdateCourseFromSchedule = UpdateCourseFromSchedule;
+
     };
 
     //UpdateCourseFromSchedule = function (data) {
@@ -154,27 +151,27 @@
     this.GetAll = function (studentId) {
 
         enrollmentModelObj.GetAllEnrollmentsByStudentId(studentId, function (enrollmentList) {
+            //studentEnrollmentListViewModel.removeAll();
+
             //for (var i = 0; i < enrollmentList.length; i++) {
-            //    scheduleListViewModel.push({
-            //        id: enrollmentList[i].ScheduleId,
-            //        year: enrollmentList[i].Year,
-            //        quarter: enrollmentList[i].Quarter,
-            //        session: scheduleList[i].Session,
-            //        day: {
-            //            name: scheduleList[i].Day.Day,
-            //        },
-            //        time: {
-            //            name: scheduleList[i].Time.Time
-            //        },
-            //        instructor: {
-            //            id: scheduleList[i].Instructor.InstructorId,
-            //            name: scheduleList[i].Instructor.FirstName + scheduleList[i].Instructor.LastName,
-            //        },
-            //        course: {
-            //            id: scheduleList[i].Course.CourseId,
-            //            title: scheduleList[i].Course.Title,
-            //            level: scheduleList[i].Course.CourseLevel,
-            //            description: scheduleList[i].Course.Description
+            //    studentEnrollmentListViewModel.push({
+            //        ScheduleId: enrollmentList[i].ScheduleId,
+            //        StudentId: enrollmentList[i].StudentId,
+            //        Grade: enrollmentList[i].Grade,
+            //        EnrolledSchedule: {
+            //            ScheduleId: enrollmentList[i].EnrolledSchedule.ScheduleId,
+            //            Year: enrollmentList[i].EnrolledSchedule.Year,
+            //            Quarter: enrollmentList[i].EnrolledSchedule.Quarter,
+            //            Session: enrollmentList[i].EnrolledSchedule.Session,
+            //            Instructor: {
+            //                InstructorId: enrollmentList[i].EnrolledSchedule.Instructor.InstructorId,
+            //                FirstName: enrollmentList[i].EnrolledSchedule.Instructor.FirstName,
+            //                LastName: enrollmentList[i].EnrolledSchedule.Instructor.LastName,
+            //            },
+            //            Course: {
+            //                CourseId: enrollmentList[i].EnrolledSchedule.Course.CourseId,
+            //                Title: enrollmentList[i].EnrolledSchedule.Course.Title,
+            //            }
             //        }
             //    });
             //}
@@ -215,13 +212,13 @@
     ko.bindingHandlers.DeleteEnrollment = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             $(element).click(function () {
-                var id = viewModel.newEnrollment.ScheduleId;
+                var enrollment = viewModel;
 
-                scheduleModelObj.Delete(id, function (result) {
+                enrollmentModelObj.RemoveEnrollment(enrollment, function (result) {
                     if (result != "ok") {
                         alert("Error Delting schedule occurred");
                     } else {
-                        scheduleListViewModel.remove(viewModel);
+                        bindingContext.$parents[1].viewModel.studentEnrollmentList.remove(viewModel);
                     }
                 });
             });

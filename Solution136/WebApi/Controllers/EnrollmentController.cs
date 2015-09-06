@@ -43,7 +43,7 @@
             var errors = new List<string>();
             var repository = new EnrollmentRepository(this.entities);
             var service = new EnrollmentService(repository);
-            service.AddEnrollment(enrollment.StudentId, enrollment.ScheduleId, ref errors);
+            service.RemoveEnrollment(enrollment.StudentId, enrollment.ScheduleId, ref errors);
 
             if (errors.Count == 0)
             {
