@@ -29,7 +29,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(NullReferenceException))]
         public void AddCourseToScheduleErrorTest2() // :  dayId  == null
         {
             //// Arranage
@@ -46,7 +46,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(NullReferenceException))]
         public void AddCourseToScheduleErrorTest3() // :  timeID  == null
         {
             //// Arranage

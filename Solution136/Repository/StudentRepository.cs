@@ -322,9 +322,7 @@
             {
                 errors.Add("Error occured in StudentRepository.RequestPreReqOverride: " + e);
             }
-        }
-
-       
+        }     
 
         public void GetStudentHistory(string studentId, ref List<string> errors)
         {

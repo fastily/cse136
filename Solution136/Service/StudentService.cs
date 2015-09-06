@@ -137,7 +137,7 @@
 
         public float CalculateGpa(string studentId, ref List<string> errors)
         {
-            List<Enrollment> enrollments = GetEnrollments(studentId, ref errors);
+            List<Enrollment> enrollments = this.GetEnrollments(studentId, ref errors);
 
             if (string.IsNullOrEmpty(studentId))
             {
@@ -211,7 +211,7 @@
                 }
             }
 
-            return (sum / (enrollments.Count - pnp));
+            return sum / (enrollments.Count - pnp);
         }
 
         public void RequestPreReqOverride(int scheduleId, string studentId, ref List<string> errors)
