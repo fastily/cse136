@@ -6,43 +6,39 @@
 <h2 class="page-header">Grade Change Request</h2>
 <a href="/Student?id=@Session["studentId"]"><< back</a>
 
-<div id="divStudent">
+<div id="divStudentEnrollments">
 
     <label>Course</label>
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Select Course
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">CSE 103</a></li>
-            <li><a href="#">CSE 105</a></li>
-            <li><a href="#">CSE 131</a></li>
-            <li><a href="#">CSE 141</a></li>
-        </ul>
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.studentEnrollmentList,
+                            value: viewModel.newEnrollment.Course.CourseId,
+                            optionsText: 'Course.Title' + 'Course.Description',
+                            optionsValue: 'Course.CourseId',
+                            optionsCaption: 'Choose a Course...'"></select>
     </div>
     <br />
 
     <label>Grade Requested</label>
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Select Grade
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li><a href="#">A</a></li>
-            <li><a href="#">B</a></li>
-            <li><a href="#">C</a></li>
-            <li><a href="#">D</a></li>
-            <li><a href="#">F</a></li>
-            <li><a href="#">P</a></li>
-            <li><a href="#">NP</a></li>
-        </ul>
-    </div>
+    <select class="form-control" data-bind="value: desired">
+        <option value="ap">A+</option>
+        <option value="a">A</option>
+        <option value="am">A-</option>
+        <option value="bp">B+</option>
+        <option value="b">B</option>
+        <option value="bm">B-</option>
+        <option value="cp">C+</option>
+        <option value="c">C</option>
+        <option value="cm">C-</option>
+        <option value="dp">D+</option>
+        <option value="d">D</option>
+        <option value="dm">D-</option>
+        <option value="p">P</option>
+        <option value="np">NP</option>
+    </select> <br />
     <br />
 
     <label>Reason</label>
-    <input class="form-control" type="text" />
+    <input class="form-control" type="text" data-bind="value: reason" />
     <br />
 
     <input class="btn btn-primary" value="Update" type="button" />
@@ -50,3 +46,10 @@
 
     <div id="divMessage" class="text-success">&nbsp;</div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var enrollmentViewModelObj = new EnrollmentViewModel();
+        enrollmentViewModelObj.LoadStudentEnrollmentsForGradeChange("@Session["studentId"]");
+    });
+</script>
