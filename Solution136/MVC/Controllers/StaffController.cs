@@ -6,7 +6,7 @@
     {
         public ActionResult Index(int id)
         {
-            this.Session["staffId"] = id;
+            Session["staffId"] = id;
             return this.View();
         }
 
