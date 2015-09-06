@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "GetStudents";
-    //var id = ViewBag.id;
+    var id = ViewBag.id;
 }
 
 <h3 class="page-header">Student List Page</h3>
@@ -42,6 +42,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        //var adminViewModel = new AdminViewModel();
+        //adminViewModel.Load(@id);
         var studentViewModelObj = new StudentViewModelAdmin();
         studentViewModelObj.GetAll();
     });
