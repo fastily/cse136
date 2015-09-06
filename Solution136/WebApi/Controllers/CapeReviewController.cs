@@ -65,7 +65,7 @@
 
             if (errors.Count == 0)
             {
-                return "successful cape review insert";
+                return "ok";
             }
 
             return "Failed cape review insert";

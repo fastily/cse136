@@ -47,7 +47,7 @@
 
 <script type="text/html" id="cape-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="attr: { href : '/Student/AddCapeReview?id=' + ScheduleId + '&inst=' + EnrolledSchedule.Instructor.FirstName + '&coursename=' + EnrolledSchedule.Course.Title + '&courseid=' + EnrolledSchedule.Course.CourseId, title: 'write' }">Write Cape Review</a>
+    <a data-bind="attr: { href : '/Student/AddCapeReview?id=' + ScheduleId + '&inst=' + EnrolledSchedule.Instructor.InstructorId + '&coursename=' + EnrolledSchedule.Course.Title + '&courseid=' + EnrolledSchedule.Course.CourseId, title: 'write' }">Write Cape Review</a>
     <a data-bind="RemoveCourseFromSchedule: $data">Delete</a>
 </script>
 

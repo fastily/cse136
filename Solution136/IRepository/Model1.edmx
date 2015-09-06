@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="cape_id" />
           </Key>
-          <Property Name="cape_id" Type="int" Nullable="false" />
+          <Property Name="cape_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="instructor_id" Type="int" />
           <Property Name="course_id" Type="int" />
           <Property Name="instructor_rating" Type="int" />
