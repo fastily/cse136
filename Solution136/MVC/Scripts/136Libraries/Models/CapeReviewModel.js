@@ -13,7 +13,7 @@ function CapeReviewModel(asyncIndicator) {
         $.ajax({
             async: asyncIndicator,
             method: "POST",
-            url: "http://localhost:9393/Api/CapeReview/AddCapeReview",
+            url: "http://localhost:9393/Api/CapeReview/InsertCapeReview",
             data: caprereview,
             dataType: "json",
             success: function (result) {

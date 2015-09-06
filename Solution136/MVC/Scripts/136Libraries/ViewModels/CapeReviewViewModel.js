@@ -8,30 +8,26 @@
     this.Initialize = function(sid, iname, cname) {
 
         var viewModel = {
-            id: sid,
-            instructor: ko.observable(iname),
-            irating: ko.observable(5),
             cname: ko.observable(cname),
-            crating: ko.observable("5"),
+            irating: ko.observable(), 
+            crating: ko.observable(),
             reason: ko.observable("Reason for your request"),
             add: function (data) {
-                self.AddCapeReview(data, sid);
+                self.AddCapeReview(data, sid, iname, cname);
             }
         };
 
         ko.applyBindings(viewModel, document.getElementById("divStudentEnrollments"));
     };
 
-    this.AddCapeReview = function (data, student_id) {
+    this.AddCapeReview = function (data, sid, iname, cname) {
 
         var model = {
             id: sid,
-            instructor: ko.observable(iname),
-            irating: ko.observable(5),
-            cname: ko.observable(cname),
-            crating: ko.observable("5"),
-            reason: ko.observable("Reason for your request"),
-         
+            irating: data.irating(),
+            cname: cname,
+            crating: data.crating(),
+            reason: data.reason()
         };
 
         CapeReviewModelObj.Create(model, function(result) {
