@@ -7,7 +7,7 @@
         public ActionResult Index(string id)
         {
             ViewBag.Id = id;
-            Session["studentId"] = id;
+            this.Session["studentId"] = id;
             return this.View();
         }
 
@@ -46,14 +46,14 @@
              return this.View();
          }
 
-         public ActionResult AddCapeReview(string id, int inst, string coursename, int courseid) {
+         public ActionResult AddCapeReview(string id, int inst, string coursename, int courseid) 
+         {
              ViewBag.ScheduleId = id;
              ViewBag.inst = inst;
              ViewBag.coursename = coursename;
              ViewBag.courseid = courseid;
              return this.View();
          }
-
 
          public ActionResult ReviewCapeReview(int cid)
          {

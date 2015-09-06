@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-namespace POCO
+﻿namespace POCO
 {
+    using System.Collections.Generic;
+
     public class Enrollment
     {
         public string StudentId { get; set; }

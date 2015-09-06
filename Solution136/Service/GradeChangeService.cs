@@ -21,6 +21,7 @@
                 errors.Add("Invalid course ID");
                 throw new ArgumentException();
             }
+
             if (gc.Schedule_id == -1)
             {
                 errors.Add("Invalid schedule ID");
@@ -47,7 +48,7 @@
             }
         }
 
-        public GradeChange FindGradeChangeByStudentId (string student_id, ref List<string> errors)
+        public GradeChange FindGradeChangeByStudentId(string student_id, ref List<string> errors)
         {
             if (string.IsNullOrEmpty(student_id))
             {
@@ -79,6 +80,5 @@
 
             return this.repository.GetGradeChangeScheduleId(student_id, course_id, ref errors);
         }
-
     }
 }

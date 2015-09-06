@@ -98,12 +98,12 @@
         }
 
         [HttpGet]
-        public string AssignPreReq(int cId, int prId)
+        public string AssignPreReq(int cId, int pr_Id)
         {
             var errors = new List<string>();
             var repository = new CourseRepository(this.entities);
             var service = new CourseService(repository);
-            service.AssignPreReq(cId, prId, ref errors);
+            service.AssignPreReq(cId, pr_Id, ref errors);
 
             if (errors.Count == 0)
             {
