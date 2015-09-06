@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="cse136Model.cape_reviews" Width="1.5" PointX="8" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.course" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.course_preReq" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="cse136Model.course_schedule" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="cse136Model.course_schedule" Width="2" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.enrollment" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.rating" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="cse136Model.schedule_day" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />

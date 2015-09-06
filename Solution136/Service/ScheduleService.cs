@@ -206,5 +206,27 @@
         {
             return this.repository.GetTimes(ref errors);
         }
+
+        public List<Schedule> GetInstructorSchedule(int instructorId, ref List<string> errors)
+        {
+            if (instructorId <= 0)
+            {
+                errors.Add("Invalid scheduleId");
+                throw new ArgumentException();
+            }
+
+            return this.repository.GetInstructorSchedule(instructorId, ref errors);
+        }
+
+        public List<Ta> GetTaBySchedule(int scheduleId, ref List<string> errors)
+        {
+            if (scheduleId <= 0)
+            {
+                errors.Add("Invalid scheduleId");
+                throw new ArgumentException();
+            }
+
+            return this.repository.GetTaBySchedule(scheduleId, ref errors);
+        }
     }
 }

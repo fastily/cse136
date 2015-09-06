@@ -2,6 +2,44 @@
     ViewBag.Title = "Staff";
 }
 
-<h2 class="page-header">Staff</h2>
+<h2 class="page-header">Staff Courses</h2>
+<div id="divStaffCourses">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Level</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: viewModel.instructorScheduleList">
+            <tr>
+                <td data-bind="text: Course.CourseId"></td>
+                <td data-bind="text: Course.Title"></td>
+                <td data-bind="text: Course.Level"></td>
+                <td data-bind="text: Course.Description"></td>
+                <td>
+                    <!-- Note, this is an example using knockout templating. $data is the keyword
+                    to for each element of the viewModel array -->
+                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-@Html.Partial("CourseList")
+<script type="text/html" id="action-template">
+    <!-- in the template, $data is each element of the viewModel which contains "id" -->
+    <a data-bind="attr: { href : '/Staff/StudentList?scheduleId=' + ScheduleId, title: 'students' }">Students</a>
+    <a data-bind="attr: { href : '/Staff/TaList', title: 'students' }">Ta's</a>
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var scheduleViewModelObj = new ScheduleViewModel();
+        scheduleViewModelObj.LoadInstructorCourses(@Session["staffId"])
+    });
+</script>

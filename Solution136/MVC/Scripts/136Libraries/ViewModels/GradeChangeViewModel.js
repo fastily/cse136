@@ -67,46 +67,4 @@
         });
 
     };
-
-    /*
-    this.GetAll = function() {
-        GradeChangeModelObj.GetAll(function(gradechangeList) {
-            gradechangeListViewModel.removeAll();
-
-            for (var i = 0; i < gradechangeList.length; i++) {
-                gradechangeListViewModel.push({
-                    id: gradechangeList[i].GradeChangeId,
-                    first: gradechangeList[i].FirstName,
-                    last: gradechangeList[i].LastName,
-                    type: gradechangeList[i].GradeChangeType
-                });
-            }
-
-            if (initialBind) {
-                ko.applyBindings({ viewModel: gradechangeListViewModel }, document.getElementById("divGradeChangeListContent"));
-                initialBind = false; // this is to prevent binding multiple time because "Delete" functio calls GetAll again
-            }
-        });
-    };
-
-    this.GetDetail = function (id) {
-
-        GradeChangeModelObj.GetDetail(id, function (result) {
-            
-            var gradechange = {
-                id: result.GradeChangeId,
-                first: ko.observable(result.FirstName),
-                last: ko.observable(result.LastName),
-                type: ko.observable(result.GradeChangeType),
-                update: function () {
-                    self.UpdateGradeChange(this);
-                }
-            };
-
-            if (initialBind) {
-                ko.applyBindings(gradechange, document.getElementById("divGradeChangeContent"));
-            }
-        });
-    };
-    */
 }

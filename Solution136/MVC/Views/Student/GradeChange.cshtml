@@ -1,28 +1,24 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "AddCourseToSchedule";
-    var year = ViewBag.year;
-    var quarter = ViewBag.quarter;
-    var id = ViewBag.id;
+    ViewBag.Title = "Student";
+    var id = ViewBag.Id;
 }
 
-<h3 class="page-header">Request a Grade Change</h3>
+<h2 class="page-header">Grade Change Request</h2>
+<a href="/Student?id=@Session["studentId"]"><< back</a>
 
-
-<a href="/Student/"><< back</a>
-
-
-<div id="divStudent">
+<div id="divStudentEnrollments">
 
     <label>Course</label>
-    <select class="form-control" data-bind="value: course">
-        <option value="1">CSE 3</option>
-        <option value="upper">Upper</option>
-        <option value="grad">Grad</option>
-    </select> <br />
+    <div class="form-group">
+        <select class="form-control" data-bind="options: viewModel.studentEnrollmentList,
+                            optionsText: 'EnrolledSchedule',
+                            optionsValue: 'EnrolledSchedule',
+                            optionsCaption: 'Choose a Course...'"></select>
+    </div>
+    <br />
 
     <label>Grade Requested</label>
-    <select class="form-control" data-bind="value: desired">
+    <select class="form-control" data-bind="">
         <option value="ap">A+</option>
         <option value="a">A</option>
         <option value="am">A-</option>
@@ -41,66 +37,18 @@
     <br />
 
     <label>Reason</label>
-    <input class="form-control" type="text" data-bind="value: reason"/>
+    <input class="form-control" type="text" data-bind="" />
     <br />
 
-    <input class="btn btn-primary" value="Request" type="button" data-bind="value: 'Add', click: $data.add" />
+    <input class="btn btn-primary" value="Update" type="button" />
     <br /><br />
 
     <div id="divMessage" class="text-success">&nbsp;</div>
 </div>
 
-
-
-
-
-<h3 class="page-header">Current Courses</h3>
-<div id="divScheduleListContent">
-    <table style="width:100%;">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Year</th>
-                <th>Quarter</th>
-                <th>Session</th>
-                <th>Instructor</th>
-                <th>Course Name</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: viewModel">
-            <tr>
-                <td>1</td>
-                <td>2015</td>
-                <td>Summer</td>
-                <td>1</td>
-                <td>CHUCHUTRAIN</td>
-                <td>CSE 3</td>
-                <!-- hard coded bs
-                <td data-bind="text: year"></td>
-                <td data-bind="text: quarter"></td>
-                <td data-bind="text: session"></td>
-                <td data-bind="text: instructor"></td>
-                <td data-bind="text: coursename"></td>
-                -->
-                <td>
-                    <!-- Note, this is an example using knockout templating. $data is the keyword
-                        to for each element of the viewModel array -->
-                    <div data-bind="template: { name: 'action-template', data: $data}"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-
-<script type="text/html" id="action-template">
-    <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="AddCourse: $data">Add Course</a>
-</script>
-
 <script type="text/javascript">
     $(document).ready(function () {
-        var gradechangeViewModelObj = new GradeChangeViewModel();
-        gradechangeViewModelObj.Initialize("@ViewBag.id");
+        var enrollmentViewModelObj = new EnrollmentViewModel();
+        enrollmentViewModelObj.LoadStudentEnrollmentsForGradeChange("@Session["studentId"]");
     });
 </script>

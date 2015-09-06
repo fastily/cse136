@@ -136,5 +136,23 @@
 
             return "error";
         }
+
+        [HttpGet]
+        public List<Schedule> GetInstructorSchedule(int instructorId)
+        {
+            var service = new ScheduleService(new ScheduleRepository(this.entities));
+            var errors = new List<string>();
+
+            return service.GetInstructorSchedule(instructorId, ref errors);
+        }
+
+        [HttpGet]
+        public List<Ta> GetTaBySchedule(int scheduleId)
+        {
+            var service = new ScheduleService(new ScheduleRepository(this.entities));
+            var errors = new List<string>();
+
+            return service.GetTaBySchedule(scheduleId, ref errors);
+        }
     }
 }

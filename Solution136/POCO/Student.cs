@@ -14,6 +14,8 @@
 
         public string Password { get; set; }
 
+        public string Grade { get; set; }
+
         public List<Schedule> Enrolled { get; set; }
 
         public override string ToString()
