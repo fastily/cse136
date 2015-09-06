@@ -9,13 +9,9 @@
 <div id="divStudentEnrollments">
 
     <label>Course</label>
-    <div class="form-group">
-        <select class="form-control" data-bind="options: viewModel.studentEnrollmentList,
-                            optionsText: 'EnrolledSchedule',
-                            optionsValue: 'EnrolledSchedule',
-                            optionsCaption: 'Choose a Course...'"></select>
-    </div>
-    <br />
+    <select class="form-control" data-bind=" foreach: viewModel.studentEnrollmentList">
+        <option data-bind="value: EnrolledSchedule.Course.CourseId, text:EnrolledSchedule.Course.Title">CSE 3</option>
+    </select> <br />
 
     <label>Grade Requested</label>
     <select class="form-control" data-bind="">
@@ -44,7 +40,6 @@
     <br /><br />
 
     <div id="divMessage" class="text-success">&nbsp;</div>
-</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
