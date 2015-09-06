@@ -45,6 +45,7 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void InsertInstructor()
         {
             //// Arranage
@@ -260,6 +261,7 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void InsertInstructorTest()
         {
             //// Arranage

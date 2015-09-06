@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "GetStudents";
-    //var id = ViewBag.id;
+    var id = ViewBag.id;
 }
 
 <h3 class="page-header">Student List Page</h3>
@@ -35,13 +35,15 @@
 
 <script type="text/html" id="action-template">
     <!-- in the template, $data is each element of the viewModel which contains "id" -->
-    <a data-bind="attr: { href : '/Admin/SharedStudentEnrollment?id=' + id, title: 'detail' }">schedule</a>
+    <a data-bind="attr: { href : '/Admin/SharedStudentEnrollment?adminId=' + @Session["adminId"] + '&id=' + id, title: 'detail' }">schedule</a>
     <a data-bind="attr: { href : '/Admin/EditStudent?id=' + id, title: 'edit' }">edit</a>
     <a data-bind="DeleteStudent: $data">delete</a>
 </script>
 
 <script type="text/javascript">
     $(document).ready(function () {
+        //var adminViewModel = new AdminViewModel();
+        //adminViewModel.Load(@id);
         var studentViewModelObj = new StudentViewModelAdmin();
         studentViewModelObj.GetAll();
     });

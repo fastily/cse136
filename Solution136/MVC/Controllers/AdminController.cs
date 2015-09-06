@@ -95,9 +95,9 @@
             return this.View();
         }
 
-        public ActionResult StudentList()
+        public ActionResult StudentList(int id)
         {
-            ///this.Session["adminId"] = id;
+            this.Session["adminId"] = id;
             return this.View();
         }
 
